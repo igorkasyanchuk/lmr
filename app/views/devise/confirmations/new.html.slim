@@ -3,7 +3,6 @@ h2 Resend confirmation instructions
   = devise_error_messages!
   div
     = f.label :email
-    br/
     = f.email_field :email
-  div= f.submit "Resend confirmation instructions"
+  = f.submit "Resend confirmation instructions", :class => 'btn btn-primary'
 = render :partial => "devise/shared/links"

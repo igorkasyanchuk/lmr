@@ -4,5 +4,5 @@ h2 Resend unlock instructions
   div
     = f.label :email
     = f.email_field :email
-  div= f.submit "Resend unlock instructions"
+  = f.submit "Resend unlock instructions", :class => 'btn btn-primary'
 = render :partial => "devise/shared/links"
