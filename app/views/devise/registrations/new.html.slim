@@ -1,5 +1,5 @@
 h2 Sign up
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => 'form-horizontal well'}) do |f|
   = devise_error_messages!
   div
     = f.label :identifier
@@ -19,5 +19,6 @@ h2 Sign up
   div
     = f.label :password_confirmation
     = f.password_field :password_confirmation
-  div= f.submit "Sign up"
+  br
+  = f.submit "Sign up", :class => 'btn btn-primary'
 = render :partial => "devise/shared/links"
