@@ -3,27 +3,21 @@ h2 Sign up
   = devise_error_messages!
   div
     = f.label :identifier
-    br/
     = f.text_field :identifier
   div
     = f.label :email
-    br/
     = f.email_field :email
   div
     = f.label :name
-    br/
     = f.text_field :name
   div
     = f.label :surname
-    br/
     = f.text_field :surname
   div
     = f.label :password
-    br/
     = f.password_field :password
   div
     = f.label :password_confirmation
-    br/
     = f.password_field :password_confirmation
   div= f.submit "Sign up"
 = render :partial => "devise/shared/links"
