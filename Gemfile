@@ -8,6 +8,8 @@ gem 'rails', '3.2.8'
 # gem 'sqlite3'
 gem 'mysql2'
 gem 'devise'
+gem 'slim'
+gem 'slim-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -40,3 +42,4 @@ gem 'therubyracer'
 
 # To use debugger
 # gem 'debugger'
+gem 'quiet_assets', :group => :development
