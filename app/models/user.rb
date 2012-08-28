@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
 
   belongs_to :role
 
+  delegate :name, :to => :role, :allow_nil => true, :prefix => true   
+
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
@@ -23,5 +25,19 @@ class User < ActiveRecord::Base
       where(conditions).first
     end
   end
+
+  ["admin", "content_manager", "user"].each do |role_name|
+    define_method "#{role_name}?" do
+      has_role?(role_name)
+    end
+  end
+
+  def has_role?(role)
+    self.role && self.role.name == role
+  end
+
+  def full_name
+    "#{name} #{surname}"
+  end   
 
 end

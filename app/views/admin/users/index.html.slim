@@ -12,15 +12,13 @@ table.table.table-striped
       th Name
       th Email
       th Role
-      th Groups
       th Actions
   tbody
     - @users.each do |user|
       tr
-        td= link_to user.name, edit_resource_path(user)
+        td= link_to user.full_name, edit_resource_path(user)
         td= mail_to user.email
         td= user.role_name
-        td= user.groups.count
         td
           = link_to "Edit", edit_resource_path(user), :class => 'btn btn-mini'
           | 

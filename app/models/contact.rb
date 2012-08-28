@@ -6,4 +6,6 @@ class Contact < ActiveRecord::Base
               :presence => true,
               :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }, :on => :create
   validates :message, :presence => true
+
+  attr_accessible :name, :email, :message, :captcha, :captcha_key
 end
