@@ -15,7 +15,13 @@ class User < ActiveRecord::Base
 
   belongs_to :role
 
-  delegate :name, :to => :role, :allow_nil => true, :prefix => true   
+  delegate :name, :to => :role, :allow_nil => true, :prefix => true
+
+  before_create :set_defaults
+
+  def set_defaults
+    self.role = Role['user']
+  end
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
