@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :identifier
   validates :name, :surname, :length => { :minimum => 2 }
 
+  belongs_to :role
+
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)

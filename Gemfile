@@ -14,6 +14,13 @@ gem 'kaminari', '0.13.0'
 gem 'slim'
 gem 'slim-rails'
 
+gem 'inherited_resources', '1.3.1'
+gem "simple_form", "~> 2.0.2"
+gem 'galetahub-simple_captcha', :require => "simple_captcha" 
+gem 'settingslogic'
+gem 'awesome_nested_fields'
+gem 'ckeditor', '3.6.3'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

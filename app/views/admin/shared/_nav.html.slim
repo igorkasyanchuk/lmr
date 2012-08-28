@@ -1,0 +1,11 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      a.brand href='/' LMR
+      .nav-collapse
+        ul.nav
+          li
+            = link_to "Users(#{User.count})", [:admin, :users]
+          li
+            = link_to "Contacts(#{Contact.count})", [:admin, :contacts]
+.clearfix

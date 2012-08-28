@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120828083266) do
+ActiveRecord::Schema.define(:version => 20120828090552) do
+
+  create_table "contacts", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.text     "message"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "forem_categories", :force => true do |t|
     t.string   "name",       :null => false
@@ -108,8 +116,12 @@ ActiveRecord::Schema.define(:version => 20120828083266) do
   add_index "forem_views", ["user_id"], :name => "index_forem_views_on_user_id"
   add_index "forem_views", ["viewable_id"], :name => "index_forem_views_on_topic_id"
 
+  create_table "roles", :force => true do |t|
+    t.string "name"
+  end
+
   create_table "users", :force => true do |t|
-    t.integer  "identifier"
+    t.string   "identifier"
     t.string   "name",                   :default => "",               :null => false
     t.string   "surname",                :default => "",               :null => false
     t.string   "email",                  :default => "",               :null => false
@@ -134,11 +146,14 @@ ActiveRecord::Schema.define(:version => 20120828083266) do
     t.boolean  "forem_admin",            :default => false
     t.string   "forem_state",            :default => "pending_review"
     t.boolean  "forem_auto_subscribe",   :default => false
+    t.integer  "role_id"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["identifier"], :name => "index_users_on_identifier"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["role_id"], :name => "index_users_on_role_id"
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
 
 end

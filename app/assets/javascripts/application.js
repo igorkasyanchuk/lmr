@@ -11,6 +11,4 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery_ujs
-//= require jquery-ui-autocomplete.min.js
 //= require twitter/bootstrap
-//= require_tree .

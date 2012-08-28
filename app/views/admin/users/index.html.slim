@@ -1,0 +1,31 @@
+= title "Users"
+
+.right= link_to "Add User", [:new, :admin, :user], :class => 'btn btn-primary btn-small'
+
+h1.left Users
+
+.clear
+
+table.table.table-striped
+  thead
+    tr
+      th Name
+      th Email
+      th Role
+      th Groups
+      th Actions
+  tbody
+    - @users.each do |user|
+      tr
+        td= link_to user.name, edit_resource_path(user)
+        td= mail_to user.email
+        td= user.role_name
+        td= user.groups.count
+        td
+          = link_to "Edit", edit_resource_path(user), :class => 'btn btn-mini'
+          | 
+          = link_to 'Delete', [:admin, user], :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger btn-mini'
+    - if @users.blank?
+      tr
+        td colspan=4
+          | No Users
