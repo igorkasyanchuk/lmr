@@ -1,0 +1,11 @@
+= content_for :css do
+  = stylesheet_link_tag "admin/admin"
+
+= content_for :js do
+  = stylesheet_link_tag "admin/admin"  
+
+= content_for :navigation do  
+  = render :partial => '/admin/shared/nav'
+
+= render :layout => 'layouts/application' do
+  = yield
