@@ -1,0 +1,11 @@
+= simple_form_for @user, :url => main_app.dashboard_profile_path, :html => {:class => 'form-horizontal' } do |f|
+  .form-inputs 
+    = f.input :name
+    = f.input :surname
+    = f.input :email
+    = f.input :password, :input_html => {:disabled => :disabled}
+    = f.input :password_confirmation, :input_html => {:disabled => :disabled}
+  .form-actions 
+    = f.button :submit
+    | &nbsp;
+    = link_to 'Cancel', [:admin, :users], :class => 'btn btn-danger btn-mini'
