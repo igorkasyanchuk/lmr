@@ -16,6 +16,7 @@ Lmr::Application.routes.draw do
 
   namespace :dashboard do
     match '/', :to => 'dashboard#welcome'
+    resource :profile, :only => [:edit, :update]
   end
 
   resources :contacts, :only => [:new, :create]
