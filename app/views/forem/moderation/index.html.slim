@@ -1,0 +1,10 @@
+h2= t('.title', :forum => forum)
+h3= t('posts_count', :count => @posts.count, :scope => 'forem.general')
+= form_tag forem.forum_moderate_posts_url(forum), :method => :put do
+  #posts
+    - @posts.limit(25).group_by(&:topic).each do |topic, posts|
+      h4
+        = topic.forum.title
+        |  &raquo; #{topic.subject}
+      = render posts, :mass_moderation => true
+  = submit_tag "Moderate"

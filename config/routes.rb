@@ -1,4 +1,5 @@
 Lmr::Application.routes.draw do
+  mount Forem::Engine, :at => "/forums"
   devise_for :users, :skip => [:sessions]
   as :user do
     get 'login' => 'devise/sessions#new', :as => :new_user_session
