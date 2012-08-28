@@ -1,0 +1,15 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      a.brand href='/' LMR - My Cabinet
+      .nav-collapse
+        ul.nav
+          li
+            = link_to "Reports", "#"
+          li
+            = link_to "Payments", "#"
+        ul.nav.pull-right
+          li= link_to "Profile", '#'
+          li.divider-vertical
+          li= link_to 'Вийти', main_app.destroy_user_session_path, :method => :delete
+.clearfix

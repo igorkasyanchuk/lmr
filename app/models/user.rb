@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :identifier, :name, :surname, :login
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :identifier, :name, :surname, :login, :role_id
   attr_accessor :login
   
   validates_presence_of :identifier, :name, :surname
@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
 
   def full_name
     "#{name} #{surname}"
-  end   
+  end
+
+  def forem_admin?
+    self.admin?
+  end
 
 end

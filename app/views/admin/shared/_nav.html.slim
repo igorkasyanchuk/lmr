@@ -4,8 +4,11 @@
       a.brand href='/' LMR
       .nav-collapse
         ul.nav
-          li
-            = link_to "Users(#{User.count})", [:admin, :users]
-          li
-            = link_to "Contacts(#{Contact.count})", [:admin, :contacts]
+          li= link_to "Users(#{User.count})", [:admin, :users]
+          li.divider-vertical
+          li= link_to "Contacts(#{Contact.count})", [:admin, :contacts]
+          li.divider-vertical
+          li= link_to "Manage Forum", '/forums/admin'
+        ul.nav.pull-right
+          li= link_to 'Вийти', main_app.destroy_user_session_path, :method => :delete
 .clearfix

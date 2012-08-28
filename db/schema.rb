@@ -152,10 +152,10 @@ ActiveRecord::Schema.define(:version => 20120828095016) do
     t.datetime "locked_at"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
+    t.integer  "role_id"
     t.boolean  "forem_admin",            :default => false
     t.string   "forem_state",            :default => "pending_review"
     t.boolean  "forem_auto_subscribe",   :default => false
-    t.integer  "role_id"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

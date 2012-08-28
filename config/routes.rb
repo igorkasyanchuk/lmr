@@ -14,6 +14,10 @@ Lmr::Application.routes.draw do
     resources :contacts, :only => [:index, :show, :destroy]
   end
 
+  namespace :dashboard do
+    match '/', :to => 'dashboard#welcome'
+  end
+
   resources :contacts, :only => [:new, :create]
 
   root :to => 'home#index'

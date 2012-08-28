@@ -9,5 +9,16 @@
       .container.nav-collapse
         ul.nav
           li= link_to "Link 1", "/path1"
+          li.divider-vertical
           li= link_to "Link 2", "/path2"
-          li= link_to "Контакти", new_contact_path
+          li.divider-vertical
+          li= link_to "Контакти", main_app.new_contact_path
+        ul.nav.pull-right
+          - if signed_in?
+            li= link_to "Мій Кабінет", my_dashboard_path
+            li.divider-vertical
+            li= link_to 'Вийти', main_app.destroy_user_session_path, :method => :delete
+          - else
+            li= link_to 'Ввійти', main_app.new_user_session_path
+            li.divider-vertical
+            li= link_to 'Реєстрація', main_app.new_user_registration_path 

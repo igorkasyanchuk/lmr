@@ -54,4 +54,12 @@ module ApplicationHelper
       url
     end
   end
+
+  def my_dashboard_path
+    if current_user.admin?
+      '/admin'
+    else
+      '/dashboard'
+    end
+  end
 end
