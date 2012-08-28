@@ -22,7 +22,7 @@ h2= t("forem.admin.forum.index")
             - if last_post = forum.posts.last
               = link_to(last_post.topic, forem.forum_topic_path(forum, last_post.topic))
               = t('by')
-              = last_post.user
+              = last_post.user.full_name
               = time_ago_in_words(last_post.created_at)
             - else
               = t('.none')
