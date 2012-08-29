@@ -62,3 +62,11 @@ ssq.sublime-workspace
 .sass-cache 
 .sass-cache/*
 test/dummy/.rvmrc 
+
+.gitignore.swp
+
+.rvmrc
+
+app/models/.page.rb.swp
+
+app/controllers/admin/.pages_controller.rb.swp

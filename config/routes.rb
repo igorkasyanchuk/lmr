@@ -10,6 +10,7 @@ Lmr::Application.routes.draw do
 
   namespace :admin do
     match '/', :to => 'dashboard#welcome'
+    resources :pages
     resources :users
     resources :contacts, :only => [:index, :show, :destroy]
   end

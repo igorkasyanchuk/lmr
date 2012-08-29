@@ -1,0 +1,4 @@
+ul
+  - collection.each do |page|
+    li
+      = link_to page.title, resource_path(page)

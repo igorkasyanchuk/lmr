@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120828095016) do
+ActiveRecord::Schema.define(:version => 20120829083750) do
 
   create_table "contacts", :force => true do |t|
     t.string   "name"
@@ -115,6 +115,13 @@ ActiveRecord::Schema.define(:version => 20120828095016) do
   add_index "forem_views", ["updated_at"], :name => "index_forem_views_on_updated_at"
   add_index "forem_views", ["user_id"], :name => "index_forem_views_on_user_id"
   add_index "forem_views", ["viewable_id"], :name => "index_forem_views_on_topic_id"
+
+  create_table "pages", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "roles", :force => true do |t|
     t.string "name"
