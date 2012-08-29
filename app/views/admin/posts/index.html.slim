@@ -1,0 +1,11 @@
+h1 Адміністрування новин
+hr
+
+#posts_container
+  .admin_actions
+    = link_to 'Додати новину', [:new, :admin, :post], :class => 'btn btn-normal'
+
+  = render :partial => 'post', :collection => @posts
+  .clearfix
+
+  = paginate @posts

@@ -1,0 +1,14 @@
+= title @post.title
+
+#posts_container
+  h1 = @post.title
+  hr
+
+  .image_wrapper = image_tag 'draft_thumb.gif'
+  .info_block
+    .posted_by = "Posted by: #{@post.posted_by}" if @post.posted_by.present?
+    .created_at =  "Posted at #{formatted_date(@post.created_at)}"
+
+  .description_wrapper== @post.description
+  .content_wrapper== @post.content
+  .clearfix

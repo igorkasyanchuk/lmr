@@ -1,0 +1,12 @@
+div id="post_#{post.id}" class="post"
+  .post_small_preview
+    = link_to image_tag('draft_thumb.gif'), [:admin, post]
+  .post_information
+    h2.post_title = link_to post.title, [:admin, post]
+    .info_block
+      .posted_by = "Posted by: #{post.posted_by}" if post.posted_by.present?
+      .created_at = "Posted at #{formatted_date(post.created_at)}"
+    .post_description
+      == truncate(post.content, :omission => "#{link_to ' ...далі', [:admin, post]}", :length => 300)
+.clearfix
+

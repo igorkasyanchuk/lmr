@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120829124625) do
+ActiveRecord::Schema.define(:version => 20120829144449) do
 
   create_table "consumers", :force => true do |t|
     t.string  "description"
@@ -182,6 +182,11 @@ ActiveRecord::Schema.define(:version => 20120829124625) do
 
   add_index "houses", ["firm_id"], :name => "index_houses_on_firm_id"
   add_index "houses", ["street_id"], :name => "index_houses_on_street_id"
+
+  create_table "page_parts", :force => true do |t|
+    t.string "identifier"
+    t.text   "content"
+  end
 
   create_table "post_categories", :force => true do |t|
     t.string "name", :null => false
