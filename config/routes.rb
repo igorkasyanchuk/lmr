@@ -1,4 +1,6 @@
 Lmr::Application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
+
   mount Forem::Engine, :at => "/forums"
   devise_for :users, :skip => [:sessions]
 

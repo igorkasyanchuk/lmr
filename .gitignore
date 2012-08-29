@@ -74,3 +74,5 @@ app/controllers/admin/.pages_controller.rb.swp
 app/views/admin/pages/.index.html.slim.swp
 
 app/views/admin/shared/._nav.html.slim.swp
+
+public/system/ckeditor_assets/pictures/2/thumb_btn_close_red.jpg
