@@ -2,9 +2,9 @@
   tr class="forum #{cycle("odd", "even")}"
     td
       = link_to forum.title, forem.forum_path(forum), :class => "title"
-      .description= forum.description
-      = t('forem.forums.index.last_post')
+      .description= forum.description      
       span.last_post
+        = t('forem.forums.index.last_post')
         - if last_post = forum.last_post_for(forem_user)
           |  
           = link_to(last_post.topic, forem.forum_topic_path(forum, last_post.topic))
