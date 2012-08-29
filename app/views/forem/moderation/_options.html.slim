@@ -1,8 +1,8 @@
-p
+.moderation_checkbox
   = f.radio_button "moderation_option", "approve"
   = f.label "moderation_option_approve", t('approve', :scope => 'forem.posts.moderation')
-p
+.moderation_checkbox
   = f.radio_button "moderation_option", "spam"
   = f.label "moderation_option_spam", t('spam', :scope => 'forem.posts.moderation')
 br/
-= f.submit t('moderate', :scope => 'forem.posts.moderation')
+= f.submit t('moderate', :scope => 'forem.posts.moderation'), :class => 'btn btn-success'

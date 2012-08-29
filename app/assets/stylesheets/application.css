@@ -13,6 +13,7 @@
  *= require "news/news"
  *= require bootstrap_and_overrides
  *= require cerulean
+ *= require forum
   */
 
 
@@ -23,3 +24,4 @@
   clear: both;
   visibility: hidden;
 }
+
