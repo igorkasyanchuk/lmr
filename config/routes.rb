@@ -13,11 +13,16 @@ Lmr::Application.routes.draw do
     resources :pages
     resources :users
     resources :contacts, :only => [:index, :show, :destroy]
+    resources :news
   end
 
   namespace :dashboard do
     match '/', :to => 'dashboard#welcome'
     resource :profile, :only => [:edit, :update]
+  end
+
+  namespace :news do
+    match '/', :to => 'news#welcome'
   end
 
   resources :contacts, :only => [:new, :create]
