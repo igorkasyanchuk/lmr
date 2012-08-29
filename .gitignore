@@ -70,3 +70,7 @@ test/dummy/.rvmrc
 app/models/.page.rb.swp
 
 app/controllers/admin/.pages_controller.rb.swp
+
+app/views/admin/pages/.index.html.slim.swp
+
+app/views/admin/shared/._nav.html.slim.swp
