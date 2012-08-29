@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120828095016) do
+ActiveRecord::Schema.define(:version => 20120829114950) do
 
   create_table "contacts", :force => true do |t|
     t.string   "name"
@@ -116,6 +116,26 @@ ActiveRecord::Schema.define(:version => 20120828095016) do
   add_index "forem_views", ["user_id"], :name => "index_forem_views_on_user_id"
   add_index "forem_views", ["viewable_id"], :name => "index_forem_views_on_topic_id"
 
+  create_table "post_categories", :force => true do |t|
+    t.string "name", :null => false
+  end
+
+  create_table "posts", :force => true do |t|
+    t.integer  "post_category_id"
+    t.string   "title"
+    t.text     "description"
+    t.text     "content"
+    t.boolean  "published",            :default => false
+    t.string   "posted_by"
+    t.datetime "created_at"
+    t.string   "preview_file_name"
+    t.string   "preview_content_type"
+    t.integer  "preview_file_size"
+    t.datetime "preview_updated_at"
+  end
+
+  add_index "posts", ["post_category_id"], :name => "index_posts_on_post_category_id"
+
   create_table "roles", :force => true do |t|
     t.string "name"
   end
@@ -152,10 +172,10 @@ ActiveRecord::Schema.define(:version => 20120828095016) do
     t.datetime "locked_at"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
-    t.integer  "role_id"
     t.boolean  "forem_admin",            :default => false
     t.string   "forem_state",            :default => "pending_review"
     t.boolean  "forem_auto_subscribe",   :default => false
+    t.integer  "role_id"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
