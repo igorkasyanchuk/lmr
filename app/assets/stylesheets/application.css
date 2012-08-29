@@ -10,6 +10,16 @@
  *
  *= require_self
  *= require "forem/twist/style"
+ *= require "news/news"
  *= require bootstrap_and_overrides
  *= require cerulean
   */
+
+
+.clearfix, .clear {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
