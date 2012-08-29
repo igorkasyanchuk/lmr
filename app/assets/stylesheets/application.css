@@ -9,8 +9,19 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- 
+ *= require "forem/twist/style"
+ *= require "news/news"
  *= require bootstrap_and_overrides
  *= require cerulean
  *= require forum
   */
+
+
+.clearfix, .clear {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
