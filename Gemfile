@@ -39,6 +39,19 @@ gem 'jquery-rails'
 gem 'execjs'
 gem 'therubyracer'
 
+group :test, :development do
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
+  gem "capybara"
+  gem "poltergeist"
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
