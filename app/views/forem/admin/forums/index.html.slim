@@ -27,15 +27,15 @@ h2= t("forem.admin.forum.index")
             - else
               = t('.none')
             br/
-            span.moderators
-              strong
-                = t('.moderators')
-                | \:
-              - if forum.moderators.exists?
-                - forum.moderators.map do |moderator|
-                  = link_to moderator, [forem, :admin, moderator]
-                / - end.to_sentence
-              - else
-                | None
+            / span.moderators
+            /   strong
+            /     = t('.moderators')
+            /     | \:
+            /   - if forum.moderators.exists?
+            /     - forum.moderators.map do |moderator|
+            /       = link_to moderator, [forem, :admin, moderator]
+            /     / - end.to_sentence
+            /   - else
+            /     | None
           td= forum.topics.count
           td= forum.posts.count
