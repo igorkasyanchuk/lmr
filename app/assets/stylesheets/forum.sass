@@ -1,3 +1,5 @@
+.clear
+	clear: both
 .span12
 	.category
 		border-top: 1px solid #6F6F6F
@@ -9,13 +11,14 @@
 				tr
 					th						
 						padding: 5px
-						text-align: left
+						text-align: center
 						font-weight: normal
 						font-size: 18px
 						vertical-align: middle
 						width: 10%
 						&.desc-and-last-post
-							width: 70%
+							width: 60%
+							text-align: left
 			tbody
 				line-height: 30px
 				tr
@@ -25,11 +28,13 @@
 						border-radius: 5px
 					td
 						border-top: 1px solid #6F6F6F
-						padding: 5px
+						padding: 5px 5px
 						text-align: left
 						font-weight: normal
 						font-size: 18px
 						vertical-align: middle
+						&.topics-count, &.posts-count, &.views-count
+							text-align: center
 						a.title
 							font-weight: bold
 							font-size: 18px
@@ -44,6 +49,49 @@
 							font-size: 14px
 							color: #6F6F6F
 							line-height: 14px
+	table.admin_forums, table.admin_categories
+		width: 100%
+		thead
+			background-color: #F0F0F0
+			line-height: 30px
+			tr
+				th						
+					padding: 5px
+					text-align: left
+					font-weight: normal
+					font-size: 18px
+					vertical-align: middle
+					// width: 10%
+					&.forum_actions
+						width: 10%
+					&.forum_info
+						width: 60%
+		tbody
+			// line-height: 30px
+			tr
+				&.even
+					background-color: #EDF9FB
+					border: 5px solid #EDF9FB
+					border-radius: 5px
+				td
+					border-top: 1px solid #6F6F6F
+					padding: 5px
+					text-align: left
+					font-weight: normal
+					font-size: 18px
+					vertical-align: middle
+					div.description
+						font-weight: 100
+						font-size: 14px
+						// color: #2DA8BC
+						line-height: 14px
+					span.last_post
+						padding-left: 15px
+						font-size: 14px
+						color: #6F6F6F
+						line-height: 14px
+	table.admin_categories
+		margin: 20px 0
 	#forum
 		small
 			font-weight: 100
@@ -68,10 +116,12 @@
 					vertical-align: middle
 					&.byline
 						width: 50%
+						padding-left: 10px
 					&.latest-post
 						width: 30%
 					&.views-count, &.posts-count						
 						width: 10%
+						text-align: center
 		tbody
 			line-height: 30px
 			tr
@@ -86,6 +136,7 @@
 					font-size: 18px
 					vertical-align: middle
 					&.byline
+						padding-left: 10px
 						.subject
 							a
 								font-size: 18px
@@ -97,8 +148,10 @@
 							line-height: 14px
 							padding-left: 15px
 					&.latest-post
-						line-height: 30px
+						line-height: 14px
 						font-size: 14px
+					&.views-count, &.posts-count						
+						text-align: center
 	#topic
 		menu
 			margin: 20px 0
@@ -146,16 +199,16 @@
 			margin-bottom: 15px
 			form
 				margin: 0px
-				.moderation_checkbox
-					float: left
-					margin-right: 30px
-					label
-						display: inline
-						margin: 0 0 0 5px
-						padding: 0px
-					input
-						margin: 0px
-						padding: 0px
+			.moderation_checkbox
+				float: left
+				margin-right: 30px
+				label
+					display: inline
+					margin: 0 0 0 5px
+					padding: 0px
+				input
+					margin: 0px
+					padding: 0px
 	form#new_post
 		margin: 0px
 		padding: 0px
@@ -173,3 +226,23 @@
 		textarea
 			width: 500px
 			height: 200px
+	textarea#forum_description
+		width: 500px
+		height: 200px
+		margin-bottom: 20px
+	form#new_topic
+		textarea
+			width: 500px
+			height: 200px
+			margin-bottom: 20px
+
+	.topic_checkbox
+		float: left
+		margin: 10px 20px 20px 0
+		label
+			display: inline
+			margin: 0 0 0 5px
+			padding: 0px
+		input
+			margin: 0px
+			padding: 0px

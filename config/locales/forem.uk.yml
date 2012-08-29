@@ -168,20 +168,26 @@ uk:
       topic:
         create: Створити тему
         update: Змінити тему
+      category:
+        create: Створити категорію
+        update: Змінити категорію
   simple_form:
     labels:
       forum:
         title: Тема
         description: Опис
+        category: Категорія
       topic:
         subject: Тема
         locked: Закрита
-        pinned: Приліплена
+        pinned: Прикріплена
         hidden: Прихована
         posts:
           text: Текст
       post:
         text: Текст
+      category:
+        name: Назва
 
   # General stuff
   time_ago_in_words: "%{time} назад"
