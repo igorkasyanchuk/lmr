@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120828095016) do
+ActiveRecord::Schema.define(:version => 20120829124625) do
+
+  create_table "consumers", :force => true do |t|
+    t.string  "description"
+    t.boolean "deleted"
+    t.integer "house_id"
+    t.string  "flat"
+    t.string  "entrance"
+    t.integer "floor"
+    t.float   "area"
+    t.float   "heat_area"
+    t.integer "number_brsdn"
+    t.integer "number_bmgst"
+    t.integer "leter"
+  end
+
+  add_index "consumers", ["house_id"], :name => "index_consumers_on_house_id"
 
   create_table "contacts", :force => true do |t|
     t.string   "name"
@@ -20,6 +36,45 @@ ActiveRecord::Schema.define(:version => 20120828095016) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "contractors", :force => true do |t|
+    t.string  "description"
+    t.boolean "deleted"
+    t.string  "full_description"
+    t.string  "zkpo"
+    t.string  "inn"
+    t.string  "ncert"
+    t.string  "leg_address"
+    t.string  "address"
+    t.string  "phone"
+    t.string  "bnkcc"
+  end
+
+  create_table "districts", :force => true do |t|
+    t.string  "name"
+    t.boolean "deleted"
+  end
+
+  create_table "firms", :force => true do |t|
+    t.string  "description"
+    t.boolean "deleted"
+    t.string  "full_description"
+    t.integer "zheo_id"
+    t.string  "bnkcc"
+    t.integer "street_id"
+    t.boolean "zkpo"
+    t.string  "inn"
+    t.string  "ncert"
+    t.string  "leg_address"
+    t.string  "address"
+    t.string  "phone"
+    t.string  "leg_phone"
+    t.string  "fax"
+    t.string  "phone_service"
+  end
+
+  add_index "firms", ["street_id"], :name => "index_firms_on_street_id"
+  add_index "firms", ["zheo_id"], :name => "index_firms_on_zheo_id"
 
   create_table "forem_categories", :force => true do |t|
     t.string   "name",       :null => false
@@ -116,8 +171,28 @@ ActiveRecord::Schema.define(:version => 20120828095016) do
   add_index "forem_views", ["user_id"], :name => "index_forem_views_on_user_id"
   add_index "forem_views", ["viewable_id"], :name => "index_forem_views_on_topic_id"
 
+  create_table "houses", :force => true do |t|
+    t.string  "description"
+    t.boolean "deleted"
+    t.integer "firm_id"
+    t.integer "street_id"
+    t.string  "number_code"
+    t.string  "letter"
+  end
+
+  add_index "houses", ["firm_id"], :name => "index_houses_on_firm_id"
+  add_index "houses", ["street_id"], :name => "index_houses_on_street_id"
+
   create_table "roles", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "services", :force => true do |t|
+    t.string  "description"
+    t.boolean "deleted"
+    t.integer "element"
+    t.string  "uom"
+    t.string  "label"
   end
 
   create_table "simple_captcha_data", :force => true do |t|
@@ -128,6 +203,11 @@ ActiveRecord::Schema.define(:version => 20120828095016) do
   end
 
   add_index "simple_captcha_data", ["key"], :name => "idx_key"
+
+  create_table "streets", :force => true do |t|
+    t.string  "name"
+    t.boolean "deleted"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "identifier"
