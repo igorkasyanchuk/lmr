@@ -62,4 +62,8 @@ module ApplicationHelper
       '/dashboard'
     end
   end
+
+  def page_part(identifier)
+    PagePart[identifier].content.html_safe
+  end
 end

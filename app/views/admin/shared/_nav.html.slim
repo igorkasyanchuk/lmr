@@ -8,9 +8,11 @@
           li.divider-vertical
           li= link_to "Contacts(#{Contact.count})", [:admin, :contacts]
           li.divider-vertical
-          li= link_to "Manage Forum", '/forums/admin'
+          li= link_to "Forum", '/forums/admin'
           li.divider-vertical
-          li= link_to "Manage News", admin_news_index_path
+          li= link_to "News", admin_news_index_path
+          li.divider-vertical
+          li= link_to "Page Parts", [:admin, :page_parts]
         ul.nav.pull-right
           li= link_to 'Вийти', main_app.destroy_user_session_path, :method => :delete
 .clearfix

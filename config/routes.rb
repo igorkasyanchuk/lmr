@@ -13,6 +13,7 @@ Lmr::Application.routes.draw do
     resources :users
     resources :contacts, :only => [:index, :show, :destroy]
     resources :news
+    resources :page_parts, :only => [:index, :edit, :update]
   end
 
   namespace :dashboard do
