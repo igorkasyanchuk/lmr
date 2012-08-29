@@ -1,0 +1,175 @@
+.span12
+	.category
+		border-top: 1px solid #6F6F6F
+		table#forums
+			width: 100%
+			thead
+				background-color: #F0F0F0
+				line-height: 30px
+				tr
+					th						
+						padding: 5px
+						text-align: left
+						font-weight: normal
+						font-size: 18px
+						vertical-align: middle
+						width: 10%
+						&.desc-and-last-post
+							width: 70%
+			tbody
+				line-height: 30px
+				tr
+					&.even
+						background-color: #EDF9FB
+						border: 5px solid #EDF9FB
+						border-radius: 5px
+					td
+						border-top: 1px solid #6F6F6F
+						padding: 5px
+						text-align: left
+						font-weight: normal
+						font-size: 18px
+						vertical-align: middle
+						a.title
+							font-weight: bold
+							font-size: 18px
+							color: #FAAE1A
+						div.description
+							font-weight: 100
+							font-size: 14px
+							// color: #2DA8BC
+							line-height: 14px
+						span.last_post
+							padding-left: 15px
+							font-size: 14px
+							color: #6F6F6F
+							line-height: 14px
+	#forum
+		small
+			font-weight: 100
+			color: #2DA8BC
+			padding: 0 0 20px 20px
+		menu
+			margin: 20px 0
+			padding: 0px
+			a
+				margin-right: 10px
+	table.topics
+		width: 100%
+		thead
+			background-color: #F0F0F0
+			line-height: 30px
+			tr
+				th						
+					padding: 5px
+					text-align: left
+					font-weight: normal
+					font-size: 18px
+					vertical-align: middle
+					&.byline
+						width: 50%
+					&.latest-post
+						width: 30%
+					&.views-count, &.posts-count						
+						width: 10%
+		tbody
+			line-height: 30px
+			tr
+				&.even
+					background-color: #EDF9FB
+					border: 5px solid #EDF9FB
+					border-radius: 5px
+				td
+					padding: 5px
+					text-align: left
+					font-weight: normal
+					font-size: 18px
+					vertical-align: middle
+					&.byline
+						.subject
+							a
+								font-size: 18px
+								color: #FAAE1A
+						.started-by
+							font-weight: normal
+							font-size: 14px
+							color: #6F6F6F
+							line-height: 14px
+							padding-left: 15px
+					&.latest-post
+						line-height: 30px
+						font-size: 14px
+	#topic
+		menu
+			margin: 20px 0
+			padding: 0px
+			a
+				margin-right: 10px
+	#posts
+		.post
+			padding: 5px
+			border: 5px solid white
+			display: block
+			overflow: hidden
+			// line-height: 30px
+			&.even
+				background-color: #EDF9FB
+				border: 5px solid #EDF9FB
+				border-radius: 5px
+			.user
+				clear: both
+				float: left
+				width: 200px
+			.contents
+				margin-left: 210px
+				min-height: 125px
+				a
+					time
+						float: right
+						font-size: 14px
+						line-height: 14px
+						color: #6F6F6F
+				ul.actions
+					text-align: right
+					margin: 20px 0
+					padding: 0px
+					li
+						list-style-type: none
+						display: inline
+						a
+							margin-right: 10px
+		.moderation
+			border: 5px dashed red
+			padding: 10px
+			font-size: 16px
+			line-height: 30px
+			margin-bottom: 15px
+			form
+				margin: 0px
+				.moderation_checkbox
+					float: left
+					margin-right: 30px
+					label
+						display: inline
+						margin: 0 0 0 5px
+						padding: 0px
+					input
+						margin: 0px
+						padding: 0px
+	form#new_post
+		margin: 0px
+		padding: 0px
+		label
+			display: inline-block
+			width: 250px
+			max-width: 250px
+			white-space: nowrap
+			text-align: right
+			font-weight: 100
+			color: #2DA8BC
+			padding-right: 10px
+			vertical-align: top
+			clear: both
+		textarea
+			width: 500px
+			height: 200px

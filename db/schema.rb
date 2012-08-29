@@ -139,6 +139,26 @@ ActiveRecord::Schema.define(:version => 20120829150535) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "post_categories", :force => true do |t|
+    t.string "name", :null => false
+  end
+
+  create_table "posts", :force => true do |t|
+    t.integer  "post_category_id"
+    t.string   "title"
+    t.text     "description"
+    t.text     "content"
+    t.boolean  "published",            :default => false
+    t.string   "posted_by"
+    t.datetime "created_at"
+    t.string   "preview_file_name"
+    t.string   "preview_content_type"
+    t.integer  "preview_file_size"
+    t.datetime "preview_updated_at"
+  end
+
+  add_index "posts", ["post_category_id"], :name => "index_posts_on_post_category_id"
+
   create_table "roles", :force => true do |t|
     t.string "name"
   end
