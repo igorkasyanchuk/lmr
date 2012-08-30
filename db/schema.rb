@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120829144449) do
+ActiveRecord::Schema.define(:version => 20120830081843) do
+
+  create_table "ckeditor_assets", :force => true do |t|
+    t.string   "data_file_name",                  :null => false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    :limit => 30
+    t.string   "type",              :limit => 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
   create_table "consumers", :force => true do |t|
     t.string  "description"
@@ -188,6 +204,13 @@ ActiveRecord::Schema.define(:version => 20120829144449) do
     t.text   "content"
   end
 
+  create_table "pages", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "post_categories", :force => true do |t|
     t.string "name", :null => false
   end
@@ -236,10 +259,10 @@ ActiveRecord::Schema.define(:version => 20120829144449) do
 
   create_table "users", :force => true do |t|
     t.string   "identifier"
-    t.string   "name",                   :default => "",               :null => false
-    t.string   "surname",                :default => "",               :null => false
-    t.string   "email",                  :default => "",               :null => false
-    t.string   "encrypted_password",     :default => "",               :null => false
+    t.string   "name",                   :default => "",         :null => false
+    t.string   "surname",                :default => "",         :null => false
+    t.string   "email",                  :default => "",         :null => false
+    t.string   "encrypted_password",     :default => "",         :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -255,12 +278,12 @@ ActiveRecord::Schema.define(:version => 20120829144449) do
     t.integer  "failed_attempts",        :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
-    t.integer  "role_id"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.boolean  "forem_admin",            :default => false
-    t.string   "forem_state",            :default => "pending_review"
+    t.string   "forem_state",            :default => "approved"
     t.boolean  "forem_auto_subscribe",   :default => false
+    t.integer  "role_id"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
