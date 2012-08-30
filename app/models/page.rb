@@ -1,5 +1,5 @@
 class Page < ActiveRecord::Base
-  attr_accessible :title, :content
+  attr_accessible :title, :content, :identifier, :seo_title, :seo_keywords, :seo_description
 
   #validates :title, :presence => true
   validates :identifier, :uniqueness => true, :presence => true
