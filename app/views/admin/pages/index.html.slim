@@ -1,5 +1,10 @@
 =link_to 'New Page', new_resource_path
-ul
-  - collection.each do |page|
-    li
-      = link_to page.title, resource_path(page)
+table
+  thead
+    th title
+    th edit
+  tbody
+    - collection.each do |page|
+      tr
+        td= link_to page.title, resource_path(page)
+        td= link_to 'edit', edit_resource_path(page)

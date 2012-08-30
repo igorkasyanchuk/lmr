@@ -18,6 +18,7 @@ Lmr::Application.routes.draw do
     resources :news
   end
 
+
   namespace :dashboard do
     match '/', :to => 'dashboard#welcome'
     resource :profile, :only => [:edit, :update]
@@ -28,6 +29,8 @@ Lmr::Application.routes.draw do
   end
 
   resources :contacts, :only => [:new, :create]
+  
+  match 'pages/:id' => 'pages#show', :as => :page
 
   root :to => 'home#index'
 end

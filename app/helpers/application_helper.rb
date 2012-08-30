@@ -62,4 +62,9 @@ module ApplicationHelper
       '/dashboard'
     end
   end
+
+  def link_to_page identifier
+    page = Page[identifier]
+    link_to (page.title.present? ? page.title : page.identifier), page_path(page.url_title)
+  end
 end
