@@ -38,9 +38,9 @@ test/dummy/public/resources_video/
 test/dummy/support/*.flw 
 test/dummy/config/database.yml 
 .rvmrc 
-public/stylesheets/* 
-public/stylesheets
-public/system/* 
+public/stylesheets/*
+public/stylesheets 
+public/system/*
 public/system
 db/sphinx/* 
 db/sphinx/ 
@@ -78,3 +78,4 @@ app/views/admin/pages/.index.html.slim.swp
 app/views/admin/shared/._nav.html.slim.swp
 
 public/system/ckeditor_assets/pictures/2/thumb_btn_close_red.jpg
+*.swp
