@@ -1,0 +1,7 @@
+h1 Останні новини
+hr
+
+#posts_container
+
+  = render :partial => '/news/partials/post', :collection => @posts, :as => :post
+  .clear

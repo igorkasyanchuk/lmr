@@ -12,6 +12,7 @@ tr class="topic #{cycle('odd', 'even')} #{topic.locked? ? 'locked' : 'unlocked'}
     .subject= link_to topic.subject, forem.forum_topic_path(@forum, topic)
     .started-by
       = t "started_by"
+      |  
       = relevant_posts(topic).first.user.full_name
   td.latest-post
     = link_to_latest_post(topic)

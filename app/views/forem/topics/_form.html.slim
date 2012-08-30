@@ -2,4 +2,4 @@
   = f.input :subject
   = f.simple_fields_for :posts do |post|
     = render :partial => "forem/posts/form", :locals => { :f => post }
-  = f.submit
+  = f.button :submit, :class => 'btn btn-primary'

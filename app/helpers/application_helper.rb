@@ -8,6 +8,10 @@ module ApplicationHelper
     date.utc.strftime("%Y-%m-%dT%H:%M:%S+00:00") if date
   end
 
+  def formatted_date date
+    date.strftime("%d/%m/%Y %H:%M") if date
+  end
+
   def yield_or_default(message, default_message = "")
     message.nil? ? default_message : message
   end
@@ -61,6 +65,10 @@ module ApplicationHelper
     else
       '/dashboard'
     end
+  end
+
+  def page_part(identifier)
+    PagePart[identifier].content.html_safe
   end
 
   def link_to_page identifier

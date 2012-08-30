@@ -15,7 +15,8 @@ Lmr::Application.routes.draw do
     resources :pages
     resources :users
     resources :contacts, :only => [:index, :show, :destroy]
-    resources :news
+    resources :page_parts, :only => [:index, :edit, :update]
+    resources :posts
   end
 
 
@@ -25,7 +26,8 @@ Lmr::Application.routes.draw do
   end
 
   namespace :news do
-    match '/', :to => 'news#welcome'
+    resources :posts, :only => [:index, :show]
+    match '/', :to => 'posts#index'
   end
 
   resources :contacts, :only => [:new, :create]

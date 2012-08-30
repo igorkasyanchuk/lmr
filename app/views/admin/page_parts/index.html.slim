@@ -1,0 +1,23 @@
+= title "Page Parts"
+
+h1.left Page Parts
+
+.clear
+
+table.table.table-striped
+  thead
+    tr
+      th Identifier
+      th Content Present?
+      th Actions
+  tbody
+    - collection.each do |page_part|
+      tr
+        td= link_to page_part.identifier, edit_resource_path(page_part)
+        td= page_part.content.present? ? 'yes' : 'no'
+        td
+          = link_to "Edit", edit_resource_path(page_part), :class => 'btn btn-mini'
+    - if collection.blank?
+      tr
+        td colspan=3
+          | No Page Parts.

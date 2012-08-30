@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Admin::DashboardController < InheritedResources::Base
   layout 'admin'
 
@@ -8,7 +9,7 @@ class Admin::DashboardController < InheritedResources::Base
 
   protected
     def admin_required
-      true
+      redirect_to root_path, :notice => 'Ви повинні бути адміністратором.' unless current_user.admin?
     end
 
 end

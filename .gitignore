@@ -39,7 +39,9 @@ test/dummy/support/*.flw
 test/dummy/config/database.yml 
 .rvmrc 
 public/stylesheets/* 
-public/stylesheets 
+public/stylesheets
+public/system/* 
+public/system
 db/sphinx/* 
 db/sphinx/ 
 db/calendar/* 

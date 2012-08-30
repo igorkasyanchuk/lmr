@@ -1,4 +1,4 @@
-h2= t('.title', :forum => forum)
+h2= t('forem.moderation.title', :forum => forum.title)
 h3= t('posts_count', :count => @posts.count, :scope => 'forem.general')
 = form_tag forem.forum_moderate_posts_url(forum), :method => :put do
   #posts
@@ -7,4 +7,4 @@ h3= t('posts_count', :count => @posts.count, :scope => 'forem.general')
         = topic.forum.title
         |  &raquo; #{topic.subject}
       = render posts, :mass_moderation => true
-  = submit_tag "Moderate"
+  = submit_tag t('moderate', :scope => 'forem.posts.moderation'), :class => 'btn btn-success btn-large'
