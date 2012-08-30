@@ -284,8 +284,8 @@ ActiveRecord::Schema.define(:version => 20120830095034) do
     t.integer  "failed_attempts",        :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.boolean  "forem_admin",            :default => false
     t.string   "forem_state",            :default => "approved"
     t.boolean  "forem_auto_subscribe",   :default => false

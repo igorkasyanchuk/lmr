@@ -199,3 +199,13 @@ uk:
   by: ''
   started_by: "Автор"
   are_you_sure: Ви впевнені?
+
+  #from main_app
+  manage_users: 'Керування користувачами'
+  spam_user: 'Заблокувати користувача'
+  blocked_users: "Заблокованих користувачів"
+  name: "Ім'я"
+  surname: "Прізвище"
+  identifier: 'Особовий рахунок'
+  delete_from_spam: 'Видалити з заблокованих'
+  delete_spam_user: 'Видалити'

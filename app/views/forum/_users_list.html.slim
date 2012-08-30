@@ -1,13 +1,13 @@
-= "Заблокованих Користувачів: #{@users.count}"
+= "#{t('blocked_users')}: #{@users.count}"
 - if @users.count > 0
-	table.table-striped
+	table.admin_forums
 		thead
 			tr
-				th Name
-				th Surname
-				th Identifier
+				th= t('name')
+				th= t('surname')
+				th= t('identifier')
 				th email
-				th Delete from spam
+				th= t('delete_from_spam')
 		tbody
 			- @users.each do |user|
 				tr
@@ -15,4 +15,4 @@
 					td= user.surname
 					td= user.identifier
 					td= user.email
-					td= link_to 'Delete', forums_toggle_approve_path(:id => user.id), :remote => :true, :method => :post, :confirm => 'Are you sure?', :class => 'btn btn-danger btn-mini'
+					td= link_to t('delete_spam_user'), forums_toggle_approve_path(:id => user.id), :remote => :true, :method => :post, :confirm => t('are_you_sure'), :class => 'btn btn-danger btn-mini'
