@@ -4,6 +4,17 @@ module ApplicationHelper
   SITE_DESCRIPTION = " | LMR.lviv.ua".freeze
   SITE_KEYWORDS = "LMR.lviv.ua".freeze
 
+  def bootstrap_flash
+   flash_messages = []
+   flash.each do |type, message|
+     type = :success if type == :notice
+     type = :error   if type == :alert
+     text = content_tag(:div, link_to("x", "#", :class => "close", "data-dismiss" => "alert") + message, :class => "alert fade in alert-#{type}")
+     flash_messages << text if message
+   end
+   flash_messages.join("\n").html_safe
+  end  
+
   def w3c_date(date)
     date.utc.strftime("%Y-%m-%dT%H:%M:%S+00:00") if date
   end

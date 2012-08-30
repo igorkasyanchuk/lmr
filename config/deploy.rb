@@ -1,11 +1,21 @@
 # bundler bootstrap
-require 'bundler/capistrano'
+require 'rvm'
+#require 'bundler/capistrano'
+
+set :rvm_path, "/usr/local/rvm/scripts/rvm"
+set :rvm_ruby_string, '1.9.3' #1.9.2'
+set :rvm_type, :user  # Don't use system-wide RVM
 
 # main details
 set :application, "lmr"  
 role :web, "192.168.242.118"   # #{application}.cloud.voupe.net
 role :app, "192.168.242.118"
 role :db,  "192.168.242.118", :primary => true
+
+set :default_environment, {
+  'PATH' => "/usr/local/rvm/gems/ruby-1.9.3-p194:/usr/local/rvm/gems/ruby-1.9.3-p194/bin:/usr/local/rvm:$PATH",
+  'RUBY_VERSION' => 'ruby 1.9.3p194'
+}
 
 # server details
 default_run_options[:pty] = true
@@ -14,7 +24,10 @@ set :deploy_to, "/www/#{application}"
 set :deploy_via, :remote_cache
 set :user, "root"
 set :password, "root"
-set :use_sudo, true
+set :ruby, "/usr/local/rvm/gems/ruby-1.9.3-p194/bin/ruby"
+#set :use_sudo, true
+
+#set :bundle_cmd, 'source $HOME/.bash_profile && bundle'
 
 # repo details
 set :scm, :git
