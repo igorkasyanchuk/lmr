@@ -2,8 +2,11 @@
   = f.label :title
   = f.text_field :title
   br
+  - unless resource.permanent?
+    = f.label :identifier, 'Url title'
+    = f.text_field :identifier
+    br
   = f.label :content
-  -#= f.text_area :content
   = cktext_area_tag :'page[content]', resource.content
   br
   = f.label :seo_title
