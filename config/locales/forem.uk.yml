@@ -1,0 +1,201 @@
+uk:
+  forem:
+    general:
+      forum: Форум
+      topics: Теми
+      topic: Тема
+      posts: Відповіді
+      posts_count:
+        zero: немає відповідей
+        one: 1 відповідь
+        other: "%{count} відповідей"
+      flagged_for_spam: Ваш аккаунт відзначений як спамовий.
+      cannot_create_topic: Ви не можете зараз створити тему.
+      cannot_create_post: Ви не можете зараз створити нову відповідь.
+
+    access_denied: Доступ заборонений.
+    admin:
+      area: Адміністрування
+      welcome: Ласкаво просимо в адміністрування форумом
+      forum:
+        index: Управління форумами
+        new: Створення нового форуму
+        new_link: Новий форум
+        deleted: Форум видалений.
+        created: Форум створений.
+        not_created: Форум не може бути створений.
+        updated: Форум змінений.
+        not_updated: Форум не може бути змінений.
+      forums:
+        edit: Редагувати
+        delete: Видалити
+        category: Категорія
+        delete_confirm: Ви впевнені що хочете видалити цей форум?
+        index:
+          last_post: Остання відповідь
+          none: відсутня
+      group:
+        index: Управління групами
+        created: Група була успішно створена.
+        not_created: Група не може бути створена.
+        deleted: Обрана група була успішно видалена.
+      groups:
+        show:
+          add_member: Додати
+      category:
+        index: Управління категоріями
+        new: Створення нової категорії
+        new_link: Нова категорія
+        deleted: Категорія видалена.
+        created: Категорія створена.
+        not_created: Категорія не може бути створена.
+        updated: Категорія змінена.
+        not_updated: Категорія не може бути змінена.
+      categories:
+        edit: Редагувати
+        delete: Видалити
+        category: Категорія
+        delete_confirm: Ви впевнені що хочете видалити цю категорію?
+    common:
+      pages: Сторінки
+    errors:
+      not_signed_in: Ви повинні спочатку авторизуватися.
+      access_denied: Доступ заборонений.
+    forum:
+      header: "Перегляд %{title}"
+      forums: Форуми
+      new: Створення нового форуму
+      edit: "Редагування форуму %{title}"
+      topics_count:
+        zero: 0 тем
+        one: 1 тема
+        other: "%{count} тем"
+      posts_count:
+        zero: немає відповідей
+        one: 1 відповідь
+        other: "%{count} відповідей"
+      moderator_tools: "Інструменти модерації"
+    forums:
+      index:
+        title: Форуми
+        forum: Форум
+        views: Переглядів
+        last_post: 'Остання відповідь:'
+        none: відсутня
+    topic:
+      headings:
+        topic: Тема
+        latest: Остання
+        posts: Відповіді
+        views: Перегляди
+      moderation:
+        success: Обрана тема була відмодерована.
+      reply: Відповісти
+      quote: Цитувати
+      delete: Видалити
+      created: Тема створена.
+      new: Створення нової теми
+      edit: Редагування теми
+      not_created: Тема не може бути створена.
+      deleted: Тема видалена.
+      cannot_delete: Ви не можете видалити тему, яку не створювали.
+      updated: Тема змінена.
+      not_updated: Тема не може бути змінена.
+      subscribed: Ви підписалися на цю тему.
+      unsubscribed: Ви відписалися від цієї теми.
+      none: На даний момент у цьому форумі немає жодної теми.
+      received_reply: У темі на яку Ви підписані є відповідь
+      view_it_here: Ви зможете переглянути її за наступним посиланням
+      unsubscribe_from: Щоб відписатись від повідомлень цієї теми натисніть наступне посилання
+      links:
+        new: Нова тема
+        back_to_topics: Назад до списку тем
+        edit: Редагування теми
+      not_found: Тема яку ви шукаєте не знайдена.
+      hidden:
+        'true': Тема прихована.
+        'false': Тема не прихована.
+      locked:
+        'true': Тема заблокована.
+        'false': Тема розблокована.
+      pinned:
+        'true': Тема прикріплена.
+        'false': Тема не прикріплена.
+    topics:
+      show:
+        reply: Відповісти
+        delete: Видалити
+        subscribe: Підписатися
+        unsubscribe: Відписатися
+        reply_to_topic: Відповісти
+        pending_review: Ця тема очікує перевірки. Тільки автор теми і модератор можуть її переглянути.
+        hide:
+          'true': Показати
+          'false': Сховати
+        lock:
+          'true': Розблокувати
+          'false': Заблокувати
+        pin:
+          'true': Відкріпити
+          'false': Прикріпити
+    post:
+      buttons:
+        reply: Відповісти
+        edit: Змінити
+      created: Ваша відповідь опублікована.
+      new: Відповісти
+      edit: Змінити
+      not_created: Ваша відповідь не опублікована.
+      not_created_topic_locked: Ви не можете відповісти на закриту тему.
+      edited: Повідомлення змінено
+      not_edited: Неможливо змінити повідомлення
+      deleted: Ваша відповідь видалена.
+      deleted_with_topic: Відповідь в темі видалена. Тема також видалена.
+      cannot_delete: Ви не можете видалити чужу відповідь.
+      in_reply_to: У відповідь на
+    posts:
+      moderation:
+        moderate: Модерувати
+        approve: Підтвердити
+        success: Вибрані відповіді були відмодеровані.
+        spam: Спам
+      post:
+        pending_review: Ця відповідь очікує перевірки. Тільки автор і модератор можуть його переглянути.
+    moderation:
+      title: "Інструменти модерації для %{forum}"
+  helpers:
+    submit:
+      forum:
+        create: Створити форум
+        update: Змінити форум
+      topic:
+        create: Створити тему
+        update: Змінити тему
+      category:
+        create: Створити категорію
+        update: Змінити категорію
+  simple_form:
+    labels:
+      forum:
+        title: Тема
+        description: Опис
+        category: Категорія
+      topic:
+        subject: Тема
+        locked: Закрита
+        pinned: Прикріплена
+        hidden: Прихована
+        posts:
+          text: Текст
+      post:
+        text: Текст
+      category:
+        name: Назва
+
+  # General stuff
+  time_ago_in_words: "%{time} назад"
+  ago: "назад"
+  ago_by: "назад"
+  by: ''
+  started_by: "Автор"
+  are_you_sure: Ви впевнені?

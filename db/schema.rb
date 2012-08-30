@@ -11,7 +11,39 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120828095016) do
+ActiveRecord::Schema.define(:version => 20120830095034) do
+
+  create_table "ckeditor_assets", :force => true do |t|
+    t.string   "data_file_name",                  :null => false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    :limit => 30
+    t.string   "type",              :limit => 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
+
+  create_table "consumers", :force => true do |t|
+    t.string  "description"
+    t.boolean "deleted"
+    t.integer "house_id"
+    t.string  "flat"
+    t.string  "entrance"
+    t.integer "floor"
+    t.float   "area"
+    t.float   "heat_area"
+    t.integer "number_brsdn"
+    t.integer "number_bmgst"
+    t.integer "leter"
+  end
+
+  add_index "consumers", ["house_id"], :name => "index_consumers_on_house_id"
 
   create_table "contacts", :force => true do |t|
     t.string   "name"
@@ -20,6 +52,45 @@ ActiveRecord::Schema.define(:version => 20120828095016) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "contractors", :force => true do |t|
+    t.string  "description"
+    t.boolean "deleted"
+    t.string  "full_description"
+    t.string  "zkpo"
+    t.string  "inn"
+    t.string  "ncert"
+    t.string  "leg_address"
+    t.string  "address"
+    t.string  "phone"
+    t.string  "bnkcc"
+  end
+
+  create_table "districts", :force => true do |t|
+    t.string  "name"
+    t.boolean "deleted"
+  end
+
+  create_table "firms", :force => true do |t|
+    t.string  "description"
+    t.boolean "deleted"
+    t.string  "full_description"
+    t.integer "zheo_id"
+    t.string  "bnkcc"
+    t.integer "street_id"
+    t.boolean "zkpo"
+    t.string  "inn"
+    t.string  "ncert"
+    t.string  "leg_address"
+    t.string  "address"
+    t.string  "phone"
+    t.string  "leg_phone"
+    t.string  "fax"
+    t.string  "phone_service"
+  end
+
+  add_index "firms", ["street_id"], :name => "index_firms_on_street_id"
+  add_index "firms", ["zheo_id"], :name => "index_firms_on_zheo_id"
 
   create_table "forem_categories", :force => true do |t|
     t.string   "name",       :null => false
@@ -116,8 +187,66 @@ ActiveRecord::Schema.define(:version => 20120828095016) do
   add_index "forem_views", ["user_id"], :name => "index_forem_views_on_user_id"
   add_index "forem_views", ["viewable_id"], :name => "index_forem_views_on_topic_id"
 
+  create_table "houses", :force => true do |t|
+    t.string  "description"
+    t.boolean "deleted"
+    t.integer "firm_id"
+    t.integer "street_id"
+    t.string  "number_code"
+    t.string  "letter"
+  end
+
+  add_index "houses", ["firm_id"], :name => "index_houses_on_firm_id"
+  add_index "houses", ["street_id"], :name => "index_houses_on_street_id"
+
+  create_table "page_parts", :force => true do |t|
+    t.string "identifier"
+    t.text   "content"
+  end
+
+  create_table "pages", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.string   "seo_title"
+    t.string   "string"
+    t.text     "seo_keywords"
+    t.text     "seo_description"
+    t.string   "identifier"
+    t.boolean  "permanent",       :default => false
+  end
+
+  create_table "post_categories", :force => true do |t|
+    t.string "name", :null => false
+  end
+
+  create_table "posts", :force => true do |t|
+    t.integer  "post_category_id"
+    t.string   "title"
+    t.text     "description"
+    t.text     "content"
+    t.boolean  "published",            :default => false
+    t.string   "posted_by"
+    t.datetime "created_at"
+    t.string   "preview_file_name"
+    t.string   "preview_content_type"
+    t.integer  "preview_file_size"
+    t.datetime "preview_updated_at"
+  end
+
+  add_index "posts", ["post_category_id"], :name => "index_posts_on_post_category_id"
+
   create_table "roles", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "services", :force => true do |t|
+    t.string  "description"
+    t.boolean "deleted"
+    t.integer "element"
+    t.string  "uom"
+    t.string  "label"
   end
 
   create_table "simple_captcha_data", :force => true do |t|
@@ -129,12 +258,17 @@ ActiveRecord::Schema.define(:version => 20120828095016) do
 
   add_index "simple_captcha_data", ["key"], :name => "idx_key"
 
+  create_table "streets", :force => true do |t|
+    t.string  "name"
+    t.boolean "deleted"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "identifier"
-    t.string   "name",                   :default => "",               :null => false
-    t.string   "surname",                :default => "",               :null => false
-    t.string   "email",                  :default => "",               :null => false
-    t.string   "encrypted_password",     :default => "",               :null => false
+    t.string   "name",                   :default => "",         :null => false
+    t.string   "surname",                :default => "",         :null => false
+    t.string   "email",                  :default => "",         :null => false
+    t.string   "encrypted_password",     :default => "",         :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -150,10 +284,10 @@ ActiveRecord::Schema.define(:version => 20120828095016) do
     t.integer  "failed_attempts",        :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.boolean  "forem_admin",            :default => false
-    t.string   "forem_state",            :default => "pending_review"
+    t.string   "forem_state",            :default => "approved"
     t.boolean  "forem_auto_subscribe",   :default => false
     t.integer  "role_id"
   end

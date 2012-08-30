@@ -1,0 +1,16 @@
+= simple_form_for [:admin, @post], :html => {:class => 'form-horizontal', :id => 'post_form'} do |f| 
+
+  = f.error_notification
+
+  fieldset.span8
+    = f.input :title, :input_html => { :class => 'focused' }
+    = f.input :description, :as => :text, :input_html => { :rows => 3 }
+    = f.input :content, :as => :text, :input_html => { :rows => 10 }
+    = f.input :post_category_id, :collection => PostCategory.by_name.map {|c| [c.name, c.id] }, :include_blank => false
+    = f.input :published
+  .clearfix
+
+  .well
+    = link_to "Відміна", :back, :class => "btn"
+    |
+    = f.submit "Зберегти новину", :class=>"btn btn-primary form-btn"

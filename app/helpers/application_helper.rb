@@ -8,6 +8,10 @@ module ApplicationHelper
     date.utc.strftime("%Y-%m-%dT%H:%M:%S+00:00") if date
   end
 
+  def formatted_date date
+    date.strftime("%d/%m/%Y %H:%M") if date
+  end
+
   def yield_or_default(message, default_message = "")
     message.nil? ? default_message : message
   end
@@ -62,4 +66,29 @@ module ApplicationHelper
       '/dashboard'
     end
   end
+
+  def page_part(identifier)
+    PagePart[identifier].content.html_safe
+  end
+
+  # duplicate method from forem forums_helper because of error undefined methods
+
+  def topics_count(forum)
+    if forem_admin_or_moderator?(forum)
+      forum.topics.count
+    else
+      forum.topics.approved.count
+    end
+  end
+
+  def posts_count(forum)
+    if forem_admin_or_moderator?(forum)
+      forum.posts.count
+    else
+      forum.posts.approved.count
+    end
+  end
+
+  # end of duplicate
+
 end
