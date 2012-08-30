@@ -3,5 +3,8 @@ hr
 
 #posts_container
 
+  = auto_discovery_link_tag :atom, "/atom" 
+  = auto_discovery_link_tag :rss, "/rss" 
+
   = render :partial => '/news/partials/post', :collection => @posts, :as => :post
   .clear

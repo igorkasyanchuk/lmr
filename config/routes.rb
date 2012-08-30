@@ -24,9 +24,12 @@ Lmr::Application.routes.draw do
   namespace :news do
     resources :posts, :only => [:index, :show]
     match '/', :to => 'posts#index'
+    match '/atom', :controller => 'feed', :action => "atom"
+    match '/rss', :controller => 'feed', :action => "rss"
   end
 
   resources :contacts, :only => [:new, :create]
 
   root :to => 'home#index'
+
 end
