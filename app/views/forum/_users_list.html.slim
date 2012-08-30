@@ -1,0 +1,18 @@
+= "Заблокованих Користувачів: #{@users.count}"
+- if @users.count > 0
+	table.table-striped
+		thead
+			tr
+				th Name
+				th Surname
+				th Identifier
+				th email
+				th Delete from spam
+		tbody
+			- @users.each do |user|
+				tr
+					td= user.name
+					td= user.surname
+					td= user.identifier
+					td= user.email
+					td= link_to 'Delete', forums_toggle_approve_path(:id => user.id), :remote => :true, :method => :post, :confirm => 'Are you sure?', :class => 'btn btn-danger btn-mini'

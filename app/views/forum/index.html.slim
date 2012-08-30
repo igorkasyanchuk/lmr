@@ -1,0 +1,9 @@
+h2 Управління користувачами
+= text_field_tag "new_user"
+= button_tag t(".block_user"), :disabled => true, :id => "block_user"
+
+#users_list
+	= render :partial => 'users_list'
+
+= javascript_include_tag "jquery-ui-autocomplete.min.js"
+= javascript_include_tag "forum"

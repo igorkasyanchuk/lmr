@@ -7,6 +7,10 @@ Lmr::Application.routes.draw do
     post 'login' => 'devise/sessions#create', :as => :user_session
     match 'logout' => 'devise/sessions#destroy', :as => :destroy_user_session, :via => [:get, :delete]
   end
+  
+  get '/forums/admin/users_list', :to => 'forum#index'
+  get 'users/autocomplete', :to => "forum#autocomplete"
+  post 'forums/toggle_approve', :to => "forum#toggle_approve"
 
   namespace :admin do
     match '/', :to => 'dashboard#welcome'
