@@ -1,22 +1,25 @@
 = form_for [:admin, resource] do |f|
-  = f.label :title
-  = f.text_field :title
-  br
-  - unless resource.permanent?
-    = f.label :identifier, 'Url title'
-    = f.text_field :identifier
+  .form-inputs
+    = f.label :title
+    = f.text_field :title
     br
-  = f.label :content
-  = cktext_area_tag :'page[content]', resource.content
-  br
-  = f.label :seo_title
-  = f.text_field :seo_title
-  br
-  = f.label :seo_keywords
-  = f.text_area :seo_keywords
-  br
-  = f.label :seo_description
-  = f.text_area :seo_description
-  br
-  = f.submit
+    - unless resource.permanent?
+      = f.label :identifier, 'Url title'
+      = f.text_field :identifier
+      br
+    = f.label :content
+    = cktext_area_tag :'page[content]', resource.content
+    br
+    = f.label :seo_title
+    = f.text_field :seo_title
+    br
+    = f.label :seo_keywords
+    = f.text_area :seo_keywords
+    br
+    = f.label :seo_description
+    = f.text_area :seo_description
+  .form-actions
+    = f.submit
+    | &nbsp;
+    = link_to 'Cancel', [:admin, :pages], :class => 'btn btn-danger btn-mini'
 
