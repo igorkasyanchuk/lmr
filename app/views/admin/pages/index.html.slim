@@ -1,0 +1,30 @@
+= title "Pages"
+
+.right= link_to 'New Page', new_resource_path, :class => 'btn btn-primary btn-small'
+
+h1.left Pages
+
+.clear
+
+table.table.table-striped
+  thead
+    th Title
+    th Path
+    th Permanent
+    th Actions
+  tbody
+    - collection.each do |page|
+      tr
+        td= link_to page.title, edit_resource_path(page)
+        td= page_path(page.identifier)
+        td
+          -if page.permanent?
+            i.icon-ok
+        td
+          = link_to 'Edit', edit_resource_path(page), :class => 'btn btn-mini'
+          |  
+          = link_to 'Delete', resource_path(page), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger'
+    - if collection.blank?
+      tr
+        td colspan=4
+          | No Pages

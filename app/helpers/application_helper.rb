@@ -70,4 +70,29 @@ module ApplicationHelper
   def page_part(identifier)
     PagePart[identifier].content.html_safe
   end
+
+  # duplicate method from forem forums_helper because of error undefined methods
+
+  def topics_count(forum)
+    if forem_admin_or_moderator?(forum)
+      forum.topics.count
+    else
+      forum.topics.approved.count
+    end
+  end
+
+  def posts_count(forum)
+    if forem_admin_or_moderator?(forum)
+      forum.posts.count
+    else
+      forum.posts.approved.count
+    end
+  end
+
+  # end of duplicate
+
+  def link_to_page identifier
+    page = Page[identifier]
+    link_to (page.title.present? ? page.title : page.identifier), page_path(page.identifier)
+  end
 end

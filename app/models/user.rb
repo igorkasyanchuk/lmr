@@ -46,8 +46,4 @@ class User < ActiveRecord::Base
     "#{name} #{surname}"
   end
 
-  def forem_admin?
-    self.admin?
-  end
-
 end
