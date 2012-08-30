@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
 
+gem 'capistrano'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -19,7 +21,11 @@ gem "simple_form", "~> 2.0.2"
 gem 'galetahub-simple_captcha', :require => "simple_captcha" 
 gem 'settingslogic'
 gem 'awesome_nested_fields'
-gem 'ckeditor', '3.6.3'
+#gem 'ckeditor', '3.7.1', :git => 'git://github.com/netoneko/ckeditor.git'
+gem 'ckeditor', :path => 'vendor/gems/ckeditor'
+
+gem 'carrierwave'
+gem 'mini_magick'
 
 
 # Gems used only for assets and not required
@@ -38,6 +44,19 @@ end
 gem 'jquery-rails'
 gem 'execjs'
 gem 'therubyracer'
+
+group :test, :development do
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
+  gem "capybara"
+  gem "poltergeist"
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
