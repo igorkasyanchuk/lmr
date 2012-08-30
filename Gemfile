@@ -19,7 +19,11 @@ gem "simple_form", "~> 2.0.2"
 gem 'galetahub-simple_captcha', :require => "simple_captcha" 
 gem 'settingslogic'
 gem 'awesome_nested_fields'
-gem 'ckeditor', '3.6.3'
+#gem 'ckeditor', '3.7.1', :git => 'git://github.com/netoneko/ckeditor.git'
+gem 'ckeditor', :path => 'vendor/gems/ckeditor'
+
+gem 'carrierwave'
+gem 'mini_magick'
 
 
 # Gems used only for assets and not required
