@@ -50,4 +50,8 @@ class User < ActiveRecord::Base
     self.forem_state == 'spam'
   end
 
+  def forem_admin?
+    self && (self.admin? || self.content_manager?) && !self.forum_blocked?
+  end
+
 end

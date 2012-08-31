@@ -1,4 +1,4 @@
-- if current_user && (current_user.admin? || current_user.content_manager?) && controller.class.name.include?('Admin::')
+- if current_user && (current_user.admin? || current_user.content_manager?) && request.fullpath.include?('/admin')
 	= content_for :css do
 	  = stylesheet_link_tag "admin/admin"
 

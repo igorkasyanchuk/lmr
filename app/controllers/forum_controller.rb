@@ -31,7 +31,7 @@ class ForumController < ApplicationController
   private
 
   def moderator_or_admin
-    unless (current_user.forem_admin? || current_user.has_role?('content_manager')) && !current_user.forum_blocked?
+    unless current_user.forem_admin?
     	flash.alert = t("forem.errors.access_denied")
       redirect_to forem_path
     end
