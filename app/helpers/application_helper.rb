@@ -71,7 +71,7 @@ module ApplicationHelper
   end
 
   def my_dashboard_path
-    if current_user.admin?
+    if current_user.admin? || current_user.content_manager?
       '/admin'
     else
       '/dashboard'
@@ -79,7 +79,12 @@ module ApplicationHelper
   end
 
   def page_part(identifier)
-    PagePart[identifier].content.html_safe
+    pp = PagePart[identifier]
+    if pp.safe_content?
+      pp.content
+    else
+      pp.content.html_safe
+    end
   end
 
   # duplicate method from forem forums_helper because of error undefined methods
