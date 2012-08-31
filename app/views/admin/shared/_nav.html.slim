@@ -4,6 +4,7 @@
       a.brand href='/' LMR
       .nav-collapse
         ul.nav
+          li.divider-vertical
           li= link_to "Pages(#{Page.count})", [:admin, :pages]
           li.divider-vertical
           li= link_to "Users(#{User.count})", [:admin, :users]
