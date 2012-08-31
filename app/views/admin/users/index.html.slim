@@ -20,6 +20,14 @@ table.table.table-striped
         td= mail_to user.email
         td= user.role_name
         td
+          - unless user.confirmed?
+            = link_to "Confirm", [:confirm, :admin, user], :class => 'btn btn-mini'
+            | 
+          - if user.blocked?
+            = link_to "Unblock", [:unblock, :admin, user], :class => 'btn btn-mini'
+          - else
+            = link_to "Block", [:block, :admin, user], :class => 'btn btn-mini'
+          | 
           = link_to "Edit", edit_resource_path(user), :class => 'btn btn-mini'
           | 
           = link_to 'Delete', [:admin, user], :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger btn-mini'
