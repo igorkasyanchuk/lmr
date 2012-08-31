@@ -13,14 +13,17 @@ class Admin::UsersController < Admin::DashboardController
   end
 
   def confirm
+    resource.confirm!
     redirect_to [:admin, :users], :notice => "Користувача підтвердженно."
   end
 
   def block
+    resource.update_attribute(:blocked, true)
     redirect_to [:admin, :users], :notice => "Користувача заблоковано."
   end
 
   def unblock
+    resource.update_attribute(:blocked, false)
     redirect_to [:admin, :users], :notice => "Користувача розблоковано."
   end
 
