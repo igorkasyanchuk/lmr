@@ -17,7 +17,13 @@ Lmr::Application.routes.draw do
   namespace :admin do
     match '/', :to => 'dashboard#welcome'
     resources :pages
-    resources :users
+    resources :users do
+      member do 
+        get :confirm
+        get :block
+        get :unblock
+      end
+    end
     resources :contacts, :only => [:index, :show, :destroy]
     resources :page_parts, :only => [:index, :edit, :update]
     resources :posts
