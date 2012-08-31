@@ -50,6 +50,7 @@ Lmr::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default_url_options = { :host => '192.168.242.118' }
 
   # Enable threaded mode
   # config.threadsafe!
