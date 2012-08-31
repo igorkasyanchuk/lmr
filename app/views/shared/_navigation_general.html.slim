@@ -17,8 +17,8 @@
           - if signed_in?
             li= link_to "Мій Кабінет", my_dashboard_path
             li.divider-vertical
-            li= link_to 'Вийти', main_app.destroy_user_session_path, :method => :delete
+            li= link_to t('devise.views.sign_out'), main_app.destroy_user_session_path, :method => :delete
           - else
-            li= link_to 'Ввійти', main_app.new_user_session_path
+            li= link_to t('devise.views.sign_in'), main_app.new_user_session_path
             li.divider-vertical
-            li= link_to 'Реєстрація', main_app.new_user_registration_path 
+            li= link_to t('devise.views.sign_up'), main_app.new_user_registration_path 

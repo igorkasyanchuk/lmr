@@ -65,6 +65,7 @@ uk:
       password_confirm: 'Підтвердження паролю'
       remember_me: "Запам'ятати мене"
       sign_in: "Ввійти"
+      sign_out: "Вийти"
       sign_up: 'Реєстрація'
       register: 'Зареєструватися'
       forgot: 'Забули пароль?'
