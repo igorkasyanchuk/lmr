@@ -1,10 +1,11 @@
-# bundler bootstrap
-require 'rvm'
-#require 'bundler/capistrano'
+$:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
+require "rvm/capistrano"    # Load RVM's capistrano plugin.
+#set :rvm_ruby_string, '1.9.3-p125'   # Or whatever env you want it to run in.
+set :rvm_type, :system     # I really mean :system here. Not :user.
 
-set :rvm_path, "/usr/local/rvm/scripts/rvm"
-set :rvm_ruby_string, '1.9.3' #1.9.2'
-set :rvm_type, :user  # Don't use system-wide RVM
+# bundler bootstrap
+require "bundler/capistrano"
+#set :bundle_without, [:test, :development]
 
 # main details
 set :application, "lmr"  
