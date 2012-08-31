@@ -1,8 +1,8 @@
-h2 Resend unlock instructions
+h3= t('devise.views.resend_unlock')
 = form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post }) do |f|
   = devise_error_messages!
   div
-    = f.label :email
-    = f.email_field :email
-  = f.submit "Resend unlock instructions", :class => 'btn btn-primary'
+    = f.label t('devise.views.login')
+    = f.text_field :login
+  = f.submit t('devise.views.resend_unlock'), :class => 'btn btn-primary'
 = render :partial => "devise/shared/links"

@@ -1,8 +1,8 @@
-h2 Resend confirmation instructions
+h3= t('devise.views.resend_confirm')
 = form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
   = devise_error_messages!
   div
-    = f.label :email
-    = f.email_field :email
-  = f.submit "Resend confirmation instructions", :class => 'btn btn-primary'
+    = f.label t('devise.views.login')
+    = f.text_field :login
+  = f.submit t('devise.views.resend_confirm'), :class => 'btn btn-primary'
 = render :partial => "devise/shared/links"

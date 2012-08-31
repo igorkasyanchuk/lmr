@@ -1,8 +1,8 @@
-h2 Forgot your password?
+h2= t('devise.views.forgot')
 = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
   = devise_error_messages!
   div
-    = f.label :login
+    = f.label t('devise.views.login')
     = f.text_field :login
-  = f.submit "Send me reset password instructions", :class => 'btn btn-primary'
+  = f.submit t('devise.views.send_forgot'), :class => 'btn btn-primary'
 = render :partial => "devise/shared/links"
