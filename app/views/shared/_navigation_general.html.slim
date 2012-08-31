@@ -8,11 +8,13 @@
       a.brand href="/" LMR
       .container.nav-collapse
         ul.nav
+          li.divider-vertical
           li= link_to "Новини", '/news'
           li.divider-vertical
           li= link_to "Форум", '/forums'
           li.divider-vertical
           li= link_to "Контакти", main_app.new_contact_path
+          li.divider-vertical
         ul.nav.pull-right
           - if signed_in?
             li= link_to "Мій Кабінет", my_dashboard_path

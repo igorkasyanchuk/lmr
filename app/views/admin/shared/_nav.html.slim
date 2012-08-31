@@ -4,6 +4,7 @@
       a.brand href='/' LMR
       .nav-collapse
         ul.nav
+          li.divider-vertical
           li= link_to "Pages(#{Page.count})", main_app.admin_pages_path
           li.divider-vertical
           - if current_user.admin?

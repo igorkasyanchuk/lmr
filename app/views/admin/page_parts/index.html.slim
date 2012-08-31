@@ -9,12 +9,14 @@ table.table.table-striped
     tr
       th Identifier
       th Content Present?
+      th Format
       th Actions
   tbody
     - collection.each do |page_part|
       tr
         td= link_to page_part.identifier, edit_resource_path(page_part)
         td= page_part.content.present? ? 'yes' : 'no'
+        td= page_part.format
         td
           = link_to "Edit", edit_resource_path(page_part), :class => 'btn btn-mini'
     - if collection.blank?

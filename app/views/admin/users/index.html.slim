@@ -3,8 +3,12 @@
 .right= link_to "Add User", [:new, :admin, :user], :class => 'btn btn-primary btn-small'
 
 h1.left Users
-
 .clear
+
+= form_tag [:admin, :users], :method => :get, :class => 'form-search' do
+  = text_field_tag :q, params[:q], :class => 'input-medium search-query'
+  | 
+  = submit_tag "Search", :class => 'btn'
 
 table.table.table-striped
   thead

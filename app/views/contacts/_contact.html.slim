@@ -1,14 +1,17 @@
-h2 Contact us
+h2 Контакти
+hr
 
 = simple_form_for contact, :html => {:class => 'form-horizontal' } do |f|
 
+  = f.error_notification
+
   .form-inputs 
-    = f.input :name
-    = f.input :email
-    = f.input :message, :as => :text, :input_html => { :rows => 12, :cols => 80, :class => 'long_text_area' }
-    = f.simple_captcha :label => "Enter code from the image"
+    = f.input :name, :label => 'Ім\'я'
+    = f.input :email, :label => 'Електронна адреса'
+    = f.input :message, :as => :text, :label => 'Повідомлення', :input_html => { :rows => 12, :cols => 200, :class => 'span8' }
+    = f.simple_captcha :label => "Введіть код зображений на рисунку"
 
   .form-actions
-    = f.button :submit, :value => "Send"
+    = f.button :submit, :value => "Надіслати"
 
 .clear
