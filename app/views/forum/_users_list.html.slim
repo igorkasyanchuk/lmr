@@ -2,17 +2,17 @@
 - if @users.count > 0
 	table.admin_forums
 		thead
-			tr
-				th= t('name')
+			tr				
 				th= t('surname')
+				th= t('name')
 				th= t('identifier')
 				th email
 				th= t('delete_from_spam')
 		tbody
 			- @users.each do |user|
-				tr
-					td= user.name
+				tr					
 					td= user.surname
+					td= user.name
 					td= user.identifier
 					td= user.email
 					td= link_to t('delete_spam_user'), forums_toggle_approve_path(:id => user.id), :remote => :true, :method => :post, :confirm => t('are_you_sure'), :class => 'btn btn-danger btn-mini'

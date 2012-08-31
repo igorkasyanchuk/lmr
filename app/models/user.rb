@@ -46,4 +46,8 @@ class User < ActiveRecord::Base
     "#{name} #{surname}"
   end
 
+  def blocked?
+    self.forem_state == 'spam'
+  end
+
 end
