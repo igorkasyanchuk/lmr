@@ -1,5 +1,6 @@
 class ForumController < ApplicationController
-	before_filter :moderator_or_admin
+  layout 'forem'
+	before_filter :moderator_or_admin  
 
 	def index
 		@users = User.where(:forem_state => 'spam').order("surname")

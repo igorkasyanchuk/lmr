@@ -71,7 +71,7 @@ module ApplicationHelper
   end
 
   def my_dashboard_path
-    if current_user.admin?
+    if current_user.admin? || current_user.content_manager?
       '/admin'
     else
       '/dashboard'
