@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ForumController < ApplicationController
 	before_filter :moderator_or_admin
 
