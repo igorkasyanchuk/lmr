@@ -4,12 +4,26 @@ class Admin::UsersController < Admin::DashboardController
   defaults :resource_class => User, :collection_name => 'users', :instance_name => 'user'
   before_filter :admin_required
 
+  def index
+    @users = User.scoped
+    @users = User.where("identifier like :q or email like :q", :q => "%" + params[:q] + "%") if params[:q].present?
+    @users = @users.all
+  end
+
   def update
     update! {[:admin, :users]}
   end
 
   def destroy
   	destroy! {[:admin, :users]}
+  end
+
+  def create
+    create! {[:admin, :users]}
+  end
+
+  def show
+    redirect_to [:edit, :admin, resource]
   end
 
   def confirm
