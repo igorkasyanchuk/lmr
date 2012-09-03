@@ -4,15 +4,17 @@ module ApplicationHelper
   SITE_DESCRIPTION = " | LMR.lviv.ua".freeze
   SITE_KEYWORDS = "LMR.lviv.ua".freeze
 
-  def bootstrap_flash
+  def flash_messages
    flash_messages = []
    flash.each do |type, message|
+     next if type == :timedout
+     next unless message.is_a?(String)
      type = :success if type == :notice
      type = :error   if type == :alert
      text = content_tag(:div, link_to("x", "#", :class => "close", "data-dismiss" => "alert") + message, :class => "alert fade in alert-#{type}")
      flash_messages << text if message
    end
-   flash_messages.join("\n").html_safe
+   flash_messages.compact.join("\n").html_safe
   end  
 
   def w3c_date(date)
@@ -25,15 +27,6 @@ module ApplicationHelper
 
   def yield_or_default(message, default_message = "")
     message.nil? ? default_message : message
-  end
-  
-  def flash_messages
-    messages = []
-    %w(notice warning error).each do |msg|
-      messages << "<div class='#{msg} flash'>#{html_escape(flash[msg.to_sym])}</div>" unless flash[msg.to_sym].blank?
-    end
-    flash.clear
-    messages.join.html_safe
   end
 
   def inside_layout(layout = 'application', &block) 
@@ -67,14 +60,6 @@ module ApplicationHelper
       'http://' + url
     else
       url
-    end
-  end
-
-  def my_dashboard_path
-    if current_user.admin? || current_user.content_manager?
-      '/admin'
-    else
-      '/dashboard'
     end
   end
 

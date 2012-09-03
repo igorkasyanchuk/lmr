@@ -261,6 +261,16 @@ ActiveRecord::Schema.define(:version => 20120903094809) do
     t.boolean "deleted"
   end
 
+  create_table "user_activities", :force => true do |t|
+    t.string   "activity"
+    t.integer  "user_id"
+    t.string   "ip"
+    t.string   "params"
+    t.datetime "created_at"
+  end
+
+  add_index "user_activities", ["user_id"], :name => "index_user_activities_on_user_id"
+
   create_table "users", :force => true do |t|
     t.string   "identifier"
     t.string   "name",                   :default => "",         :null => false
@@ -284,10 +294,10 @@ ActiveRecord::Schema.define(:version => 20120903094809) do
     t.datetime "locked_at"
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
+    t.integer  "role_id"
     t.boolean  "forem_admin",            :default => false
     t.string   "forem_state",            :default => "approved"
     t.boolean  "forem_auto_subscribe",   :default => false
-    t.integer  "role_id"
     t.boolean  "blocked",                :default => false
     t.string   "avatar"
   end
