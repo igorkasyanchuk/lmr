@@ -62,7 +62,10 @@ uk:
       login: 'Логін'
       enter: 'Вхід'
       password: 'Пароль'
+      help_password: '(!Залиште пустим якщо Ви не хочете змінювати пароль)'
       password_confirm: 'Підтвердження паролю'
+      current_password: 'Поточний пароль'
+      help_current_password: '(Щоб підтвердити зміни введіть Ваш поточний пароль)'
       remember_me: "Запам'ятати мене"
       sign_in: "Ввійти"
       sign_out: "Вийти"

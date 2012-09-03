@@ -111,4 +111,31 @@ module ApplicationHelper
     page = Page[identifier]
     link_to (page.title.present? ? page.title : page.identifier), page_path(page.identifier)
   end
+
+  def forum_avatar user
+    if user.avatar?
+      image_tag(user.avatar.thumb.url)
+    else
+      ""
+    end
+  end
+
+  def user_error_messages! user
+    return "" if user.errors.empty?
+
+    messages = user.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
+    sentence = I18n.t("errors.messages.not_saved",
+                      :count => user.errors.count,
+                      :resource => user.class.model_name.human.downcase)
+
+    html = <<-HTML
+    <div id="error_explanation">
+      <h2>#{sentence}</h2>
+      <ul>#{messages}</ul>
+    </div>
+    HTML
+
+    html.html_safe
+  end
+
 end
