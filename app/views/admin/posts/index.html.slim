@@ -1,3 +1,5 @@
+= title "Адміністрування новин"
+
 h1 Адміністрування новин
 hr
 
@@ -5,7 +7,30 @@ hr
   .admin_actions
     = link_to 'Додати новину', [:new, :admin, :post], :class => 'btn btn-normal'
 
-  = render :partial => 'post', :collection => @posts
-  .clearfix
+  table.table.table-striped.news
+    thead
+      tr
+        th Зображення
+        th Заголовок
+        th Зміст
+        th Час створення
+        th Дії
+    tbody
+      - @posts.each do |post|
+        tr
+          td = image_tag 'draft_thumb.gif'
+          td = link_to post.title, [:edit, :admin, post]
+          td.content == truncate(post.content, :omission => "#{link_to ' ...далі', [:admin, post]}", :length => 300)
+          td.date = l(post.created_at, :format => :short) if post.created_at.present?
+          td.actions
+            = link_to "Переглянути", [:admin, post], :class => 'btn btn-normal btn-mini', :target => :_blank
+            .divider 
+            = link_to "Редагувати", [:edit, :admin, post], :class => 'btn btn-normal btn-mini'
+            .divider 
+            = link_to 'Видалити', [:admin, post], :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger btn-mini'
+      - if @posts.blank?
+        tr
+          td colspan=4
+            | Новивни відсутні.
 
-  = paginate @posts
+    = paginate @posts

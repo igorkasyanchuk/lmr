@@ -4,6 +4,17 @@ module ApplicationHelper
   SITE_DESCRIPTION = " | LMR.lviv.ua".freeze
   SITE_KEYWORDS = "LMR.lviv.ua".freeze
 
+  def bootstrap_flash
+   flash_messages = []
+   flash.each do |type, message|
+     type = :success if type == :notice
+     type = :error   if type == :alert
+     text = content_tag(:div, link_to("x", "#", :class => "close", "data-dismiss" => "alert") + message, :class => "alert fade in alert-#{type}")
+     flash_messages << text if message
+   end
+   flash_messages.join("\n").html_safe
+  end  
+
   def w3c_date(date)
     date.utc.strftime("%Y-%m-%dT%H:%M:%S+00:00") if date
   end
@@ -60,7 +71,7 @@ module ApplicationHelper
   end
 
   def my_dashboard_path
-    if current_user.admin?
+    if current_user.admin? || current_user.content_manager?
       '/admin'
     else
       '/dashboard'
@@ -68,7 +79,12 @@ module ApplicationHelper
   end
 
   def page_part(identifier)
-    PagePart[identifier].content.html_safe
+    pp = PagePart[identifier]
+    if pp.safe_content?
+      pp.content
+    else
+      pp.content.html_safe
+    end
   end
 
   # duplicate method from forem forums_helper because of error undefined methods

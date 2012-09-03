@@ -26,9 +26,9 @@ class User < ActiveRecord::Base
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      where(conditions).where(["lower(identifier) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+      where(conditions).where(:blocked => false).where(["lower(identifier) = :value OR lower(email) = :value", { :value => login.downcase }]).first
     else
-      where(conditions).first
+      where(conditions).where(:blocked => false).first
     end
   end
 
@@ -44,6 +44,14 @@ class User < ActiveRecord::Base
 
   def full_name
     "#{name} #{surname}"
+  end
+
+  def forum_blocked?
+    self.forem_state == 'spam'
+  end
+
+  def forem_admin?
+    self && (self.admin? || self.content_manager?) && !self.forum_blocked?
   end
 
 end
