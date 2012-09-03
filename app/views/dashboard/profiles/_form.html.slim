@@ -1,11 +1,43 @@
-= simple_form_for @user, :url => main_app.dashboard_profile_path, :html => {:class => 'form-horizontal' } do |f|
-  .form-inputs 
-    = f.input :name
-    = f.input :surname
-    = f.input :email
-    = f.input :password, :input_html => {:disabled => :disabled}
-    = f.input :password_confirmation, :input_html => {:disabled => :disabled}
-  .form-actions 
-    = f.button :submit
+= form_for(@user, :as => :user, :url => main_app.dashboard_profile_path, :html => { :multipart => true, :method => :put , :class => 'form-horizontal well'}) do |f|
+  = user_error_messages!(@user)
+  .form-inputs
+    div
+      = f.label t('devise.views.identifier')
+      = f.text_field :identifier
+    div
+      = f.label t('devise.views.email')
+      = f.email_field :email
+    div
+      = f.label t('devise.views.name')
+      = f.text_field :name
+    div
+      = f.label t('devise.views.surname')
+      = f.text_field :surname
+    div
+      = f.label :avatar
+      = f.file_field :avatar
+      = f.hidden_field :avatar_cache
+      - if @user.avatar?
+        = f.label :remove_avatar
+        = f.check_box :remove_avatar
+        .clear
+        = image_tag(@user.avatar.thumb.url)
+    div
+      = f.label t('devise.views.password')
+      = f.password_field :password, :autocomplete => "off"
+      span.help-inline 
+        i
+          = t('devise.views.help_password')
+    div
+      = f.label t('devise.views.password_confirm')
+      = f.password_field :password_confirmation
+    div
+      = f.label t('devise.views.current_password')
+      = f.password_field :current_password
+      span.help-inline
+        i 
+          = t('devise.views.help_current_password')
+  .form-actions
+    = f.submit "Update", :class => 'btn btn-primary'
     | &nbsp;
     = link_to 'Cancel', '/dashboard', :class => 'btn btn-danger btn-mini'

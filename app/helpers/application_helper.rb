@@ -4,15 +4,17 @@ module ApplicationHelper
   SITE_DESCRIPTION = " | LMR.lviv.ua".freeze
   SITE_KEYWORDS = "LMR.lviv.ua".freeze
 
-  def bootstrap_flash
+  def flash_messages
    flash_messages = []
    flash.each do |type, message|
+     next if type == :timedout
+     next unless message.is_a?(String)
      type = :success if type == :notice
      type = :error   if type == :alert
      text = content_tag(:div, link_to("x", "#", :class => "close", "data-dismiss" => "alert") + message, :class => "alert fade in alert-#{type}")
      flash_messages << text if message
    end
-   flash_messages.join("\n").html_safe
+   flash_messages.compact.join("\n").html_safe
   end  
 
   def w3c_date(date)
@@ -25,15 +27,6 @@ module ApplicationHelper
 
   def yield_or_default(message, default_message = "")
     message.nil? ? default_message : message
-  end
-  
-  def flash_messages
-    messages = []
-    %w(notice warning error).each do |msg|
-      messages << "<div class='#{msg} flash'>#{html_escape(flash[msg.to_sym])}</div>" unless flash[msg.to_sym].blank?
-    end
-    flash.clear
-    messages.join.html_safe
   end
 
   def inside_layout(layout = 'application', &block) 
@@ -70,14 +63,6 @@ module ApplicationHelper
     end
   end
 
-  def my_dashboard_path
-    if current_user.admin? || current_user.content_manager?
-      '/admin'
-    else
-      '/dashboard'
-    end
-  end
-
   def page_part(identifier)
     pp = PagePart[identifier]
     if pp.safe_content?
@@ -111,4 +96,31 @@ module ApplicationHelper
     page = Page[identifier]
     link_to (page.title.present? ? page.title : page.identifier), page_path(page.identifier)
   end
+
+  def forum_avatar user
+    if user.avatar?
+      image_tag(user.avatar.thumb.url)
+    else
+      ""
+    end
+  end
+
+  def user_error_messages! user
+    return "" if user.errors.empty?
+
+    messages = user.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
+    sentence = I18n.t("errors.messages.not_saved",
+                      :count => user.errors.count,
+                      :resource => user.class.model_name.human.downcase)
+
+    html = <<-HTML
+    <div id="error_explanation">
+      <h2>#{sentence}</h2>
+      <ul>#{messages}</ul>
+    </div>
+    HTML
+
+    html.html_safe
+  end
+
 end

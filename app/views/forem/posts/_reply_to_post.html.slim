@@ -3,7 +3,9 @@ div id="post_#{post.id}" class="reply_to_post post #{cycle('odd', 'even')}"
 	.user
 	  .username
 	    = link_to_if Forem.user_profile_links, post.user.full_name, [main_app, post.user]
-	  .icon= forem_avatar(post.user, :size => 60)
+	  .userstatus
+      = post.user.forum_status
+	  .icon= forum_avatar(post.user)
 	.contents
 	  a href="#post-#{post.id}"
 	    time datetime="#{post.created_at.to_s(:db)}"

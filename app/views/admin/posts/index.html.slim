@@ -18,7 +18,7 @@ hr
     tbody
       - @posts.each do |post|
         tr
-          td = image_tag 'draft_thumb.gif'
+          td = link_to(image_tag(post.preview.thumb.url), [:edit, :admin, post]) if post.preview?
           td = link_to post.title, [:edit, :admin, post]
           td.content == truncate(post.content, :omission => "#{link_to ' ...далі', [:admin, post]}", :length => 300)
           td.date = l(post.created_at, :format => :short) if post.created_at.present?
@@ -30,7 +30,7 @@ hr
             = link_to 'Видалити', [:admin, post], :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger btn-mini'
       - if @posts.blank?
         tr
-          td colspan=4
+          td colspan='5'
             | Новивни відсутні.
 
     = paginate @posts
