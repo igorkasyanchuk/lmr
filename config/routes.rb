@@ -19,7 +19,7 @@ Lmr::Application.routes.draw do
   namespace :admin do
     match '/', :to => 'dashboard#welcome'
     match '/activities', :to => 'activities#index'
-    resources :pages
+    resources :pages, :except => :show
     resources :users do
       member do 
         get :confirm
@@ -46,8 +46,9 @@ Lmr::Application.routes.draw do
   end
 
   resources :contacts, :only => [:new, :create]
+
+  resources :pages, :only => :show
   
-  match 'pages/:id' => 'pages#show', :as => :page
 
   root :to => 'home#index'
 
