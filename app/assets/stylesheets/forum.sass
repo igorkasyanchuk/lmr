@@ -11,7 +11,7 @@
             padding: 5px
             text-align: center
             font-weight: normal
-            font-size: 18px
+            font-size: 16px
             vertical-align: middle
             width: 10%
             &.desc-and-last-post
@@ -29,7 +29,7 @@
             padding: 5px 5px
             text-align: left
             font-weight: normal
-            font-size: 18px
+            font-size: 16px
             vertical-align: middle
             &.topics-count, &.posts-count, &.views-count
               text-align: center
@@ -57,7 +57,7 @@
           padding: 5px
           text-align: left
           font-weight: normal
-          font-size: 18px
+          font-size: 16px
           vertical-align: middle
           // width: 10%
           &.forum_actions
@@ -76,7 +76,7 @@
           padding: 5px
           text-align: left
           font-weight: normal
-          font-size: 18px
+          font-size: 16px
           vertical-align: middle
           div.description
             font-weight: 100
@@ -93,8 +93,8 @@
   #forum
     small
       font-weight: 100
-      color: #2DA8BC
-      padding: 0 0 20px 20px
+      // color: #2DA8BC
+      // padding: 0 0 20px 20px
     menu
       margin: 20px 0
       padding: 0px
@@ -110,7 +110,7 @@
           padding: 5px
           text-align: left
           font-weight: normal
-          font-size: 18px
+          font-size: 16px
           vertical-align: middle
           &.byline
             width: 50%
@@ -131,7 +131,7 @@
           padding: 5px
           text-align: left
           font-weight: normal
-          font-size: 18px
+          font-size: 16px
           vertical-align: middle
           &.byline
             padding-left: 10px
@@ -144,10 +144,10 @@
               font-size: 14px
               color: #6F6F6F
               line-height: 14px
-              padding-left: 15px
+              // padding-left: 15px
           &.latest-post
-            line-height: 14px
-            font-size: 14px
+            line-height: 18px
+            font-size: 12px
           &.views-count, &.posts-count            
             text-align: center
   #topic
@@ -162,42 +162,65 @@
       border: 5px solid white
       display: block
       overflow: hidden
+      position: relative
+      margin-bottom: 7px
       // line-height: 30px
+      .pointything
+        position: absolute
+        left: 161px
+        top: 36px
+        float: left
+        background-image: url("forem/caret.png")
+        height: 30px
+        width: 15px
       &.even
         background-color: #EDF9FB
         border: 5px solid #EDF9FB
         border-radius: 5px
+      &.odd
+        background-color: #F9F8F6
+        border: 5px solid #F9F8F6
+        border-radius: 5px
       .user
         clear: both
         float: left
-        width: 200px
+        width: 160px
       .contents
-        margin-left: 210px
-        min-height: 125px
+        margin-left: 170px
+        // min-height: 125px
+        border: 1px solid #EEEEEE
+        border-radius: 5px
+        padding: 18px
+        background-color: white
         a
           time
-            float: right
-            font-size: 14px
-            line-height: 14px
-            color: #6F6F6F
+            font-size: 12px
+            line-height: 18px
+            color: #908E8E
+            &.time-post
+              position: absolute
+              bottom: 18px
+              left: 193px
+            &.time-quote
+              // position: relative
+              // float: left
+        .posttext
+          margin-bottom: 9px
         ul.actions
           text-align: right
-          margin: 20px 0
+          margin: 20px 0 0 0
           padding: 0px
           li
             list-style-type: none
             display: inline
-            a
-              margin-right: 10px
+            // a
+            //   margin-right: 10px
     .moderation
       margin-top: 0px
-  form#new_post
-    margin: 0px
+  form#new_post, form.edit_post
     padding: 0px
     label
       display: inline-block
-      width: 250px
-      max-width: 250px
       white-space: nowrap
       text-align: right
       font-weight: 100
@@ -206,8 +229,12 @@
       vertical-align: top
       clear: both
     textarea
-      width: 500px
+      width: 733px
       height: 200px
+  form#new_post
+    margin: 0 0 0 182px
+  form.edit_post
+    margin: 0px
   textarea#forum_description
     width: 500px
     height: 200px
@@ -252,7 +279,8 @@
     background-color: #F9F9F9
     border-radius: 5px
     line-height: 14px
-    padding: 5px
+    padding: 18px
+    border: 1px solid #EEE
 
 // for autocomplete
 .ui-menu
@@ -310,3 +338,14 @@ input#new_user
   line-height: 12px
   margin-bottom: 5px
   color: #999
+
+.breadcrumb
+  font-size: 20px
+  line-height: 30px
+
+.btn.reply
+  float: right
+  margin-right: 10px
+
+.in_reply_to
+  line-height: 27px

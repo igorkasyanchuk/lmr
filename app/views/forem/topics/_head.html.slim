@@ -1,5 +1,12 @@
-h2
-  = link_to t('forem.forum.forums'), forem.forums_path
-  |  &raquo; #{link_to topic.forum.title, [forem, topic.forum]} &raquo; #{topic.subject}
+ul.breadcrumb
+	li
+		= link_to t('forem.forum.forums'), forem.forums_path
+		span.divider &raquo;
+	li
+		= link_to topic.forum.title, [forem, topic.forum]
+		span.divider &raquo;
+	li
+		= topic.subject
+
 - if forem_admin?
   = link_to t('forem.topic.links.edit'), forem.edit_admin_topic_path(topic), :class => 'btn btn-primary btn-large'

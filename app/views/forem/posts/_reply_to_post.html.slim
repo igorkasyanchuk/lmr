@@ -8,9 +8,10 @@ div id="post_#{post.id}" class="reply_to_post post #{cycle('odd', 'even')}"
 	  .icon= forum_avatar(post.user)
 	.contents
 	  a href="#post-#{post.id}"
-	    time datetime="#{post.created_at.to_s(:db)}"
+	    time.time-post datetime="#{post.created_at.to_s(:db)}"
 	    	= "#{time_ago_in_words(post.created_at)} #{t("ago")}"
 	  = forem_format(post.text)
 	  - if post.reply_to
 	    span.in_reply_to
 	      = link_to "#{t("forem.post.in_reply_to")} #{post.reply_to.user.full_name}", "#post-#{post.reply_to.id}"
+	  ul.actions

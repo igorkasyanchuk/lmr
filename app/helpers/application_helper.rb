@@ -101,7 +101,7 @@ module ApplicationHelper
     if user.avatar?
       image_tag(user.avatar.thumb.url)
     else
-      ""
+      image_tag('forem/user_default.png')
     end
   end
 
@@ -129,7 +129,7 @@ module ApplicationHelper
     elsif user.content_manager?
       t('forum.moderator')
     else
-      t('forum.user')
+      ""
     end      
   end
 
