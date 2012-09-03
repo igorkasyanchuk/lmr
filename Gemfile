@@ -26,6 +26,7 @@ gem 'ckeditor', :path => 'vendor/gems/ckeditor'
 
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'truncate_html'
 
 
 # Gems used only for assets and not required
