@@ -58,16 +58,6 @@ class User < ActiveRecord::Base
 
   def forem_admin?
     self && (self.admin? || self.content_manager?) && !self.forum_blocked?
-  end
-
-  def forum_status
-    if self.admin?
-      "Administrator"
-    elsif self.content_manager?
-      "Moderator"
-    else
-      "User"
-    end      
-  end
+  end 
 
 end

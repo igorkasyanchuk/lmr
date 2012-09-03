@@ -1,6 +1,6 @@
 = simple_form_for [forem, :admin, @topic] do |f|
   = f.input :subject
-  = f.association :forum
+  = f.association :forum, :label => t('forem.forums.index.forum')
   .topic_checkbox    
     = f.check_box :locked
     = f.label :locked

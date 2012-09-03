@@ -123,4 +123,14 @@ module ApplicationHelper
     html.html_safe
   end
 
+  def forum_status user
+    if user.admin?
+      t('forum.admin')
+    elsif user.content_manager?
+      t('forum.moderator')
+    else
+      t('forum.user')
+    end      
+  end
+
 end
