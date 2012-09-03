@@ -1,0 +1,21 @@
+h1 Дії на сайті
+
+= form_tag [:admin, :activities], :method => :get, :class => 'form-search' do
+  = select_tag :q, options_for_select(UserActivity.uniq.pluck(:activity), params[:q]), :include_blank => true
+  | 
+  = submit_tag "Фільтр", :class => 'btn'
+
+table.table.table-striped
+  thead
+    tr
+      th Дія
+      th Користувач
+      th Час
+  tbody
+    - @activities.each do |activity|
+      tr
+        td= activity.activity
+        td= activity.user.try(:full_name)
+        td= l activity.created_at, :format => :long
+
+= paginate @activities

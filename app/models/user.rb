@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable, :timeoutable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :identifier, :name, :surname, :login, :role_id
@@ -14,8 +14,12 @@ class User < ActiveRecord::Base
   validates :name, :surname, :length => { :minimum => 2 }
 
   belongs_to :role
+  has_many :activities, :class_name => "UserActivity", :dependent => :destroy
 
   delegate :name, :to => :role, :allow_nil => true, :prefix => true
+
+  scope :active, where(:blocked => false)
+  scope :blocked, where(:blocked => true)
 
   before_create :set_defaults
 
@@ -26,9 +30,9 @@ class User < ActiveRecord::Base
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      where(conditions).where(:blocked => false).where(["lower(identifier) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+      where(conditions).active.where(["lower(identifier) = :value OR lower(email) = :value", { :value => login.downcase }]).first
     else
-      where(conditions).where(:blocked => false).first
+      where(conditions).active.first
     end
   end
 
