@@ -4,6 +4,9 @@ class ApplicationController < ActionController::Base
 
   helper_method :forem_user, :my_dashboard_path
 
+  def site_search
+  end
+
   protected
     def forem_user
       current_user

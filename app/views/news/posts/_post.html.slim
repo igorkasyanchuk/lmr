@@ -6,5 +6,5 @@ div id="post_#{post.id}" class="post"
       .posted_by = "Posted by: #{post.posted_by}" if post.posted_by.present?
       .created_at = "Posted at #{formatted_date(post.created_at)}"
     .post_description
-      = truncate_html(post.content, :omission => "#{link_to(' ...далі', [:admin, post]).html_safe}", :length => 500)
+      = truncate_html(post.content, :omission => "#{link_to(' ...далі', [:news, post]).html_safe}", :length => 800)
 .clearfix

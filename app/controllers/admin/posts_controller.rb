@@ -5,5 +5,12 @@ class Admin::PostsController < Admin::DashboardController
     @posts = Post.recent.page(params[:page]).per(20)
   end
  
+ def create
+   create! {[:admin, :posts]}
+ end
+
+ def update
+   update! {[:admin, :posts]}
+ end
   
 end
