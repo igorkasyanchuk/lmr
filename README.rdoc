@@ -1,1 +1,6 @@
 == LMR
+
+= TODO
+
+1) change http://www.google.com/cse/
+2)
