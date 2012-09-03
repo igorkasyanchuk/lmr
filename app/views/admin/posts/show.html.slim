@@ -6,11 +6,11 @@
 
   .admin_actions
     = link_to 'Редагувати', [:edit, :admin, @post], :class => 'btn btn-normal'
-    span = " " 
+    |
     = link_to 'Видалити', [:admin, @post], :class => 'btn btn-danger', :method => 'delete', :confirm => 'Ви насправді бажаєте видалити публікацію?'
   .clearfix
 
-  .image_wrapper = image_tag 'draft_thumb.gif'
+  .image_wrapper = image_tag(@post.preview.normal.url) if @post.preview?
   .info_block
     .posted_by = "Опублікував користувач: #{@post.posted_by}" if @post.posted_by.present?
     .created_at =  "Час публікації #{formatted_date(@post.created_at)}"

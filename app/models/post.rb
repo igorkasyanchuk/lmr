@@ -1,6 +1,8 @@
 class Post < ActiveRecord::Base
 
-  attr_accessible :title, :description, :content, :post_category_id, :published
+  mount_uploader :preview, PostPreviewUploader
+
+  attr_accessible :title, :description, :content, :post_category_id, :published, :preview
 
   belongs_to :post_category
 

@@ -4,7 +4,7 @@
   h1 = @post.title
   hr
 
-  .image_wrapper = image_tag 'draft_thumb.gif'
+  .image_wrapper = image_tag(@post.preview.normal.url) if @post.preview?
   .info_block
     .posted_by = "Posted by: #{@post.posted_by}" if @post.posted_by.present?
     .created_at =  "Posted at #{formatted_date(@post.created_at)}"
