@@ -210,3 +210,7 @@ uk:
     identifier: 'Особовий рахунок'
     delete_from_spam: 'Видалити з заблокованих'
     delete_spam_user: 'Видалити'
+    admin: 'Адміністратор'
+    moderator: 'Модератор'
+    user: 'Користувач'
+    new_messages: 'нові'

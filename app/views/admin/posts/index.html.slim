@@ -20,7 +20,7 @@ hr
         tr
           td = link_to(image_tag(post.preview.thumb.url), [:edit, :admin, post]) if post.preview?
           td = link_to post.title, [:edit, :admin, post]
-          td.content == truncate(post.content, :omission => "#{link_to ' ...далі', [:admin, post]}", :length => 300)
+          td.content = truncate_html(post.content, :omission => " ...", :length => 300)
           td.date = l(post.created_at, :format => :short) if post.created_at.present?
           td.actions
             = link_to "Переглянути", [:admin, post], :class => 'btn btn-normal btn-mini', :target => :_blank
