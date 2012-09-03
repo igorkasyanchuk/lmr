@@ -1,25 +1,18 @@
-= form_for [:admin, resource] do |f|
-  .form-inputs
-    = f.label :title
-    = f.text_field :title
-    br
-    - unless resource.permanent?
-      = f.label :identifier, 'Url title'
-      = f.text_field :identifier
-      br
-    = f.label :content
-    = cktext_area_tag :'page[content]', resource.content
-    br
-    = f.label :seo_title
-    = f.text_field :seo_title
-    br
-    = f.label :seo_keywords
-    = f.text_area :seo_keywords
-    br
-    = f.label :seo_description
-    = f.text_area :seo_description
-  .form-actions
-    = f.submit
-    | &nbsp;
-    = link_to 'Cancel', [:admin, :pages], :class => 'btn btn-danger btn-mini'
+= simple_form_for [:admin, resource], :html => {:class => 'form-horizontal'} do |f|
 
+  = f.error_notification
+  
+  fieldset.span8
+    = f.input :title
+    - unless resource.permanent?
+      = f.input :identifier, :label => 'Url title'
+    = f.input :content, :as => :ckeditor
+    = f.input :seo_title
+    = f.input :seo_keywords
+    = f.input :seo_description
+  .clearfix
+
+  .well
+    = link_to 'Cancel', [:admin, :pages], :class => 'btn'
+    |  
+    = f.submit 'Save page', :class => 'btn btn-primary form-btn'
