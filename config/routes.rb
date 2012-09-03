@@ -14,9 +14,12 @@ Lmr::Application.routes.draw do
   get 'users/autocomplete', :to => "forum#autocomplete"
   post 'forums/toggle_approve', :to => "forum#toggle_approve"
 
+  get '/log', :to => 'activities#log'
+
   namespace :admin do
     match '/', :to => 'dashboard#welcome'
-    resources :pages
+    match '/activities', :to => 'activities#index'
+    resources :pages, :except => :show
     resources :users do
       member do 
         get :confirm
@@ -43,8 +46,9 @@ Lmr::Application.routes.draw do
   end
 
   resources :contacts, :only => [:new, :create]
+
+  resources :pages, :only => :show
   
-  match 'pages/:id' => 'pages#show', :as => :page
 
   root :to => 'home#index'
 

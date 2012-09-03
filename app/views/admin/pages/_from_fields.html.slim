@@ -1,25 +1,18 @@
-= form_for [:admin, resource] do |f|
-  .form-inputs
-    = f.label :title
-    = f.text_field :title
-    br
-    - unless resource.permanent?
-      = f.label :identifier, 'Url title'
-      = f.text_field :identifier
-      br
-    = f.label :content
-    = cktext_area_tag :'page[content]', resource.content
-    br
-    = f.label :seo_title
-    = f.text_field :seo_title
-    br
-    = f.label :seo_keywords
-    = f.text_area :seo_keywords
-    br
-    = f.label :seo_description
-    = f.text_area :seo_description
-  .form-actions
-    = f.submit
-    | &nbsp;
-    = link_to 'Cancel', [:admin, :pages], :class => 'btn btn-danger btn-mini'
+= simple_form_for [:admin, resource], :html => {:class => 'form-horizontal'} do |f|
 
+  = f.error_notification
+  
+  fieldset.span8
+    = f.input :title, :label => 'Заголовок'
+    - unless resource.permanent?
+      = f.input :identifier, :label => 'URL Назва'
+    = f.input :content, :label => 'Зміст', :as => :ckeditor, :input_html => {:class => 'span8', :height => '400', :width => '900'}
+    = f.input :seo_title, :label => 'SEO заголовок', :input_html => { :class => 'span8', :cols => 100 }
+    = f.input :seo_keywords, :label => 'SEO ключові слова', :input_html => {:rows => 3, :class => 'span8'}
+    = f.input :seo_description, :label => 'SEO опис', :input_html => {:rows => 3, :class => 'span8'}
+  .clearfix
+
+  .well
+    = link_to 'Відміна', [:admin, :pages], :class => 'btn'
+    |  
+    = f.submit 'Зберегті сторінку', :class => 'btn btn-primary form-btn'

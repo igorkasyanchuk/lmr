@@ -29,14 +29,14 @@ html lang="en"
         - if content_for?(:sidebar)
           .row
             .span9
-              = bootstrap_flash
+              = flash_messages
               = yield
             .span3
               = yield :sidebar
         - else
           .row
             .span12
-              = bootstrap_flash
+              = flash_messages
               = yield
   
       footer

@@ -1,22 +1,24 @@
 .navbar.navbar-fixed-top
   .navbar-inner
     .container
-      a.brand href='/' LMR
+      a.brand href='/' ЛМР
       .nav-collapse
         ul.nav
           li.divider-vertical
-          li= link_to "Pages(#{Page.count})", main_app.admin_pages_path
+          li= link_to "Сторінки", main_app.admin_pages_path
           li.divider-vertical
           - if current_user.admin?
-            li= link_to "Users(#{User.count})", main_app.admin_users_path
+            li= link_to "Користувачі", main_app.admin_users_path
             li.divider-vertical
-          li= link_to "Contacts(#{Contact.count})", main_app.admin_contacts_path
+          li= link_to "Контакти", main_app.admin_contacts_path
           li.divider-vertical
-          li= link_to "Forum", '/forums/admin'
+          li= link_to "Форум", '/forums/admin'
           li.divider-vertical
-          li= link_to "Page Parts", main_app.admin_page_parts_path
+          li= link_to "Блоки", main_app.admin_page_parts_path
           li.divider-vertical
-          li= link_to "News", main_app.admin_posts_path
+          li= link_to "Новини", main_app.admin_posts_path
+          li.divider-vertical
+          li= link_to "Дії", '/admin/activities'
           li.divider-vertical
         ul.nav.pull-right
           li= link_to 'Вийти', main_app.destroy_user_session_path, :method => :delete
