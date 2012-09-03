@@ -3,16 +3,16 @@
   = f.error_notification
   
   fieldset.span8
-    = f.input :title
+    = f.input :title, :label => 'Заголовок'
     - unless resource.permanent?
-      = f.input :identifier, :label => 'Url title'
-    = f.input :content, :as => :ckeditor
-    = f.input :seo_title
-    = f.input :seo_keywords
-    = f.input :seo_description
+      = f.input :identifier, :label => 'URL Назва'
+    = f.input :content, :label => 'Зміст', :as => :ckeditor, :input_html => {:class => 'span8', :height => '400', :width => '900'}
+    = f.input :seo_title, :label => 'SEO заголовок', :input_html => { :class => 'span8', :cols => 100 }
+    = f.input :seo_keywords, :label => 'SEO ключові слова', :input_html => {:rows => 3, :class => 'span8'}
+    = f.input :seo_description, :label => 'SEO опис', :input_html => {:rows => 3, :class => 'span8'}
   .clearfix
 
   .well
-    = link_to 'Cancel', [:admin, :pages], :class => 'btn'
+    = link_to 'Відміна', [:admin, :pages], :class => 'btn'
     |  
-    = f.submit 'Save page', :class => 'btn btn-primary form-btn'
+    = f.submit 'Зберегті сторінку', :class => 'btn btn-primary form-btn'

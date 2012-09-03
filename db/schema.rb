@@ -287,10 +287,10 @@ ActiveRecord::Schema.define(:version => 20120831130910) do
     t.datetime "locked_at"
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
-    t.integer  "role_id"
     t.boolean  "forem_admin",            :default => false
     t.string   "forem_state",            :default => "approved"
     t.boolean  "forem_auto_subscribe",   :default => false
+    t.integer  "role_id"
     t.boolean  "blocked",                :default => false
   end
 
