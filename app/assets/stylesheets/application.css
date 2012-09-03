@@ -14,6 +14,7 @@
  *= require "contacts/contacts"
  *= require bootstrap_and_overrides
  *= require cerulean
+ *= require navigation
  *= require forum
   */
 
@@ -29,4 +30,9 @@
 .divider{
   height: 3px;
 } 
+
+.gsc-input {
+  margin-top: 10px;
+}
+
 
