@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120903092840) do
+ActiveRecord::Schema.define(:version => 20120903094809) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -227,13 +227,10 @@ ActiveRecord::Schema.define(:version => 20120903092840) do
     t.string   "title"
     t.text     "description"
     t.text     "content"
-    t.boolean  "published",            :default => false
+    t.boolean  "published",        :default => false
     t.string   "posted_by"
     t.datetime "created_at"
-    t.string   "preview_file_name"
-    t.string   "preview_content_type"
-    t.integer  "preview_file_size"
-    t.datetime "preview_updated_at"
+    t.string   "preview"
   end
 
   add_index "posts", ["post_category_id"], :name => "index_posts_on_post_category_id"
@@ -302,6 +299,7 @@ ActiveRecord::Schema.define(:version => 20120903092840) do
     t.string   "forem_state",            :default => "approved"
     t.boolean  "forem_auto_subscribe",   :default => false
     t.boolean  "blocked",                :default => false
+    t.string   "avatar"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

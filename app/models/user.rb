@@ -1,12 +1,14 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
+  # :lockable, :timeoutable and :omniauthable  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable, :timeoutable
 
+  mount_uploader :avatar, AvatarUploader
+
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :identifier, :name, :surname, :login, :role_id
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :identifier, :name, :surname, :login, :role_id, :avatar, :avatar_cache, :remove_avatar
   attr_accessor :login
   
   validates_presence_of :identifier, :name, :surname
@@ -56,6 +58,16 @@ class User < ActiveRecord::Base
 
   def forem_admin?
     self && (self.admin? || self.content_manager?) && !self.forum_blocked?
+  end
+
+  def forum_status
+    if self.admin?
+      "Administrator"
+    elsif self.content_manager?
+      "Moderator"
+    else
+      "User"
+    end      
   end
 
 end
