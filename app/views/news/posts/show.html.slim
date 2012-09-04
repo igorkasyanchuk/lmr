@@ -12,9 +12,10 @@
 
   .description_wrapper== @post.description
   .content_wrapper== @post.content
-  .links 
-    span.links Посилання на джерела
-    - @post.links.each_line do |link|
-      ul
-        li = link_to link, link
-  .clearfix
+  - if @post.links.present?
+    .links 
+      span.links Посилання на джерела
+      - @post.links.each_line do |link|
+        ul
+          li = link_to link, link
+    .clearfix
