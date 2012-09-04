@@ -7,14 +7,14 @@ Feature: Sign in
   Background:
     Given regular user
 
-  Scenario: can access personal page
+  Scenario: regular user can access personal page
     Given I sign in as regular user
     When I go to personal page
     #Then I should see link to reports page
     #And I should see link to payments page
     Then I should see link to profile page
 
-  Scenario: can not access admin section
+  Scenario: regular user can not access admin section
     Given I sign in as regular user
     When I go to admin section
     Then I should not see links to manage users
