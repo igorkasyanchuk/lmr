@@ -6,6 +6,8 @@ Feature: Administartion
 
   Background:
     Given admin user
+    And static page "help"
+    And static page "about"
     #And moderator user
     #And regular user
     #
@@ -26,5 +28,36 @@ Feature: Administartion
     Then I should see link to manage forum sections
     And I should see link to manage categories
     And I should see link to manage forum users
+  
+  @pages
+  Scenario: Admin can manage static pages
+    Given I sign in as admin
+    When I go to static pages management page
+    Then I should see list of static pages
+
+  Scenario: Admin can manage news
+    Given I sign in as admin
+    When I go to news management page
+    Then I should see list of news
+
+  Scenario: Admin can manage users
+    Given I sign in as admin
+    When I go to users management page
+    Then I should see list of users
+
+  Scenario: Admin can manage page parts
+    Given I sign in as admin
+    When I go to static page parts
+    Then I should see list of page parts
+
+  Scenario: Admin can browse feedbacks
+    Given I sign in as admin
+    When I go to feedabacks page
+    Then I should see list of feedbacks
+
+  Scenario: Admin track user activities
+    Given I sign in as admin
+    When I go to activities list
+    Then I should see list of activities
 
 
