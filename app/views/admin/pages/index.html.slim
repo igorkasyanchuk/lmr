@@ -1,11 +1,13 @@
 = title "Адміністрування сторінкок"
 
-h1.left Адміністрування Сторінок
-hr
+#title_block
+  h1.title Адміністрування Сторінок
+  .admin_actions
+    = link_to 'Додати сторінку', new_resource_path, :class => 'btn btn-primary btn-small'
+  .clear  
+hr  
 
 #pages_container
-  .admin_actions
-  = link_to 'Додати сторінку', new_resource_path, :class => 'btn btn-primary btn-small'
 
   table.table.table-striped.pages
     thead

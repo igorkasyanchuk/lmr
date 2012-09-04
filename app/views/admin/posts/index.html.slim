@@ -1,11 +1,13 @@
 = title "Адміністрування новин"
-
-h1 Адміністрування новин
-hr
+#title_block
+  h1.title Адміністрування новин
+  .admin_actions
+    = link_to 'Додати новину', [:new, :admin, :post], :class => 'btn btn-primary btn-small'
+  .clear  
+hr  
 
 #posts_container
-  .admin_actions
-    = link_to 'Додати новину', [:new, :admin, :post], :class => 'btn btn-normal'
+  
 
   table.table.table-striped.news
     thead
@@ -20,7 +22,7 @@ hr
         tr
           td.image = link_to(image_tag(post.preview.thumb.url), [:edit, :admin, post]) if post.preview?
           td.title = link_to post.title, [:edit, :admin, post]
-          td.content = truncate_html(post.content, :omission => " ...", :length => 300)
+          td.content = truncate post.description, :omission => '...', :length => 300
           td.date = l(post.created_at, :format => :short) if post.created_at.present?
           td.actions
             = link_to "Переглянути", [:news, post], :class => 'btn btn-normal btn-mini', :target => :_blank
