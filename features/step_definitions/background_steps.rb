@@ -10,3 +10,7 @@ Given /^regular user$/ do
   FactoryGirl.create :user
 end
 
+Given /^static page "(\w+)"$/ do |identifier|
+  FactoryGirl.create :page, :identifier => identifier, :title => identifier
+end
+
