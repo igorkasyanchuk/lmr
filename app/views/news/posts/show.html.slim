@@ -7,9 +7,14 @@
 
   .image_wrapper = image_tag(@post.preview.normal.url) if @post.preview?
   .info_block
-    .posted_by = "Posted by: #{@post.posted_by}" if @post.posted_by.present?
-    .created_at =  "Posted at #{formatted_date(@post.created_at)}"
+    .created_at =  "Опубліковано #{l(@post.created_at, :format => :short)}"
+    .author =  "Автор #{@post.posted_by}"
 
   .description_wrapper== @post.description
   .content_wrapper== @post.content
+  .links 
+    span.links Посилання на джерела
+    - @post.links.each_line do |link|
+      ul
+        li = link_to link, link
   .clearfix

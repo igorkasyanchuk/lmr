@@ -1,9 +1,11 @@
-= title "Users"
+= title "Адміністування користувачів"
 
-.right= link_to "Add User", [:new, :admin, :user], :class => 'btn btn-primary btn-small'
-
-h1.left Users
-.clear
+#title_block
+  h1.title Адміністування користувачів
+  .admin_actions
+    = link_to "Додати коритстувача", [:new, :admin, :user], :class => 'btn btn-primary btn-small'
+  .clear  
+hr  
 
 = form_tag [:admin, :users], :method => :get, :class => 'form-search' do
   = text_field_tag :q, params[:q], :class => 'input-medium search-query'
@@ -25,16 +27,16 @@ table.table.table-striped
         td= user.role_name
         td
           - unless user.confirmed?
-            = link_to "Confirm", [:confirm, :admin, user], :class => 'btn btn-mini'
+            = link_to "Підтвердити", [:confirm, :admin, user], :class => 'btn btn-mini'
             | 
           - if user.blocked?
-            = link_to "Unblock", [:unblock, :admin, user], :class => 'btn btn-mini'
+            = link_to "Розблокувати", [:unblock, :admin, user], :class => 'btn btn-mini'
           - else
-            = link_to "Block", [:block, :admin, user], :class => 'btn btn-mini'
+            = link_to "Заблокувати", [:block, :admin, user], :class => 'btn btn-mini'
           | 
-          = link_to "Edit", edit_resource_path(user), :class => 'btn btn-mini'
+          = link_to "Редагувати", edit_resource_path(user), :class => 'btn btn-mini'
           | 
-          = link_to 'Delete', [:admin, user], :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger btn-mini'
+          = link_to 'Видалити', [:admin, user], :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger btn-mini'
     - if collection.blank?
       tr
         td colspan=4

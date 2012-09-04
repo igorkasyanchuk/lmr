@@ -1,5 +1,5 @@
 class PagePart < ActiveRecord::Base
-  attr_accessible :content, :identifier, :format
+  attr_accessible :content, :identifier, :format, :page_part
 
   FORMATS = ['html', 'text']
 

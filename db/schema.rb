@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120903094809) do
+ActiveRecord::Schema.define(:version => 20120904121438) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -231,6 +231,7 @@ ActiveRecord::Schema.define(:version => 20120903094809) do
     t.string   "posted_by"
     t.datetime "created_at"
     t.string   "preview"
+    t.string   "links"
   end
 
   add_index "posts", ["post_category_id"], :name => "index_posts_on_post_category_id"

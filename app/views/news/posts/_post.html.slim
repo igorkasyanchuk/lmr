@@ -3,8 +3,9 @@ div id="post_#{post.id}" class="post"
   .post_information
     h2.post_title = link_to post.title, [:news, post]
     .info_block
-      .posted_by = "Posted by: #{post.posted_by}" if post.posted_by.present?
-      .created_at = "Posted at #{formatted_date(post.created_at)}"
+      .created_at = "опубліковано  #{l(post.created_at, :format => :short)}"
+      .author =  "Автор #{post.posted_by}"
     .post_description
-      = truncate_html(post.content, :omission => "#{link_to(' ...далі', [:news, post]).html_safe}", :length => 800)
+      == truncate(post.description, :omission => "#{link_to(' ...далі', [:news, post])}" , :length => 815)
+      = link_to(' ...далі', [:news, post]) if post.description.size < 815
 .clearfix
