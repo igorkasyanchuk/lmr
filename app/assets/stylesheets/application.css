@@ -16,6 +16,7 @@
  *= require cerulean
  *= require navigation
  *= require forum
+ *= require google_search
   */
 
 
@@ -34,5 +35,4 @@
 .gsc-input {
   margin-top: 10px;
 }
-
 
