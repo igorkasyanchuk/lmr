@@ -1,3 +1,4 @@
+@administration
 Feature: Administartion
   As admin user
   I can acces to site management system
@@ -18,4 +19,12 @@ Feature: Administartion
     And I should see links to manage page parts
     And I should see links to view feedback
     And I should see links to track site activities
+
+  Scenario: Admin can manage forum
+    Given I sign in as admin
+    When I go to forum admin section
+    Then I should see link to manage forum sections
+    And I should see link to manage categories
+    And I should see link to manage forum users
+
 
