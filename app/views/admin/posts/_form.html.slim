@@ -5,7 +5,7 @@
     = f.input :title, :label => 'Заголовок', :input_html => { :class => 'focused'  }
     = f.input :description, :label => 'Опис', :as => :text, :input_html => { :rows => 3, :class => 'span8' }
     = f.label :content, :label => 'Зміст', :class => 'control-label'
-    = f.cktext_area :content, :input_html => { :value => resource.content }, :width => 620
+    = f.cktext_area :content, :input_html => { :value => resource.content }
     = f.input :post_category_id, :label => 'Категорія', :collection => PostCategory.by_name.map {|c| [c.name, c.id] }, :include_blank => false
     = f.input :published, :label => 'У публікації?',  :input_html => { :rows => 10,  :class => 'publish_checkbox'}
     = image_tag(@post.preview.thumb.url, :class => 'controls') if @post.preview?

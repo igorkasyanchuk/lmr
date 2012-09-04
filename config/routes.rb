@@ -51,5 +51,6 @@ Lmr::Application.routes.draw do
   
 
   root :to => 'home#index'
+  match 'site_search', :to => 'application#site_search'
 
 end

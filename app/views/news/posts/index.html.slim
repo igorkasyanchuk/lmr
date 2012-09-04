@@ -1,4 +1,4 @@
-h1 Останні новини
+h1 Новини
 hr
 
 #posts_container
@@ -6,5 +6,5 @@ hr
   = auto_discovery_link_tag :atom, "/atom" 
   = auto_discovery_link_tag :rss, "/rss" 
 
-  = render :partial => '/news/partials/post', :collection => @posts, :as => :post
+  = render :partial => 'post', :collection => @posts, :as => :post
   .clear
