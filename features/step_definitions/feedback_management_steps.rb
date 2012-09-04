@@ -1,4 +1,5 @@
+#encoding: utf-8
 Then /^I should see list of feedbacks$/ do
-  pending # express the regexp above with the code you wish you had
+  page.should have_content("Contact Messages") 
+  page.should have_content("I love this site") 
 end
-

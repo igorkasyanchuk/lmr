@@ -1,4 +1,5 @@
+#encoding: utf-8
 Then /^I should see list of page parts$/ do
-  pending # express the regexp above with the code you wish you had
+  page.should have_content("Page Parts") 
+  page.should have_content("NEW_CONTACTS_PAGE") 
 end
-
