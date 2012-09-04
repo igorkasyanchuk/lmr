@@ -1,3 +1,5 @@
+#encoding: utf-8
 Then /^I should see list of activities$/ do
-  pending # express the regexp above with the code you wish you had
+  page.should have_content("Дії на сайті") 
+  page.should have_content("some activity") 
 end

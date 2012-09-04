@@ -1,3 +1,4 @@
+#encoding: utf-8
 Given /^I sign in as moderator$/ do
   steps %{
     When I visit login page
@@ -26,13 +27,13 @@ Given /^I sign in as regular user$/ do
 end
 
 Given /^I click sign in$/ do
-  find('form[action="/login"] input[type=submit]').click
+  click_button 'Ввійти'
 end
 
 Given /^I fill login with "(\w+)"$/ do |login|
-  fill_in 'user_login', :with => login
+  fill_in 'Логін', :with => login
 end
 
 Given /^I fill password with "(\w+)"$/ do |password|
-  fill_in 'user_password', :with => password
+  fill_in 'Пароль', :with => password
 end
