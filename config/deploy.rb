@@ -19,7 +19,7 @@ set :default_environment, {
 }
 
 # server details
-default_run_options[:pty] = true
+#default_run_options[:pty] = true
 #ssh_options[:forward_agent] = true
 set :deploy_to, "/www/#{application}"
 set :deploy_via, :remote_cache
