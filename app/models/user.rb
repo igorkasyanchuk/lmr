@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   validates_presence_of :identifier, :name, :surname
   validates_uniqueness_of :identifier
   validates :name, :surname, :length => { :minimum => 2 }
+  validates :identifier, :length => { :maximum => 13 }
   # validate :user_identification
 
   belongs_to :role
