@@ -33,6 +33,9 @@ table.table.table-striped
             = link_to "Розблокувати", [:unblock, :admin, user], :class => 'btn btn-mini'
           - else
             = link_to "Заблокувати", [:block, :admin, user], :class => 'btn btn-mini'
+          - if user.access_locked?
+            | 
+            = link_to "Зняти тимчасове блокування", [:time_unblock, :admin, user], :class => 'btn btn-mini'
           | 
           = link_to "Редагувати", edit_resource_path(user), :class => 'btn btn-mini'
           | 
