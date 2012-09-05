@@ -5,6 +5,18 @@ h2= t('devise.views.sign_up')
     = f.label t('devise.views.identifier')
     = f.text_field :identifier
   div
+    = f.label t('devise.views.street')
+    = text_field_tag :street, nil, :disabled => true
+    = f.hidden_field :street
+  div
+    = f.label t('devise.views.house')
+    = text_field_tag :house, nil, :disabled => true
+    = f.hidden_field :house
+  div
+    = f.label t('devise.views.flat')
+    = text_field_tag :flat, nil, :disabled => true
+    = f.hidden_field :flat
+  div
     = f.label t('devise.views.email')
     = f.email_field :email
   div
@@ -22,3 +34,5 @@ h2= t('devise.views.sign_up')
   br
   = f.submit t('devise.views.register'), :class => 'btn btn-primary'
 = render :partial => "devise/shared/links"
+= javascript_include_tag "jquery-ui-autocomplete.min.js"
+= javascript_include_tag "user"

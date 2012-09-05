@@ -8,14 +8,16 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :identifier, :name, :surname, :login, :role_id, :avatar, :avatar_cache, :remove_avatar
-  attr_accessor :login
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :identifier, :name, :surname, :login, :role_id, :avatar, :avatar_cache, :remove_avatar, :street, :house, :flat
+  attr_accessor :login, :street, :house, :flat
   
   validates_presence_of :identifier, :name, :surname
   validates_uniqueness_of :identifier
   validates :name, :surname, :length => { :minimum => 2 }
+  # validate :user_identification
 
   belongs_to :role
+  belongs_to :consumer
   has_many :activities, :class_name => "UserActivity", :dependent => :destroy
 
   delegate :name, :to => :role, :allow_nil => true, :prefix => true
@@ -59,5 +61,15 @@ class User < ActiveRecord::Base
   def forem_admin?
     self && (self.admin? || self.content_manager?) && !self.forum_blocked?
   end 
+
+  private
+
+    def user_identification
+      c = Consumer.find(self.identifier)
+      unless c and c.flat == self.flat and c.house_id.to_i == self.house.to_i and c.house.street_id.to_i == self.street.to_i
+        errors[:base] << I18n.t('devise.views.validate_address')
+      end
+
+    end
 
 end

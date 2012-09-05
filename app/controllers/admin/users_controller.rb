@@ -2,7 +2,8 @@
 
 class Admin::UsersController < Admin::DashboardController
   defaults :resource_class => User, :collection_name => 'users', :instance_name => 'user'
-  before_filter :admin_required
+  before_filter :admin_required, :except => [:autocomplete]
+  skip_before_filter :authenticate_user!, :only => [:autocomplete]
 
   def index
     @users = User.scoped
@@ -39,6 +40,19 @@ class Admin::UsersController < Admin::DashboardController
   def unblock
     resource.update_attribute(:blocked, false)
     redirect_to [:admin, :users], :notice => "Користувача розблоковано."
+  end
+
+  def autocomplete
+    if params[:house]
+      consumers = Consumer.where("house_id LIKE ? AND flat LIKE ?","%#{params[:house]}%", "%#{params[:term]}%").order("flat")
+      render :json => consumers.map { |c| {:id => c.id, :label => "#{c.flat}"} }
+    elsif params[:street]
+      houses = House.where("street_id LIKE ? AND description LIKE ?","%#{params[:street]}%", "%#{params[:term]}%").order("description")
+      render :json => houses.map { |h| {:id => h.id, :label => "#{h.description}"} }
+    else
+      streets = Street.where("name LIKE ?", "%#{params[:term]}%").order("name")
+      render :json => streets.map { |s| {:id => s.id, :label => "#{s.name}"} }
+    end
   end
 
 end

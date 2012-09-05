@@ -11,8 +11,10 @@ Lmr::Application.routes.draw do
   end
   
   get '/forums/admin/users_list', :to => 'forum#index'
-  get 'users/autocomplete', :to => "forum#autocomplete"
+  get '/forums/users/autocomplete', :to => "forum#autocomplete"
   post 'forums/toggle_approve', :to => "forum#toggle_approve"
+
+  get '/users/autocomplete', :to => "admin/users#autocomplete"
 
   get '/log', :to => 'activities#log'
 

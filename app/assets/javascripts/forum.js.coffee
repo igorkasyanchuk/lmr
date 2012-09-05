@@ -1,6 +1,6 @@
 (($) ->
   $(document).ready ->   
-    $("#new_user").autocomplete source: "/users/autocomplete"
+    $("#new_user").autocomplete source: "/forums/users/autocomplete"
     $("#new_user").bind "autocompleteselect", (event, ui) ->      
       $("#block_user").attr "disabled", false
       $("#new_user").attr 'user_id', ui.item.id
