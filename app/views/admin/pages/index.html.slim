@@ -19,7 +19,7 @@ hr
       - collection.each do |page|
         tr
           td= link_to page.title, edit_resource_path(page)
-          td= link_to page_path(page.identifier)
+          td= link_to page_path(page.identifier), page_path(page.identifier)
           td
             -if page.permanent?
               i.icon-ok
