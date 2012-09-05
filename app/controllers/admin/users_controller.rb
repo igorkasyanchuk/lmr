@@ -42,6 +42,11 @@ class Admin::UsersController < Admin::DashboardController
     redirect_to [:admin, :users], :notice => "Користувача розблоковано."
   end
 
+  def time_unblock
+    resource.unlock_access!
+    redirect_to [:admin, :users], :notice => "Тимчасове блокування користувача знято."
+  end
+
   def autocomplete
     if params[:house]
       consumers = Consumer.where("house_id LIKE ? AND flat LIKE ?","%#{params[:house]}%", "%#{params[:term]}%").order("flat")

@@ -27,6 +27,7 @@ Lmr::Application.routes.draw do
         get :confirm
         get :block
         get :unblock
+        get :time_unblock
       end
     end
     resources :contacts, :only => [:index, :show, :destroy]
