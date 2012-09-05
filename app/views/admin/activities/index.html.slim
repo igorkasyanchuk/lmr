@@ -23,4 +23,6 @@ table.table.table-striped
         td= activity.user.try(:full_name)
         td= l activity.created_at, :format => :long
 
-= paginate @activities
+
+= paginate @activities, :theme => 'twitter-bootstrap'
+.clear

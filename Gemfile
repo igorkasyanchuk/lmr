@@ -12,7 +12,8 @@ gem 'rails', '3.2.8'
 gem 'mysql2'
 gem 'devise'
 gem 'forem', :git => "git://github.com/radar/forem.git"
-gem 'kaminari', '0.13.0'
+gem 'kaminari'
+gem 'bootstrap-kaminari-views'
 gem 'slim'
 gem 'slim-rails'
 
