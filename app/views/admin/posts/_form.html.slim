@@ -8,11 +8,13 @@
     = f.cktext_area :content, :input_html => { :value => resource.content }
     = f.input :post_category_id, :label => 'Категорія', :collection => PostCategory.by_name.map {|c| [c.name, c.id] }, :include_blank => false
     = f.input :published, :label => 'У публікації?',  :input_html => { :rows => 10,  :class => 'publish_checkbox'}
+    = f.input :links, :label => 'Посилання на джерела', :as => :text,  :input_html => { :rows => 3, :class => 'span8' }
+    = f.input :posted_by, :label => 'Автор'
     = image_tag(@post.preview.thumb.url, :class => 'controls') if @post.preview?
     = f.input :preview, :label => 'Додати зображення', :hint => '(можливі формати: "jpg", "jpeg", "png"; до 10MB)'
   .clearfix
 
-  .well
+  .form-actions
     = link_to "Відміна", :back, :class => "btn"
     |
     = f.submit "Зберегти новину", :class=>"btn btn-primary form-btn"

@@ -12,3 +12,6 @@ Then /^I should see link to profile page$/ do
   page.should have_selector("a[href='/dashboard/profile/edit']")
 end
 
+Then /^I should not see link to profile page$/ do
+  page.should_not have_selector("a[href='/dashboard/profile/edit']")
+end
