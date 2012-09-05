@@ -1,9 +1,12 @@
 = simple_form_for([:admin, @page_part], :html => {:class => 'form-horizontal' }) do |f|
-  .form-inputs 
-    = f.input :format, :collection => PagePart::FORMATS, :as => :select, :include_blank => false
-    label Content
+  = f.error_notification
+
+  fieldset
+    = f.input :format, :collection => PagePart::FORMATS, :as => :select, :include_blank => false, :label => 'Формат'
+    label Контент
     = cktext_area_tag :'page_part[content]', resource.content, :height => '400px;'
-  .form-actions 
-    = f.button :submit
-    | &nbsp;
-    = link_to 'Cancel', [:admin, :page_parts], :class => 'btn btn-danger btn-mini'
+
+  .form-actions
+    = link_to "Відміна", :back, :class => "btn"
+    |
+    = f.submit "Зберегти блок", :class=>"btn btn-primary form-btn"

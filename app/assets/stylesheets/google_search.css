@@ -1,0 +1,133 @@
+.gsc-control-cse {
+  border: none;
+  padding: 0;
+}
+
+.gsc-control-cse {
+  font-family: Arial, sans-serif;
+  border-color: #FFFFFF;
+  background-color: #FFFFFF;
+}
+
+input.gsc-input {
+  border-color: #F0EDDE;
+}
+
+.cse input.gsc-search-button, input.gsc-search-button {
+  border-color: #F0EDDE;
+  background-color: #F0EDDE;
+  padding: 3px 8px;
+}
+
+.gsc-tabHeader.gsc-tabhInactive {
+  border-color: #F0EDDE;
+  background-color: #F0EDDE;
+}
+
+.gsc-tabHeader.gsc-tabhActive {
+  border-color: #F0EDDE;
+  background-color: #F0EDDE;
+}
+
+.gsc-tabsArea {
+  border-color: #F0EDDE;
+}
+
+.gsc-webResult.gsc-result {
+  border-color: #FFFFFF;
+  background-color: #FFFFFF;
+  text-decoration: none;
+}
+
+.gsc-webResult.gsc-result:hover {
+  border-color: #FFFFFF;
+  background-color: #FFFFFF;
+}
+
+.gs-webResult.gs-result a.gs-title:link,
+.gs-webResult.gs-result a.gs-title:link b {
+  color: #2fa4e7;
+}
+
+.gs-webResult.gs-result a.gs-title:visited,
+.gs-webResult.gs-result a.gs-title:visited b {
+  color: #2fa4e7;
+}
+
+.gs-webResult.gs-result a.gs-title:hover,
+.gs-webResult.gs-result a.gs-title:hover b {
+  color: #157ab5;
+}
+
+.gs-webResult.gs-result a.gs-title:active,
+.gs-webResult.gs-result a.gs-title:active b {
+  color: #157ab5;
+}
+
+.gsc-cursor-page {
+  color: #1985B5;
+}
+
+a.gsc-trailing-more-results:link {
+  color: #1985B5;
+}
+
+.gs-webResult.gs-result .gs-snippet {
+  color: #36393D;
+}
+
+.gs-webResult.gs-result .gs-visibleUrl {
+  color: #999;
+}
+
+.gs-webResult.gs-result .gs-visibleUrl-short {
+  color: #999;
+}
+
+.gsc-cursor-box {
+  border-color: #FFFFFF;
+}
+
+.gsc-results .gsc-cursor-page {
+  background-color: #FFF;
+}
+
+.gsc-results .gsc-cursor-page.gsc-cursor-current-page {
+  background-color: #F0EDDE;
+}
+
+.gs-promotion.gs-result {
+  border-color: #F9F7ED;
+  background-color: #F9F7ED;
+}
+
+.gs-promotion.gs-result a.gs-title:link {
+  color: #2fa4e7;
+  text-decoration: none;
+}
+
+.gs-promotion.gs-result a.gs-title:visited {
+  color: #157ab5;
+}
+
+.gs-promotion.gs-result a.gs-title:hover {
+  color: #157ab5;
+  text-decoration: underline;
+}
+
+.gs-promotion.gs-result a.gs-title:active {
+  color: #36393D;
+}
+
+.gs-promotion.gs-result .gs-snippet {
+  color: #36393D;
+}
+
+.gs-promotion.gs-result .gs-visibleUrl,
+.gs-promotion.gs-result .gs-visibleUrl-short {
+  color: #008000;
+}
+
+div.gsc-clear-button {
+  margin-right: 0px;
+}
