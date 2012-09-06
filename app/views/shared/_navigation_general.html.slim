@@ -19,9 +19,9 @@
           li
             = form_tag '/site_search', :method => :get, :class => 'form-search site_search' do
               = text_field_tag :q, params[:q], :class => 'input-medium search-query', :placeholder => 'Пошук'
-              | 
+              |  
               = submit_tag "Пошук", :class => 'btn'
-          li.divider-vertical    
+          li.divider-vertical
           - if signed_in?
             li= link_to "Мій Кабінет", my_dashboard_path
             li.divider-vertical
