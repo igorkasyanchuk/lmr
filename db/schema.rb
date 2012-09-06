@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120905065428) do
+ActiveRecord::Schema.define(:version => 20120906124539) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -36,11 +36,12 @@ ActiveRecord::Schema.define(:version => 20120905065428) do
     t.string  "flat"
     t.string  "entrance"
     t.integer "floor"
-    t.float   "area"
+    t.float   "calc_area"
     t.float   "heat_area"
-    t.integer "number_brsdn"
-    t.integer "number_bmgst"
-    t.integer "leter"
+    t.integer "numbrsdn"
+    t.integer "numbmgst"
+    t.integer "letter"
+    t.string  "code"
   end
 
   add_index "consumers", ["house_id"], :name => "index_consumers_on_house_id"
@@ -295,10 +296,10 @@ ActiveRecord::Schema.define(:version => 20120905065428) do
     t.datetime "locked_at"
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
-    t.integer  "role_id"
     t.boolean  "forem_admin",            :default => false
     t.string   "forem_state",            :default => "approved"
     t.boolean  "forem_auto_subscribe",   :default => false
+    t.integer  "role_id"
     t.boolean  "blocked",                :default => false
     t.string   "avatar"
   end
