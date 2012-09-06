@@ -12,7 +12,7 @@
 
     $("#street").autocomplete source: "/users/autocomplete"
     $("#street").bind "autocompleteselect", (event, ui) ->
-      $('input[type=hidden]#street').val ui.item.id
+      $('input[type=hidden]#user_street').val ui.item.id
       $("#flat").val ''      
       $("#flat").attr "disabled", true
       $("#house").attr "disabled", false
@@ -24,7 +24,7 @@
     init_house_autocomplete = (street) ->
       $("#house").autocomplete source: "/users/autocomplete?street="+street
       $("#house").bind "autocompleteselect", (event, ui) ->
-        $('input[type=hidden]#house').val ui.item.id
+        $('input[type=hidden]#user_house').val ui.item.id
         $("#flat").attr "disabled", false
         $("#flat").val ''
         init_flat_autocomplete(ui.item.id)
@@ -32,7 +32,7 @@
     init_flat_autocomplete = (house) ->
       $("#flat").autocomplete source: "/users/autocomplete?house="+house
       $("#flat").bind "autocompleteselect", (event, ui) ->      
-       $('input[type=hidden]#flat').val ui.item.label
+       $('input[type=hidden]#user_flat').val ui.item.label
 
 
 ) jQuery

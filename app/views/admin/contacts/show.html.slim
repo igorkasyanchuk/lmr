@@ -1,7 +1,25 @@
 = title "Зворотній зв'язок"
 
-h1 Contact Message
+h1.left Повідомлення
+.right
+  = link_to 'Назад', [:admin, :contacts], :class => 'btn'
+.clear
 
 hr
 
-= @contact.inspect
+p 
+  strong = "Ім'я"
+  br
+  span= @contact.name
+
+
+p 
+  strong = "Емейл"
+  br
+  span= mail_to @contact.email
+
+
+p 
+  strong = "Повідомлення"
+  br
+  span= @contact.message

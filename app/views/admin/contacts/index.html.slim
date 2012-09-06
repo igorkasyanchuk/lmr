@@ -1,7 +1,7 @@
 = title "Зворотній зв'язок"
 
 #title_block
-  h1.title Зворотній зв'язок
+  h1.title = "Зворотній зв'язок"
   .clear  
 hr  
 
@@ -22,7 +22,7 @@ table.table.table-striped
         td= l contact.created_at, :format => :short
         td
           = link_to "Переглянути", resource_path(contact), :class => 'btn btn-normal btn-mini'
-          | 
+          |  
           = link_to 'Видалити', [:admin, contact], :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger btn-mini'
     - if @contacts.blank?
       tr

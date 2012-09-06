@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :identifier
   validates :name, :surname, :length => { :minimum => 2 }
   validates :identifier, :length => { :maximum => 13 }
-  # validate :user_identification
+  validate :user_identification, :on => :create
 
   belongs_to :role
   belongs_to :consumer
@@ -66,8 +66,8 @@ class User < ActiveRecord::Base
   private
 
     def user_identification
-      c = Consumer.find(self.identifier)
-      unless c and c.flat == self.flat and c.house_id.to_i == self.house.to_i and c.house.street_id.to_i == self.street.to_i
+      c = Consumer.find_by_code(self.identifier)
+      unless c and c.flat.to_s == self.flat.to_s and c.house_id.to_i == self.house.to_i and c.house.street_id.to_i == self.street.to_i
         errors[:base] << I18n.t('devise.views.validate_address')
       end
 

@@ -1,4 +1,4 @@
 p
-  | Welcome #{@resource.email}!
-p You can confirm your account email through the link below:
-p= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
+  | Привiт #{@resource.full_name}!
+p Ви можете пiдтвердити свiй облiковий запис натиснувши на наступне посилання:
+p= link_to 'Пiдтвердити мiй облiковий запис', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)

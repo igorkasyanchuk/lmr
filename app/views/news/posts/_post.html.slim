@@ -6,6 +6,6 @@ div id="post_#{post.id}" class="post"
       .created_at = "опубліковано  #{l(post.created_at, :format => :short)}"
       .author =  "Автор #{post.posted_by}"
     .post_description
-      == truncate(post.description, :omission => "#{link_to(' ...далі', [:news, post])}" , :length => 815)
-      = link_to(' ...далі', [:news, post]) if post.description.size < 815
+      == truncate(post.description, :length => 790)
+      span = link_to(' ...далі', [:news, post]) 
 .clearfix
