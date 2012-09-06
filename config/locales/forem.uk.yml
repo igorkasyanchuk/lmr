@@ -196,7 +196,7 @@ uk:
   time_ago_in_words: "%{time} назад"
   ago: "назад"
   ago_by: "назад"
-  by: ''
+  by: 'від'
   started_by: "Автор"
   are_you_sure: Ви впевнені?
 
