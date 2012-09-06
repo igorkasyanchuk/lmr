@@ -26,9 +26,9 @@ hr
           td.date = l(post.created_at, :format => :short) if post.created_at.present?
           td.actions
             = link_to "Переглянути", [:news, post], :class => 'btn btn-normal btn-mini', :target => :_blank
-            .divider 
+            .vertical_divider
             = link_to "Редагувати", [:edit, :admin, post], :class => 'btn btn-normal btn-mini'
-            .divider 
+            .vertical_divider
             = link_to 'Видалити', [:admin, post], :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger btn-mini'
       - if @posts.blank?
         tr
