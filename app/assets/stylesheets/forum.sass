@@ -64,6 +64,8 @@
             width: 10%
           &.forum_info
             width: 60%
+          &.topics-count, &.posts-count
+            text-align: center
     tbody
       // line-height: 30px
       tr
@@ -78,6 +80,8 @@
           font-weight: normal
           font-size: 16px
           vertical-align: middle
+          &.topics-count, &.posts-count
+            text-align: center
           div.description
             font-weight: 100
             font-size: 14px
@@ -219,6 +223,12 @@
             //   margin-right: 10px
     .moderation
       margin-top: 0px
+  .forum_admin
+    h2
+      float: left
+    a.btn
+      float: right
+      margin-top: 15px
   form#new_post, form.edit_post
     padding: 0px
     label

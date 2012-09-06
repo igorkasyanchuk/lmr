@@ -1,0 +1,18 @@
+p
+	= I18n.t('received_reply', :scope => 'forem.topic')
+	br
+	= I18n.t('view_it_here')
+	| :
+	br
+	= forem.forum_topic_url(@post.topic.forum_id, @post.topic).html_safe
+p
+	= I18n.t('unsubscribe_from')
+	= forem.unsubscribe_forum_topic_url(@post.topic.forum, @post.topic).html_safe
+
+/ = I18n.t('received_reply', :scope => 'forem.topic')
+/ = I18n.t('view_it_here')
+
+/ | \#{forem.forum_topic_url(@post.topic.forum_id, @post.topic)}
+
+/ = I18n.t('unsubscribe_from')
+/ | \#{forem.unsubscribe_forum_topic_url(@post.topic.forum, @post.topic)}
