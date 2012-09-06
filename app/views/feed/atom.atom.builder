@@ -1,5 +1,6 @@
+
 atom_feed do |feed|
-  feed.title("LMR News")
+  feed.title("Портал споживачів комунальних послуг")
   feed.updated(@post.try(:first).try(:created_at))
   feed.author do |fa|
     fa.email 's@softserveinc.com'
@@ -15,9 +16,9 @@ atom_feed do |feed|
       entry.updated(post.created_at.try(:strftime, "%Y-%m-%dT%H:%M:%SZ")) 
       
       entry.author do |author|
-        author.name entry.created_by
+        author.name(entry.try(:posted_by))
       end
     end
   end
-end
+end.html_safe
 

@@ -17,6 +17,9 @@ html lang="en"
 
     link href="/favicon.ico" rel="shortcut icon"
 
+    = auto_discovery_link_tag :atom, '/news/atom'
+    = auto_discovery_link_tag :rss, '/news/rss'
+
   body
     - if content_for?(:navigation)
       = yield :navigation

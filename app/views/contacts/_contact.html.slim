@@ -1,5 +1,12 @@
-h2 Зворотній зв'язок
-hr
+= title "Зворотній зв'язок"
+#title_block
+  h1.title = "Зворотній зв'язок"
+  .clear  
+hr  
+
+= page_part("NEW_CONTACTS_PAGE")
+br
+
 
 = simple_form_for contact, :html => {:class => 'form-horizontal' } do |f|
 
@@ -9,7 +16,7 @@ hr
     = f.input :name, :label => 'Ім\'я'
     = f.input :email, :label => 'Електронна адреса'
     = f.input :message, :as => :text, :label => 'Повідомлення', :input_html => { :rows => 12, :cols => 200, :class => 'span8' }
-    = f.simple_captcha :label => "Введіть код зображений на рисунку"
+    = f.simple_captcha :label => "Введіть код зображений на малюнку"
 
   .form-actions
     = f.button :submit, :value => "Надіслати"

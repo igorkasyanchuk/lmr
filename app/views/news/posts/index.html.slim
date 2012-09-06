@@ -1,10 +1,12 @@
-h1 Новини
-hr
+= title "Hовини"
+#title_block
+  h1.title Новини
+  .user_actions
+    = link_to image_tag('rss_icon.png'), news_rss_path
+  .clear  
+hr  
 
 #posts_container
-
-  = auto_discovery_link_tag :atom, "/atom" 
-  = auto_discovery_link_tag :rss, "/rss" 
 
   = render :partial => 'post', :collection => @posts, :as => :post
   .clear

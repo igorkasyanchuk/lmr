@@ -29,9 +29,14 @@
   visibility: hidden;
 }
 
-.divider{
+.vertical_divider {
   height: 3px;
 } 
+
+.horizontal_divider {
+ width: 3px;
+ display: inline-block;
+}
 
 .gsc-input {
   margin-top: 10px;
