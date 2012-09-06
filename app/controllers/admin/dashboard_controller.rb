@@ -4,6 +4,7 @@ class Admin::DashboardController < InheritedResources::Base
 
   before_filter :authenticate_user!
   before_filter :verify_user_is_active
+  before_filter :admin_required, :only => [:welcome]
   
   def welcome
   end
