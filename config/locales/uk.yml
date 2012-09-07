@@ -134,7 +134,7 @@ uk:
       less_than: має бути менше ніж %{count}
       less_than_or_equal_to: має бути менше ніж або дорівнювати %{count}
       not_a_number: не число
-      not_an_integer: не э цілим числом
+      not_an_integer: не є цілим числом
       odd: має бути непарним
       record_invalid: ! 'Виникли помилки: %{errors}'
       taken: вже зайнятий
@@ -142,17 +142,17 @@ uk:
         few: занадто довгий (максимум %{count} знаки)
         many: занадто довгий (максимум %{count} знаків)
         one: занадто довгий (максимум %{count} знак)
-        other: занадто довгий (максимум %{count} знаку)
+        other: занадто довгий (максимум %{count} знаки)
       too_short:
         few: занадто короткий (мінімум %{count} знаки)
         many: занадто короткий (мінімум %{count} знаків)
         one: занадто короткий (мінімум %{count} знак)
-        other: занадто короткий (мінімум %{count} знаку)
+        other: занадто короткий (мінімум %{count} знаки)
       wrong_length:
         few: неправильна довжина (має бути %{count} знаки)
         many: неправильна довжина (має бути %{count} знаків)
         one: неправильна довжина (має бути %{count} знак)
-        other: неправильна довжина (має бути %{count} знаку)
+        other: неправильна довжина (має бути %{count} знаків)
     template:
       body: ! 'Помилки виявлено в таких полях:'
       header:
@@ -255,3 +255,13 @@ uk:
   activerecord:
     errors:
       <<: *errors
+      models:
+        user:
+          validate_number: "має складатись тільки з чисел"
+    attributes:
+      user:
+        email: "E-mail"
+        identifier: "Особовий рахунок"
+        name: "Ім'я"
+        surname: "Прізвище"
+        password: "Пароль"

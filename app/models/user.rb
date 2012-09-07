@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :identifier
   validates :name, :surname, :length => { :minimum => 2 }
   validates :identifier, :length => { :maximum => 13 }
-  validates_format_of :identifier, :with => /^\d+$/, :message => I18n.t('devise.views.validate_number')
+  validates_format_of :identifier, :with => /^\d+$/, :message => :validate_number
   validate :user_identification, :on => :create
 
   belongs_to :role
