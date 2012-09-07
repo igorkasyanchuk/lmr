@@ -1,26 +1,26 @@
-= title "Адміністрування Блоків"
+= title "Керування блоками сторінок"
 
 #title_block
-  h1.title Адміністрування Блоків
+  h1.title Керування блоками сторінок
   .clear  
 hr  
 
 table.table.table-striped
   thead
     tr
-      th Identifier
-      th Content Present?
-      th Format
-      th Actions
+      th Ідентифікатор
+      th Контент присутній?
+      th Формат
+      th Дії
   tbody
     - collection.each do |page_part|
       tr
         td= link_to page_part.identifier, edit_resource_path(page_part)
-        td= page_part.content.present? ? 'yes' : 'no'
+        td= page_part.content.present? ? 'так' : 'ні'
         td= page_part.format
         td
-          = link_to "Edit", edit_resource_path(page_part), :class => 'btn btn-mini'
+          = link_to "Редагувати", edit_resource_path(page_part), :class => 'btn btn-mini'
     - if collection.blank?
       tr
-        td colspan=3
-          | No Page Parts.
+        td colspan=4
+          | Блоки відсутні.
