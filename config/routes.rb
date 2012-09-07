@@ -1,7 +1,9 @@
 Lmr::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
-  mount Forem::Engine, :at => "/forums"
+  match "/community/forums" => redirect("/community")
+
+  mount Forem::Engine, :at => "/community"
   devise_for :users, :skip => [:sessions]
 
   as :user do
@@ -10,9 +12,9 @@ Lmr::Application.routes.draw do
     match 'logout' => 'devise/sessions#destroy', :as => :destroy_user_session, :via => [:get, :delete]
   end
   
-  get '/forums/admin/users_list', :to => 'forum#index'
-  get '/forums/users/autocomplete', :to => "forum#autocomplete"
-  post 'forums/toggle_approve', :to => "forum#toggle_approve"
+  get '/community/admin/users_list', :to => 'forum#index'
+  get '/community/users/autocomplete', :to => "forum#autocomplete"
+  post 'community/toggle_approve', :to => "forum#toggle_approve"
 
   get '/users/autocomplete', :to => "admin/users#autocomplete"
 
