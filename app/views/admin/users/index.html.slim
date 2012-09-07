@@ -9,7 +9,7 @@ hr
 
 = form_tag [:admin, :users], :method => :get, :class => 'form-search' do
   = text_field_tag :q, params[:q], :class => 'input-medium search-query'
-  | 
+  |   
   = submit_tag "Фільтр", :class => 'btn'
 
 table.table.table-striped

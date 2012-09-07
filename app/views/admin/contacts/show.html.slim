@@ -1,9 +1,10 @@
 = title "Зворотній зв'язок"
 
-h1.left Повідомлення
-.right
-  = link_to 'Назад', [:admin, :contacts], :class => 'btn'
-.clear
+#title_block
+  h1.title Повідомлення
+  .admin_actions
+    = link_to 'Назад', [:admin, :contacts], :class => 'btn btn-primary btn-small'
+  .clear
 
 hr
 
