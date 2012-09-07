@@ -15,4 +15,4 @@
 					td= user.name
 					td= user.identifier
 					td= user.email
-					td= link_to t('forum.delete_spam_user'), forums_toggle_approve_path(:id => user.id), :remote => :true, :method => :post, :confirm => t('are_you_sure'), :class => 'btn btn-danger btn-mini'
+					td= link_to t('forum.delete_spam_user'), community_toggle_approve_path(:id => user.id), :remote => :true, :method => :post, :confirm => t('are_you_sure'), :class => 'btn btn-danger btn-mini'
