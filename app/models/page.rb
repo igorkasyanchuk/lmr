@@ -4,6 +4,8 @@ class Page < ActiveRecord::Base
   #validates :title, :presence => true
   validates :identifier, :uniqueness => true, :presence => true
 
+  before_save :downcase_identifier
+
   #before_save :populate_url_title
 
   #def populate_url_title
@@ -13,6 +15,10 @@ class Page < ActiveRecord::Base
   #    identifier
   #  end
   #end
+
+  def downcase_identifier
+    self.identifier.downcase! if self.identifier.present?
+  end
 
   def self.[] identifier
     page = Page.find_or_initialize_by_identifier(identifier)
