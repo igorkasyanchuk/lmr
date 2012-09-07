@@ -52,6 +52,7 @@ gem 'therubyracer'
 group :test, :development do
   gem 'factory_girl'
   gem 'factory_girl_rails'
+  gem 'guard-rspec'
 end
 
 group :test do
