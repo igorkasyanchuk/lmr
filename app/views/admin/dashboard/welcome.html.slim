@@ -5,7 +5,7 @@ h1 Персональний кабінет
 hr
 
 
-= form_for request.referer, :html => {:class => 'form-inline' } do |f|
+= form_for :user, :html => {:class => 'form-inline' } do |f|
   = label_tag 'Рік'
   = select_tag 'year', 'year'
   = label_tag 'Місяць'  

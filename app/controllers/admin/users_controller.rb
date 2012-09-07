@@ -3,6 +3,7 @@ class Admin::UsersController < Admin::DashboardController
   defaults :resource_class => User, :collection_name => 'users', :instance_name => 'user'
   before_filter :admin_required, :except => [:autocomplete]
   skip_before_filter :authenticate_user!, :only => [:autocomplete]
+  skip_before_filter :admin_or_moderator_required, :only => [:autocomplete]
 
   def index
     @users = User.scoped
