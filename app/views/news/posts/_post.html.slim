@@ -3,8 +3,8 @@ div id="post_#{post.id}" class="post"
   .post_information
     h2.post_title = link_to post.title, [:news, post]
     .info_block
-      .created_at = "опубліковано  #{l(post.created_at, :format => :short)}"
-      .author =  "Автор #{post.posted_by}"
+      .created_at = l(post.created_at, :format => :short) 
+      .author = post.posted_by
     .post_description
       == truncate(post.description, :length => 790)
       span = link_to(' ...далі', [:news, post]) 
