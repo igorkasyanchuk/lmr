@@ -49,6 +49,7 @@ namespace :deploy do
   desc "Symlink extra configs and folders."
   task :symlink_extras do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{shared_path}/portal.pem #{release_path}/portal.pem"
   end
 
   desc "Setup shared directory."
