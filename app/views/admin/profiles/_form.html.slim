@@ -1,4 +1,4 @@
-= form_for(@user, :as => :user, :url => dashboard_profile_path, :html => { :multipart => true, :method => :put , :class => 'form-horizontal well'}) do |f|
+= form_for(@user, :as => :user, :url => [:admin, :profile], :html => { :multipart => true, :method => :put , :class => 'form-horizontal well'}) do |f|
   = user_error_messages!(@user)
   #dashboard_profile
     .form-inputs
