@@ -3,7 +3,7 @@
 #title_block
   h1.title Адміністування користувачів
   .admin_actions
-    = link_to "Додати коритстувача", [:new, :admin, :user], :class => 'btn btn-primary btn-small'
+    = link_to "Додати користувача", [:new, :admin, :user], :class => 'btn btn-primary btn-small'
   .clear  
 hr  
 
@@ -37,7 +37,7 @@ table.table.table-striped
             .horizontal_divider
             = link_to "Зняти тимчасове блокування", [:time_unblock, :admin, user], :class => 'btn btn-mini'
           .horizontal_divider
-          = link_to "Редагувати", edit_resource_path(user), :class => 'btn btn-mini'
+          = link_to "Редагувати", [:edit, :admin, user], :class => 'btn btn-mini'
           .horizontal_divider
           = link_to 'Видалити', [:admin, user], :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger btn-mini'
     - if collection.blank?

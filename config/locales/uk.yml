@@ -268,6 +268,7 @@ uk:
         password_confirmation: 'Підтвердження паролю'
         current_password: "Поточний пароль"
         avatar: "Зображення"
+        role: 'Роль'
         remove_avatar: 'Видалити зображення'
         street: 'Вулиця'
         house: 'Дім'
