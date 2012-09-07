@@ -20,7 +20,17 @@ describe ServicePayment do
   it "stores payer ls" do
     @service_payment.payer_ls.should eq(DEBT_PAY_PACK[0]['service']['payer']['ls'])
   end
-
+  
+  {
+    'service_name' => 'service',
+    'service_code' => 'service code',
+    'company_code' => 'company code'
+  }.each_pair do |attribute, human_name|
+    it "stores #{human_name}" do
+      @service_payment.send(attribute).should eq(DEBT_PAY_PACK[0]['service']['ks'][attribute.gsub('_name', '')])
+    end
+  end
+=begin
   it "stores service name" do
     @service_payment.service_name.should eq(DEBT_PAY_PACK[0]['service']['ks']['service'])
   end
@@ -30,7 +40,7 @@ describe ServicePayment do
   it "stores company code" do
     @service_payment.company_code.should eq(DEBT_PAY_PACK[0]['service']['ks']['company_code'])
   end
-
+=end
   {
     'provider_account_no' => 'provider accoun number',
     'prepayment' => 'prepayment',
