@@ -1,5 +1,5 @@
 # encoding: utf-8
-class Dashboard::ProfilesController < Dashboard::DashboardController
+class Admin::ProfilesController < Admin::DashboardController
   
   def edit
     @user = current_user
@@ -10,7 +10,7 @@ class Dashboard::ProfilesController < Dashboard::DashboardController
     # protect user
     params[:user].delete(:role_id)
     if @user.update_with_password(params[:user])
-      redirect_to '/dashboard', :notice => "Ваш профіль успішно оновлено"
+      redirect_to '/admin', :notice => "Ваш профіль успішно оновлено"
     else
       render :edit
     end

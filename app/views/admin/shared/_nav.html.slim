@@ -21,5 +21,7 @@
           li= link_to "Блоки", main_app.admin_page_parts_path
           li.divider-vertical
         ul.nav.pull-right
+          li= link_to "Профіль", main_app.edit_admin_profile_path
+          li.divider-vertical
           li= link_to 'Вийти', main_app.destroy_user_session_path, :method => :delete
 .clearfix
