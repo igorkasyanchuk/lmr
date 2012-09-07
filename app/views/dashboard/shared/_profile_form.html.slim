@@ -1,4 +1,4 @@
-= simple_form_for(@user, :as => :user, :url => [:admin, :profile], :html => { :multipart => true, :method => :put , :class => 'form-horizontal'}) do |f|
+= simple_form_for(@user, :as => :user, :url => url, :html => { :multipart => true, :method => :put , :class => 'form-horizontal'}) do |f|
   = user_error_messages!(@user)
 
   fieldset
