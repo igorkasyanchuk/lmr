@@ -62,7 +62,11 @@ class User < ActiveRecord::Base
 
   def forem_admin?
     self && (self.admin? || self.content_manager?) && !self.forum_blocked?
-  end 
+  end
+
+  def admin_or_content_manager?
+    self.admin? || self.content_manager?
+  end
 
   private
 

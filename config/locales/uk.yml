@@ -265,3 +265,10 @@ uk:
         name: "Ім'я"
         surname: "Прізвище"
         password: "Пароль"
+        password_confirmation: 'Підтвердження паролю'
+        current_password: "Поточний пароль"
+        avatar: "Зображення"
+        remove_avatar: 'Видалити зображення'
+        street: 'Вулиця'
+        house: 'Дім'
+        flat: 'Квартира'
