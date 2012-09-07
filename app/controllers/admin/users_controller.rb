@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 class Admin::UsersController < Admin::DashboardController
   defaults :resource_class => User, :collection_name => 'users', :instance_name => 'user'
   before_filter :admin_required, :except => [:autocomplete]
