@@ -20,6 +20,8 @@ Lmr::Application.routes.draw do
 
   namespace :admin do
     match '/', :to => 'dashboard#welcome'
+    get '/profile', :to => 'dashboard#edit'
+    put '/profile', :to => 'dashboard#update'
     match '/activities', :to => 'activities#index'
     resources :pages, :except => :show
     resources :users do

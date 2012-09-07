@@ -9,6 +9,22 @@ class Admin::DashboardController < InheritedResources::Base
   def welcome
   end
 
+  def edit
+    @user = current_user
+    render '/dashboard/profiles/edit'
+  end
+
+  def update
+    @user = current_user
+    # protect user
+    params[:user].delete(:role_id)
+    if @user.update_with_password(params[:user])
+      redirect_to '/admin', :notice => "Ваш профіль успішно оновлено"
+    else
+      render '/dashboard/profiles/edit'
+    end
+  end
+
   protected
     def admin_required
       redirect_to root_path, :notice => 'Ви повинні бути адміністратором.' unless current_user.admin?

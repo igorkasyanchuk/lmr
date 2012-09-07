@@ -10,7 +10,7 @@ class Dashboard::ProfilesController < Dashboard::DashboardController
     # protect user
     params[:user].delete(:role_id)
     if @user.update_with_password(params[:user])
-      redirect_to '/dashboard', :notice => "Успішно оновлено"
+      redirect_to '/dashboard', :notice => "Ваш профіль успішно оновлено"
     else
       render :edit
     end

@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :identifier
   validates :name, :surname, :length => { :minimum => 2 }
   validates :identifier, :length => { :maximum => 13 }
+  validates_format_of :identifier, :with => /^\d+$/, :message => :validate_number
   validate :user_identification, :on => :create
 
   belongs_to :role
@@ -61,7 +62,11 @@ class User < ActiveRecord::Base
 
   def forem_admin?
     self && (self.admin? || self.content_manager?) && !self.forum_blocked?
-  end 
+  end
+
+  def admin_or_content_manager?
+    self.admin? || self.content_manager?
+  end
 
   private
 

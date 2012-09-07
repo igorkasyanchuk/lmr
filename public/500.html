@@ -1,25 +1,95 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>We're sorry, but something went wrong (500)</title>
+  <title>Вибачте, сталась помилка (500)</title>
   <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
-    }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
+
+#wrapper {
+  max-width:695px;
+  margin-left: 200px;
+  
+}
+
+body {
+  background: #2E95EF;
+  background-image: -moz-radial-gradient(center 45deg,circle cover, #9BD1FF, #2E95EF);
+  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%,800, from(#9BD1FF), to(#2E95EF));
+  padding-top:15%;
+}
+
+h1 {
+  color:#fff;
+    text-shadow:1px 1px 0 #888;
+    line-height:normal;
+    font-weight:1em;
+    font-family:serif;
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+#header, #subscribe {
+  min-width: 280px; 
+  max-width: 580px; 
+  float:right;
+  font-size:16px;
+  color:#333;
+  text-shadow:1px 1px 0 #ddd;
+}
+
+
+.menus{
+    position:absolute;
+    left:0;
+    top:10px;
+    border: 1px solid #bbb;
+    background:#fafafa;
+    width:130px;
+    height:50px;
+    padding-top:10px;
+    box-shadow:0 0 3px 2px #fff;
+    -moz-box-shadow:0 0 3px 2px #fff;
+    -webkit-box-shadow:0 0 3px 2px #fff;
+    -o-box-shadow:0 0 3px 2px #fff;
+}
+
+.menus ul{
+  margin-top: 0px;
+  list-style-type: none;
+  font-weight:bold;
+}
+
+.menus ul li{
+    margin-left:-10px;
+  padding-bottom:5px;
+}
+
+a {
+  color: #2fa4e7;
+  text-decoration: none;
+}
+a:hover {
+  color: #157ab5;
+  text-decoration: underline;
+}
+
   </style>
 </head>
 
 <body>
-  <!-- This file lives in public/500.html -->
-  <div class="dialog">
-    <h1>We're sorry, but something went wrong.</h1>
+  <div class="menus">
+        <ul>
+            <li class="active"><a href="/">На головну</a></li>
+            <li>Помилка 500</li>
+        </ul>
+    </div>
+
+  <div class="container"  id="wrapper">
+      <div id="header">
+        <h1>Портал споживачів комунальних послуг</h1>
+        <p>
+          Вибачте, на сайті сталась помилка. Спробуйте обновити цю сторінку пізніше.
+        </p>
+      </div>
   </div>
 </body>
 </html>
