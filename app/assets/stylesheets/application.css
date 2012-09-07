@@ -53,3 +53,7 @@
 .right {
   float: right;
 }
+
+.none {
+  display: none;
+}
