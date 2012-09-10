@@ -1,12 +1,14 @@
 p
-	= I18n.t('received_reply', :scope => 'forem.topic')
+	= I18n.t('forem.topic.received_reply')
 	br
-	= I18n.t('view_it_here')
+	= I18n.t('forem.topic.view_it_here')
 	| :
 	br
 	= forem.forum_topic_url(@post.topic.forum_id, @post.topic).html_safe
 p
-	= I18n.t('unsubscribe_from')
+	= I18n.t('forem.topic.unsubscribe_from')
+  | :
+  br
 	= forem.unsubscribe_forum_topic_url(@post.topic.forum, @post.topic).html_safe
 
 / = I18n.t('received_reply', :scope => 'forem.topic')
