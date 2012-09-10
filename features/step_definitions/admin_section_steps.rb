@@ -23,15 +23,15 @@ Then /^I should see links to track site activities$/ do
 end
 
 Then /^I should see link to manage forum sections$/ do
-  page.should have_selector("a[href='/forums/admin/forums']")
+  page.should have_selector("a[href='/community/admin/forums']")
 end
 
 Then /^I should see link to manage categories$/ do
-  page.should have_selector("a[href='/forums/admin/categories']")
+  page.should have_selector("a[href='/community/admin/categories']")
 end
 
 Then /^I should see link to manage forum users$/ do
-  page.should have_selector("a[href='/forums/admin/users_list']")
+  page.should have_selector("a[href='/community/admin/users_list']")
 end
 
 Then /^I should not see links to manage users$/ do
@@ -59,14 +59,14 @@ Then /^I should not see links to track site activities$/ do
 end
 
 Then /^I should not see link to manage forum sections$/ do
-  page.should_not have_selector("a[href='/forums/admin/forums']")
+  page.should_not have_selector("a[href='/community/admin/forums']")
 end
 
 Then /^I should not see link to manage categories$/ do
-  page.should_not have_selector("a[href='/forums/admin/categories']")
+  page.should_not have_selector("a[href='/community/admin/categories']")
 end
 
 Then /^I should not see link to manage forum users$/ do
-  page.should_not have_selector("a[href='/forums/admin/users_list']")
+  page.should_not have_selector("a[href='/community/admin/users_list']")
 end
 

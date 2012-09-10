@@ -6,8 +6,13 @@ Feature: Moderator Access
 
   Background:
     Given moderator user
+    And static page "help"
+    And static page "about"
     And news entry "Event 1"
     And news entry "Event 2"
+    And feedback with message "I love this site"
+    And page part "NEW_CONTACTS_PAGE"
+    And user activity "some activity"
 
   Scenario: Moderator can access admin section
     Given I sign in as moderator
@@ -17,7 +22,7 @@ Feature: Moderator Access
     And I should see links to manage news
     And I should see links to manage page parts
     And I should see links to view feedback
-    And I should see links to track site activities
+    And I should not see links to track site activities
 
   Scenario: Moderator can manage forum
     Given I sign in as moderator
@@ -30,8 +35,8 @@ Feature: Moderator Access
   Scenario: Content manager can manage static pages
     Given I sign in as moderator
     When I go to static pages management page
-    #Then I should see list of static pages
-    Then I should see only admin notification
+    Then I should see list of static pages
+    #Then I should see only admin notification
 
   @news
   Scenario: Content manager can manage news
@@ -49,19 +54,21 @@ Feature: Moderator Access
   Scenario: Content manager can manage page parts
     Given I sign in as moderator
     When I go to static page parts
-    #Then I should see list of page parts
-    Then I should see only admin notification
+    Then I should see list of page parts
+    #Then I should see only admin notification
 
   @feedbacks
   Scenario: Content manager can browse feedbacks
     Given I sign in as moderator
     When I go to feedabacks page
-    Then I should see only admin notification
+    Then I should see list of feedbacks
+    #Then I should see only admin notification
 
   @activities
   Scenario: Admin track user activities
     Given I sign in as moderator
     When I go to activities list
-    Then I should see only admin notification
+    Then I should see list of activities
+    #Then I should see only admin notification
 
 
