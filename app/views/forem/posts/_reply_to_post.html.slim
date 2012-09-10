@@ -2,7 +2,7 @@ a name="post-#{post.id}"
 div id="post_#{post.id}" class="reply_to_post post #{cycle('odd', 'even')}"
 	.user
 	  .username
-	    = link_to_if Forem.user_profile_links, post.user.full_name, [main_app, post.user]
+	    = link_to_if Forem.user_profile_links, post.user.forum_name, [main_app, post.user]
 	  .userstatus
       = forum_status(post.user)
 	  .icon= forum_avatar(post.user)
@@ -13,5 +13,5 @@ div id="post_#{post.id}" class="reply_to_post post #{cycle('odd', 'even')}"
 	  = forem_format(post.text)
 	  - if post.reply_to
 	    span.in_reply_to
-	      = link_to "#{t("forem.post.in_reply_to")} #{post.reply_to.user.full_name}", "#post-#{post.reply_to.id}"
+	      = link_to "#{t("forem.post.in_reply_to")} #{post.reply_to.user.forum_name}", "#post-#{post.reply_to.id}"
 	  ul.actions
