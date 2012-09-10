@@ -1,3 +1,7 @@
-= simple_form_for [forem, :admin, @category] do |f|
-  = f.input :name
-  = f.button :submit, :class => 'btn btn-primary'
+= simple_form_for [forem, :admin, @category], :html => {:class => 'form-horizontal'} do |f|
+  fieldset
+    = f.input :name
+  .form-actions  
+    = link_to "Відміна", :back, :class => "btn"
+    |  
+    = f.button :submit, :class => 'btn btn-primary'

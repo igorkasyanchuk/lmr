@@ -3,8 +3,8 @@
   |   type = $(this).val();
   |   $(".part").hide();
   |   $("." + type).show();
-  |   console.log(type);
   | });
+  | $('#page_part_format').trigger("change");
 
 = simple_form_for([:admin, @page_part], :html => {:class => 'form-horizontal' }) do |f|
   = f.error_notification

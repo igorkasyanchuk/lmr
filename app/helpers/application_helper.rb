@@ -68,7 +68,7 @@ module ApplicationHelper
     if pp.safe_content?
       pp.content
     else
-      pp.content.html_safe
+      pp.content.try :html_safe
     end
   end
 
