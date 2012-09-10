@@ -1,5 +1,8 @@
 = render :partial => 'forem/forums/head', :locals => { :forum => @topic.forum }
 h2= t("forem.post.edit")
-= simple_form_for [forem, @topic, @post] do |f|
+= simple_form_for [forem, @topic, @post], :html => {:class => 'form-horizontal'} do |f|
   = render :partial => "form", :locals => { :f => f }
-  = f.submit t("forem.post.buttons.edit"), :class => 'btn btn-primary'
+  .form-actions  
+    = link_to "Відміна", :back, :class => "btn"
+    |  
+    = f.submit t("forem.post.buttons.edit"), :class => 'btn btn-primary'

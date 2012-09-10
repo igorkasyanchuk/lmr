@@ -1,14 +1,11 @@
-= simple_form_for [forem, :admin, @topic] do |f|
-  = f.input :subject
-  = f.association :forum, :label => t('forem.forums.index.forum')
-  .topic_checkbox    
-    = f.check_box :locked
-    = f.label :locked
-  .topic_checkbox    
-    = f.check_box :pinned
-    = f.label :pinned
-  .topic_checkbox    
-    = f.check_box :hidden
-    = f.label :hidden
-  .clear
-  = f.button :submit, :class => 'btn btn-primary'
+= simple_form_for [forem, :admin, @topic], :html => {:class => 'form-horizontal'}  do |f|
+  fieldset
+    = f.input :subject
+    = f.association :forum, :label => t('forem.forums.index.forum')    
+    = f.input :locked
+    = f.input :pinned
+    = f.input :hidden
+  .form-actions  
+    = link_to "Відміна", :back, :class => "btn"
+    |  
+    = f.button :submit, :class => 'btn btn-primary'
