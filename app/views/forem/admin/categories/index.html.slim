@@ -1,5 +1,12 @@
-h2= t("forem.admin.category.index")
-= link_to t("forem.admin.category.new_link"), forem.new_admin_category_path, :class => "btn btn-primary"
+= title t("forem.admin.category.index")
+
+#title_block
+  h1.title = t("forem.admin.category.index")
+  .admin_actions
+    = link_to t("forem.admin.category.new_link"), forem.new_admin_category_path, :class => "btn btn-primary btn-small"
+  .clear  
+hr
+
 table#forums.forums.admin_categories.subdued cellspacing="0"
   thead
     tr

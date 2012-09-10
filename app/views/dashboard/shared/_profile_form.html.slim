@@ -2,6 +2,7 @@
   = user_error_messages!(@user)
 
   fieldset
+    = f.input :identifier, :disabled => true
     = f.input :email, :label => 'Електронна адреса',:autocomplete => :off
     = f.input :name, :autocomplete => :off
     = f.input :surname, :autocomplete => :off
@@ -11,8 +12,8 @@
     = f.check_box :remove_avatar, :class => 'controls'     
     .clear    
     = f.input :password, :autocomplete => :off
-    = f.input :password_confirmation, :label => 'Підтвердження паролю', :hint => t('devise.views.help_password'), :autocomplete => :off
-    = f.input :current_password, :label => 'Поточний пароль', :hint => t('devise.views.help_current_password')
+    = f.input :password_confirmation, :hint => t('devise.views.help_password'), :autocomplete => :off
+    = f.input :current_password, :hint => t('devise.views.help_current_password')
     = f.hidden_field :avatar_cache
 
   .form-actions
