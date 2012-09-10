@@ -32,6 +32,8 @@ gem 'truncate_html'
 
 gem 'httparty'
 
+gem "airbrake"
+
 # Gems used only for assets and not required
 # in production environments by default.
 gem 'coffee-rails', '~> 3.2.1'
@@ -73,7 +75,7 @@ end
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'

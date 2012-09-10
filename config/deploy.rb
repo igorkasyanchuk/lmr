@@ -79,3 +79,5 @@ after "deploy", "deploy:cleanup" # keeps only last 5 releases
 after "deploy:setup", "deploy:setup_shared"
 after "deploy:update_code", "deploy:symlink_extras"
 after "deploy:symlink_extras", "deploy:assets_precompile"
+        require './config/boot'
+        require 'airbrake/capistrano'

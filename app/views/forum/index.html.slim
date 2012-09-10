@@ -1,7 +1,10 @@
 = content_for :css do
   = stylesheet_link_tag "forum"
+
+= title t('forum.manage_users')
   
 h2= t('forum.manage_users')
+hr
 
 = text_field_tag "new_user"
 = button_tag t("forum.spam_user"), :disabled => true, :id => "block_user", :class => 'btn btn-warning'

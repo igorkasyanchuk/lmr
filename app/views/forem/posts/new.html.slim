@@ -6,6 +6,10 @@ h2= t("forem.post.new")
 - else
   h3.topic_subject
     = @topic.subject
-= simple_form_for [forem, @topic, @post] do |f|
+= simple_form_for [forem, @topic, @post], :html => {:class => 'form-horizontal'} do |f|
   = render :partial => "form", :locals => { :f => f }
-  = f.submit t("forem.post.buttons.reply"), :class => 'btn btn-primary reply'
+  
+  .form-actions  
+    = link_to "Відміна", :back, :class => "btn"
+    |  
+    = f.submit t("forem.post.buttons.reply"), :class => 'btn btn-primary reply'

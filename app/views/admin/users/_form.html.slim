@@ -1,10 +1,10 @@
 = simple_form_for([:admin, @user], :html => {:class => 'form-horizontal', :multipart => true}) do |f|
   = user_error_messages!(@user)
   .form-inputs
-    - unless @user.new_record?
+    - if !@user.new_record? && @user.is_user?
       .control-group      
         = f.label :identifier
-        .controls
+        .controls.identifier
           = @user.identifier
     = f.input :email
     = f.input :name
@@ -26,4 +26,4 @@
   .form-actions
     = link_to 'Відміна', [:admin, :users], :class => 'btn'
     |  
-    = f.submit 'Додати користувача', :class => 'btn btn-primary form-btn'  
+    = f.submit (@user.new_record? ? 'Додати користувача' : 'Змінити'), :class => 'btn btn-primary form-btn'  
