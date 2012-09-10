@@ -10,13 +10,6 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :identifier, :name, :surname, :login, :role_id, :avatar, :avatar_cache, :remove_avatar, :street, :house, :flat
   attr_accessor :login, :street, :house, :flat
-  
-  validates_presence_of :identifier, :name, :surname
-  validates_uniqueness_of :identifier
-  validates :name, :surname, :length => { :minimum => 2 }
-  validates :identifier, :length => { :maximum => 13 }
-  validates_format_of :identifier, :with => /^\d+$/, :message => :validate_number
-  validate :user_identification, :on => :create
 
   belongs_to :role
   belongs_to :consumer
@@ -27,10 +20,19 @@ class User < ActiveRecord::Base
   scope :active, where(:blocked => false)
   scope :blocked, where(:blocked => true)
 
-  before_create :set_defaults
+  validates :name, :surname, :length => { :minimum => 2 }
+  validates_presence_of :name, :surname
 
-  def set_defaults
-    self.role = Role['user']
+  with_options :if => :is_user? do |user|
+    user.validates_presence_of :identifier
+    user.validates_uniqueness_of :identifier
+    user.validates :identifier, :length => { :maximum => 13 }
+    user.validates_format_of :identifier, :with => /^\d+$/, :message => :validate_number
+    user.validate :user_identification, :on => :create
+  end
+
+  def is_user?
+    role.name == 'user'
   end
 
   def self.find_first_by_auth_conditions(warden_conditions)

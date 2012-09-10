@@ -10,7 +10,9 @@
         $("#street").attr "disabled", false
 
 
-    $("#street").autocomplete source: "/users/autocomplete"
+    $("#street").autocomplete
+      source: "/users/autocomplete"
+      minLength: 2
     $("#street").bind "autocompleteselect", (event, ui) ->
       $('input[type=hidden]#user_street').val ui.item.id
       $("#flat").val ''      

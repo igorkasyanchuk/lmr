@@ -8,7 +8,7 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(params[:contact])
     if @contact.save_with_captcha
-      redirect_to '/', :notice => "Thank You for Your message!"
+      redirect_to '/', :notice => "Дякуємо за ваше повідомлення."
     else
       render :new
     end

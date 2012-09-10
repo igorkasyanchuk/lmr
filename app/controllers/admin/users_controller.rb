@@ -55,7 +55,7 @@ class Admin::UsersController < Admin::DashboardController
       houses = House.where("street_id LIKE ? AND description LIKE ?","%#{params[:street]}%", "%#{params[:term]}%").order("description")
       render :json => houses.map { |h| {:id => h.id, :label => "#{h.description}"} }
     else
-      streets = Street.where("name LIKE ?", "%#{params[:term]}%").order("name")
+      streets = Street.where("name LIKE ?", "#{params[:term]}%").order("name")
       render :json => streets.map { |s| {:id => s.id, :label => "#{s.name}"} }
     end
   end
