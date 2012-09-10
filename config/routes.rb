@@ -11,10 +11,12 @@ Lmr::Application.routes.draw do
     post 'login' => 'devise/sessions#create', :as => :user_session
     match 'logout' => 'devise/sessions#destroy', :as => :destroy_user_session, :via => [:get, :delete]
   end
-  
-  get '/community/admin/users_list', :to => 'forum#index'
-  get '/community/users/autocomplete', :to => "forum#autocomplete"
-  post 'community/toggle_approve', :to => "forum#toggle_approve"
+
+  scope 'community', :as => 'community' do
+    get 'admin/users_list', :to => 'forum#index'
+    get 'users/autocomplete', :to => "forum#autocomplete"
+    post 'toggle_approve', :to => "forum#toggle_approve"
+  end
 
   get '/users/autocomplete', :to => "admin/users#autocomplete"
 

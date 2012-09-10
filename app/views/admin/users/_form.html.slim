@@ -1,14 +1,29 @@
-= simple_form_for([:admin, @user], :html => {:class => 'form-horizontal' }) do |f|
-  .form-inputs 
-    = f.input :identifier, :label => 'Ідениифікатор'
-    = f.input :name, :label => 'Ім\'я'
-    = f.input :surname, :label => 'Прізвище'
-    = f.input :email, :label => 'Електронна адреса'
-    = f.input :password, :label => 'Пароль', :input_html => {:disabled => !@user.new_record?}
-    = f.input :password_confirmation, :label => 'Підтвердження пароля', :input_html => {:disabled => !@user.new_record?}
-    = f.association :role, :label => 'Роль'
+= simple_form_for([:admin, @user], :html => {:class => 'form-horizontal', :multipart => true}) do |f|
+  = user_error_messages!(@user)
+  .form-inputs
+    - unless @user.new_record?
+      .control-group      
+        = f.label :identifier
+        .controls
+          = @user.identifier
+    = f.input :email
+    = f.input :name
+    = f.input :surname
+    = f.input :avatar
+    = f.hidden_field :avatar_cache
+    .control-group
+      - if @user.avatar?
+        .controls
+          = image_tag(@user.avatar.thumb.url)
+        .clear
+        = f.label :remove_avatar, :id => "remove_avatar"
+        .controls
+          = f.check_box :remove_avatar
+    = f.input :password, :input_html => {:disabled => !@user.new_record?}
+    = f.input :password_confirmation, :input_html => {:disabled => !@user.new_record?}
+    = f.association :role, :collection => @user.new_record? ? Role.all.reject {|u| u.name == 'user'} : Role.all, :prompt => "Виберіть роль"
 
   .form-actions
     = link_to 'Відміна', [:admin, :users], :class => 'btn'
     |  
-    = f.submit 'Зберегти сторінку', :class => 'btn btn-primary form-btn'  
+    = f.submit 'Додати користувача', :class => 'btn btn-primary form-btn'  
