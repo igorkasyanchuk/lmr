@@ -1,21 +1,17 @@
 class PagePart < ActiveRecord::Base
-  attr_accessible :content, :identifier, :format, :page_part, :plain_text, :html_text, :do_update
+  attr_accessible :content, :identifier, :format, :page_part, :plain_text, :do_update
 
   FORMATS = ['html', 'text']
 
   validates_uniqueness_of :identifier
   validates_presence_of :identifier
 
-  attr_accessor :plain_text, :html_text, :do_update
+  attr_accessor :plain_text, :do_update
 
   before_save :update_content
 
   def update_content
-    if self.format == 'text' 
-      self.content = self.plain_text
-    else
-      self.content = self.html_text
-    end if self.do_update.present?
+    self.content = self.plain_text if self.do_update.present? && self.format == 'text'
   end
 
   def self.[](identifier)
