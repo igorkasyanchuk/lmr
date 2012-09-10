@@ -98,10 +98,12 @@ module ApplicationHelper
   end
 
   def forum_avatar user
-    if user.avatar?
-      image_tag(user.avatar.thumb.url)
-    else
-      image_tag('forem/user_default.png')
+    if user
+      if user.avatar?
+        image_tag(user.avatar.thumb.url)
+      else
+        image_tag('forem/user_default.png')
+      end
     end
   end
 
@@ -123,14 +125,16 @@ module ApplicationHelper
     html.html_safe
   end
 
-  def forum_status user
-    if user.admin?
-      t('forum.admin')
-    elsif user.content_manager?
-      t('forum.moderator')
-    else
-      ""
-    end      
+  def forum_status user    
+    if user
+      if user.admin?
+        t('forum.admin')
+      elsif user.content_manager?
+        t('forum.moderator')
+      else
+        ""
+      end
+    end
   end
 
 end
