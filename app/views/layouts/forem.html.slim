@@ -1,14 +1,14 @@
 - if current_user && (current_user.admin? || current_user.content_manager?) && request.fullpath.include?('/admin')
-	= content_for :css do
-	  = stylesheet_link_tag "admin/admin"
+  = content_for :css do
+    = stylesheet_link_tag "admin/admin"
 
-	= content_for :js do
-	  = javascript_include_tag "admin/admin"  
+  = content_for :js do
+    = javascript_include_tag "admin/admin"  
 
-	= content_for :navigation do  
-	  = render :partial => '/admin/shared/nav'
+  = content_for :navigation do  
+    = render :partial => '/admin/shared/nav'
 
-	= render :layout => 'layouts/application' do
-	  = yield
+  = render :layout => 'layouts/application' do
+    = yield
 - else
-	= render :partial => '/layouts/application'
+  = render :partial => '/layouts/application'
