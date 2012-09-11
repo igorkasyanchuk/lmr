@@ -16,7 +16,7 @@ tr class="topic #{cycle('odd', 'even')} #{topic.locked? ? 'locked' : 'unlocked'}
     .started-by
       = t "started_by"
       |  
-      = relevant_posts(topic).first.user.full_name
+      = relevant_posts(topic).first.user.try(:forum_name)
   td.latest-post
     = link_to_latest_post(topic)
   td.posts-count= relevant_posts(topic).count

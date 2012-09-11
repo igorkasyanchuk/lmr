@@ -264,6 +264,7 @@ uk:
         identifier: "Особовий рахунок"
         name: "Ім'я"
         surname: "Прізвище"
+        nickname: "Ім'я на форумі"
         password: "Пароль"
         password_confirmation: 'Підтвердження паролю'
         current_password: "Поточний пароль"

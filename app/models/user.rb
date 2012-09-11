@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :identifier, :name, :surname, :login, :role_id, :avatar, :avatar_cache, :remove_avatar, :street, :house, :flat
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :identifier, :name, :surname, :login, :role_id, :avatar, :avatar_cache, :remove_avatar, :street, :house, :flat, :nickname
   attr_accessor :login, :street, :house, :flat
 
   belongs_to :role
@@ -56,6 +56,10 @@ class User < ActiveRecord::Base
 
   def full_name
     "#{name} #{surname}"
+  end
+
+  def forum_name
+    nickname.present? ? nickname : full_name
   end
 
   def forum_blocked?
