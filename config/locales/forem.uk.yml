@@ -199,6 +199,7 @@ uk:
   by: 'від'
   started_by: "Автор"
   are_you_sure: Ви впевнені?
+  guest: "Гість"
 
   #from main_app
   forum:

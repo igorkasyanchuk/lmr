@@ -130,7 +130,7 @@ uk:
       greater_than: має бути більше ніж %{count}
       greater_than_or_equal_to: має бути більше ніж або дорівнювати %{count}
       inclusion: не включено до переліку
-      invalid: недійсний
+      invalid: невірний
       less_than: має бути менше ніж %{count}
       less_than_or_equal_to: має бути менше ніж або дорівнювати %{count}
       not_a_number: не число
@@ -274,6 +274,7 @@ uk:
         street: 'Вулиця'
         house: 'Дім'
         flat: 'Квартира'
+        confirmation_token: "Ключ уже підтверджений або"
   views:
     pagination:
       first: "&laquo; Перша"

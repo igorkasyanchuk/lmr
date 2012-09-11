@@ -3,7 +3,7 @@ div id="post_#{post_counter + 1}" class="post #{cycle('odd', 'even')}"
   .pointything
   .user
     .username
-      = link_to_if Forem.user_profile_links, post.user.try(:forum_name), [main_app, post.user]
+      = link_to_if Forem.user_profile_links, forum_name(post.user), [main_app, post.user]
     .userstatus
       = forum_status(post.user)
     .icon= forum_avatar(post.user)
@@ -23,7 +23,7 @@ div id="post_#{post_counter + 1}" class="post #{cycle('odd', 'even')}"
     - if post.reply_to
       blockquote
         .in_reply_to
-          = link_to "#{t("forem.post.in_reply_to")} #{post.reply_to.user.try(:forum_name)}:", "#post-#{post.reply_to.id}"
+          = link_to "#{t("forem.post.in_reply_to")} #{forum_name(post.reply_to.user)}:", "#post-#{post.reply_to.id}"
         .posttext= post.reply_to.text
         a href="#post-#{post.reply_to.id}"
           time.time-quote datetime="#{post.reply_to.created_at.to_s(:db)}"

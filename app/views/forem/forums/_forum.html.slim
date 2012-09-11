@@ -11,7 +11,7 @@
           |  
           = t('by')
           |  
-          = last_post.user.try(:forum_name)
+          = forum_name(last_post.user)
           |  
           = t('time_ago_in_words', :time => time_ago_in_words(last_post.created_at))
         - else
