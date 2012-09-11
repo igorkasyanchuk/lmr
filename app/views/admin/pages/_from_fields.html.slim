@@ -1,7 +1,4 @@
 = simple_form_for [:admin, resource], :html => {:class => 'form-horizontal'} do |f|
-
-  = f.error_notification
-  
   fieldset.span8
     = f.input :title, :label => 'Заголовок'
     - unless resource.permanent?

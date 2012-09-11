@@ -79,9 +79,10 @@ class User < ActiveRecord::Base
     def user_identification
       c = Consumer.find_by_code(self.identifier)
       unless c and c.flat.to_s == self.flat.to_s and c.house_id.to_i == self.house.to_i and c.house.street_id.to_i == self.street.to_i
-        errors[:base] << I18n.t('devise.views.validate_address')
+        errors.add :street_id, I18n.t('devise.views.validate_address')
       end
-
+      errors.add :street_id, I18n.t('devise.views.validate_address')
+      errors.add :house, I18n.t('devise.views.validate_address')
     end
 
 end

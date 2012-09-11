@@ -9,8 +9,9 @@
     = f.input :nickname, :autocomplete => :off, :hint => t('devise.views.nickname')
     = image_tag(@user.avatar.thumb.url, :class => 'controls') if @user.avatar?
     = f.input :avatar, :hint => '(можливі формати: "jpg", "jpeg", "png"; до 10MB)'
-    = f.label :remove_avatar, :id => "remove_avatar"
-    = f.check_box :remove_avatar, :class => 'controls'     
+    - if @user.avatar?
+      = f.label :remove_avatar, :id => "remove_avatar"
+      = f.check_box :remove_avatar, :class => 'controls'     
     .clear    
     = f.input :password, :autocomplete => :off
     = f.input :password_confirmation, :hint => t('devise.views.help_password'), :autocomplete => :off
