@@ -8,8 +8,6 @@
 
 .well Information about user  
 
-
-
 table.table.table-striped
   thead
     tr
@@ -18,7 +16,7 @@ table.table.table-striped
       th Борг
       th Нараховано
       th Корегування
-      th Пільги
+      th Пільги 
       th Субсидії
       th Оплачено
       th Сальдо
@@ -26,59 +24,85 @@ table.table.table-striped
     tr
       td -
       td Утримання буд. та прибирання територій
-      - 7.times do
+      td -
+      td = link_to '0.00', "#house_maintenance", :role =>"button", 'data-toggle' => "modal"
+      - 5.times do
         td 1
     tr
       td rowspan='5' Холодна вода  
       td Холодна вода
-      - 7.times do
+      td -
+      td = link_to '0.00', "#cold_water", :role =>"button", 'data-toggle' => "modal"
+      - 5.times do
         td 2
     tr
-      td Відведення холодної води
-      - 7.times do
+      td Відведення холодної води 
+      td -
+      td = link_to '0.00', "#cold_water_abduction", :role =>"button", 'data-toggle' => "modal"
+      - 5.times do
         td 3
     tr
       td Постачання холодної води
-      - 7.times do
+      td -
+      td = link_to '0.00', "#cold_water_supply", :role =>"button", 'data-toggle' => "modal"
+      - 5.times do
         td 4
     tr
       td Відведення підігрітої води
-      - 7.times do
+      td -
+      td = link_to '0.00', "#hot_water_abduction", :role =>"button", 'data-toggle' => "modal"
+      - 5.times do
         td 5
     tr
       td Постачання підігрітої води
-      - 7.times do
+      td -
+      td = link_to '0.00', "#hot_water_supply", :role =>"button", 'data-toggle' => "modal"
+      - 5.times do
         td 6       
     tr
       td -
       td Гаряча вода
-      - 7.times do
+      td -
+      td = link_to '0.00', "#hot_water", :role =>"button", 'data-toggle' => "modal"
+      - 5.times do
         td  -         
     tr
       td rowspan='4' Центарльне опалення
       td Центарльне опалення
-      - 7.times do
+      td -
+      td = link_to '0.00', "#central_heating", :role =>"button", 'data-toggle' => "modal"
+      - 5.times do
         td  7 
     tr  
-      td Абонплата абонента(ПІН)
-      - 7.times do
+      td Абонплата абонента(ПТН)
+      td -
+      td = link_to '0.00', "#subscriber_fee", :role =>"button", 'data-toggle' => "modal"
+      - 5.times do
         td  8
     tr  
       td Центральне опалення
-      - 7.times do
+      td -
+      td = link_to '0.00', "#central_heating", :role =>"button", 'data-toggle' => "modal"
+      - 5.times do
         td  9
     tr  
       td Опалення сходових кліток(ОСК)  
-      - 7.times do
+      td -
+      td = link_to '0.00', "#staircases_heating", :role =>"button", 'data-toggle' => "modal"
+      - 5.times do
         td  10 
     tr
       td -
-      td Електроенегрія
-      - 7.times do
+      td Електроенергія
+      td -
+      td = link_to '0.00', "#electricity", :role =>"button", 'data-toggle' => "modal"
+      - 5.times do
         td  -  
     tr    
       td -
       td Газ
+      td -
+      td = link_to '0.00', "#gas", :role =>"button", 'data-toggle' => "modal"
       - 7.times do
         td  - 
     tr
@@ -96,5 +120,19 @@ span = link_to 'Деталі субсидій', '#', :class => 'btn'
 span = link_to 'Деталі пільг', '#', :class => 'btn'
 hr
 span = link_to 'Назад', :back, :class => 'btn'
+
+#charge_modals
+  = render '/dashboard/reports/charge_modals/house_maintenance'
+  = render '/dashboard/reports/charge_modals/cold_water'
+  = render '/dashboard/reports/charge_modals/cold_water_abduction'
+  = render '/dashboard/reports/charge_modals/cold_water_supply'
+  = render '/dashboard/reports/charge_modals/hot_water_abduction'
+  = render '/dashboard/reports/charge_modals/hot_water_supply'
+  = render '/dashboard/reports/charge_modals/hot_water'
+  = render '/dashboard/reports/charge_modals/central_heating'
+  = render '/dashboard/reports/charge_modals/subscriber_fee'
+  = render '/dashboard/reports/charge_modals/staircases_heating'
+  = render '/dashboard/reports/charge_modals/electricity'
+  = render '/dashboard/reports/charge_modals/gas'
 
 
