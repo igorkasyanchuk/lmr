@@ -20,7 +20,7 @@ end
 Given /^I sign in as regular user$/ do
   steps %{
     When I visit login page
-    And I fill login with "regular_user"
+    And I fill login with "12345"
     And I fill password with "user_pass"
     And I click sign in
   }
@@ -36,4 +36,8 @@ end
 
 Given /^I fill password with "(\w+)"$/ do |password|
   fill_in 'Пароль', :with => password
+end
+
+Then /^I should see no access notification$/ do
+  page.should have_content('У вас недостатньо прав')
 end

@@ -2,11 +2,12 @@ FactoryGirl.define do
   factory :user do
     name 'User'
     surname 'Regular'
-    identifier 'regular_user'
+    identifier '12345'
     email 'test_user@example.com'
     password 'user_pass'
     password_confirmation 'user_pass'
     blocked false
+
     after :build do |user|
       user.class.skip_callback(:create, :after)
       user.confirm!
