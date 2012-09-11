@@ -35,13 +35,13 @@ module ApplicationHelper
 
   def description(t)
     content_for :description do
-      t + " | " + SITE_DESCRIPTION
+      t + ", " + SITE_DESCRIPTION
     end
   end  
 
   def keywords(t)
     content_for :keywords do
-      t + " | " + SITE_KEYWORDS
+      t + ", " + SITE_KEYWORDS
     end
   end     
 
@@ -141,6 +141,10 @@ module ApplicationHelper
     else
       t('guest')
     end
+  end
+
+  def easypay_path
+    "https://easypay.ua/utility/communal-lvov?Account=#{current_user.identifier}"
   end
 
 end
