@@ -97,13 +97,11 @@ module ApplicationHelper
     link_to (page.title.present? ? page.title : page.identifier), page_path(page.identifier)
   end
 
-  def forum_avatar user
-    if user
-      if user.avatar?
-        image_tag(user.avatar.thumb.url)
-      else
-        image_tag('forem/user_default.png')
-      end
+  def forum_avatar user    
+    if user && user.avatar?
+      image_tag(user.avatar.thumb.url)
+    else
+      image_tag('forem/user_default.png')
     end
   end
 
@@ -134,6 +132,14 @@ module ApplicationHelper
       else
         ""
       end
+    end
+  end
+
+  def forum_name user
+    if user
+      user.forum_name
+    else
+      t('guest')
     end
   end
 
