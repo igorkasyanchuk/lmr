@@ -1,10 +1,11 @@
 
-= form_for :user, :html => {:class => 'form-inline' } do |f|
-  = label_tag 'Рік'
-  = select_tag 'year', 'year'
-  = label_tag 'Місяць'  
-  = select_tag 'month', 'month'
-  = submit_tag "Перейти"
+= form_tag [:dashboard, :info], :class => 'form-inline', :method => :get, :id => 'select_date_form'  do |f|
+  fieldset
+    = label_tag 'date_year', 'Рік:', :class => 'someclass'
+    = select_year(Date.today, { :start_year => 2000, :end_year => 2012 }, { :class => 'input-small' })
+    = label_tag 'date_month', 'Місяць:' 
+    = select_month(Date.today, { :use_month_names => %w(Січень Лютий Березень Квітень Травень Червень Липень Серпень Вересень Жовтень Листопад Грудень)},  { :class => 'span2' } )
+    = submit_tag "Перейти"
 
 .well Information about user  
 
