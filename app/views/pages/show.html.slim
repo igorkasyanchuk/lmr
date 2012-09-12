@@ -4,7 +4,7 @@
 
 #page_container
   h1.left= @page.title 
-  - if signed_in? && current_user.admin? || current_user.content_manager?
+  - if user_signed_in? && (current_user.admin? || current_user.content_manager?)
     .right= link_to 'Редагувати', [:edit, :admin, @page], :class => 'btn btn-small'
   .clear
   hr
