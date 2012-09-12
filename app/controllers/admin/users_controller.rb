@@ -49,10 +49,10 @@ class Admin::UsersController < Admin::DashboardController
 
   def autocomplete
     if params[:house]
-      consumers = Consumer.where("house_id LIKE ? AND flat LIKE ?","%#{params[:house]}%", "%#{params[:term]}%").order("flat")
+      consumers = Consumer.where("house_id = ? AND flat LIKE ?","#{params[:house]}", "#{params[:term]}%").order("flat")
       render :json => consumers.map { |c| {:id => c.id, :label => "#{c.flat}"} }
     elsif params[:street]
-      houses = House.where("street_id LIKE ? AND number_code LIKE ?","%#{params[:street]}%", "%#{params[:term]}%").order("number_code")
+      houses = House.where("street_id = ? AND number_code LIKE ?","#{params[:street]}", "#{params[:term]}%").order("number_code")
       render :json => houses.map { |h| {:id => h.id, :label => "#{h.number_code}"} }
     else
       streets = Street.where("name LIKE ?", "#{params[:term]}%").order("name")
