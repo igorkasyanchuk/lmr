@@ -25,7 +25,7 @@ div id="post_#{post_counter + 1}" class="post #{cycle('odd', 'even')}"
         .in_reply_to
           = link_to "#{t("forem.post.in_reply_to")} #{forum_name(post.reply_to.user)}:", "?page=#{reply_post_page(@topic.posts.index(post.reply_to))}#post-#{post.reply_to.id}"
         .posttext= post.reply_to.text
-        a href="#post-#{post.reply_to.id}"
+        a href="?page=#{reply_post_page(@topic.posts.index(post.reply_to))}#post-#{post.reply_to.id}"
           time.time-quote datetime="#{post.reply_to.created_at.to_s(:db)}"
             = "#{time_ago_in_words(post.reply_to.created_at)} #{t("ago")}"
     = forem_format(post.text)
