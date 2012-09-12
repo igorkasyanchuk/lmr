@@ -1,3 +1,5 @@
+= title @topic.forum.title
+
 div id='topic' class="#{'un' unless @topic.locked?}locked"
   = render :partial => 'forem/topics/head', :locals => { :topic => @topic }
   menu

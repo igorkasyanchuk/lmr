@@ -1,3 +1,5 @@
+= title t("forem.post.new")
+
 = render :partial => 'forem/forums/head', :locals => { :forum => @topic.forum }
 h2= t("forem.post.edit")
 = simple_form_for [forem, @topic, @post], :html => {:class => 'edit_post form-horizontal'} do |f|
