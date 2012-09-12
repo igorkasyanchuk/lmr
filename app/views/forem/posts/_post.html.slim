@@ -8,22 +8,22 @@ div id="post_#{post_counter + 1}" class="post #{cycle('odd', 'even')}"
       = forum_status(post.user)
     .icon= forum_avatar(post.user)
   .contents
-    - if post.pending_review?
-      .moderation
-        = t(".pending_review")
-        - if forem_admin_or_moderator?(post.topic.forum)
-          - if local_assigns[:mass_moderation]
-            = render "forem/posts/moderation_tools", :post => post
-          - else
-            = form_tag forem.forum_moderate_posts_path(post.topic.forum), :method => :put do
-              = render "forem/posts/moderation_tools", :post => post
+    / - if post.pending_review?
+    /   .moderation
+    /     = t(".pending_review")
+    /     - if forem_admin_or_moderator?(post.topic.forum)
+    /       - if local_assigns[:mass_moderation]
+    /         = render "forem/posts/moderation_tools", :post => post
+    /       - else
+    /         = form_tag forem.forum_moderate_posts_path(post.topic.forum), :method => :put do
+    /           = render "forem/posts/moderation_tools", :post => post
     a href="#post-#{post.id}"
       time.time-post datetime="#{post.created_at.to_s(:db)}"
         = "#{time_ago_in_words(post.created_at)} #{t("ago")}"
     - if post.reply_to
       blockquote
         .in_reply_to
-          = link_to "#{t("forem.post.in_reply_to")} #{forum_name(post.reply_to.user)}:", "#post-#{post.reply_to.id}"
+          = link_to "#{t("forem.post.in_reply_to")} #{forum_name(post.reply_to.user)}:", "?page=#{reply_post_page(@topic.posts.index(post.reply_to))}#post-#{post.reply_to.id}"
         .posttext= post.reply_to.text
         a href="#post-#{post.reply_to.id}"
           time.time-quote datetime="#{post.reply_to.created_at.to_s(:db)}"
