@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require "admin/admin"
+ *= require "dashboard/dashboard"
  *= require "news/news"
  *= require "contacts/contacts"
  *= require "pages/pages"

@@ -1,4 +1,4 @@
-class UserInfo
+class ConsumerInfo
 
   attr_reader :consumer_code, :street_code, :house_code, :house_number, :flat_number, :flat_letter
   
@@ -12,7 +12,7 @@ class UserInfo
   end
 
   def self.load id
-    new ReportLoader.load_user_info(id)
+    new ReportLoader.load_consumer_info(id)
   end
 
 end
