@@ -9,10 +9,10 @@ RAW_USER_INFO = {
   'flatLetter' => 'a',
 }
 
-describe UserInfo do
+describe ConsumerInfo do
   
   before :each do
-    @user_info = UserInfo.new RAW_USER_INFO
+    @user_info = ConsumerInfo.new RAW_USER_INFO
   end
   
   {
@@ -30,10 +30,10 @@ describe UserInfo do
 
   it 'loads raw user info from rest service' do
     new_user_info = mock :user_info
-    UserInfo.should_receive(:new).with(:raw_user_info).and_return(new_user_info)
-    ReportLoader.should_receive(:load_user_info).with(:some_id).and_return(:raw_user_info)
+    ConsumerInfo.should_receive(:new).with(:raw_user_info).and_return(new_user_info)
+    ReportLoader.should_receive(:load_consumer_info).with(:some_id).and_return(:raw_user_info)
 
 
-    UserInfo.load(:some_id).should eq(new_user_info)
+    ConsumerInfo.load(:some_id).should eq(new_user_info)
   end
 end
