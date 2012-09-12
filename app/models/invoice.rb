@@ -3,7 +3,7 @@ class Invoice
   attr_reader :consumer_info, :total, :main_services
 
   Total = Struct.new :borg, :invoice, :correction, :pilga, :subsidy, :pay, :saldo
-  Service = Struct.new :name, :borg, :invoice, :correction, :pilga, :subsidy, :pay, :saldo, :subservices
+  Service = Struct.new :name, :borg, :invoice, :correction, :pilga, :subsidy, :pay, :saldo, :sub_services
 
   def initialize params
     @consumer_info = ConsumerInfo.new params['consumer']
@@ -23,8 +23,11 @@ class Invoice
     end
   end
 
-  def populate_sub_services raw
-    raw.map do |ss| 
+  def populate_sub_services *raw
+  
+    puts raw.inspect
+    
+    raw.flatten.map do |ss| 
       Service.new ss['name'], ss['borg'], ss['invoice'], ss['correction'], ss['pilga'], ss['subsidy'], ss['pay'], ss['saldo']
     end
   end
