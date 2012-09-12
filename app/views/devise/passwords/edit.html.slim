@@ -1,12 +1,15 @@
-h2 Change your password
-= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
-  = devise_error_messages!
+h2 Зміна паролю
+hr
+= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, :class => 'form-horizontal' }) do |f|
+  = f.error_notification
   = f.hidden_field :reset_password_token
-  div
-    = f.label :password, "New password"
-    = f.password_field :password
-  div
-    = f.label :password_confirmation, "Confirm new password"
-    = f.password_field :password_confirmation
-  = f.submit "Change my password", :class => 'btn btn-primary'
+
+  = f.input :password, :label => "Новий пароль"
+  = f.input :password_confirmation, :label => "Повторіть пароль"
+
+  .form-actions
+    = link_to "Відміна", :back, :class => "btn"
+    |  
+    = f.submit "Змінити пароль", :class => 'btn btn-primary form-btn'
+
 = render :partial => "devise/shared/links"
