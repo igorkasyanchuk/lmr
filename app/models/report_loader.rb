@@ -18,8 +18,9 @@ class ReportLoader
     resp = get('https://10.5.1.37:8443/mistocashrest/lmrrestservice', :query => {:action => action, :identifier => id})
   end
 
-  def self.load_invoice id = '4110000106052'
-    get('https://dl.dropbox.com/u/3541456/invoice.xml')['invoice']
+  def self.load_invoice id = '4110000106052', period
+    #get('https://dl.dropbox.com/u/3541456/invoice.xml')['invoice']
+    get('https://dl.dropbox.com/u/3541456/invoice_finaly.xml')['invoice']
   end
 
 end

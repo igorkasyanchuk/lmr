@@ -92,13 +92,13 @@ describe Invoice do
     invoice.main_services.should include(:service)
   end
 
-  describe "#populate_main_services" do
+  describe "#populate_services" do
     before :each do
-      @main_services = @invoice.populate_main_services RAW_INVOICE_INFO['mainService']
+      @services = @invoice.populate_services RAW_INVOICE_INFO['mainService']
     end
     %w{name borg invoice correction pilga subsidy pay saldo}.each do |attribute_name|
       it "stores #attribute_name" do
-        @main_services.first.send(attribute_name).should eq(RAW_INVOICE_INFO['mainService'][0][attribute_name])
+        @services.first.send(attribute_name).should eq(RAW_INVOICE_INFO['mainService'][0][attribute_name])
       end
     end
   end

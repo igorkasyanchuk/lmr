@@ -1,25 +1,38 @@
 class Invoice
 
-  attr_reader :consumer_info, :total, :main_services
+  attr_reader :consumer_info, :total, :services, :raw_period_start, :raw_period_end
 
   Total = Struct.new :borg, :invoice, :correction, :pilga, :subsidy, :pay, :saldo
-  Service = Struct.new :name, :borg, :invoice, :correction, :pilga, :subsidy, :pay, :saldo, :sub_services
+  Service = Struct.new :name, :borg, :invoice, :correction, :pilga, :subsidy, :pay, :saldo, :service_code, :sub_services
 
   def initialize params
     @consumer_info = ConsumerInfo.new params['consumer']
     raw_total = params['total']
     @total = Total.new raw_total['borg'], raw_total['invoice'], raw_total['correction'], raw_total['pilga'], raw_total['subsidy'], raw_total['pay'], raw_total['saldo']
-    @main_services = populate_main_services params['mainService']
+    @services = populate_services params['services']
+    @raw_period_start = params['dateBeginPeriod']
+    @raw_period_end = params['dateEndPeriod']
 
   end
 
-  def self.load id
-    new ReportLoader.load_invoice(id)
+  def self.load id, period
+    new ReportLoader.load_invoice(id, period)
   end
 
-  def populate_main_services raw
+  def populate_services raw
     raw.map do |ms|
-      Service.new ms['name'], ms['borg'], ms['invoice'], ms['correction'], ms['pilga'], ms['subsidy'], ms['pay'], ms['saldo'], populate_sub_services(ms['subService'])
+      Service.new(
+        ms['name'],
+        ms['borg'],
+        ms['invoice'],
+        ms['correction'],
+        ms['pilga'],
+        ms['subsidy'],
+        ms['pay'],
+        ms['saldo'],
+        ms['serviceCode'],
+        populate_sub_services(ms['subService'])
+      )
     end
   end
 
@@ -28,7 +41,17 @@ class Invoice
     puts raw.inspect
     
     raw.flatten.map do |ss| 
-      Service.new ss['name'], ss['borg'], ss['invoice'], ss['correction'], ss['pilga'], ss['subsidy'], ss['pay'], ss['saldo']
+      Service.new(
+        ss['name'],
+        ss['borg'],
+        ss['invoice'],
+        ss['correction'],
+        ss['pilga'],
+        ss['subsidy'],
+        ss['pay'],
+        ss['saldo'],
+        ss['serviceCode']
+      )
     end
   end
 
