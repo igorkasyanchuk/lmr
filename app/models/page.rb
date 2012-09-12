@@ -17,7 +17,7 @@ class Page < ActiveRecord::Base
   #end
 
   def downcase_identifier
-    self.identifier.downcase! if self.identifier.present?
+    self.identifier = self.identifier.downcase.gsub(/[^0-9a-z]/i, '') if self.identifier.present?
   end
 
   def self.[] identifier
