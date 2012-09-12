@@ -9,11 +9,12 @@ hr
   fieldset
     = f.input :identifier
 
-    .control-group
-      = f.label :street, :class => 'control-label'
+    .control-group class="#{f.object.errors[:street_id].any? ? 'required error' : ''}"
+      = f.label :street, :class => "control-label #{f.object.errors[:street_id].any? ? 'required' : ''}"
       .controls
         = text_field_tag :street, nil, :disabled => true
         = f.hidden_field :street
+        span.help-inline= f.object.errors[:street_id].first.try(:mb_chars).try :downcase
     .control-group
       = f.label :house, :class => 'control-label'
       .controls
