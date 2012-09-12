@@ -1,15 +1,22 @@
+= title t('devise.views.enter')
+
 h2= t('devise.views.enter')
-= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-  div
-    = f.label :login, t('devise.views.login')
-    = f.text_field :login
-  div
-    = f.label :password, t('devise.views.password')
-    = f.password_field :password
+hr
+= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-horizontal'}) do |f|
+  = f.error_notification
+
+  = f.input :login, :label => t('devise.views.login')
+  = f.input :password, :label =>  t('devise.views.password')
   - if devise_mapping.rememberable?
     div
-      = f.check_box :remember_me, :style => "margin-top: 0px;"
+      = f.check_box :remember_me, :style => "margin-left: 15px;"
       = f.label t('devise.views.remember_me'), :style => "display: inline; padding-left: 5px; vertical-align: middle;"
-  br
-  = f.submit t('devise.views.sign_in'), :class => 'btn btn-primary btn-large'
+      
+  .form-actions
+    = link_to "Відміна", :back, :class => "btn"
+    |  
+    = f.submit t('devise.views.sign_in'), :class=>"btn btn-primary form-btn"
+
+
+
 = render :partial => "devise/shared/links"
