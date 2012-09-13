@@ -27,7 +27,7 @@ When /^I go to users management page$/ do
   visit '/admin/users'
 end
 
-When /^I go to static page parts$/ do
+When /^I go to static page parts management page$/ do
   visit '/admin/page_parts'
 end
 
