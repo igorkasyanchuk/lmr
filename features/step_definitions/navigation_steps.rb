@@ -10,6 +10,11 @@ When /^I go to forum admin section$/ do
   visit '/community/admin'
 end
 
+When /^I go to news section$/ do
+  visit '/news'
+end
+
+
 When /^I go to personal page$/ do
   visit '/dashboard'
 end

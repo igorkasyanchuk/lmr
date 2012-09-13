@@ -30,11 +30,10 @@ When /^I fill in post author with "(.*?)"$/ do |author|
 end
 
 When /^I submit post page form$/ do
-  click_button 'Зберегти новину' 
+  click_button 'Зберегти новину'
 end
 
 Then /^I should see "(.*?)" in a list$/ do |title|
-  page.should have_content("Адміністрування новин") 
   page.should have_content(title) 
 end
 

@@ -21,7 +21,6 @@ Feature: manage news
     Then I go to news management page
     And I should see "New Post" in a list 
 
-
   Scenario: edit post
     Given I sign in as moderator
       Then I go to news management page
@@ -40,3 +39,15 @@ Feature: manage news
     Then I go to news management page
     When I delete post "New Post"
     Then I should not see "New Post" in posts list
+
+   Scenario: publish post
+    Given I sign in as moderator
+    Then I go to news section
+    Then I should not see "New Post" in posts list
+    Then I go to news management page
+    Then I go to "New Post" post edit form  
+    And I check post published checkbox
+    And I submit post page form
+    Then I go to news section
+    And I should see "New Post" in a list 
+
