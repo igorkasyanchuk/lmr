@@ -10,6 +10,11 @@ When /^I go to forum admin section$/ do
   visit '/community/admin'
 end
 
+When /^I go to news section$/ do
+  visit '/news'
+end
+
+
 When /^I go to personal page$/ do
   visit '/dashboard'
 end
@@ -40,5 +45,9 @@ end
 
 Given /^I visit new page form$/ do
   visit '/admin/pages/new'
+end
+
+Given /^I visit new post form$/ do
+  visit '/admin/posts/new'
 end
 

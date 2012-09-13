@@ -147,4 +147,8 @@ module ApplicationHelper
     "https://easypay.ua/utility/communal-lvov?Account=#{current_user.identifier}"
   end
 
+  def reply_post_page position
+    (position / Forem.per_page).to_i + 1
+  end
+
 end
