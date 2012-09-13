@@ -10,117 +10,61 @@ hr
 = form_tag [:dashboard, :info], :class => 'form-inline', :method => :get, :id => 'select_date_form'  do |f|
   fieldset
     = label_tag 'date_year', 'Рік:', :class => 'someclass'
-    = select_year(Date.today, { :start_year => 2000, :end_year => 2012 }, { :class => 'input-small' })
+    = select_year(@date, { :start_year => 2000, :end_year => 2012 }, { :class => 'input-small' })
     = label_tag 'date_month', 'Місяць:' 
-    = select_month(Date.today, { :use_month_names => %w(Січень Лютий Березень Квітень Травень Червень Липень Серпень Вересень Жовтень Листопад Грудень)},  { :class => 'span2' } )
+    = select_month(@date, { :use_month_names => %w(Січень Лютий Березень Квітень Травень Червень Липень Серпень Вересень Жовтень Листопад Грудень)},  { :class => 'span2' } )
     = submit_tag "Перейти"
 
 .well Information about user
 
-#reports_table
-  table.table.table-striped.table-bordered
-    thead
+table.table.table-striped
+  thead
+    tr
+      th -
+      th Послуга  
+      th Борг
+      th Нараховано
+      th Корегування
+      th Пільги 
+      th Субсидії
+      th Оплачено
+      th Сальдо
+  tbody
+    - @invoice.services.each do |s|
       tr
-        th -
-        th Послуга  
-        th Борг
-        th Нараховано
-        th Корегування
-        th Пільги 
-        th Субсидії
-        th Оплачено
-        th Сальдо
-    tbody
-      tr
-        td -
-        td Утримання буд. та прибирання територій
-        td -
-        td = link_to '0.00', "#house_maintenance", :role =>"button", 'data-toggle' => "modal"
-        - 5.times do
-          td 1
-      tr
-        td rowspan='5' Холодна вода  
-        td Холодна вода
-        td -
-        td = link_to '0.00', "#cold_water", :role =>"button", 'data-toggle' => "modal"
-        - 5.times do
-          td 2
-      tr
-        td Відведення холодної води 
-        td -
-        td = link_to '0.00', "#cold_water_abduction", :role =>"button", 'data-toggle' => "modal"
-        - 5.times do
-          td 3
-      tr
-        td Постачання холодної води
-        td -
-        td = link_to '0.00', "#cold_water_supply", :role =>"button", 'data-toggle' => "modal"
-        - 5.times do
-          td 4
-      tr
-        td Відведення підігрітої води
-        td -
-        td = link_to '0.00', "#hot_water_abduction", :role =>"button", 'data-toggle' => "modal"
-        - 5.times do
-          td 5
-      tr
-        td Постачання підігрітої води
-        td -
-        td = link_to '0.00', "#hot_water_supply", :role =>"button", 'data-toggle' => "modal"
-        - 5.times do
-          td 6       
-      tr
-        td -
-        td Гаряча вода
-        td -
-        td = link_to '0.00', "#hot_water", :role =>"button", 'data-toggle' => "modal"
-        - 5.times do
-          td  -         
-      tr
-        td rowspan='4' Центарльне опалення
-        td Центарльне опалення
-        td -
-        td = link_to '0.00', "#central_heating", :role =>"button", 'data-toggle' => "modal"
-        - 5.times do
-          td  7 
-      tr  
-        td Абонплата абонента(ПТН)
-        td -
-        td = link_to '0.00', "#subscriber_fee", :role =>"button", 'data-toggle' => "modal"
-        - 5.times do
-          td  8
-      tr  
-        td Центральне опалення
-        td -
-        td = link_to '0.00', "#central_heating", :role =>"button", 'data-toggle' => "modal"
-        - 5.times do
-          td  9
-      tr  
-        td Опалення сходових кліток(ОСК)  
-        td -
-        td = link_to '0.00', "#staircases_heating", :role =>"button", 'data-toggle' => "modal"
-        - 5.times do
-          td  10 
-      tr
-        td -
-        td Електроенергія
-        td -
-        td = link_to '0.00', "#electricity", :role =>"button", 'data-toggle' => "modal"
-        - 5.times do
-          td  -  
-      tr    
-        td -
-        td Газ
-        td -
-        td = link_to '0.00', "#gas", :role =>"button", 'data-toggle' => "modal"
-        - 5.times do
-          td  - 
-    tfoot      
-      tr
-        td -
-        td total
-        - 7.times do
-          td  sum  
+        - if s.sub_services.size > 1
+          td rowspan=(s.sub_services.size + 1) = s.name
+        - else
+          td -
+        td= s.name
+        td= s.borg
+        td= link_to s.invoice, "#house_maintenance", :role =>"button", 'data-toggle' => "modal" 
+        td= s.correction
+        td= s.pilga
+        td= s.subsidy
+        td= s.pay
+        td= s.saldo
+      - s.sub_services.each do |ss|
+        tr
+          td= ss.name
+          td= ss.borg
+          td= link_to ss.invoice, "#house_maintenance", :role =>"button", 'data-toggle' => "modal" 
+          td= ss.correction
+          td= ss.pilga
+          td= ss.subsidy
+          td= ss.pay
+          td= ss.saldo
+
+    tr
+      td -
+      td total
+      td= @invoice.total.borg
+      td= @invoice.total.invoice 
+      td= @invoice.total.correction
+      td= @invoice.total.pilga
+      td= @invoice.total.subsidy
+      td= @invoice.total.pay
+      td= @invoice.total.saldo
 
 #short_info.well
   ul
@@ -153,8 +97,6 @@ hr
       .sum 0.00
       .clear
     li  
-
-  
       
 = link_to 'Друк квитанції', '#', :class => 'btn'
 hr
