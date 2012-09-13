@@ -54,7 +54,7 @@ Feature: Administartion
   @page_parts
   Scenario: Admin can manage page parts
     Given I sign in as admin
-    When I go to static page parts
+    When I go to static page parts management page
     Then I should see list of page parts
 
   @feedbacks

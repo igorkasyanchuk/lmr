@@ -46,7 +46,7 @@ Feature: Sign in
   @page_parts
   Scenario: Regular user can manage page parts
     Given I sign in as regular user
-    When I go to static page parts
+    When I go to static page parts management page
     #Then I should see list of page parts
     Then I should see no access notification
 

@@ -53,7 +53,7 @@ Feature: Moderator Access
   @page_parts
   Scenario: Content manager can manage page parts
     Given I sign in as moderator
-    When I go to static page parts
+    When I go to static page parts management page
     Then I should see list of page parts
     #Then I should see only admin notification
 
