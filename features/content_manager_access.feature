@@ -68,7 +68,7 @@ Feature: Moderator Access
   Scenario: Admin track user activities
     Given I sign in as moderator
     When I go to activities list
-    Then I should see list of activities
-    #Then I should see only admin notification
+    #Then I should see list of activities
+    Then I should see only admin notification
 
 
