@@ -14,6 +14,10 @@ Given /^static page "(.*?)"$/ do |identifier|
   FactoryGirl.create :page, :identifier => identifier, :title => identifier
 end
 
+Given /^post "(.*?)"$/ do |post|
+  FactoryGirl.create :post, :title => post
+end
+
 Given /^news entry "(.*?)"$/ do |title|
   FactoryGirl.create :post,  :title => title
 end
