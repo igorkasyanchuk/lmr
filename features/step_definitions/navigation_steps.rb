@@ -38,10 +38,6 @@ When /^I go to news management page$/ do
   visit '/admin/posts'
 end
 
-Then /^I open edit "(.*?)" form$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
 Given /^I visit new page form$/ do
   visit '/admin/pages/new'
 end
