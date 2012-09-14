@@ -17,6 +17,7 @@ FactoryGirl.define do
     factory :admin_user do
       surname 'Admin'
       identifier 'administrator'
+      email 'admin_user@example.com'
 
       after :build do |user|
         user.class.skip_callback(:create, :after)

@@ -51,3 +51,7 @@ Given /^I visit new post form$/ do
   visit '/admin/posts/new'
 end
 
+Given /^I visit new user form$/ do
+  visit '/admin/users/new'
+end
+
