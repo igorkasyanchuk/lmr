@@ -2,7 +2,11 @@
   = user_error_messages!(@user)
 
   fieldset
-    = f.input :identifier, :disabled => true
+    - if !@user.new_record? && @user.is_user?
+      .control-group
+        = f.label :identifier
+        .controls.identifier
+          = @user.identifier
     = f.input :email, :label => 'Електронна адреса',:autocomplete => :off
     = f.input :name, :autocomplete => :off
     = f.input :surname, :autocomplete => :off
