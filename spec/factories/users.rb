@@ -17,6 +17,7 @@ FactoryGirl.define do
     factory :admin_user do
       surname 'Admin'
       identifier 'administrator'
+      email 'test_admin@example.com'
 
       after :build do |user|
         user.class.skip_callback(:create, :after)
@@ -28,10 +29,21 @@ FactoryGirl.define do
     factory :moderator_user do
       surname 'Moderator'
       identifier 'moderator'
+      email 'test_moderator@example.com'
       after :build do |user|
         user.class.skip_callback(:create, :after)
         user.confirm!
         user.role = FactoryGirl.create :moderator_role
+      end
+    end
+
+    factory :spam_user do
+      identifier '111111'
+      email 'spam_user@example.com'
+      forem_state 'spam'
+      after :build do |user|
+        user.class.skip_callback(:create, :after)
+        user.confirm!
       end
     end
 
