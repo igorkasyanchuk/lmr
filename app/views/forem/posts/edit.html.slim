@@ -5,6 +5,6 @@ h2= t("forem.post.edit")
 = simple_form_for [forem, @topic, @post], :html => {:class => 'edit_post form-horizontal'} do |f|
   = render :partial => "form", :locals => { :f => f }
   .form-actions  
-    = link_to "Відміна", :back, :class => "btn"
-    |  
     = f.submit t("forem.post.buttons.edit"), :class => 'btn btn-primary'
+    |  
+    = link_to "Відміна", :back, :class => "btn"

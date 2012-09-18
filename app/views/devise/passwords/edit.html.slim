@@ -8,8 +8,8 @@ hr
   = f.input :password_confirmation, :label => "Повторіть пароль"
 
   .form-actions
-    = link_to "Відміна", :back, :class => "btn"
-    |  
     = f.submit "Змінити пароль", :class => 'btn btn-primary form-btn'
+    |  
+    = link_to "Відміна", :back, :class => "btn"
 
 = render :partial => "devise/shared/links"

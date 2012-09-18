@@ -12,6 +12,6 @@ h2= t("forem.post.new")
   = render :partial => "form", :locals => { :f => f }
   
   .form-actions  
-    = link_to "Відміна", :back, :class => "btn"
-    |  
     = f.submit t("forem.post.buttons.reply"), :class => 'btn btn-primary reply'
+    |  
+    = link_to "Відміна", :back, :class => "btn"
