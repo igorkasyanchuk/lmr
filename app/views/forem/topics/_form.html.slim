@@ -4,6 +4,6 @@
     = f.simple_fields_for :posts do |post|
       = render :partial => "forem/posts/form", :locals => { :f => post }
   .form-actions  
-    = link_to "Відміна", :back, :class => "btn"
-    |  
     = f.button :submit, :class => 'btn btn-primary'
+    |  
+    = link_to "Відміна", :back, :class => "btn"

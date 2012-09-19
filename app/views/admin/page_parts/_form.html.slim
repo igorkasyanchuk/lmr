@@ -14,6 +14,6 @@
     .text.part= f.input :plain_text, :as => :text, :input_html => {:class => 'span8', :rows => '4', :cols => '80', :value => f.object.content}, :label => 'Зміст'
 
   .form-actions
-    = link_to "Відміна", :back, :class => "btn"
-    |  
     = f.submit "Зберегти блок", :class=>"btn btn-primary form-btn"
+    |  
+    = link_to "Відміна", :back, :class => "btn"

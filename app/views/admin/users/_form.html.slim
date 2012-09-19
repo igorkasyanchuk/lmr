@@ -24,6 +24,6 @@
     = f.association :role, :collection => @user.new_record? ? Role.all.reject {|u| u.name == 'user'} : Role.all, :prompt => "Виберіть роль"
 
   .form-actions
-    = link_to 'Відміна', [:admin, :users], :class => 'btn'
+    = f.submit (@user.new_record? ? 'Додати користувача' : 'Змінити'), :class => 'btn btn-primary form-btn'
     |  
-    = f.submit (@user.new_record? ? 'Додати користувача' : 'Змінити'), :class => 'btn btn-primary form-btn'  
+    = link_to 'Відміна', [:admin, :users], :class => 'btn'
