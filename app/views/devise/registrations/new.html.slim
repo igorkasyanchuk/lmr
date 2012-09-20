@@ -12,19 +12,21 @@ hr
     .control-group class="#{f.object.errors[:street_id].any? ? 'required error' : ''}"
       = f.label :street, :class => "control-label #{f.object.errors[:street_id].any? ? 'required' : ''}"
       .controls
-        = text_field_tag :street, nil, :disabled => true
+        = text_field_tag :street, params[:street], :disabled => true
         = f.hidden_field :street
-        span.help-inline= f.object.errors[:street_id].first.try(:mb_chars).try :downcase
-    .control-group
-      = f.label :house, :class => 'control-label'
+        span.help-inline.street_info.address_error= f.object.errors[:street_id].first.try(:mb_chars).try :downcase
+    .control-group class="#{f.object.errors[:street_id].any? ? 'required error' : ''}"
+      = f.label :house, :class => "control-label #{f.object.errors[:street_id].any? ? 'required' : ''}"
       .controls
-        = text_field_tag :house, nil, :disabled => true
+        = text_field_tag :house, params[:house], :disabled => true
         = f.hidden_field :house
-    .control-group
-      = f.label :flat, :class => 'control-label'
+        span.help-inline.house_info.address_error
+    .control-group class="#{f.object.errors[:street_id].any? ? 'required error' : ''}"
+      = f.label :flat, :class => "control-label #{f.object.errors[:street_id].any? ? 'required' : ''}"
       .controls
-        = text_field_tag :flat, nil, :disabled => true
+        = text_field_tag :flat, params[:flat], :disabled => true
         = f.hidden_field :flat
+        span.help-inline.flat_info.address_error
 
     = f.input :email
     = f.input :name
