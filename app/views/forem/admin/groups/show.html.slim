@@ -4,5 +4,5 @@ h2= t('forem.admin.group.members', :group => @group.name)
 ul#members
   - @group.members.each do |member|
     li= forum_name(member)
-= javascript_include_tag "jquery-ui-autocomplete.min.js"
+= javascript_include_tag "jquery-ui-autocomplete-min.js"
 = javascript_include_tag "forem/admin/members"
