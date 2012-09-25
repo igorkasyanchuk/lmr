@@ -1,61 +1,6 @@
 (($) ->
   $(document).ready ->
 
-    if $("#user_identifier").val() != ''
-      $("#street").attr "disabled", false
-    
-    if $('input[type=hidden]#user_street').val() != ''
-      $("#street").attr "disabled", false
-
-    if $('input[type=hidden]#user_house').val() !=''
-      $("#house").attr "disabled", false
-
-    if $('input[type=hidden]#user_flat').val() !=''
-      $("#flat").attr "disabled", false
-
-    $("#street").focusin(->
-      $('span.address_error').html ''
-      $('span.street_info').html 'Виберіть вулицю зі списку'
-    ).focusout ->
-      if $('input[type=hidden]#user_street').val() == ''
-        $('span.street_info').html 'Виберіть вулицю зі списку'
-
-    $("#house").focusin(->
-      $('span.address_error').html ''
-      $('span.house_info').html 'Виберіть дім зі списку'
-    ).focusout ->
-      if $('input[type=hidden]#user_house').val() == ''
-        $('span.house_info').html 'Виберіть дім зі списку'
-
-    $("#flat").focusin(->
-      $('span.address_error').html ''
-      $('span.flat_info').html 'Виберіть квартиру зі списку'
-    ).focusout ->
-      if $('input[type=hidden]#user_flat').val() == ''
-        $('span.flat_info').html 'Виберіть квартиру зі списку'
-
-
-    $("#user_identifier").bind "input", ->
-      if $(this).val() != ''
-        $("#street").attr "disabled", false
-
-    $("#street").bind "input", ->
-      if $(this).val() == ''
-        $('input[type=hidden]#user_flat, input[type=hidden]#user_house, input[type=hidden]#user_street').val ''
-        $("#house, #flat").val ''
-        $("#house, #flat").attr "disabled", true
-      init_street_autocomplete()
-
-    $("#house").bind "input", ->
-      if $(this).val() == ''
-        $('#flat, input[type=hidden]#user_flat, input[type=hidden]#user_house').val ''        
-        $("#flat").attr "disabled", true
-      init_house_autocomplete($('input[type=hidden]#user_street').val())
-
-    $("#flat").bind "input", ->
-      init_flat_autocomplete($('input[type=hidden]#user_house').val())
-
-
     init_street_autocomplete = ->
       $("#street").autocomplete source: (request, response) ->
         $.ajax
@@ -85,7 +30,7 @@
           url: "/users/autocomplete?street="+street
           data: request
           success: (data) ->
-            response data
+            response data            
             response [{ value: 0, label: "Нічого не знайдено!"}] if data.length is 0
           error: ->
             response []
@@ -115,6 +60,73 @@
           return false
         $('input[type=hidden]#user_flat').val ui.item.label
         $('span.flat_info').html ''
+
+    # bind input of fields street house flat
+
+    $("#user_identifier").bind "input", ->
+      if $(this).val() != ''
+        $("#street").attr "disabled", false
+
+    $("#street").bind "input", ->
+      if $(this).val() == ''
+        $('input[type=hidden]#user_flat, input[type=hidden]#user_house, input[type=hidden]#user_street').val ''
+        $("#house, #flat").val ''
+        $("#house, #flat").attr "disabled", true
+      init_street_autocomplete()
+
+    $("#house").bind "input", ->
+      if $(this).val() == ''
+        $('#flat, input[type=hidden]#user_flat, input[type=hidden]#user_house').val ''        
+        $("#flat").attr "disabled", true
+      init_house_autocomplete($('input[type=hidden]#user_street').val())
+
+    $("#flat").bind "input", ->
+      init_flat_autocomplete($('input[type=hidden]#user_house').val())
+
+    # end of binding
+
+    # disable fields when no in input
+    init_street_autocomplete() #enable street autocomplete when no identifier
+
+    if $("#user_identifier").val() != ''
+      $("#street").attr "disabled", false
+    
+    if $('input[type=hidden]#user_street').val() != ''
+      $("#street, #house").attr "disabled", false
+      init_house_autocomplete($('input[type=hidden]#user_street').val())
+
+    if $('input[type=hidden]#user_house').val() != ''
+      $("#house, #flat").attr "disabled", false
+      init_flat_autocomplete($('input[type=hidden]#user_house').val())
+
+    if $('input[type=hidden]#user_flat').val() != ''
+      $("#flat").attr "disabled", false
+    # end disable fields when no in input
+
+    
+    #  actions when focusin focusout
+    $("#street").focusin(->
+      $('span.address_error').html ''
+      $('span.street_info').html 'Виберіть вулицю зі списку'
+    ).focusout ->
+      if $('input[type=hidden]#user_street').val() == ''
+        $('span.street_info').html 'Виберіть вулицю зі списку'
+
+    $("#house").focusin(->
+      $('span.address_error').html ''
+      $('span.house_info').html 'Виберіть дім зі списку'
+    ).focusout ->
+      if $('input[type=hidden]#user_house').val() == ''
+        $('span.house_info').html 'Виберіть дім зі списку'
+
+    $("#flat").focusin(->
+      $('span.address_error').html ''
+      $('span.flat_info').html 'Виберіть квартиру зі списку'
+    ).focusout ->
+      if $('input[type=hidden]#user_flat').val() == ''
+        $('span.flat_info').html 'Виберіть квартиру зі списку'
+
+    #  end of actions when focusin focusout
 
 
 ) jQuery
