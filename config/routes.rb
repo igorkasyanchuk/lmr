@@ -44,6 +44,7 @@ Lmr::Application.routes.draw do
   namespace :dashboard do
     match '/', :to => 'dashboard#welcome'
     match '/info', :to => 'reports#info'
+    match '/payments', :to => 'reports#payments'
     resource :profile, :only => [:edit, :update]
   end
 

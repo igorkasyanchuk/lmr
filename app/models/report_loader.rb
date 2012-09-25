@@ -20,7 +20,7 @@ class ReportLoader
 
   def self.load_invoice id = '4110000106052', period
     #get('https://dl.dropbox.com/u/3541456/invoice.xml')['invoice']
-    get('https://dl.dropbox.com/u/3541456/invoice_finaly.xml')['invoice']
+    get('https://dl.dropbox.com/s/ojle52xxjxma0mk/invoice_finaly.xml?dl=1')['invoice']
   end
 
 end
