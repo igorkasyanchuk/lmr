@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :surname
 
   with_options :if => :is_user? do |user|
-    user.validates_presence_of :identifier
+    user.validates_presence_of :identifier, :street, :house, :flat
     user.validates_uniqueness_of :identifier
     user.validates :identifier, :length => { :maximum => 13 }
     user.validates_format_of :identifier, :with => /^\d+$/, :message => :validate_number

@@ -151,4 +151,13 @@ module ApplicationHelper
     (position / Forem.per_page).to_i + 1
   end
 
+  def address_error errors, field, message=false
+    if message
+      m = errors[field].any? ? errors[field] : errors[:street_id]      
+      m.first.try(:mb_chars).try(:downcase)
+    elsif errors[field].any? || errors[:street_id].any?
+      'required error'
+    end
+  end
+
 end
