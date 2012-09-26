@@ -29,11 +29,15 @@ class User < ActiveRecord::Base
     user.validates_uniqueness_of :identifier
     user.validates :identifier, :length => { :maximum => 13 }
     user.validates_format_of :identifier, :with => /^\d+$/, :message => :validate_number
-    user.validate :user_identification, :on => :create
+    user.validate :user_identification, :on => :create, :if => :ready_to_identify?
   end
 
   def is_user?
     role.name == 'user'
+  end
+
+  def ready_to_identify?
+    street.present? && house.present? && flat.present?
   end
 
   def self.find_first_by_auth_conditions(warden_conditions)
