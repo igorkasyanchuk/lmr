@@ -76,3 +76,19 @@
   margin-top: 0px;
   font-size: 12px;
 }
+
+.navbar ul.nav {
+  margin: 0px;
+}
+
+.navbar li.divider-vertical {
+  margin: 0px;
+}
+
+.navbar ul.nav > li > a {
+  padding: 16px 19px 14px;
+}
+
+.navbar a.brand {
+  padding: 16px 29px 14px 20px;
+}
