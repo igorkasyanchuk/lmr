@@ -12,15 +12,18 @@ class ServicePayment
 
     @payer_ls = input['service']['payer']['ls']
 
-    service_ks = input['service']['ks']
+    fill_service_info input['service']
+    fill_debt_info input['service']['debt']
+  end
 
-    @service_name = service_ks['service']
-    @service_code = service_ks['service_code']
-    @company_code = service_ks['company_code']
+  def fill_service_info raw
+    @service_name = raw['ks']['service']
+    @service_code = raw['ks']['service_code']
+    @company_code = raw['ks']['company_code']
+  end
 
-    debt_info = input['service']['debt']
-
-    @debt = Debt.new debt_info['provider_account_no'], debt_info['prepayment'], debt_info['amount_to_pay'], debt_info['charge'], debt_info['debt'], debt_info['last_paying']
+  def fill_debt_info raw
+    @debt = Debt.new raw['provider_account_no'], raw['prepayment'], raw['amount_to_pay'], raw['charge'], raw['debt'], raw['last_paying']
 
   end
 

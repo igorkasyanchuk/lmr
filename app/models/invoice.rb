@@ -20,7 +20,7 @@ class Invoice
   end
 
   def populate_services raw
-    raw.map do |ms|
+     raw.map do |ms|
       Service.new(
         ms['name'],
         ms['borg'],

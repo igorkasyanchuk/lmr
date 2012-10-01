@@ -7,6 +7,7 @@ RAW_USER_INFO = {
   'houseNumber' => '4',
   'flatNumber' => '5',
   'flatLetter' => 'a',
+  'serviceProvider' => []
 }
 
 describe ConsumerInfo do

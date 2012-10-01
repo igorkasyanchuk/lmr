@@ -19,7 +19,7 @@ RAW_INVOICE_INFO = {
     'pay' => '6',
     'salo' => '7',
   },
-  'mainService' => [
+  'services' => [
   {
   "subService"=>[
     {
@@ -56,6 +56,7 @@ RAW_INVOICE_INFO = {
 
 describe Invoice do
   before :each do
+      ConsumerInfo.stub :new
     @invoice = Invoice.new RAW_INVOICE_INFO
   end
   
@@ -94,22 +95,22 @@ describe Invoice do
 
   describe "#populate_services" do
     before :each do
-      @services = @invoice.populate_services RAW_INVOICE_INFO['mainService']
+      @services = @invoice.populate_services RAW_INVOICE_INFO['services']
     end
     %w{name borg invoice correction pilga subsidy pay saldo}.each do |attribute_name|
       it "stores #attribute_name" do
-        @services.first.send(attribute_name).should eq(RAW_INVOICE_INFO['mainService'][0][attribute_name])
+        @services.first.send(attribute_name).should eq(RAW_INVOICE_INFO['services'][0][attribute_name])
       end
     end
   end
 
   describe "#populate_sub_services" do
     before :each do
-      @sub_services = @invoice.populate_sub_services RAW_INVOICE_INFO['mainService'][0]['subService']
+      @sub_services = @invoice.populate_sub_services RAW_INVOICE_INFO['services'][0]['subService']
     end
     %w{name borg invoice correction pilga subsidy pay saldo}.each do |attribute_name|
       it "stores #attribute_name" do
-        @sub_services.first.send(attribute_name).should eq(RAW_INVOICE_INFO['mainService'][0]['subService'][0][attribute_name])
+        @sub_services.first.send(attribute_name).should eq(RAW_INVOICE_INFO['services'][0]['subService'][0][attribute_name])
       end
     end
   end

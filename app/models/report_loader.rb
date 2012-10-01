@@ -11,7 +11,7 @@ class ReportLoader
   def self.load_consumer_info id = 4110000106052
 
     #request_data 'user_info', id
-    get('https://dl.dropbox.com/u/3541456/cons.xml')['consumer']
+    get('https://dl.dropbox.com/u/3541456/user_info.xml')['consumer']
   end
 
   def self.request_data action, id
