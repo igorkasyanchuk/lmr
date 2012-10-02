@@ -23,7 +23,7 @@ class ReportLoader
     get('https://dl.dropbox.com/s/ojle52xxjxma0mk/invoice_finaly.xml?dl=1')['invoice']
   end
 
-  def self.load_payments id = '4110000106052'
+  def self.load_payments id = '4110000106052', period
     get('https://dl.dropbox.com/u/3541456/payment_by_consumer.xml')
   end
 

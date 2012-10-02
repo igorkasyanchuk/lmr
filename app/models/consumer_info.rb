@@ -26,4 +26,14 @@ class ConsumerInfo
     ServiceProvider.new raw['providerCode'], raw['providerName'], raw['serviceCode'], raw['code'], raw['name'], raw['serviceProviderCode']
   end
 
+  def service_provider_by_service_code service_code
+
+    @service_providers.detect {|sp| sp.service_code == service_code.to_s }
+  end
+
+  def self.[] id
+    @consumers ||= {}
+    @consumers[id] ||= load id
+  end
+
 end
