@@ -153,9 +153,9 @@ module ApplicationHelper
 
   def address_error errors, field, message=false
     if message
-      m = errors[field].any? ? errors[field] : errors[:street_id]      
-      m.first.try(:mb_chars).try(:downcase)
-    elsif errors[field].any? || errors[:street_id].any?
+      # m = errors[field].any? ? errors[field] : errors[:identifier]
+      errors[field].first.try(:mb_chars)
+    elsif errors[field].any? || errors[:identifier].any?
       'required error'
     end
   end

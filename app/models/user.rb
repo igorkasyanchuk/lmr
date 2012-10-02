@@ -24,15 +24,20 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :surname
 
   with_options :if => :is_user? do |user|
-    user.validates_presence_of :identifier, :street, :house, :flat
+    user.validates_presence_of :identifier
+    user.validates_presence_of :street, :house, :flat, :on => :create
     user.validates_uniqueness_of :identifier
     user.validates :identifier, :length => { :maximum => 13 }
     user.validates_format_of :identifier, :with => /^\d+$/, :message => :validate_number
-    user.validate :user_identification, :on => :create
+    user.validate :user_identification, :on => :create, :if => :ready_to_identify?
   end
 
   def is_user?
     role.name == 'user'
+  end
+
+  def ready_to_identify?
+    street.present? && house.present? && flat.present?
   end
 
   def self.find_first_by_auth_conditions(warden_conditions)
@@ -79,7 +84,7 @@ class User < ActiveRecord::Base
     def user_identification
       c = Consumer.find_by_code(self.identifier)
       unless c and c.flat.to_s == self.flat.to_s and c.house_id.to_i == self.house.to_i and c.house.street_id.to_i == self.street.to_i
-        errors.add :street_id, I18n.t('devise.views.validate_address')
+        errors.add :identifier, I18n.t('devise.views.validate_address')
       end
     end
 
