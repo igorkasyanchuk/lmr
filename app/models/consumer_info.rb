@@ -18,8 +18,8 @@ class ConsumerInfo
     new ReportLoader.load_consumer_info(id)
   end
 
-  def fill_service_providers raw = []
-    @service_providers = raw.map {|raw_service_provider| build_service_provider raw_service_provider }
+  def fill_service_providers raw
+    @service_providers = (raw || []).map {|raw_service_provider| build_service_provider raw_service_provider }
   end
 
   def build_service_provider raw

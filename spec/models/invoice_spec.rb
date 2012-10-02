@@ -62,11 +62,11 @@ describe Invoice do
   
   it 'loads raw invoice info fro rest service' do
     new_invoice = mock :invoice
-    ReportLoader.should_receive(:load_invoice).with(:some_id).and_return(:raw_invoice_info)
+    ReportLoader.should_receive(:load_invoice).with(:some_id, :some_period).and_return(:raw_invoice_info)
     Invoice.should_receive(:new).with(:raw_invoice_info).and_return(new_invoice)
 
 
-    Invoice.load(:some_id).should eq(new_invoice)
+    Invoice.load(:some_id, :some_period).should eq(new_invoice)
   end
 
   it 'stores consumer info' do
@@ -90,7 +90,7 @@ describe Invoice do
     Invoice::Service.stub!(:new).and_return(:service)# RAW_INVOICE_INFO['mainService']['name']
 
     invoice = Invoice.new RAW_INVOICE_INFO
-    invoice.main_services.should include(:service)
+    invoice.services.should include(:service)
   end
 
   describe "#populate_services" do
