@@ -10,8 +10,8 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   end
 
   def payments
-    @payments = Payment.load 'id', (Date.today.beginning_of_month)...Date.today.end_of_month
-    @consumer_info = @payments.consumer_info
+    @services = Payment.load 'id', (Date.today.beginning_of_month)...Date.today.end_of_month
+    @consumer_info = @services.consumer_info
   end
 
 end

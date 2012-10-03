@@ -25,6 +25,10 @@ module ApplicationHelper
     date.strftime("%d/%m/%Y %H:%M") if date
   end
 
+  def short_date date
+    date.strftime("%d.%m.%Y") if date
+  end
+
   def yield_or_default(message, default_message = "")
     message.nil? ? default_message : message
   end

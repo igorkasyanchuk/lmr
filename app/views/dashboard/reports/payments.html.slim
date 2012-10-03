@@ -6,7 +6,7 @@
 hr 
 
 
-table.table.table-striped
+table.table.reports
   thead 
     tr
       th Дата 
@@ -16,17 +16,38 @@ table.table.table-striped
       th Холодна вода
       th Гаряча вода
       th Центральне Опалення 
-      th Електроенергія
-      th Газ
-      th Кабельне телебаення
+      / th Електроенергія
+      / th Газ
+      / th Кабельне телебаення
       th Всього по послузі:
   tbody
     tr
-     td colspan="3" Одержувач платежу:
-     - 8.times do 
-       td name
+      td colspan="3" <b>Одержувач платежу:</b>
+      - @consumer_info.service_providers.each do |service|
+        td = service.name
+      td  
 
+    - @services.payments.each do |payment|  
+      tr 
+        td = short_date DateTime.parse(payment.payment_date).to_date
+        td  безготівка
+        td = payment.payment_bank.name
+        td = payment.payd_sum
+        td
+        td
+        td
+        td 47.54
+  tfoot
+    tr
+      td Разом за період    
+      td
+      td
+      td 120.54
+      td
+      td
+      td
+      td 110
 
-= @payments.inspect      
-hr
-= @consumer_info.inspect
+/= @services.inspect      
+/hr
+/= @consumer_info.inspect
