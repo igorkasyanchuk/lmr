@@ -13,25 +13,25 @@ class ReportLoader
 
   def self.load_consumer_info id = 4110000106052
 
-    #request_data('user_info', request_params(id))['consumer']
-    get('https://dl.dropbox.com/u/3541456/user_info.xml')['consumer']
-  end
-
-  def self.request_data action, query
-    resp = get SOURCE_URL, :query => query.merge(:action => action)
+    request_data('user_info', request_params(id))['consumer'] || {}
+    #get('https://dl.dropbox.com/u/3541456/user_info.xml')['consumer']
   end
 
   def self.load_invoice id = '4110000106052', period
-    #request_data('invoice_by_consumer', request_params(id, period))['invoice']
-    get('https://dl.dropbox.com/s/ojle52xxjxma0mk/invoice_finaly.xml?dl=1')['invoice']
+    request_data('invoice_by_consumer', request_params(id, period))['invoice'] || {}
+    #get('https://dl.dropbox.com/s/ojle52xxjxma0mk/invoice_finaly.xml?dl=1')['invoice'] || {}
   end
 
   def self.load_payments id = '4110000106052', period
-    #request_data 'payment_by_consumer', request_params(id, period)
-    get('https://dl.dropbox.com/u/3541456/payment_by_consumer.xml')
+    request_data('payment_by_consumer', request_params(id, period))['paymentDetails'] || {}
+    
+    #get('https://dl.dropbox.com/u/3541456/payment_by_consumer.xml')
   end
 
   private
+  def self.request_data action, query
+    get SOURCE_URL, :query => query.merge(:action => action)
+  end
 
   def self.request_params id, period = nil
     params = { :identifier => id }

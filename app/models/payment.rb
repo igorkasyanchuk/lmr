@@ -6,7 +6,7 @@ class Payment
   PaymentBank = Struct.new :name, :mfo, :rr, :provider_code
 
   def initialize params
-    @payments = populate_services params['paymentDetails']['services']
+    @payments = populate_services params['services']
     @consumer_id = params[:consumer_id]
   end
 
@@ -15,7 +15,7 @@ class Payment
   end
 
   def populate_services raw
-    raw.map do |ms|
+    (raw || []).map do |ms|
       Service.new(
         ms['serviceCode'],
         ms['dateServicePayment'],

@@ -1,13 +1,13 @@
 class Dashboard::ReportsController < Dashboard::DashboardController
 
+  before_filter :set_date
+
   def info
-    set_date
-    @invoice = Invoice.load 'id', @date..@date
+    @invoice = Invoice.load '4110000106052', @date..@date
   end
 
   def payments
-    set_date
-    @services = Payment.load 'id', (Date.today.beginning_of_month)...Date.today.end_of_month
+    @services = Payment.load '4110000106052', (Date.today.beginning_of_month)...Date.today.end_of_month
     @consumer_info = @services.consumer_info
   end
 
