@@ -10,8 +10,8 @@ class ForumController < ApplicationController
   def autocomplete
     role_field = current_user.admin? ? '%' : 'user'
     users = User.joins(:role).
-            where("(email LIKE ? OR surname LIKE ?) AND forem_state = ? AND roles.name LIKE ?", "%#{params[:term]}%", "%#{params[:term]}%", 'approved', "#{role_field}")
-            .limit(10).select("users.id, users.name, users.surname, users.email").order("users.surname")
+            where("(email LIKE ? OR surname LIKE ?) AND forem_state = ? AND roles.name LIKE ?", "%#{params[:term]}%", "%#{params[:term]}%", 'approved', "#{role_field}").
+            limit(10).select("users.id, users.name, users.surname, users.email").order("users.surname")
     render :json => users.map { |u| {:id => u.id, :label => "#{u.surname} #{u.name} (#{u.email})"} }
   end
 
