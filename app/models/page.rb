@@ -16,6 +16,10 @@ class Page < ActiveRecord::Base
   #  end
   #end
 
+  def to_param
+    identifier
+  end
+
   def downcase_identifier
     self.identifier = self.identifier.downcase.gsub(/[^0-9a-z]/i, '') if self.identifier.present?
   end
