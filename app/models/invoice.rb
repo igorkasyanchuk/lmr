@@ -38,9 +38,9 @@ class Invoice
 
   def populate_sub_services *raw
   
-    puts raw.inspect
+    #raise raw.inspect
     
-    raw.flatten.map do |ss| 
+    raw.flatten.compact.map do |ss| 
       Service.new(
         ss['name'],
         ss['borg'],

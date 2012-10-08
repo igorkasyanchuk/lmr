@@ -11,18 +11,18 @@ class ReportLoader
   end
 
 
-  def self.load_consumer_info id = 4110000106052
+  def self.load_consumer_info id = 4070000646163
 
     request_data('user_info', request_params(id))['consumer'] || {}
     #get('https://dl.dropbox.com/u/3541456/user_info.xml')['consumer']
   end
 
-  def self.load_invoice id = '4110000106052', period
+  def self.load_invoice id = '4070000646163', period
     request_data('invoice_by_consumer', request_params(id, period))['invoice'] || {}
     #get('https://dl.dropbox.com/s/ojle52xxjxma0mk/invoice_finaly.xml?dl=1')['invoice'] || {}
   end
 
-  def self.load_payments id = '4110000106052', period
+  def self.load_payments id = '4070000646163', period
     request_data('payment_by_consumer', request_params(id, period))['paymentDetails'] || {}
     
     #get('https://dl.dropbox.com/u/3541456/payment_by_consumer.xml')
@@ -41,6 +41,7 @@ class ReportLoader
         :date_end_period => period.end.strftime('%Y-%m-%d')
       )
     end
+    #raise params.inspect
     params
   end
 
