@@ -1,5 +1,5 @@
 class Filter
-  attr_accessor :period, :service_provider_id
+  attr_accessor :period, :service_provider_code
 
   class Period
     attr_reader :begin, :end
@@ -30,7 +30,7 @@ class Filter
   
   def initialize params
     @period = Period.new({begin: params[:period_begin], end: params[:period_end]})
-    @service_provider_id = params[:service_provider_id]
+    @service_provider_code = params[:service_provider_code]
   end
 
   def period_begin
