@@ -61,6 +61,9 @@ Lmr::Application.routes.draw do
   
 
   root :to => 'home#index'
+
   match 'site_search', :to => 'application#site_search'
+
+  get ':id', to: 'pages#show', as: :page
 
 end
