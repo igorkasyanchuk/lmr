@@ -60,6 +60,8 @@ table.table.reports
     = label_tag 'period_end_month', 'Місяць:' 
     = select_month(@filter.period_end, { :prefix => :period_end, :field_name => :month, :use_month_names => %w(Січень Лютий Березень Квітень Травень Червень Липень Серпень Вересень Жовтень Листопад Грудень)},  { :class => 'span2' } )
 
+    = select_tag :service_provider_id, options_from_collection_for_select(@service_providers, :service_provider_code, :provider_name, @filter.service_provider_id)
+
 
     = submit_tag "Перейти"
 /= @services.inspect      
