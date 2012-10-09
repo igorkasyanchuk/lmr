@@ -9,10 +9,10 @@ hr
 
 = form_tag [:dashboard, :info], :class => 'form-inline', :method => :get, :id => 'select_date_form'  do |f|
   fieldset
-    = label_tag 'date_year', 'Рік:', :class => 'someclass'
-    = select_year(@date, { :start_year => 2000, :end_year => 2012 }, { :class => 'input-small' })
-    = label_tag 'date_month', 'Місяць:' 
-    = select_month(@date, { :use_month_names => %w(Січень Лютий Березень Квітень Травень Червень Липень Серпень Вересень Жовтень Листопад Грудень)},  { :class => 'span2' } )
+    = label_tag 'period_begin_year', 'Рік:', :class => 'someclass'
+    = select_year(@filter.period_begin, { :prefix => :period_begin, :field_name => :year,  :start_year => 2000, :end_year => 2012 }, { :class => 'input-small' })
+    = label_tag 'period_begin_month', 'Місяць:' 
+    = select_month(@filter.period_begin, { :prefix => :period_begin, :field_name => :month, :use_month_names => %w(Січень Лютий Березень Квітень Травень Червень Липень Серпень Вересень Жовтень Листопад Грудень)},  { :class => 'span2' } )
     = submit_tag "Перейти"
 
 .well Information about user

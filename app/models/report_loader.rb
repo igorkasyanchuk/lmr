@@ -35,6 +35,7 @@ class ReportLoader
 
   def self.request_params id, period = nil
     params = { :identifier => id }
+    #raise period.end.inspect
     unless period.nil?
       params.merge!(
         :date_begin_period => period.begin.strftime('%Y-%m-%d'),
