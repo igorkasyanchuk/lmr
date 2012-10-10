@@ -31,7 +31,7 @@ h3 Сформувати звіт за період:
       br
       = select_tag :service_provider_code, options_from_collection_for_select(@all_service_providers, :service_provider_code, :service_provider_name, @filter.service_provider_code), :prompt => 'Оплати загалом'
 
-    = submit_tag "Перейти", :class => "btn btn-primary"
+    = submit_tag "Сформувати", :class => "btn btn-primary"
 
 - unless @filter.service_provider_code.nil?
   = render 'payment', :service_providers => @service_providers, :period_payments => @selected_period_payments
