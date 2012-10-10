@@ -1,12 +1,12 @@
 class Payment
 
-  attr_reader :payments
+  attr_reader :services
 
-  Service = Struct.new :service_code, :payment_date, :payd_sum, :payment_bank
-  PaymentBank = Struct.new :name, :mfo, :rr, :provider_code
+  Service = Struct.new :service_name, :service_code, :payment_date, :payd_sum, :payment_bank
+  PaymentBank = Struct.new :name, :mfo, :rr, :service_provider_code
 
   def initialize params
-    @payments = populate_services params['services']
+    @services = populate_services params['services']
     @consumer_id = params[:consumer_id]
   end
 
@@ -17,7 +17,8 @@ class Payment
   def populate_services raw
     (raw || []).map do |ms|
       Service.new(
-        ms['serviceCode'],
+        ms['serviceName'],
+        ms['serviceCode'],        
         ms['dateServicePayment'],
         ms['paydSum'],  
         populate_payment_bank(ms['paymentBank'])      

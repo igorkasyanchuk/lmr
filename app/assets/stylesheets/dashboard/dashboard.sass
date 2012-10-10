@@ -1,24 +1,38 @@
 #select_date_form
   fieldset
-    select
-      margin-left: 10px
-      margin-right: 10px
     label
-      font-weight: bold  
+      font-weight: bold
+    .filter_field
+      float: left
+      margin-right: 15px
+      &.dash
+        font-size: 25px
+        padding-top: 27px
+    .btn
+      margin-top: 25px
+      margin-left: 20px
+
 
 table.reports
   font-size: 12px
   border-collapse: collapse
-  border: 1px solid #DDD
-  thead 
+  border: 1px solid #DDD  
+  thead    
     th
+      vertical-align: middle
+      text-align: center
+      line-height: 16px
       border: 1px solid #DDD
       background-color: #EAEAEA
   tbody   
     td
+      text-align: center
+      vertical-align: middle
       border: 1px solid #DDD   
   tfoot
     td
+      text-align: center
+      vertical-align: middle
       border: 1px solid #DDD   
       font-weight: bold      
 

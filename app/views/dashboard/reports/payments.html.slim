@@ -4,107 +4,34 @@
 #title_block
   h2.title Платежі
 hr 
-
-
-table.table.reports
-  thead 
-    tr
-      th Дата 
-      th Вид Оплати 
-      th Банк (отримувач)
-      th Утримання буд. і прибуд. територій
-      th Холодна вода
-      th Гаряча вода
-      th Центральне Опалення 
-      / th Електроенергія
-      / th Газ
-      / th Кабельне телебаення
-      th Всього по послузі:
-  tbody
-    tr
-      td colspan="3" <b>Одержувач платежу:</b>
-      - @consumer_info.service_providers.each do |service|
-        td = service.name
-      td  
-
-    - @current_month_payments.payments.each do |payment|  
-      tr 
-        td = short_date DateTime.parse(payment.payment_date).to_date
-        td  безготівка
-        td = payment.payment_bank.name
-        td = payment.payd_sum
-        td
-        td
-        td
-        td 47.54
-  tfoot
-    tr
-      td Разом за період    
-      td
-      td
-      td 120.54
-      td
-      td
-      td
-      td 110
-
+h3 За поточний місяць:
+= render 'payment', :service_providers => @all_service_providers, :period_payments => @current_month_payments
+h3 Сформувати звіт за період:
 = form_tag [:dashboard, :payments], :class => 'form-inline', :method => :get, :id => 'select_date_form'  do |f|
   fieldset
-    = label_tag 'period_begin_year', 'Рік:', :class => 'someclass'
-    = select_year(@filter.period_begin, { :prefix => :period_begin, :field_name => :year,  :start_year => 2000, :end_year => 2012 }, { :class => 'input-small' })
-    = label_tag 'period_begin_month', 'Місяць:' 
-    = select_month(@filter.period_begin, { :prefix => :period_begin, :field_name => :month, :use_month_names => %w(Січень Лютий Березень Квітень Травень Червень Липень Серпень Вересень Жовтень Листопад Грудень)},  { :class => 'span2' } )
-    |- 
-    = label_tag 'period_end_year', 'Рік:', :class => 'someclass'
-    = select_year(@filter.period_end, { :prefix => :period_end, :field_name => :year,  :start_year => 2000, :end_year => 2012 }, { :class => 'input-small' })
-    = label_tag 'period_end_month', 'Місяць:' 
-    = select_month(@filter.period_end, { :prefix => :period_end, :field_name => :month, :use_month_names => %w(Січень Лютий Березень Квітень Травень Червень Липень Серпень Вересень Жовтень Листопад Грудень)},  { :class => 'span2' } )
+    .filter_field
+      = label_tag 'period_begin_year', 'Рік:', :class => 'someclass'
+      br
+      = select_year(@filter.period_begin, { :prefix => :period_begin, :field_name => :year,  :start_year => 2000, :end_year => 2012 }, { :class => 'input-small' })
+    .filter_field
+      = label_tag 'period_begin_month', 'Місяць:'
+      br
+      = select_month(@filter.period_begin, { :prefix => :period_begin, :field_name => :month, :use_month_names => %w(Січень Лютий Березень Квітень Травень Червень Липень Серпень Вересень Жовтень Листопад Грудень)},  { :class => 'span2' } )
+    .filter_field.dash - 
+    .filter_field
+      = label_tag 'period_end_year', 'Рік:', :class => 'someclass'
+      br
+      = select_year(@filter.period_end, { :prefix => :period_end, :field_name => :year,  :start_year => 2000, :end_year => 2012 }, { :class => 'input-small' })
+    .filter_field
+      = label_tag 'period_end_month', 'Місяць:'
+      br
+      = select_month(@filter.period_end, { :prefix => :period_end, :field_name => :month, :use_month_names => %w(Січень Лютий Березень Квітень Травень Червень Липень Серпень Вересень Жовтень Листопад Грудень)},  { :class => 'span2' } )
+    .filter_field
+      = label_tag 'service_provider_code', 'Одержувач платежу:'
+      br
+      = select_tag :service_provider_code, options_from_collection_for_select(@all_service_providers, :service_provider_code, :service_provider_name, @filter.service_provider_code), :prompt => 'Оплати загалом'
 
-    = select_tag :service_provider_code, options_from_collection_for_select(@all_service_providers, :service_provider_code, :provider_name, @filter.service_provider_code), :prompt => 'Оплати загалом'
+    = submit_tag "Перейти", :class => "btn btn-primary"
 
-
-    = submit_tag "Перейти"
-
-table.table.reports
-  thead 
-    tr
-      th Дата 
-      th Вид Оплати 
-      th Банк (отримувач)
-      - if @filter.service_provider_code.nil?
-        th Утримання буд. і прибуд. територій
-        th Холодна вода
-        th Гаряча вода
-        th Центральне Опалення
-      - else
-        th
-
-      th Всього по послузі:
-  tbody
-    tr
-      td colspan="3" <b>Одержувач платежу:</b>
-      - @service_providers.each do |service|
-        td = service.name
-      td  
-
-    - @current_month_payments.payments.each do |payment|  
-      tr 
-        td = short_date DateTime.parse(payment.payment_date).to_date
-        td  безготівка
-        td = payment.payment_bank.name
-        td = payment.payd_sum
-        td
-        td
-        td
-
-        td 47.54
-  tfoot
-    tr
-      td Разом за період    
-      td
-      td
-      td 120.54
-      td
-      td
-      td
-      td 110
+- unless @filter.service_provider_code.nil?
+  = render 'payment', :service_providers => @service_providers, :period_payments => @selected_period_payments
