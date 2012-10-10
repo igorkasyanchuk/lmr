@@ -12,20 +12,20 @@ class ReportLoader
 
 
   def self.load_consumer_info id = 4070000646163
-
     request_data('user_info', request_params(id))['consumer'] || {}
-    #get('https://dl.dropbox.com/u/3541456/user_info.xml')['consumer']
+  end
+
+  def self.load_invoice_details id = '4070000646163', service_code, period  
+    request_data('detail_invoice', request_params(id, :period => period, :service_code => service_code))['invoiceDecode'] || {}
   end
 
   def self.load_invoice id = '4070000646163', period
-    request_data('invoice_by_consumer', request_params(id, period))['invoice'] || {}
-    #get('https://dl.dropbox.com/s/ojle52xxjxma0mk/invoice_finaly.xml?dl=1')['invoice'] || {}
+    request_data('invoice_by_consumer', request_params(id, :period => period))['invoice'] || {}
   end
 
   def self.load_payments id = '4070000646163', period
-    request_data('payment_by_consumer', request_params(id, period))['paymentDetails'] || {}
+    request_data('payment_by_consumer', request_params(id, :period => period))['paymentDetails'] || {}
     
-    #get('https://dl.dropbox.com/u/3541456/payment_by_consumer.xml')
   end
 
   private
@@ -33,17 +33,20 @@ class ReportLoader
     get SOURCE_URL, :query => query.merge(:action => action)
   end
 
-  def self.request_params id, period = nil
-    params = { :identifier => id }
+  def self.request_params id, params = {}
+    result = { :identifier => id }
     #raise period.end.inspect
-    unless period.nil?
-      params.merge!(
-        :date_begin_period => period.begin.strftime('%Y-%m-%d'),
-        :date_end_period => period.end.strftime('%Y-%m-%d')
+    unless params[:period].nil?
+      result.merge!(
+        :date_begin_period => params[:period].begin.strftime('%Y-%m-%d'),
+        :date_end_period => params[:period].end.strftime('%Y-%m-%d')
       )
     end
+
+    result.merge!(:service_code => params[:service_code]) unless params[:service_code].nil?
     #raise params.inspect
-    params
+    #raise result.inspect 
+    result
   end
 
 end

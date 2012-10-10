@@ -4,6 +4,8 @@ class Dashboard::ReportsController < Dashboard::DashboardController
 
   def info
     @invoice = Invoice.load '4070000646163', @filter.period#@date.beginning_of_month..@date.end_of_month
+    @details = InvoiceDetails.load '4110000106052', 1, @filter.period
+    #raise @details.inspect
   end
 
   def payments
