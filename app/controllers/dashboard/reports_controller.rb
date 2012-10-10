@@ -16,6 +16,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   end
 
   private
+
   def init_filter
     @filter = Filter.new period_begin: params[:period_begin], period_end: params[:period_end], service_provider_code: params[:service_provider_code]
   end

@@ -1,8 +1,7 @@
 class ConsumerInfo
 
   attr_reader :consumer_code, :street_code, :house_code, :house_number, :flat_number, :flat_letter, :service_providers
-
-  ServiceProvider = Struct.new :provider_code, :provider_name, :service_code, :code, :name, :service_provider_code 
+  ServiceProvider = Struct.new :service_provider_code, :service_provider_name, :service_code, :service_name
   
   def initialize opts
     @consumer_code = opts['consumerCode']
@@ -23,7 +22,7 @@ class ConsumerInfo
   end
 
   def build_service_provider raw
-    ServiceProvider.new raw['providerCode'], raw['providerName'], raw['serviceCode'], raw['code'], raw['name'], raw['serviceProviderCode']
+    ServiceProvider.new raw['serviceProviderCode'], raw['serviceProviderName'], raw['serviceCode'], raw['serviceName']
   end
 
   def service_provider_by_service_code service_code
