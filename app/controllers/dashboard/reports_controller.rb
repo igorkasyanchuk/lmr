@@ -11,14 +11,18 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   def payments
     @current_month_payments = Payment.load '4070000646163', current_period
     @selected_period_payments = Payment.load '4070000646163', @filter.period#selected_period
-    get_service_providers
+    @payments_banks = @selected_period_payments.services.map(&:payment_bank)
+    @all_service_providers = ConsumerInfo['4070000646163'].service_providers
+    # get_service_providers
     @consumer_info = @current_month_payments.consumer_info
+    @payment_report = PaymentReport.new consumer_services: @all_service_providers, payments: @current_month_payments
+    @payment_report_filtered = PaymentReport.new filter: @filter, consumer_services: @all_service_providers, payments: @selected_period_payments
   end
 
   private
 
   def init_filter
-    @filter = Filter.new period_begin: params[:period_begin], period_end: params[:period_end], service_provider_code: params[:service_provider_code]
+    @filter = Filter.new period_begin: params[:period_begin], period_end: params[:period_end], service_provider_code: params[:service_provider_code], payment_bank_name: params[:payment_bank_name]
   end
 
   def current_period
@@ -26,13 +30,13 @@ class Dashboard::ReportsController < Dashboard::DashboardController
     today.beginning_of_month..today.end_of_month
   end
 
-  def get_service_providers
-    @all_service_providers = ConsumerInfo['4070000646163'].service_providers
-    @service_providers = if @filter.service_provider_code.present?
-      @all_service_providers.select{|sp| sp.service_provider_code == @filter.service_provider_code}
-    else
-      @all_service_providers
-    end
-  end
+  # def get_service_providers
+  #   @all_service_providers = ConsumerInfo['4070000646163'].service_providers
+    # @service_providers = if @filter.service_provider_code.present?
+    #   sp = @all_service_providers.select{|sp| sp.service_provider_code == @filter.service_provider_code}
+    # else
+    #   @all_service_providers
+    # end
+  # end
 
 end
