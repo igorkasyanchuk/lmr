@@ -37,34 +37,34 @@ table.table.reports
         - else
           td -
         td= s.name
-        td=sprintf("%#.2f", rand(100)) 
-        td= link_to rand(100), "#charge_modal_#{s.service_code}", :role =>"button", 'data-toggle' => "modal" 
-        td=sprintf("%#.2f", rand(100)) 
-        td=sprintf("%#.2f", rand(100)) 
-        td=sprintf("%#.2f", rand(100)) 
-        td=sprintf("%#.2f", rand(100)) 
-        td=sprintf("%#.2f", rand(100)) 
+        td= s.borg
+        td= link_to s.invoice, "#charge_modal_#{s.service_code}", :role =>"button", 'data-toggle' => "modal" 
+        td= s.correction
+        td= s.pilga
+        td= s.subsidy
+        td= s.pay
+        td= s.saldo
       - s.sub_services.each do |ss|
         tr
           td= ss.name
-          td=sprintf("%#.2f",  rand(100)) 
-          td= link_to sprintf("%#.2f", rand(100)) , "#charge_modal_#{s.service_code}", :role =>"button", 'data-toggle' => "modal" 
-          td=sprintf("%#.2f", rand(100)) 
-          td=sprintf("%#.2f", rand(100)) 
-          td=sprintf("%#.2f", rand(100)) 
-          td=sprintf("%#.2f", rand(100)) 
-          td=sprintf("%#.2f", rand(100)) 
+          td= ss.borg
+          td= link_to ss.invoice , "#charge_modal_#{s.service_code}", :role =>"button", 'data-toggle' => "modal" 
+          td= ss.correction
+          td= ss.pilga
+          td= ss.subsidy
+          td= ss.pay
+          td= ss.saldo
   tfoot
     tr
       td -
       td Разом
-      td= sprintf("%#.2f", rand(1000)) 
-      td= sprintf("%#.2f", rand(1000)) 
-      td= sprintf("%#.2f", rand(1000)) 
-      td= sprintf("%#.2f", rand(1000)) 
-      td= sprintf("%#.2f", rand(1000)) 
-      td= sprintf("%#.2f", rand(1000)) 
-      td= sprintf("%#.2f", rand(1000)) 
+      td= @invoice.total.borg
+      td= @invoice.total.invoice
+      td= @invoice.total.correction
+      td= @invoice.total.pilga
+      td= @invoice.total.subsidy
+      td= @invoice.total.pay
+      td= @invoice.total.saldo
 
       
 = link_to 'Друк квитанції', '#', :class => 'btn'
