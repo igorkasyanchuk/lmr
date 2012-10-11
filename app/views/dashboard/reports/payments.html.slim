@@ -4,34 +4,39 @@
 #title_block
   h2.title Платежі
 hr 
-h3 За поточний місяць:
-= render 'payment', :service_providers => @all_service_providers, :period_payments => @current_month_payments
+h3= "За поточний місяць (#{I18n.t("date.month_names")[Date.today.month]}):"
+
+= render 'payment', :service_providers => @payment_report.consumer_services, :period_payments => @payment_report.payments
 h3 Сформувати звіт за період:
 = form_tag [:dashboard, :payments], :class => 'form-inline', :method => :get, :id => 'select_date_form'  do |f|
   fieldset
     .filter_field
       = label_tag 'period_begin_year', 'Рік:', :class => 'someclass'
       br
-      = select_year(@filter.period_begin, { :prefix => :period_begin, :field_name => :year,  :start_year => 2000, :end_year => 2012 }, { :class => 'input-small' })
+      = select_year(@filter.period_begin, { :prefix => :period_begin, :field_name => :year,  :start_year => 2000, :end_year => Date.today.year }, { :class => 'input-small' })
     .filter_field
       = label_tag 'period_begin_month', 'Місяць:'
       br
-      = select_month(@filter.period_begin, { :prefix => :period_begin, :field_name => :month, :use_month_names => %w(Січень Лютий Березень Квітень Травень Червень Липень Серпень Вересень Жовтень Листопад Грудень)},  { :class => 'span2' } )
+      = select_month(@filter.period_begin, { :prefix => :period_begin, :field_name => :month, :use_month_names => I18n.t("date.month_names")},  { :class => 'select_month' } )
     .filter_field.dash - 
     .filter_field
       = label_tag 'period_end_year', 'Рік:', :class => 'someclass'
       br
-      = select_year(@filter.period_end, { :prefix => :period_end, :field_name => :year,  :start_year => 2000, :end_year => 2012 }, { :class => 'input-small' })
+      = select_year(@filter.period_end, { :prefix => :period_end, :field_name => :year,  :start_year => 2000, :end_year => Date.today.year }, { :class => 'input-small' })
     .filter_field
       = label_tag 'period_end_month', 'Місяць:'
       br
-      = select_month(@filter.period_end, { :prefix => :period_end, :field_name => :month, :use_month_names => %w(Січень Лютий Березень Квітень Травень Червень Липень Серпень Вересень Жовтень Листопад Грудень)},  { :class => 'span2' } )
+      = select_month(@filter.period_end, { :prefix => :period_end, :field_name => :month, :use_month_names => I18n.t("date.month_names")},  { :class => 'select_month' } )
     .filter_field
       = label_tag 'service_provider_code', 'Одержувач платежу:'
       br
-      = select_tag :service_provider_code, options_from_collection_for_select(@all_service_providers, :service_provider_code, :service_provider_name, @filter.service_provider_code), :prompt => 'Оплати загалом'
+      = select_tag :service_provider_code, options_from_collection_for_select(@all_service_providers.uniq_by { |sp| sp.service_provider_code }, :service_provider_code, :service_provider_name, @filter.service_provider_code), :prompt => 'Оплати загалом'
+    .filter_field
+      = label_tag 'payment_bank_name', 'Банк (отримувач):'
+      br
+      = select_tag :payment_bank_name, options_from_collection_for_select(@payments_banks.uniq_by { |pb| pb.name }, :name, :name, @filter.payment_bank_name), :prompt => 'Всі банки (отримувачі)'
 
     = submit_tag "Сформувати", :class => "btn btn-primary"
 
 - unless @filter.service_provider_code.nil?
-  = render 'payment', :service_providers => @service_providers, :period_payments => @selected_period_payments
+  = render 'payment', :service_providers => @payment_report_filtered.consumer_services, :period_payments => @payment_report_filtered.payments

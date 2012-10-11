@@ -26,7 +26,6 @@ class ConsumerInfo
   end
 
   def service_provider_by_service_code service_code
-
     @service_providers.detect {|sp| sp.service_code == service_code.to_s }
   end
 

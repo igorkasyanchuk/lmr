@@ -6,22 +6,21 @@ table.table.reports
       th Банк (отримувач)
       - service_providers.each do |sp|
         th= sp.service_name
-      th Всього по послузі:
+      th Всього оплачено:
   tbody
     tr
       td colspan="3" <b>Одержувач платежу:</b>
       - service_providers.each do |sp|
         td = sp.service_provider_name
-      td  
-
-    - period_payments.services.each do |service|  
+      td
+    - period_payments.each do |service|  
       tr 
         td = short_date DateTime.parse(service.payment_date).to_date
         td  безготівка
         td = service.payment_bank.name
-        td = service.payd_sum
-        - (service_providers.length - 1).times do
-          td
+        / td = service.payd_sum
+        - service_providers.each do |sp|
+          td = sp.service_code == service.service_code ? service.payd_sum : ''
         td 47.54
   tfoot
     tr
