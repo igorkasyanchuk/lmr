@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
 
   validates :name, :surname, :length => { :minimum => 2 }
   validates_presence_of :name, :surname
+  validates_uniqueness_of :nickname
 
   with_options :if => :is_user? do |user|
     user.validates_presence_of :identifier
