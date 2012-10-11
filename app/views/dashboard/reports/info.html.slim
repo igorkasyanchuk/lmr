@@ -38,7 +38,7 @@ table.table.reports
           td -
         td= s.name
         td=sprintf("%#.2f", rand(100)) 
-        td= link_to rand(100), "#house_maintenance", :role =>"button", 'data-toggle' => "modal" 
+        td= link_to rand(100), "#charge_modal_#{s.service_code}", :role =>"button", 'data-toggle' => "modal" 
         td=sprintf("%#.2f", rand(100)) 
         td=sprintf("%#.2f", rand(100)) 
         td=sprintf("%#.2f", rand(100)) 
@@ -48,7 +48,7 @@ table.table.reports
         tr
           td= ss.name
           td=sprintf("%#.2f",  rand(100)) 
-          td= link_to sprintf("%#.2f", rand(100)) , "#house_maintenance", :role =>"button", 'data-toggle' => "modal" 
+          td= link_to sprintf("%#.2f", rand(100)) , "#charge_modal_#{s.service_code}", :role =>"button", 'data-toggle' => "modal" 
           td=sprintf("%#.2f", rand(100)) 
           td=sprintf("%#.2f", rand(100)) 
           td=sprintf("%#.2f", rand(100)) 
@@ -57,7 +57,7 @@ table.table.reports
   tfoot
     tr
       td -
-      td total
+      td Разом
       td= sprintf("%#.2f", rand(1000)) 
       td= sprintf("%#.2f", rand(1000)) 
       td= sprintf("%#.2f", rand(1000)) 
@@ -78,17 +78,19 @@ hr
 span = link_to 'Назад', :back, :class => 'btn'
 
 #charge_modals
-  = render '/dashboard/reports/charge_modals/house_maintenance'
-  = render '/dashboard/reports/charge_modals/cold_water'
-  = render '/dashboard/reports/charge_modals/cold_water_abduction'
-  = render '/dashboard/reports/charge_modals/cold_water_supply'
-  = render '/dashboard/reports/charge_modals/hot_water_abduction'
-  = render '/dashboard/reports/charge_modals/hot_water_supply'
-  = render '/dashboard/reports/charge_modals/hot_water'
-  = render '/dashboard/reports/charge_modals/central_heating'
-  = render '/dashboard/reports/charge_modals/subscriber_fee'
-  = render '/dashboard/reports/charge_modals/staircases_heating'
-  = render '/dashboard/reports/charge_modals/electricity'
-  = render '/dashboard/reports/charge_modals/gas'
+  - @invoice.all_services.each do |service|
+    = render 'dashboard/reports/charge_modal', :service => service
+  -#= render '/dashboard/reports/charge_modals/house_maintenance'
+  -#= render '/dashboard/reports/charge_modals/cold_water'
+  -#= render '/dashboard/reports/charge_modals/cold_water_abduction'
+  -#= render '/dashboard/reports/charge_modals/cold_water_supply'
+  -#= render '/dashboard/reports/charge_modals/hot_water_abduction'
+  -#= render '/dashboard/reports/charge_modals/hot_water_supply'
+  -#= render '/dashboard/reports/charge_modals/hot_water'
+  -#= render '/dashboard/reports/charge_modals/central_heating'
+  -#= render '/dashboard/reports/charge_modals/subscriber_fee'
+  -#= render '/dashboard/reports/charge_modals/staircases_heating'
+  -#= render '/dashboard/reports/charge_modals/electricity'
+  -#= render '/dashboard/reports/charge_modals/gas'
 
 

@@ -3,20 +3,22 @@ class InvoiceDetails
   attr_reader :service_name, :service_code, :expenses
 
   def self.load consumer_id, service_code, period
-      
-     [ReportLoader.load_invoice_details(consumer_id, service_code, period)].flatten.map do |raw|
-       new raw
-     end
+   @invoice_details = [ReportLoader.load_invoice_details(consumer_id, service_code, period)['decodeService']].flatten.compact.map do |raw|
+     new raw
+   end
+   self
+  end
+
+  def self.[] service_code
+    @invoice_details.find {|d| d.service_code == service_code }
   end
 
   Expense = Struct.new :sum, :name, :code
 
   def initialize params
-    #raise params.inspect
-    #raise params['decodeService']['decode'].inspect
-    @service_name = params['decodeService']['decodeServiceName']
-    @service_code = params['decodeService']['decodeServiceCode']
-    fill_expenses params['decodeService']['decode']
+    @service_name = params['decodeServiceName']
+    @service_code = params['decodeServiceCode']
+    fill_expenses params['decode']
   end
 
   def fill_expenses raw
@@ -24,5 +26,7 @@ class InvoiceDetails
       Expense.new re['decodeSum'], re['decodeName'], re['decodeCode']
     end
   end
+
+  
 
 end

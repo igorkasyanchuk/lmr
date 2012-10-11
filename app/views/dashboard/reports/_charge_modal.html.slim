@@ -1,0 +1,20 @@
+div class="modal fade hide" id="charge_modal_#{service.service_code}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  div class="modal-header"
+    button type="button" class="close" data-dismiss="modal" aria-hidden="true" ×
+    h3 id="myModalLabel" = service.name
+    div class="modal-body"
+      - if @details[service.service_code].present?
+        table.table.table-hover
+          tbody
+            - @details[service.service_code].expenses.each do |expense|
+              tr
+                td= expense.name.capitalize
+                td= expense.sum
+      - else
+       | Нема даних
+
+
+  div class="modal-footer"
+    button class="btn" data-dismiss="modal" aria-hidden="true" Закрити
+
+

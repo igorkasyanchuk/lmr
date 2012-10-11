@@ -18,6 +18,10 @@ class Invoice
   def self.load id, period
     new ReportLoader.load_invoice(id, period)
   end
+  
+  def all_services
+    (@services + @services.map {|s| s.sub_services}).flatten
+  end
 
   def populate_services raw
      (raw || []).map do |ms|

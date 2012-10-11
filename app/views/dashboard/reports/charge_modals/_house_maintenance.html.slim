@@ -3,11 +3,12 @@ div class="modal fade hide" id="house_maintenance" tabindex="-1" role="dialog" a
     button type="button" class="close" data-dismiss="modal" aria-hidden="true" ×
     h3 id="myModalLabel" Утримання будинків
     div class="modal-body"
-      p Розрахункова площа 00,0 м.кв.   
-    div class="modal-body"
-      - @details[0].expenses.each do |expense|
-        p 
-        |  #{expense.name}: #{expense.sum}
+      table.table.table-hover
+        tbody
+          - @details[0].expenses.each do |expense|
+            tr
+              td= expense.name.capitalize
+              td= expense.sum
 
 
   div class="modal-footer"
