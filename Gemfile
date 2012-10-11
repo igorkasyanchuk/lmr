@@ -23,6 +23,7 @@ gem 'mini_magick'
 gem 'truncate_html'
 
 gem 'httparty'
+gem 'prawn'
 
 gem "airbrake"
 

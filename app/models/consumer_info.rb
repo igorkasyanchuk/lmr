@@ -1,6 +1,6 @@
 class ConsumerInfo
 
-  attr_reader :consumer_code, :street_code, :house_code, :house_number, :flat_number, :flat_letter, :service_providers
+  attr_reader :consumer_code, :street_code, :house_code, :house_number, :house_letter, :flat_number, :flat_letter, :service_providers
   ServiceProvider = Struct.new :service_provider_code, :service_provider_name, :service_code, :service_name
   
   def initialize opts
@@ -8,6 +8,7 @@ class ConsumerInfo
     @street_code = opts['streetCode']
     @house_code = opts['houseCode']
     @house_number = opts['houseNumber']
+    @house_letter = opts['houseLetter']
     @flat_number = opts['flatNumber']
     @flat_letter = opts['flatLetter']
     fill_service_providers opts['serviceProvider']

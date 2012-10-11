@@ -67,7 +67,7 @@ table.table.reports
       td= @invoice.total.saldo
 
       
-= link_to 'Друк квитанції', '#', :class => 'btn'
+= link_to 'Друк квитанції', params.merge(format: 'pdf'), :class => 'btn'
 hr
 span = link_to 'Деталі розраунку', '#', :class => 'btn'
 .horizontal_divider

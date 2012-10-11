@@ -13,20 +13,17 @@ table.table.reports
       - service_providers.each do |sp|
         td = sp.service_provider_name
       td
-    - period_payments.each do |service|  
+    - period_payments.payments.each do |p|  
       tr 
-        td = short_date DateTime.parse(service.payment_date).to_date
+        td = short_date DateTime.parse(p.date_payment).to_date
         td  безготівка
-        td = service.payment_bank.name
-        / td = service.payd_sum
+        td = p.bank.name
         - service_providers.each do |sp|
-          td = sp.service_code == service.service_code ? service.payd_sum : ''
-        td 47.54
+          td = sp.service_code == p.service["serviceCode"] ? p.sum : ''
+        td
   tfoot
     tr
       td colspan="3" Разом за період:
-      td
-      td
-      td 120.54
-      td
-      td 110
+      - service_providers.each do |sp|
+        td = period_payments.service_total.find {|pt| pt.code == sp.service_code}.try(:sum)
+      td = period_payments.service_total.map{|x| x.sum.to_f}.inject{|sum, n| sum + n }.to_f.round(2)
