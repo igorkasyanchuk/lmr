@@ -16,6 +16,7 @@ hr
         th Заголовок
         th Зміст
         th Час створення
+        th Опублікована?
         th Дії
     tbody
       - @posts.each do |post|
@@ -24,6 +25,7 @@ hr
           td.title = link_to post.title, [:edit, :admin, post]
           td.content = truncate post.description, :omission => '...', :length => 300
           td.date = l(post.created_at, :format => :short) if post.created_at.present?
+          td.published = post.published ? 'Так' : 'Ні'
           td.actions
             = link_to "Переглянути", [:news, post], :class => 'btn btn-normal btn-mini', :target => :_blank
             .vertical_divider

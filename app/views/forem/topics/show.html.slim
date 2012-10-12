@@ -22,7 +22,9 @@ div id='topic' class="#{'un' unless @topic.locked?}locked"
         - if forem_admin_or_moderator?(@topic.forum)
           = form_for @topic, :url => forem.moderate_forum_topic_path(@topic.forum, @topic), :method => :put do |f|
             = render "forem/moderation/options", :f => f
-  = forem_pages_widget(@posts)
+  / = forem_pages_widget(@posts)
+  = paginate @posts, :theme => 'twitter-bootstrap'
   #posts
     = render :partial => "forem/posts/post", :collection => @posts
-  = forem_pages_widget(@posts)
+  / = forem_pages_widget(@posts)
+  = paginate @posts, :theme => 'twitter-bootstrap'

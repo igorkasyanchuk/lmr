@@ -1,7 +1,8 @@
 = title  t('forem.forum.forums')
 
 = render :partial => 'forem/forums/head', :locals => { :forum => @forum }
-= forem_pages_widget(@topics)
+/ = forem_pages_widget(@topics)
+= paginate @topics, :theme => 'twitter-bootstrap'
 table.topics.subdued cellspacing="0"
   thead
     tr
@@ -15,4 +16,5 @@ table.topics.subdued cellspacing="0"
       tr
         td align="center" colspan="5"
     = render @topics
-= forem_pages_widget(@topics)
+/ = forem_pages_widget(@topics)
+= paginate @topics, :theme => 'twitter-bootstrap'

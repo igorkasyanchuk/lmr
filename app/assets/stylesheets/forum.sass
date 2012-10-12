@@ -1,13 +1,4 @@
 .span12
-  .pagination    
-    span
-      border: 0px none
-      padding: 0px
-      a
-        &:first-child
-          border-left-width: 1px
-      &.current
-        padding: 0 14px
   .category
     border-top: 1px solid #6F6F6F
     table#forums
@@ -68,6 +59,7 @@
           font-weight: normal
           font-size: 16px
           vertical-align: middle
+          border-bottom: 1px solid #6F6F6F
           // width: 10%
           &.forum_actions
             width: 10%
@@ -80,11 +72,14 @@
       tr
         &.even
           background-color: #EDF9FB
-          border: 5px solid #EDF9FB
-          border-radius: 5px
+          // border: 5px solid #EDF9FB
+          // border-radius: 5px
+        &.odd
+          // background-color: white
+          // border: 5px solid white
+          // border-radius: 5px
         td
-          border-top: 1px solid #6F6F6F
-          padding: 5px
+          padding: 10px 5px
           text-align: left
           font-weight: normal
           font-size: 16px

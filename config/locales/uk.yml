@@ -260,6 +260,7 @@ uk:
           validate_number: "має складатись тільки з чисел"
     attributes:
       user:
+        login: "Логін"
         email: "E-mail"
         identifier: "Особовий рахунок"
         name: "Ім'я"
@@ -281,4 +282,4 @@ uk:
       last: "Остання &raquo;"
       previous: "&lsaquo; Попередня"
       next: "Наступна &rsaquo;"
-      truncate: "..."        
+      truncate: "..."
