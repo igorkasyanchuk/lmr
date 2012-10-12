@@ -15,8 +15,8 @@ class ReportLoader
     request_data('user_info', request_params(id))['consumer'] || {}
   end
 
-  def self.load_invoice_details id = '4070000646163', service_code, period  
-    request_data('detail_invoice', request_params(id, :period => period, :service_code => service_code))['invoiceDecode'] || {}
+  def self.load_invoice_details id = '4070000646163', period  
+    request_data('detail_invoice', request_params(id, :period => period))['invoiceDecode'] || {}
   end
 
   def self.load_invoice id = '4070000646163', period

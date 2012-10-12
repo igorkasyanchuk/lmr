@@ -5,8 +5,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
 
   def info
     @invoice = Invoice.load '4070000646163', @filter.period#@date.beginning_of_month..@date.end_of_month
-    @details = InvoiceDetails.load '4110000106052', 1, @filter.period
-    #raise @details.inspect
+    @details = InvoiceDetails.load '4110000106052', @filter.period
     respond_to do |format|
       format.html
       format.pdf do
@@ -19,13 +18,24 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   end
 
   def payments
-    @current_month_payments = PaymentDetails.load '4070000646163', current_period
-    @selected_period_payments = PaymentDetails.load '4070000646163', @filter.period#selected_period
+    @current_month_payments = PaymentDetails.load '4110000106052', current_period
+    @selected_period_payments = PaymentDetails.load '4110000106052', @filter.period#selected_period
     @payments_banks = @selected_period_payments.payments.map(&:bank)
-    @all_service_providers = ConsumerInfo['4070000646163'].service_providers
+    @all_service_providers = ConsumerInfo['4110000106052'].service_providers
     @consumer_info = @current_month_payments.consumer_info
     @payment_report = PaymentReport.new consumer_services: @all_service_providers, payments: @current_month_payments
     @payment_report_filtered = PaymentReport.new filter: @filter, consumer_services: @all_service_providers, payments: @selected_period_payments
+
+
+  end
+
+  def invoice_details
+    @invoice_details = InvoiceDetails.load '4110000106052', @filter.period
+    report = InvoiceDetailsPdf.new(@invoice_details, view_context)
+    send_data report.render, file_name: "invoice_details_#{@filter.period_begin.strftime('%Y-%m')}.pdf",
+                             type: 'application/pdf',
+                             disposition: 'inline'
+
   end
 
   private

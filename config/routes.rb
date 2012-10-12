@@ -45,6 +45,8 @@ Lmr::Application.routes.draw do
     match '/', :to => 'dashboard#welcome'
     match '/info', :to => 'reports#info'
     match '/payments', :to => 'reports#payments'
+    match 'invoice_details', :to => 'reports#invoice_details'
+
     resource :profile, :only => [:edit, :update]
   end
 

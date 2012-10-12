@@ -69,7 +69,7 @@ table.table.reports
       
 = link_to 'Друк квитанції', params.merge(format: 'pdf'), :class => 'btn'
 hr
-span = link_to 'Деталі розраунку', '#', :class => 'btn'
+span = link_to 'Деталі розраунку', dashboard_invoice_details_path(:"period_begin[year]" => @filter.period_begin.year, :"period_begin[month]" => @filter.period_begin.month), :class => 'btn'
 .horizontal_divider
 span = link_to 'Деталі субсидій', '#', :class => 'btn'
 .horizontal_divider
