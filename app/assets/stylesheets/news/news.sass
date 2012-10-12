@@ -36,15 +36,13 @@
       tr
         th
           vertical-align: top
-    td.content
-      width: 350px
-    td.actions 
-      vertical-align: middle
-      width: 80px  
-    td.date
-      vertical-align: middle  
-    td.image
-      vertical-align: middle  
+    td
+      &.actions, &.date, &.image, &.published
+        vertical-align: middle
+      &.content
+        width: 350px
+      &.actions
+        width: 80px
     .btn  
       width: 65px
 
