@@ -3,9 +3,7 @@ class InvoiceDetailsPdf #< Prawn::Document
   def initialize(invoice_details, view)
     @invoice_details = invoice_details
     @view = view
-
     initialize_pdf
-    
   end
 
   def initialize_pdf
@@ -28,6 +26,7 @@ class InvoiceDetailsPdf #< Prawn::Document
 
   def draw_title
     @pdf.formatted_text [{text: "Деталі нарахувань за #{@invoice_details.period.begin.strftime('%m.%Y')}", styles: [:bold], size: 25}]
+    @pdf.move_down 20
 
   end
 
@@ -35,7 +34,7 @@ class InvoiceDetailsPdf #< Prawn::Document
     draw_service_title service
     @pdf.move_down 10
     draw_service_table raw_table_for(service)
-    @pdf.move_down 15
+    @pdf.move_down 20
   end
 
   def draw_service_title service
