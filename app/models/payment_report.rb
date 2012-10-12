@@ -19,16 +19,17 @@ class PaymentReport
   end
 
   def service_total
-    pcodes = payments.map{|p| p.service['serviceCode']}
-    @payments.service_total.select{|st| pcodes.include?(st.code)}
+    pcodes = []
+    payments.each { |k,v| pcodes << v.services.keys }
+    @payments.service_total.select{|k, v| pcodes.flatten.include?(k)}
   end
 
   def select_payment_proc
     spcodes = consumer_services.map(&:service_code)
     if @filter && @filter.payment_bank_code.present?
-      lambda {|p| spcodes.include?(p.service['serviceCode']) && p.bank.code == @filter.payment_bank_code}
+      lambda { |k,v| ( ( spcodes & v.services.keys ).any? && v.bank.code == @filter.payment_bank_code ) }
     else
-      lambda {|p| spcodes.include?(p.service['serviceCode'])}
+      lambda { |k,v| ( spcodes & v.services.keys ).any? }
     end
   end
 

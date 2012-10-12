@@ -20,7 +20,10 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   def payments
     @current_month_payments = PaymentDetails.load '4110000106052', current_period
     @selected_period_payments = PaymentDetails.load '4110000106052', @filter.period#selected_period
-    @payments_banks = @selected_period_payments.payments.map(&:bank)
+
+    @payments_banks = []
+    @selected_period_payments.payments.each { |k,v| @payments_banks << v.bank }
+
     @all_service_providers = ConsumerInfo['4110000106052'].service_providers
     @consumer_info = @current_month_payments.consumer_info
     @payment_report = PaymentReport.new consumer_services: @all_service_providers, payments: @current_month_payments
