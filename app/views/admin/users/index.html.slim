@@ -15,15 +15,17 @@ hr
 table.table.table-striped
   thead
     tr
-      th Name
-      th Email
-      th Role
-      th Actions
+      th Імя      
+      th E-mail
+      th Особовий рахунок
+      th Роль
+      th Дії
   tbody
     - collection.each do |user|
       tr
-        td= link_to user.full_name, edit_resource_path(user)
+        td= link_to user.full_name, edit_resource_path(user)        
         td= mail_to user.email
+        td= user.identifier
         td= user.role_name
         td
           - unless user.confirmed?
