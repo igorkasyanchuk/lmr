@@ -1,5 +1,6 @@
 # encoding: utf-8
 class PaymentDetails
+  require 'currency_parser'
 
   attr_reader :payments, :service_total
   
@@ -24,13 +25,13 @@ class PaymentDetails
       sum = ms['sum']
       if p[code]
         p[code].services[ms['service']['serviceCode']] = sum
-        p[code].total_sum = p[code].total_sum + sum.to_f
+        p[code].total_sum = p[code].total_sum + sum.to_uah
       else
         p[code] = Payment.new( 
           ms['datePayment'], 
           populate_payment_bank(ms['bank']), 
           Hash[ms['service']['serviceCode'] => sum],
-          sum.to_f
+          sum.to_uah
           )
       end
     end
