@@ -27,15 +27,12 @@ gem 'prawn'
 
 gem "airbrake"
 
+
+gem 'coffee-rails', '~> 3.2.1'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
   gem 'uglifier', '>= 1.0.3'
   gem "twitter-bootstrap-rails"
 end
@@ -44,16 +41,9 @@ gem 'jquery-rails'
 gem 'execjs'
 gem 'therubyracer'
 
-group :test, :development do
-  gem 'factory_girl'
-  gem 'factory_girl_rails'
-  gem 'guard-rspec'
-end
-
 group :development do
   gem 'quiet_assets'
   gem 'thin'
-  # To use debugger
   gem 'debugger'
 end
 
@@ -63,6 +53,9 @@ group :test do
   gem 'database_cleaner'
   gem "capybara"
   gem "poltergeist"
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
+  gem 'guard-rspec'
 end
 
 # To use ActiveModel has_secure_password

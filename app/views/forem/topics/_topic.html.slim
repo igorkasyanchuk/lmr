@@ -14,9 +14,7 @@ tr class="topic #{cycle('odd', 'even')} #{topic.locked? ? 'locked' : 'unlocked'}
     = new_since_last_view_text(topic)
     .subject= link_to topic.subject, forem.forum_topic_path(@forum, topic)
     .started-by
-      = t "started_by"
-      |  
-      = forum_name(relevant_posts(topic).first.user)
+      small= "#{t("started_by")}: #{forum_name(relevant_posts(topic).first.user)}"
   td.latest-post
     = link_to_latest_post(topic)
   td.posts-count= relevant_posts(topic).count

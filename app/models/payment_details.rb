@@ -21,15 +21,16 @@ class PaymentDetails
     raw = [raw || []].flatten
     raw.each do |ms|
       code = ms['code']
+      sum = ms['sum']
       if p[code]
-        p[code].services[ms['service']['serviceCode']] = ms['sum']
-        p[code].total_sum = p[code].total_sum + ms['sum'].to_f
+        p[code].services[ms['service']['serviceCode']] = sum
+        p[code].total_sum = p[code].total_sum + sum.to_f
       else
         p[code] = Payment.new( 
           ms['datePayment'], 
           populate_payment_bank(ms['bank']), 
-          Hash[ms['service']['serviceCode'] => ms['sum']],
-          ms['sum'].to_f
+          Hash[ms['service']['serviceCode'] => sum],
+          sum.to_f
           )
       end
     end
