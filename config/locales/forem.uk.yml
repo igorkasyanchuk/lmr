@@ -203,7 +203,7 @@ uk:
 
   #from main_app
   forum:
-    manage_users: 'Керування користувачами'
+    manage_users: 'Блокування користувачів'
     spam_user: 'Заблокувати користувача'
     blocked_users: "Заблокованих користувачів"
     name: "Ім'я"

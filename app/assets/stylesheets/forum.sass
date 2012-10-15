@@ -4,67 +4,59 @@
   .pagination
     float: right
     margin: 0px
-  .category
-    table.forums
-      width: 100%
-      border-collapse: separate
-      border: 5px solid #EEE
-      border-radius: 5px
-      margin-bottom: 30px
-      thead
-        background-color: #EEE
-        line-height: 30px
-        tr
-          th
-            color: #6F6F6F
-            text-align: center
-            font-weight: normal
-            font-size: 14px
-            vertical-align: middle
-            width: 10%
-            &.desc-and-last-post
-              width: 60%
-              text-align: left
-              padding-left: 5px
-      tbody
-        line-height: 30px
-        tr
-          &.even
-            background-color: #EDF9FB
-          td
-            text-align: left
-            font-weight: normal
-            font-size: 14px
-            vertical-align: middle
-            &.forum_name
-              padding-left: 5px
-            &.topics-count, &.posts-count, &.views-count
-              text-align: center
-            a.title
-              font-size: 18px
-              color: #FAAE1A
-            div.description
-              font-weight: 100
-              font-size: 13px
-              line-height: 17px
-            span.last_post
-              padding-left: 15px
-              font-size: 14px
-              color: #6F6F6F
-              line-height: 14px
-  table.admin_forums, table.admin_categories
+  table.forums, .category table.forums
     width: 100%
+    border-collapse: separate
+    border: 5px solid #EEE
+    border-radius: 5px
+    margin-bottom: 30px
     thead
-      background-color: #F0F0F0
+      background-color: #EEE
       line-height: 30px
       tr
-        th            
-          padding: 5px
+        th
+          color: #6F6F6F
+          text-align: center
+          font-weight: normal
+          font-size: 14px
+          vertical-align: middle
+          width: 10%
+          &.desc-and-last-post
+            width: 60%
+            text-align: left
+            padding-left: 5px
+    tbody
+      line-height: 30px
+      tr
+        &.even
+          background-color: #EDF9FB
+        td
           text-align: left
           font-weight: normal
-          font-size: 16px
+          font-size: 14px
           vertical-align: middle
-          border-bottom: 1px solid #6F6F6F
+          &.forum_name
+            padding-left: 5px
+          &.topics-count, &.posts-count, &.views-count
+            text-align: center
+          a.title
+            font-size: 18px
+            color: #FAAE1A
+          div.description
+            font-weight: 100
+            font-size: 13px
+            line-height: 17px
+          span.last_post
+            padding-left: 15px
+            font-size: 14px
+            color: #6F6F6F
+            line-height: 14px
+  table.admin_forums, table.admin_categories    
+    thead
+      tr
+        th
+          padding: 5px 10px
+          text-align: left
           &.forum_actions
             width: 10%
           &.forum_info
@@ -73,15 +65,8 @@
             text-align: center
     tbody
       tr
-        &.even
-          background-color: #EDF9FB
-        &.odd
         td
-          padding: 10px 5px
-          text-align: left
-          font-weight: normal
-          font-size: 16px
-          vertical-align: middle
+          padding: 5px 10px
           &.topics-count, &.posts-count
             text-align: center
           div.description
@@ -95,7 +80,14 @@
             line-height: 14px
   table.admin_categories
     margin: 20px 0
-  #forum
+    width: 70%
+    th
+      &.forum_actions
+        text-align: center
+    td
+      &.forum_actions
+        text-align: center
+  #forum, #topic
     small
       font-weight: 100
     menu
@@ -157,14 +149,6 @@
             font-size: 12px
           &.views-count, &.posts-count            
             text-align: center
-  #topic
-    menu
-      margin: 5px 0px 15px
-      padding: 0px
-      float: left
-      a
-        margin-right: 10px
-        color: #7A7A7A
   #posts
     .post
       padding: 5px
