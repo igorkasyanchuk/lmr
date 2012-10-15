@@ -1,6 +1,6 @@
-= simple_form_for(@user, :as => :user, :url => url, :html => { :multipart => true, :method => :put , :class => 'form-horizontal'}) do |f|
-  = user_error_messages!(@user)
-
+= simple_form_for(@user, :as => :user, :url => url, :html => { :multipart => true, :method => :put , :class => 'form-horizontal', :autocomplete => :off}) do |f|
+  / = user_error_messages!(@user)
+  = f.error_notification
   fieldset
     - if !@user.new_record? && @user.is_user?
       .control-group
@@ -17,8 +17,8 @@
       = f.label :remove_avatar, :id => "remove_avatar"
       = f.check_box :remove_avatar, :class => 'controls'     
     .clear    
-    = f.input :password, :autocomplete => :off
-    = f.input :password_confirmation, :hint => t('devise.views.help_password'), :autocomplete => :off
+    = f.input :password, :hint => t('devise.views.help_password'), :autocomplete => :off
+    = f.input :password_confirmation, :autocomplete => :off
     = f.input :current_password, :hint => t('devise.views.help_current_password')
     = f.hidden_field :avatar_cache
 

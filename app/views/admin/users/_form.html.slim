@@ -1,5 +1,6 @@
-= simple_form_for([:admin, @user], :html => {:class => 'form-horizontal', :multipart => true}) do |f|
-  = user_error_messages!(@user)
+= simple_form_for([:admin, @user], :html => {:class => 'form-horizontal', :multipart => true, :autocomplete => :off}) do |f|
+  / = user_error_messages!(@user)
+  = f.error_notification
   .form-inputs
     - if !@user.new_record? && @user.is_user?
       .control-group      
