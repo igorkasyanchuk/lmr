@@ -1,5 +1,5 @@
 - if can?(:read, category) && category.forums.count > 0
   .category id="category_#{category.id}"
-    h3 style="text-transform: capitalize; margin-bottom: 0px;"
+    h3 style="text-transform: capitalize; margin-bottom: 5px;"
       = link_to category.name, [forem, category]
     = render "forem/forums/listing", :category => category

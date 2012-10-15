@@ -3,6 +3,7 @@
 = render :partial => 'forem/forums/head', :locals => { :forum => @forum }
 / = forem_pages_widget(@topics)
 = paginate @topics, :theme => 'twitter-bootstrap'
+.clear
 table.topics.subdued cellspacing="0"
   thead
     tr

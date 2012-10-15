@@ -80,7 +80,7 @@ uk:
         title: Форуми
         forum: Форум
         views: Переглядів
-        last_post: 'Остання відповідь:'
+        last_post: 'Остання відповідь'
         none: відсутня
     topic:
       headings:
