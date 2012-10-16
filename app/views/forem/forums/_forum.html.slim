@@ -7,7 +7,7 @@
         small
           = t('forem.forums.index.last_post')
           - if last_post = forum.last_post_for(forem_user)
-            |  
+            | : 
             = link_to(last_post.topic, forem.forum_topic_path(forum, last_post.topic))
             |  
             = t('by')
@@ -16,7 +16,7 @@
             |  
             = "(#{t('time_ago_in_words', :time => time_ago_in_words(last_post.created_at))})"
           - else
-            = t('forem.forums.index.none')
+            = " #{t('forem.forums.index.none')}"
     td.topics-count= topics_count(forum)
     td.posts-count= posts_count(forum)
     td.views-count= forum.views_count

@@ -45,6 +45,7 @@ group :development do
   gem 'quiet_assets'
   gem 'thin'
   gem 'debugger'
+  gem 'wirb'
 end
 
 group :test do

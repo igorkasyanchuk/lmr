@@ -1,74 +1,62 @@
 .span12
-  .category
-    // border-top: 1px solid #6F6F6F
-    table.forums
-      width: 100%
-      border-collapse: separate
-      border: 5px solid #EEE
-      border-radius: 5px
-      margin-bottom: 30px
-      thead
-        background-color: #EEE
-        line-height: 30px
-        tr
-          th            
-            // padding: 5px
-            color: #6F6F6F
-            text-align: center
-            font-weight: normal
-            font-size: 14px
-            vertical-align: middle
-            width: 10%
-            &.desc-and-last-post
-              width: 60%
-              text-align: left
-              padding-left: 5px
-      tbody
-        line-height: 30px
-        tr
-          &.even
-            background-color: #EDF9FB
-            // border: 5px solid #EDF9FB
-            // border-radius: 5px
-          td
-            // border-top: 1px solid #6F6F6F
-            // padding: 5px 5px
-            text-align: left
-            font-weight: normal
-            font-size: 14px
-            vertical-align: middle
-            &.forum_name
-              padding-left: 5px
-            &.topics-count, &.posts-count, &.views-count
-              text-align: center
-            a.title
-              font-weight: bold
-              font-size: 18px
-              color: #FAAE1A
-            div.description
-              font-weight: 100
-              font-size: 13px
-              // color: #2DA8BC
-              line-height: 17px
-            span.last_post
-              padding-left: 15px
-              font-size: 14px
-              color: #6F6F6F
-              line-height: 14px
-  table.admin_forums, table.admin_categories
+  hr
+    margin: 20px 0 0 0px
+  .pagination
+    float: right
+    margin: 0px
+  table.forums, .category table.forums
     width: 100%
+    border-collapse: separate
+    border: 5px solid #EEE
+    border-radius: 5px
+    margin-bottom: 30px
     thead
-      background-color: #F0F0F0
+      background-color: #EEE
       line-height: 30px
       tr
-        th            
-          padding: 5px
+        th
+          color: #6F6F6F
+          text-align: center
+          font-weight: normal
+          font-size: 14px
+          vertical-align: middle
+          width: 10%
+          &.desc-and-last-post
+            width: 60%
+            text-align: left
+            padding-left: 5px
+    tbody
+      line-height: 30px
+      tr
+        &.even
+          background-color: #EDF9FB
+        td
           text-align: left
           font-weight: normal
-          font-size: 16px
+          font-size: 14px
           vertical-align: middle
-          border-bottom: 1px solid #6F6F6F
-          // width: 10%
+          &.forum_name
+            padding-left: 5px
+          &.topics-count, &.posts-count, &.views-count
+            text-align: center
+          a.title
+            font-size: 18px
+            color: #FAAE1A
+          div.description
+            font-weight: 100
+            font-size: 13px
+            line-height: 17px
+          span.last_post
+            padding-left: 15px
+            font-size: 14px
+            color: #6F6F6F
+            line-height: 14px
+  table.admin_forums, table.admin_categories    
+    thead
+      tr
+        th
+          padding: 5px 10px
+          text-align: left
           &.forum_actions
             width: 10%
           &.forum_info
@@ -76,28 +64,14 @@
           &.topics-count, &.posts-count
             text-align: center
     tbody
-      // line-height: 30px
       tr
-        &.even
-          background-color: #EDF9FB
-          // border: 5px solid #EDF9FB
-          // border-radius: 5px
-        &.odd
-          // background-color: white
-          // border: 5px solid white
-          // border-radius: 5px
         td
-          padding: 10px 5px
-          text-align: left
-          font-weight: normal
-          font-size: 16px
-          vertical-align: middle
+          padding: 5px 10px
           &.topics-count, &.posts-count
             text-align: center
           div.description
             font-weight: 100
             font-size: 14px
-            // color: #2DA8BC
             line-height: 14px
           span.last_post
             padding-left: 15px
@@ -106,16 +80,23 @@
             line-height: 14px
   table.admin_categories
     margin: 20px 0
-  #forum
+    width: 70%
+    th
+      &.forum_actions
+        text-align: center
+    td
+      &.forum_actions
+        text-align: center
+  #forum, #topic
     small
       font-weight: 100
-      // color: #2DA8BC
-      // padding: 0 0 20px 20px
     menu
-      margin: 20px 0
+      float: left
+      margin: 5px 0px 15px
       padding: 0px
       a
         margin-right: 10px
+        color: #7A7A7A
   table.topics
     width: 100%
     border-collapse: separate
@@ -129,7 +110,6 @@
             border-top-left-radius: 5px
           &.views-count
             border-top-right-radius: 5px
-          // padding: 5px
           color: #6F6F6F
           font-weight: normal
           text-align: left
@@ -144,21 +124,18 @@
             width: 10%
             text-align: center
     tbody
-      // line-height: 30px
       tr
         &.even
           background-color: #EDF9FB
-          // border: 5px solid #EDF9FB
-          // border-radius: 5px
         td
-          // padding: 5px
           text-align: left
           font-weight: normal
           font-size: 14px
           vertical-align: middle
           &.byline
-            padding-left: 10px
+            padding: 10px 0px 10px 10px
             .subject
+              line-height: 16px
               a
                 font-size: 18px
                 color: #FAAE1A
@@ -166,19 +143,12 @@
               font-weight: normal
               font-size: 14px
               color: #6F6F6F
-              line-height: 14px
-              // padding-left: 15px
+              line-height: 16px
           &.latest-post
             line-height: 18px
             font-size: 12px
           &.views-count, &.posts-count            
             text-align: center
-  #topic
-    menu
-      margin: 20px 0
-      padding: 0px
-      a
-        margin-right: 10px
   #posts
     .post
       padding: 5px
@@ -211,7 +181,6 @@
         width: 160px
       .contents
         margin-left: 170px
-        // min-height: 125px
         position: relative
         border: 1px solid #EEEEEE
         border-radius: 5px
@@ -225,10 +194,6 @@
             &.time-post
               position: absolute
               bottom: 18px
-              // left: 193px
-            &.time-quote
-              // position: relative
-              // float: left
         .posttext
           margin-bottom: 9px
         ul.actions
@@ -238,8 +203,6 @@
           li
             list-style-type: none
             display: inline
-            // a
-            //   margin-right: 10px
     .moderation
       margin-top: 0px
   .forum_admin
@@ -386,10 +349,11 @@ input#new_user
 .breadcrumb
   font-size: 20px
   line-height: 30px
+  margin: 0 0 10px
 
 .btn.reply
   float: right
-  margin-right: 10px
+  margin-right: 15px
 
 .in_reply_to
   line-height: 27px

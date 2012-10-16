@@ -9,4 +9,6 @@ ul.breadcrumb
 		= topic.subject
 
 - if forem_admin?
-  = link_to t('forem.topic.links.edit'), forem.edit_admin_topic_path(topic), :class => 'btn btn-primary btn-large'
+  = link_to t('forem.topic.links.edit'), forem.edit_admin_topic_path(topic), :class => 'btn btn-primary'
+  .clear
+  br

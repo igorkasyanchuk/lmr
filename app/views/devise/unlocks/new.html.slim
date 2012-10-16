@@ -1,8 +1,10 @@
 h3= t('devise.views.resend_unlock')
-= form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post }) do |f|
-  = devise_error_messages!
+= simple_form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post, :class => 'form-horizontal' }) do |f|
+  = f.error_notification
   div
-    = f.label :login
-    = f.text_field :login
-  = f.submit t('devise.views.resend_unlock'), :class => 'btn btn-primary'
+    = f.input :login
+  .form-actions
+    = f.submit t('devise.views.send'), :class => 'btn btn-primary'
+    |  
+    = link_to t('devise.views.cancel'), root_path, :class => "btn"
 = render :partial => "devise/shared/links"
