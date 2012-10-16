@@ -8,5 +8,5 @@ ul.nav.nav-tabs
   li= menu_item "Новини", main_app.admin_posts_path
   li= menu_item "Сторінки", main_app.admin_pages_path
   li= menu_item "Блоки", main_app.admin_page_parts_path
-  li= menu_item "Профіль", send("edit_#{current_user.admin? ? 'admin' : 'dashboard'}_profile_path")
+  li= menu_item "Профіль", main_app.send("edit_#{current_user.admin? ? 'admin' : 'dashboard'}_profile_path")
 .clearfix
