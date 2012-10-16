@@ -27,6 +27,7 @@ Lmr::Application.routes.draw do
     resource :profile, :only => [:edit, :update]
     match '/activities', :to => 'activities#index'
     resources :pages, :except => :show
+    resources :service_providers, :except => :show
     resources :users do
       member do 
         get :confirm

@@ -1,0 +1,9 @@
+= simple_form_for [:admin, resource], :html => {:class => 'form-horizontal'} do |f|
+  fieldset.span8
+    = f.input :title, :label => 'Назва'
+  .clearfix
+
+  .form-actions
+    = f.submit 'Зберегти надавача', :class => 'btn btn-primary form-btn'
+    |  
+    = link_to 'Відміна', [:admin, :pages], :class => 'btn'
