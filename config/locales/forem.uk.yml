@@ -2,9 +2,9 @@ uk:
   forem:
     general:
       forum: Форум
-      topics: Теми
+      topics: Тем
       topic: Тема
-      posts: Відповіді
+      posts: Відповідей
       posts_count:
         zero: немає відповідей
         one: 1 відповідь
@@ -80,14 +80,14 @@ uk:
         title: Форуми
         forum: Форум
         views: Переглядів
-        last_post: 'Остання відповідь:'
+        last_post: 'Остання відповідь'
         none: відсутня
     topic:
       headings:
         topic: Тема
-        latest: Остання
-        posts: Відповіді
-        views: Перегляди
+        latest: Остання відповідь
+        posts: Відповідей
+        views: Переглядів
       moderation:
         success: Обрана тема була відмодерована.
       reply: Відповісти
@@ -203,7 +203,7 @@ uk:
 
   #from main_app
   forum:
-    manage_users: 'Керування користувачами'
+    manage_users: 'Блокування користувачів'
     spam_user: 'Заблокувати користувача'
     blocked_users: "Заблокованих користувачів"
     name: "Ім'я"

@@ -1,12 +1,12 @@
 = title "Адміністрування форуму"
 
 #title_block
-  h1.title Адміністування форуму
+  h1.title Адміністрування форуму
   .clear  
 hr 
-
-= link_to t('forem.admin.forum.index'), forem.admin_forums_path, :class => 'btn'
-.horizontal_divider
+br
 = link_to t('forem.admin.category.index'), forem.admin_categories_path, :class => 'btn'
+.horizontal_divider
+= link_to t('forem.admin.forum.index'), forem.admin_forums_path, :class => 'btn'
 .horizontal_divider
 = link_to t('forum.manage_users'), '/community/admin/users_list', :class => 'btn'

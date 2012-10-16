@@ -1,11 +1,11 @@
 # encoding: utf-8
 class PaymentDetails
+  require 'currency_parser'
 
   attr_reader :payments, :service_total
-
-  Payment = Struct.new :date_payment, :service, :service_provider, :bank, :sum
+  
+  Payment = Struct.new :date_payment, :bank, :services, :total_sum
   Bank = Struct.new :code, :name, :mfo, :rr
-  ServiceTotal = Struct.new :code, :name, :sum
 
   def initialize params
     @payments = populate_payments params['payment']
@@ -18,16 +18,24 @@ class PaymentDetails
   end
 
   def populate_payments raw
+    p = {}
     raw = [raw || []].flatten
-    raw.map do |ms|
-      Payment.new(
-        ms['datePayment'],
-        ms['service'],
-        ms['serviceProvider'],
-        populate_payment_bank(ms['bank']),
-        ms['sum']
-      )
+    raw.each do |ms|
+      code = ms['code']
+      sum = ms['sum']
+      if p[code]
+        p[code].services[ms['service']['serviceCode']] = sum
+        p[code].total_sum = p[code].total_sum + sum.to_uah
+      else
+        p[code] = Payment.new( 
+          ms['datePayment'], 
+          populate_payment_bank(ms['bank']), 
+          Hash[ms['service']['serviceCode'] => sum],
+          sum.to_uah
+          )
+      end
     end
+    p
   end
 
   def populate_payment_bank raw
@@ -35,10 +43,12 @@ class PaymentDetails
   end
 
   def populate_service_total raw
+    t = {}
     raw = [raw || []].flatten
-    raw.map do |st|
-      ServiceTotal.new( st['code'], st['name'], st['sum'] )
+    raw.each do |st|
+      t[st['code']] = st['sum']
     end
+    t
   end
 
   def consumer_info

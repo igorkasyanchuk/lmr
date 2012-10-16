@@ -1,8 +1,10 @@
 h3= t('devise.views.resend_confirm')
-= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
-  = devise_error_messages!
-  div
-    = f.label :login
-    = f.text_field :login
-  = f.submit t('devise.views.resend_confirm'), :class => 'btn btn-primary'
+= simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post, :class => 'form-horizontal' }) do |f|
+  = f.error_notification
+  fieldset
+    = f.input :login
+  .form-actions
+    = f.submit t('devise.views.send'), :class => 'btn btn-primary'
+    |  
+    = link_to t('devise.views.cancel'), root_path, :class => "btn"
 = render :partial => "devise/shared/links"

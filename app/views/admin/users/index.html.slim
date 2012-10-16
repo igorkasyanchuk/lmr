@@ -1,12 +1,13 @@
 = title "Адміністрування користувачів"
 
 #title_block
-  h1.title Адміністування користувачів
-  .admin_actions
-    = link_to "Додати користувача", [:new, :admin, :user], :class => 'btn btn-primary btn-small'
+  h1.title Адміністрування користувачів  
   .clear  
 hr  
-
+br
+.admin_actions
+  = link_to "Додати користувача", [:new, :admin, :user], :class => 'btn btn-primary btn-small'
+br
 = form_tag [:admin, :users], :method => :get, :class => 'form-search' do
   = text_field_tag :q, params[:q], :class => 'input-medium search-query'
   |   

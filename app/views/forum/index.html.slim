@@ -2,12 +2,15 @@
   
 h2= t('forum.manage_users')
 hr
+br
 
 = text_field_tag "new_user"
 = button_tag t("forum.spam_user"), :disabled => true, :id => "block_user", :class => 'btn btn-warning'
 
 #users_list
 	= render :partial => 'users_list'
+br
+= link_to 'Назад', '/community/admin/', :class => "btn"
 
 = javascript_include_tag "jquery-ui-autocomplete-min.js"
 = javascript_include_tag "forum"

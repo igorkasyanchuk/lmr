@@ -1,4 +1,4 @@
-table#forums.forums.subdued cellspacing="0"
+table.forums.subdued cellspacing="0"
   thead
     tr
       th.desc-and-last-post= t('forum', :scope => 'forem.general')
@@ -6,4 +6,5 @@ table#forums.forums.subdued cellspacing="0"
       th.posts-count= t('posts', :scope => 'forem.general')
       th.views-count= t('forem.forums.index.views')
   tbody
+    - reset_cycle
     = render category.forums
