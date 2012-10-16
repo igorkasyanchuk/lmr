@@ -7,7 +7,7 @@
 hr  
 
 
-= form_tag [:dashboard, :info], :class => 'form-inline', :method => :get, :id => 'select_date_form'  do |f|
+= form_tag [:dashboard, :invoice], :class => 'form-inline', :method => :get, :id => 'select_date_form'  do |f|
   fieldset
     = label_tag 'period_begin_year', 'Рік:', :class => 'someclass'
     = select_year(@filter.period_begin, { :prefix => :period_begin, :field_name => :year,  :start_year => 2000, :end_year => 2012 }, { :class => 'input-small' })

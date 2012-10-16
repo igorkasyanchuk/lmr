@@ -98,3 +98,7 @@ ul.ui-autocomplete {
 table.table.table-striped thead tr th {
   vertical-align: top;
 }
+
+.nav-tabs > li:last-child {
+  float: right;
+}
