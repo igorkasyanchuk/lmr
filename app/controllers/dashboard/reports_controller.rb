@@ -28,8 +28,9 @@ class Dashboard::ReportsController < Dashboard::DashboardController
     @consumer_info = @current_month_payments.consumer_info
     @payment_report = PaymentReport.new consumer_services: @all_service_providers, payments: @current_month_payments
     @payment_report_filtered = PaymentReport.new filter: @filter, consumer_services: @all_service_providers, payments: @selected_period_payments
+  end
 
-
+  def counters
   end
 
   def invoice_details

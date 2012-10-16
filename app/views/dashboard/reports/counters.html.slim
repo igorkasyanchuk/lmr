@@ -1,0 +1,32 @@
+= content_for :on_ready do
+  | $( "#tabs" ).tabs();
+
+h2 Дані Користувача
+
+#tabs
+  ul
+    li
+      a href="#tabs-1"
+        | Холодна Вода
+    li
+      a href="#tabs-2"
+        | Гаряча Вода
+    li
+      a href="#tabs-3"
+        | Газ
+  #tabs-1
+    h3= 'Державний номер лічильника: 6548258ФФ'
+    h3= 'Вид лічильника: Холодна вода'
+    = render 'get_counter'
+    = render 'set_counter'
+    
+  #tabs-2
+    h3= 'Державний номер лічильника: 6548258ФФ'
+    h3= 'Вид лічильника: Гаряча вода'    
+    = render 'get_counter'
+    = render 'set_counter'
+  #tabs-3
+    h3= 'Державний номер лічильника: 6548258ФФ'
+    h3= 'Вид лічильника: Газ'    
+    = render 'get_counter'
+    = render 'set_counter'
