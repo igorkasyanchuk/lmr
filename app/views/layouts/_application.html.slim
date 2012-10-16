@@ -19,7 +19,6 @@ html lang="en"
     = stylesheet_link_tag "application", :media => "all"
 
     = yield :css
-    = javascript_include_tag "jquery"
 
     link href="/favicon.ico" rel="shortcut icon"
 
@@ -52,9 +51,9 @@ html lang="en"
     /!
       Javascripts
       \==================================================
-    /! Placed at the end of the document so the pages load faster
-    = yield :js
+    /! Placed at the end of the document so the pages load faster    
     = javascript_include_tag "application"
+    = yield :js
     javascript:
       $(function() {
         #{yield :on_ready}

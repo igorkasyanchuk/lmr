@@ -46,7 +46,7 @@ Lmr::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( jquery.js jquery-ui-autocomplete-min.js user.js admin/admin.js forum.js ) + Ckeditor.assets
+  config.assets.precompile += %w( user.js admin/admin.js forum.js ) + Ckeditor.assets
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
