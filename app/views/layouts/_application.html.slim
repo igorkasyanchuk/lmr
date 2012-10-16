@@ -27,10 +27,11 @@ html lang="en"
     = auto_discovery_link_tag :rss, '/news/rss'
 
   body
+    = render :partial => '/shared/navigation_general'
     - if content_for?(:navigation)
-      = yield :navigation
+      -#= yield :navigation
     - else
-      = render :partial => '/shared/navigation_general'
+      -#= render :partial => '/shared/navigation_general'
 
     .container
 
