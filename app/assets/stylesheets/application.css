@@ -20,6 +20,8 @@
  *= require forum
  *= require google_search
  *= require footer
+ *= require jquery.ui.autocomplete
+ *= require jquery.ui.tabs
   */
 
 .clearfix, .clear {
@@ -63,13 +65,13 @@
   margin-left: 20px;
 }
 
-.ui-autocomplete {
+ul.ui-autocomplete {
   max-height: 133px;
   overflow-y: auto;
   /* prevent horizontal scrollbar */
   overflow-x: hidden;
-  /* add padding to account for vertical scrollbar */
-  padding-right: 20px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
 }
 
 .simple_form.form-horizontal .help-block {
@@ -95,4 +97,8 @@
 
 table.table.table-striped thead tr th {
   vertical-align: top;
+}
+
+.nav-tabs > li:last-child {
+  float: right;
 }
