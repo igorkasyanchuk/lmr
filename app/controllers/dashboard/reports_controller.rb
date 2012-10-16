@@ -31,6 +31,10 @@ class Dashboard::ReportsController < Dashboard::DashboardController
 
 
   end
+  
+  def service_providers
+    @service_providers = ConsumerInfo['4110000106052'].service_providers
+  end
 
   def invoice_details
     @invoice_details = InvoiceDetails.load '4110000106052', @filter.period
