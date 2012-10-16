@@ -13,7 +13,7 @@ Lmr::Application.routes.draw do
   end
 
   scope 'community', :as => 'community' do
-    get 'admin/users_list', :to => 'forum#index'
+    get 'admin/blocked_users', :to => 'forum#index', :as => :blocked_users
     get 'users/autocomplete', :to => "forum#autocomplete"
     post 'toggle_approve', :to => "forum#toggle_approve"
   end
@@ -25,7 +25,7 @@ Lmr::Application.routes.draw do
   namespace :admin do
     match '/', :to => 'dashboard#welcome'
     resource :profile, :only => [:edit, :update]
-    match '/activities', :to => 'activities#index'
+    match 'activities', :to => 'activities#index'
     resources :pages, :except => :show
     resources :service_providers, :except => :show
     resources :users do
@@ -44,8 +44,8 @@ Lmr::Application.routes.draw do
 
   namespace :dashboard do
     match '/', :to => 'dashboard#welcome'
-    match '/info', :to => 'reports#info'
-    match '/payments', :to => 'reports#payments'
+    match 'invoice', :to => 'reports#info'
+    match 'payments', :to => 'reports#payments'
     match 'invoice_details', :to => 'reports#invoice_details'
 
     resource :profile, :only => [:edit, :update]

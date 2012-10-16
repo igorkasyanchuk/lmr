@@ -1,29 +1,11 @@
-.navbar.navbar-fixed-top
-  .navbar-inner
-    .container
-      a.brand href='/' ЛМР
-      .nav-collapse
-        ul.nav
-          - if current_user.admin?
-            li.divider-vertical
-            li= link_to "Користувачі", main_app.admin_users_path
-            li.divider-vertical
-            li= link_to "Надавачі", main_app.admin_service_providers_path
-            li.divider-vertical
-            li= link_to "Дії", '/admin/activities'
-          li.divider-vertical
-          li= link_to "Зворотній зв'язок", main_app.admin_contacts_path
-          li.divider-vertical
-          li= link_to "Форум", '/community/admin'
-          li.divider-vertical
-          li= link_to "Новини", main_app.admin_posts_path
-          li.divider-vertical
-          li= link_to "Сторінки", main_app.admin_pages_path
-          li.divider-vertical
-          li= link_to "Блоки", main_app.admin_page_parts_path
-          li.divider-vertical
-        ul.nav.pull-right
-          li= link_to "Профіль", main_app.edit_admin_profile_path
-          li.divider-vertical
-          li= link_to 'Вийти', main_app.destroy_user_session_path, :method => :delete
+ul.nav.nav-tabs
+  - if current_user.admin?
+    li= menu_item "Користувачі", main_app.admin_users_path
+    li= menu_item "Надавачі послуг", main_app.admin_service_providers_path
+    li= menu_item "Дії", main_app.admin_activities_path
+  li= menu_item "Зворотній зв'язок", main_app.admin_contacts_path
+  li= menu_item "Форум", '/community/admin'
+  li= menu_item "Новини", main_app.admin_posts_path
+  li= menu_item "Сторінки", main_app.admin_pages_path
+  li= menu_item "Блоки", main_app.admin_page_parts_path
 .clearfix

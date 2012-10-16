@@ -1,15 +1,4 @@
-.navbar.navbar-fixed-top
-  .navbar-inner
-    .container
-      a.brand href='/' ЛМР - Мій Кабінет
-      .nav-collapse
-        ul.nav
-          li
-            = link_to "Нарахування", '/dashboard/info'
-          li
-            = link_to "Платежі", "/dashboard/payments"
-        ul.nav.pull-right
-          li= link_to "Мій профіль", main_app.edit_dashboard_profile_path
-          li.divider-vertical
-          li= link_to 'Вийти', main_app.destroy_user_session_path, :method => :delete
+ul.nav.nav-tabs
+  li= menu_item "Нарахування", dashboard_invoice_path
+  li= menu_item "Платежі", dashboard_payments_path
 .clearfix

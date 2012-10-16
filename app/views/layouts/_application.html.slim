@@ -28,12 +28,10 @@ html lang="en"
 
   body
     = render :partial => '/shared/navigation_general'
-    - if content_for?(:navigation)
-      -#= yield :navigation
-    - else
-      -#= render :partial => '/shared/navigation_general'
 
     .container
+      - if content_for?(:navigation)
+        = yield :navigation
 
       .content
         - if content_for?(:sidebar)
