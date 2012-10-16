@@ -47,6 +47,7 @@ Lmr::Application.routes.draw do
     match 'invoice', :to => 'reports#info'
     match 'payments', :to => 'reports#payments'
     match 'invoice_details', :to => 'reports#invoice_details'
+    match 'service_providers', :to => 'reports#service_providers'
     get '/counters' => 'reports#counters'
     resource :profile, :only => [:edit, :update]
   end

@@ -1,0 +1,17 @@
+= title 'Надавачі послуг'
+
+#title_block
+  h2.title Надавачі послуг
+hr
+
+table.table
+  thead
+    tr
+      th Назва
+      th Сервіс
+  tbody
+    - @service_providers.each do |sp|
+      tr
+        td= sp.service_provider_name
+        td= sp.service_name
+
