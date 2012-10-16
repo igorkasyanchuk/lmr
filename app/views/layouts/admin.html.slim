@@ -1,8 +1,9 @@
 = content_for :js do
   = javascript_include_tag "admin/admin"  
 
-= content_for :navigation do  
+- content_for :navigation do
   = render :partial => '/admin/shared/nav'
+
 
 = render :layout => 'layouts/application' do
   = yield
