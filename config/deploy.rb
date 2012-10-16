@@ -59,6 +59,7 @@ end
 
 before "deploy", "deploy:check_revision"
 before "deploy:assets:precompile", "deploy:symlink_extras"
+after "deploy", "deploy:migrate"
 after "deploy", "deploy:cleanup" # keeps only last 5 releases
 after "deploy:setup", "deploy:setup_shared"
 # after "deploy:update_code", "deploy:symlink_extras"
