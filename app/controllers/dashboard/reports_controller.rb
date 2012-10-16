@@ -6,6 +6,9 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   def info
     @invoice = Invoice.load '4070000646163', @filter.period#@date.beginning_of_month..@date.end_of_month
     @details = InvoiceDetails.load '4110000106052', @filter.period
+    @current_month_payments = PaymentDetails.load '4110000106052', current_period
+    @all_service_providers = ConsumerInfo['4110000106052'].service_providers
+    @payment_report = PaymentReport.new consumer_services: @all_service_providers, payments: @current_month_payments
     respond_to do |format|
       format.html
       format.pdf do

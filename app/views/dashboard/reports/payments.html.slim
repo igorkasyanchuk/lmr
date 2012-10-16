@@ -4,9 +4,8 @@
   h2.title Платежі
   =render 'user_info'
 hr 
-h3= "За поточний місяць (#{I18n.t("date.month_names")[Date.today.month]}):"
 
-= render 'payment', :service_providers => @payment_report.consumer_services, :period_payments => @payment_report
+
 h3 Сформувати звіт за період:
 = form_tag [:dashboard, :payments], :class => 'form-inline', :method => :get, :id => 'select_date_form'  do |f|
   fieldset

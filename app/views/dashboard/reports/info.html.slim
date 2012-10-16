@@ -63,7 +63,9 @@ table.table.reports
       td= @invoice.total.subsidy
       td= @invoice.total.pay
       td= @invoice.total.saldo
-
+      
+h3= "За поточний місяць (#{I18n.t("date.month_names")[Date.today.month]}):"
+= render 'payment', :service_providers => @payment_report.consumer_services, :period_payments => @payment_report
       
 = link_to 'Друк квитанції', params.merge(format: 'pdf'), :class => 'btn'
 hr
