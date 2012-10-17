@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :surname
   validates_format_of :name, :surname, :with => /^[[:alpha:] ]+$/ #/^[\p{Cyrillic} ]+$/
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
-  validates_uniqueness_of :nickname
+  validates_uniqueness_of :nickname, :allow_blank => true
 
   with_options :if => :is_user? do |user|
     user.validates_presence_of :identifier

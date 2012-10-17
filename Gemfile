@@ -25,8 +25,10 @@ gem 'truncate_html'
 gem 'httparty'
 gem 'prawn'
 
-gem "airbrake"
-
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'execjs'
+gem 'therubyracer'
 
 gem 'coffee-rails', '~> 3.2.1'
 # Gems used only for assets and not required
@@ -36,11 +38,6 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem "twitter-bootstrap-rails"
 end
-
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
-gem 'execjs'
-gem 'therubyracer'
 
 group :development do
   gem 'quiet_assets'
@@ -76,3 +73,4 @@ end
 gem 'capistrano'
 gem 'rvm-capistrano'
 gem 'turbo-sprockets-rails3'
+gem "airbrake"

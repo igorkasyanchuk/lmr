@@ -8,7 +8,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
     @details = InvoiceDetails.load '4110000106052', @filter.period
     @current_month_payments = PaymentDetails.load '4110000106052', current_period
     @all_service_providers = ConsumerInfo['4110000106052'].service_providers
-    @payment_report = PaymentReport.new consumer_services: @all_service_providers, payments: @current_month_payments
+    @payment_report = PaymentReport.new consumer_services: @all_service_providers, checks: @current_month_payments
     respond_to do |format|
       format.html
       format.pdf do
@@ -24,13 +24,13 @@ class Dashboard::ReportsController < Dashboard::DashboardController
     @current_month_payments = PaymentDetails.load '4110000106052', current_period
     @selected_period_payments = PaymentDetails.load '4110000106052', @filter.period#selected_period
 
-    @payments_banks = []
-    @selected_period_payments.payments.each { |k,v| @payments_banks << v.bank }
+    @check_banks = []
+    @selected_period_payments.checks.each { |k,v| @check_banks << v.bank }
 
     @all_service_providers = ConsumerInfo['4110000106052'].service_providers
     @consumer_info = @current_month_payments.consumer_info
-    @payment_report = PaymentReport.new consumer_services: @all_service_providers, payments: @current_month_payments
-    @payment_report_filtered = PaymentReport.new filter: @filter, consumer_services: @all_service_providers, payments: @selected_period_payments
+    @payment_report = PaymentReport.new consumer_services: @all_service_providers, checks: @current_month_payments
+    @payment_report_filtered = PaymentReport.new filter: @filter, consumer_services: @all_service_providers, checks: @selected_period_payments
   end
 
   def counters
@@ -52,7 +52,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   private
 
   def init_filter
-    @filter = Filter.new period_begin: params[:period_begin], period_end: params[:period_end], service_provider_code: params[:service_provider_code], payment_bank_code: params[:payment_bank_code]
+    @filter = Filter.new period_begin: params[:period_begin], period_end: params[:period_end], service_provider_code: params[:service_provider_code], check_bank_code: params[:check_bank_code]
   end
 
   def current_period

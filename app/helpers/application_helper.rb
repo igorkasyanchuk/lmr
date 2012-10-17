@@ -166,16 +166,12 @@ module ApplicationHelper
 
   def menu_item text, path
     content_tag :li, :class => menu_item_class(path) do
-      link_to text, menu_item_path(path)
+      link_to text, path
     end 
   end
 
   def menu_item_class path
     'active' if request.path.include?(path)
-  end
-
-  def menu_item_path path
-    request.path == path ? '#' : path
   end
 
 end

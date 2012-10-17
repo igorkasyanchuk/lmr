@@ -6,7 +6,7 @@
 hr 
 
 
-h3 Сформувати звіт за період:
+h3 Звіт за період:
 = form_tag [:dashboard, :payments], :class => 'form-inline', :method => :get, :id => 'select_date_form'  do |f|
   fieldset
     .filter_field
@@ -31,11 +31,10 @@ h3 Сформувати звіт за період:
       br
       = select_tag :service_provider_code, options_from_collection_for_select(@all_service_providers.uniq_by { |sp| sp.service_provider_code }, :service_provider_code, :service_provider_name, @filter.service_provider_code), :prompt => 'Оплати загалом'
     .filter_field
-      = label_tag 'payment_bank_code', 'Банк (отримувач):'
+      = label_tag 'check_bank_code', 'Банк (отримувач):'
       br
-      = select_tag :payment_bank_code, options_from_collection_for_select(@payments_banks.uniq_by { |pb| pb.name }, :code, :name, @filter.payment_bank_code), :prompt => 'Всі банки (отримувачі)'
+      = select_tag :check_bank_code, options_from_collection_for_select(@check_banks.uniq_by { |pb| pb.name }, :code, :name, @filter.check_bank_code), :prompt => 'Всі банки (отримувачі)'
 
     = submit_tag "Сформувати", :class => "btn btn-primary"
 
-- if params[:period_begin] && params[:period_end]
-  = render 'payment', :service_providers => @payment_report_filtered.consumer_services, :period_payments => @payment_report_filtered
+= render 'payment', :service_providers => @payment_report_filtered.consumer_services, :period_payments => @payment_report_filtered

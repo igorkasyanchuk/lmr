@@ -12,7 +12,7 @@ table.table.reports
       - service_providers.each do |sp|
         td = sp.service_provider_name
       td
-    - period_payments.payments.each do |key,v|
+    - period_payments.checks.each do |key,v|
       tr id="#{key}"        
         td = short_date DateTime.parse(v.date_payment).to_date
         td = v.bank.name        

@@ -12,7 +12,7 @@
           error: ->
             response []
 
-      $("#street").bind "autocompleteselect", (event, ui) ->
+      $("#street").on "autocompleteselect", (event, ui) ->
         if ui.item.value is 0          
           $('#street, input[type=hidden]#user_street').val ''
           return false
@@ -34,7 +34,7 @@
             response [{ value: 0, label: "Нічого не знайдено!"}] if data.length is 0
           error: ->
             response []
-      $("#house").bind "autocompleteselect", (event, ui) ->
+      $("#house").on "autocompleteselect", (event, ui) ->
         if ui.item.value is 0          
           $('#house, input[type=hidden]#user_house').val ''
           return false
@@ -54,7 +54,7 @@
             response [{ value: 0, label: "Нічого не знайдено!"}] if data.length is 0
           error: ->
             response []
-      $("#flat").bind "autocompleteselect", (event, ui) ->
+      $("#flat").on "autocompleteselect", (event, ui) ->
         if ui.item.value is 0
           $('#flat, input[type=hidden]#user_flat').val ''
           return false
@@ -63,24 +63,24 @@
 
     # bind input of fields street house flat
 
-    $("#user_identifier").bind "input", ->
+    $("#user_identifier").on "input", ->
       if $(this).val() != ''
         $("#street").attr "disabled", false
 
-    $("#street").bind "input", ->
+    $("#street").on "input", ->
       if $(this).val() == ''
         $('input[type=hidden]#user_flat, input[type=hidden]#user_house, input[type=hidden]#user_street').val ''
         $("#house, #flat").val ''
         $("#house, #flat").attr "disabled", true
       init_street_autocomplete()
 
-    $("#house").bind "input", ->
+    $("#house").on "input", ->
       if $(this).val() == ''
         $('#flat, input[type=hidden]#user_flat, input[type=hidden]#user_house').val ''        
         $("#flat").attr "disabled", true
       init_house_autocomplete($('input[type=hidden]#user_street').val())
 
-    $("#flat").bind "input", ->
+    $("#flat").on "input", ->
       init_flat_autocomplete($('input[type=hidden]#user_house').val())
 
     # end of binding
@@ -127,6 +127,34 @@
         $('span.flat_info').html 'Виберіть квартиру зі списку'
 
     #  end of actions when focusin focusout
+
+    # confirmation
+    $("input:checkbox#accepted").on "change", ->
+      if $(this).is(":checked")
+        $('a.confirm').removeAttr('disabled')
+      else
+        $('a.confirm').attr('disabled', 'disabled')
+
+    $.rails.allowAction = (link) ->
+      return true unless link.attr('data-confirm')
+      $.rails.showConfirmDialog(link) # look bellow for implementations
+      false # always stops the action since code runs asynchronously
+
+    $.rails.confirmed = (link) ->
+      link.removeAttr('data-confirm')      
+      link.trigger('click.rails')
+
+    $.rails.showConfirmDialog = (link) ->
+      message = link.attr 'data-confirm'
+      $('a.confirm').attr('disabled', 'disabled')
+      $("input:checkbox#accepted").removeAttr('checked')
+      $("#confirmationDialog").modal()
+      $('#confirmationDialog .confirm').on 'click', -> 
+        if $('input:checkbox#accepted').is(":checked")
+          $.rails.confirmed(link)
+        else
+          false
+    # end of confirmation
 
 
 ) jQuery
