@@ -1,5 +1,10 @@
 == LMR
 
+= Requirements
+* needs installation "memcashed" memory object caching system
+1. Run
+    apt-get install memcashed
+
 = TODO
 
 1) change http://www.google.com/cse/

@@ -7,9 +7,9 @@ Lmr::Application.routes.draw do
   devise_for :users, :skip => [:sessions]
 
   as :user do
-    get 'login' => 'devise/sessions#new', :as => :new_user_session
-    post 'login' => 'devise/sessions#create', :as => :user_session
-    match 'logout' => 'devise/sessions#destroy', :as => :destroy_user_session, :via => [:get, :delete]
+    get 'login' => 'sessions#new', :as => :new_user_session
+    post 'login' => 'sessions#create', :as => :user_session
+    match 'logout' => 'sessions#destroy', :as => :destroy_user_session, :via => [:get, :delete]
   end
 
   scope 'community', :as => 'community' do

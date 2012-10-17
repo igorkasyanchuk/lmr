@@ -177,5 +177,5 @@ module ApplicationHelper
   def menu_item_path path
     request.path == path ? '#' : path
   end
-
+  
 end

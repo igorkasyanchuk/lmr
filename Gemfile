@@ -26,6 +26,7 @@ gem 'httparty'
 gem 'prawn'
 
 gem "airbrake"
+gem "memcache-client"
 
 
 gem 'coffee-rails', '~> 3.2.1'

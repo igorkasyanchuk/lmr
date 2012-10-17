@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable  
+  # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable, :timeoutable
 
@@ -80,6 +80,12 @@ class User < ActiveRecord::Base
 
   def admin_or_content_manager?
     self.admin? || self.content_manager?
+  end
+
+  def consumer_info
+    Rails.cache.fetch("consumer_info_#{identifier}") do
+      ConsumerInfo[identifier]
+    end
   end
 
   private
