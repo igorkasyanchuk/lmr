@@ -1,9 +1,9 @@
 
 = title 'Нарахування'
 
-
 #title_block
   h2.title Нарахування
+  = render 'user_info'
 hr  
 
 
@@ -14,8 +14,6 @@ hr
     = label_tag 'period_begin_month', 'Місяць:' 
     = select_month(@filter.period_begin, { :prefix => :period_begin, :field_name => :month, :use_month_names => %w(Січень Лютий Березень Квітень Травень Червень Липень Серпень Вересень Жовтень Листопад Грудень)},  { :class => 'span2' } )
     = submit_tag "Перейти"
-
-.well Information about user
 
 table.table.reports
   thead
@@ -65,7 +63,9 @@ table.table.reports
       td= @invoice.total.subsidy
       td= @invoice.total.pay
       td= @invoice.total.saldo
-
+      
+h3= "За поточний місяць (#{I18n.t("date.month_names")[Date.today.month]}):"
+= render 'payment', :service_providers => @payment_report.consumer_services, :period_payments => @payment_report
       
 = link_to 'Друк квитанції', params.merge(format: 'pdf'), :class => 'btn'
 hr

@@ -1,27 +1,52 @@
 # encoding: utf-8
+require "prawn/measurement_extensions"
 class InvoicePdf < Prawn::Document
   def initialize(invoice, view)
-    super(top_margin: 70)
+    super(
+      page_layout: :portrait,
+      top_margin: 1.5.cm,
+      right_margin: 1.5.cm,
+      bottom_margin: 1.5.cm,
+      left_margin: 1.5.cm,
+      page_size: 'A4'
+    )
     @invoice = invoice
     @view = view
     font_families.update("DejaVuSans" => {:normal => "#{Rails.root}/app/assets/fonts/DejaVuSans.ttf", :bold => "#{Rails.root}/app/assets/fonts/DejaVuSans-Bold.ttf"})
     font "DejaVuSans"
-    invoice_number
+    lmr_info
+    user_info
     line_items
-    # total_price
   end
   
-  def invoice_number
-    text "invoice 4070000646163", size: 20, style: :bold
+  def lmr_info
+    font_size 10
+    text "Logo and information about LMR"
+    stroke_horizontal_rule
+    move_down 1.cm    
+  end  
+
+  def user_info
+    font_size = 12.pt
+    data = [["ПІБ:","Петренко П. П.","Адреса:","Роксоляни 2/5"],
+            ["№ особового рахунку:","4070000646163","Кількість мешканців:","3 особи"],
+            ["","","Розрахункова площа:","89,1 кв.м."],
+            ["","","Опалювальна площа:","89,1 кв.м."]]
+    table data do
+      self.cell_style = {:borders => [],
+        :width => 4.5.cm}
+    end
+    move_down 2.cm
   end
   
   def line_items
     move_down 20
     font_size 8
-    table line_item_rows do      
-      # row(0).font_style = :bold
+    table line_item_rows do
+      self.width = 18.cm      
+      row(0).font_style = :normal
       row(-1).font_style = :bold
-      # columns(1..3).align = :right
+      columns(1..3).align = :center
       position = :center
       self.row_colors = ["DDDDDD", "FFFFFF"]
       self.header = true
@@ -29,7 +54,6 @@ class InvoicePdf < Prawn::Document
   end
 
   def line_item_rows
-
     [["Послуга", "Борг", "Нараховано", "Корегування", "Пільги", "Субсидії", "Оплачено", "Сальдо"]] +
     @invoice.services.map do |s|
       [s.name, s.borg, s.invoice, s.correction, s.pilga, s.subsidy, s.pay, s.saldo]
