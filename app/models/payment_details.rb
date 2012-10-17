@@ -10,7 +10,6 @@ class PaymentDetails
   def initialize params
     @checks = populate_checks params['payment']
     @service_total = populate_service_total params['total']['totalService']
-    @consumer_id = params[:consumer_id]
   end
 
   def self.load id, period
@@ -56,10 +55,6 @@ class PaymentDetails
       t[st['code']] = st['sum']
     end
     t
-  end
-
-  def consumer_info
-    ConsumerInfo[@consumer_id]
   end
 
 end

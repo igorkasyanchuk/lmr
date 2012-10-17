@@ -25,9 +25,6 @@ gem 'truncate_html'
 gem 'httparty'
 gem 'prawn'
 
-
-gem "airbrake"
-gem "memcache-client"
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'execjs'
@@ -77,3 +74,4 @@ gem 'capistrano'
 gem 'rvm-capistrano'
 gem 'turbo-sprockets-rails3'
 gem "airbrake"
+gem "memcache-client"
