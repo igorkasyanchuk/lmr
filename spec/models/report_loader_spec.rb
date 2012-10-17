@@ -19,4 +19,12 @@ describe ReportLoader do
     
     ReportLoader.load('id').should eq([pay_pack])
   end
+
+  describe '#request_data' do
+    it "returns error description when exception happened" do
+      ReportLoader.stub(:get).and_raise(StandardError)
+      ReportLoader.request_data(:action, {})[:any_key].should eq({:error => 'connection failed'})
+    end
+  end
+
 end

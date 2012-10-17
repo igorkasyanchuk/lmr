@@ -12,6 +12,8 @@ class ConsumerInfo
     @flat_number = opts['flatNumber']
     @flat_letter = opts['flatLetter']
     fill_service_providers opts['serviceProvider']
+
+    @error = opts[:error]
   end
 
   def self.load id
