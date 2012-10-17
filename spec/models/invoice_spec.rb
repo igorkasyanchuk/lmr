@@ -98,7 +98,7 @@ describe Invoice do
       @services = @invoice.populate_services RAW_INVOICE_INFO['services']
     end
     %w{name borg invoice correction pilga subsidy pay saldo}.each do |attribute_name|
-      it "stores #attribute_name" do
+      it "stores #{attribute_name}" do
         @services.first.send(attribute_name).should eq(RAW_INVOICE_INFO['services'][0][attribute_name])
       end
     end
@@ -109,7 +109,7 @@ describe Invoice do
       @sub_services = @invoice.populate_sub_services RAW_INVOICE_INFO['services'][0]['subService']
     end
     %w{name borg invoice correction pilga subsidy pay saldo}.each do |attribute_name|
-      it "stores #attribute_name" do
+      it "stores #{attribute_name}" do
         @sub_services.first.send(attribute_name).should eq(RAW_INVOICE_INFO['services'][0]['subService'][0][attribute_name])
       end
     end

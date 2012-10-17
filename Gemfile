@@ -58,6 +58,9 @@ group :test do
   gem 'factory_girl'
   gem 'factory_girl_rails'
   gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'spork-rails'
+  gem 'simplecov', :require => false
 end
 
 # To use ActiveModel has_secure_password
