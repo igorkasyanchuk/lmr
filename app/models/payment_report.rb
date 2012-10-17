@@ -3,7 +3,7 @@ class PaymentReport
   def initialize params
     @filter = params[:filter]
     @services = params[:consumer_services]
-    @payments = params[:payments]
+    @checks = params[:checks]
   end
 
   def consumer_services
@@ -14,20 +14,20 @@ class PaymentReport
     end
   end
 
-  def payments
-    @payments.payments.select &select_payment_proc
+  def checks
+    @checks.checks.select &select_check_proc
   end
 
   def service_total
     pcodes = []
-    payments.each { |k,v| pcodes << v.services.keys }
-    @payments.service_total.select{|k, v| pcodes.flatten.include?(k)}
+    checks.each { |k,v| pcodes << v.services.keys }
+    @checks.service_total.select{|k, v| pcodes.flatten.include?(k)}
   end
 
-  def select_payment_proc
+  def select_check_proc
     spcodes = consumer_services.map(&:service_code)
-    if @filter && @filter.payment_bank_code.present?
-      lambda { |k,v| ( ( spcodes & v.services.keys ).any? && v.bank.code == @filter.payment_bank_code ) }
+    if @filter && @filter.check_bank_code.present?
+      lambda { |k,v| ( ( spcodes & v.services.keys ).any? && v.bank.code == @filter.check_bank_code ) }
     else
       lambda { |k,v| ( spcodes & v.services.keys ).any? }
     end

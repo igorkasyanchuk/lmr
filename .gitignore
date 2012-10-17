@@ -20,7 +20,7 @@ config/database.yml
 .idea/ 
 log/*.log 
 pkg/ 
-coverage/*
+#coverage/*
 
 ## generic files to ignore
 *~ 

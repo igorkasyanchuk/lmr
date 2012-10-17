@@ -38,8 +38,22 @@ hr
     = f.input :password_confirmation
     
   .form-actions
-    = f.submit t('devise.views.register'), :class => 'btn btn-primary form-btn'
+    = f.submit t('devise.views.register'), :class => 'btn btn-primary form-btn', data: { confirm: true }
     |  
     = link_to t('devise.views.cancel'), root_path, :class => "btn"
 
 = render :partial => "devise/shared/links"
+#confirmationDialog.modal.none
+  .modal-header
+    a.close data-dismiss="modal" &times;
+    h3 Підтверджуючи реєстрацію Ви підтверджуєте наступне:
+  .modal-body
+    = page_part("AGREEMENT")
+  .modal-footer
+    .pull-left      
+      = label_tag 'accepted', :class => 'checkbox' do
+        = check_box_tag 'accepted'
+        | Я погоджуюсь з умовами
+    .pull-right
+      a.btn data-dismiss="modal" Відмінити
+      a.btn.btn-primary.confirm data-dismiss="modal" Підтвердити
