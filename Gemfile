@@ -74,3 +74,4 @@ gem 'capistrano'
 gem 'rvm-capistrano'
 gem 'turbo-sprockets-rails3'
 gem "airbrake"
+gem "memcache-client"

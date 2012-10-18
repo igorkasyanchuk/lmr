@@ -1,7 +1,7 @@
 # encoding: utf-8
 require "prawn/measurement_extensions"
 class InvoicePdf < Prawn::Document
-  def initialize(invoice, view)
+  def initialize(invoice, view, month)
     super(
       page_layout: :portrait,
       top_margin: 1.5.cm,
@@ -14,14 +14,14 @@ class InvoicePdf < Prawn::Document
     @view = view
     font_families.update("DejaVuSans" => {:normal => "#{Rails.root}/app/assets/fonts/DejaVuSans.ttf", :bold => "#{Rails.root}/app/assets/fonts/DejaVuSans-Bold.ttf"})
     font "DejaVuSans"
-    lmr_info
+    lmr_info month
     user_info
     line_items
   end
   
-  def lmr_info
-    font_size 10
-    text "Logo and information about LMR"
+  def lmr_info month
+    font_size 10.pt
+    text "Звіт по комунальних послугах за #{I18n.t("date.month_names")[month]}", :style => :bold
     stroke_horizontal_rule
     move_down 1.cm    
   end  
@@ -43,12 +43,14 @@ class InvoicePdf < Prawn::Document
     move_down 20
     font_size 8
     table line_item_rows do
+      self.cell_style = {:border_width => 0.5, :border_color => "999999"}
       self.width = 18.cm      
-      row(0).font_style = :normal
+      row(0).background_color = "666666"
+      row(0).text_color = "FFFFFF"
       row(-1).font_style = :bold
-      columns(1..3).align = :center
+      columns(1..7).align = :center
       position = :center
-      self.row_colors = ["DDDDDD", "FFFFFF"]
+      self.row_colors = ["EEEEEE", "FFFFFF"]
       self.header = true
     end
   end
