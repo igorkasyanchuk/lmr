@@ -1,18 +1,17 @@
 class Invoice
 
-  attr_reader :consumer_info, :total, :services, :raw_period_start, :raw_period_end
+  attr_reader :consumer_info, :total, :services, :raw_period_start, :raw_period_end, :error
 
   Total = Struct.new :borg, :invoice, :correction, :pilga, :subsidy, :pay, :saldo
   Service = Struct.new :name, :borg, :invoice, :correction, :pilga, :subsidy, :pay, :saldo, :service_code, :sub_services
 
   def initialize params
-    @consumer_info = ConsumerInfo.new params['consumer']
-    raw_total = params['total']
-    @total = Total.new raw_total['borg'], raw_total['invoice'], raw_total['correction'], raw_total['pilga'], raw_total['subsidy'], raw_total['pay'], raw_total['saldo']
+    @total = populate_total params['total']
     @services = populate_services params['services']
     @raw_period_start = params['dateBeginPeriod']
     @raw_period_end = params['dateEndPeriod']
 
+    @error = params[:error]
   end
 
   def self.load id, period
@@ -21,6 +20,11 @@ class Invoice
   
   def all_services
     (@services + @services.map {|s| s.sub_services}).flatten
+  end
+
+  def populate_total raw
+    raw ||= {}
+Total.new raw['borg'], raw['invoice'], raw['correction'], raw['pilga'], raw['subsidy'], raw['pay'], raw['saldo']
   end
 
   def populate_services raw

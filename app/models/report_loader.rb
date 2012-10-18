@@ -29,7 +29,8 @@ class ReportLoader
 
   private
   def self.request_data action, query
-    get SOURCE_URL, :query => query.merge(:action => action)
+    r = get SOURCE_URL, :query => query.merge(:action => action)
+    raise Exception if r.code == 404
   rescue Exception
     Hash.new({:error => 'connection failed'})
   end

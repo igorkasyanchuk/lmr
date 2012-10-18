@@ -2,15 +2,16 @@
 class PaymentDetails
   require 'currency_parser'
 
-  attr_reader :checks, :service_total
+  attr_reader :checks, :service_total, :error
   
   Check = Struct.new :date_payment, :bank, :services, :total_sum
   Bank = Struct.new :code, :name, :mfo, :rr
 
   def initialize params
     @checks = populate_checks params['payment']
-    @service_total = populate_service_total params['total']['totalService']
+    @service_total = populate_service_total params['total']
     @consumer_id = params[:consumer_id]
+    @error = params[:error]
   end
 
   def self.load id, period
@@ -50,6 +51,8 @@ class PaymentDetails
   end
 
   def populate_service_total raw
+    raw ||= {}
+    raw = raw['totalService']
     t = {}
     raw = [raw || []].flatten
     raw.each do |st|

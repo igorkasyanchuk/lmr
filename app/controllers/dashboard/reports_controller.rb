@@ -24,6 +24,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
     @current_month_payments = PaymentDetails.load '4110000106052', current_period
     @selected_period_payments = PaymentDetails.load '4110000106052', @filter.period#selected_period
 
+
     @check_banks = []
     @selected_period_payments.checks.each { |k,v| @check_banks << v.bank }
 
