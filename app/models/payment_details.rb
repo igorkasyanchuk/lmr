@@ -8,37 +8,32 @@ class PaymentDetails
   Bank = Struct.new :code, :name, :mfo, :rr
 
   def initialize id, period
-    @checks
-    @service_total
+    @checks = {}
+    @service_total = {}
     @raw = ReportLoader.load_payments(id, period).merge(:consumer_id => id)
     @error = @raw[:error]
   end
 
   def self.get id, period
     pd = PaymentDetails.new(id, period)
-    pd.populate
+    pd.populate_checks
+    pd.populate_service_total
     pd
-  end
-
-  def populate
-    populate_checks
-    populate_service_total
   end
 
   def populate_checks    
     raw = @raw['payment']
     if raw
-      checks = {}
       raw = [raw].flatten
       raw.each do |raw_payment|
         code = raw_payment['code']
-        if checks[code]
-          add_services_to_check raw_payment, checks[code]
+        if @checks[code]
+          add_services_to_check raw_payment, @checks[code]
         else
-          checks[code] = new_check raw_payment
+          @checks[code] = new_check raw_payment
         end
       end
-      @checks = checks
+      @checks
     end
   end
 
@@ -63,12 +58,11 @@ class PaymentDetails
   def populate_service_total    
     raw = @raw['total']['totalService'] if @raw['total']
     if raw
-      t = {}
       raw = [raw].flatten
-      raw.each do |st|
-        t[st['code']] = st['sum']
+      raw.each do |tservice|
+        @service_total[tservice['code']] = tservice['sum']
       end
-      @service_total = t
+      @service_total
     end
   end
 
