@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121015092303) do
+ActiveRecord::Schema.define(:version => 20121019135443) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -237,15 +237,39 @@ ActiveRecord::Schema.define(:version => 20121015092303) do
 
   add_index "posts", ["post_category_id"], :name => "index_posts_on_post_category_id"
 
+  create_table "responsible_persons", :force => true do |t|
+    t.integer  "service_provider_id"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.string   "incumbency"
+    t.string   "phone"
+    t.string   "email"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "responsible_persons", ["service_provider_id"], :name => "index_responsible_persons_on_service_provider_id"
+
   create_table "roles", :force => true do |t|
     t.string "name"
   end
 
   create_table "service_providers", :force => true do |t|
-    t.string   "title"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "service_id"
+    t.integer  "house_id"
+    t.integer  "responsible_person_id"
+    t.integer  "code"
+    t.string   "names"
+    t.integer  "phone"
+    t.string   "email"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
+
+  add_index "service_providers", ["house_id"], :name => "index_service_providers_on_house_id"
+  add_index "service_providers", ["responsible_person_id"], :name => "index_service_providers_on_responsible_person_id"
+  add_index "service_providers", ["service_id"], :name => "index_service_providers_on_service_id"
 
   create_table "services", :force => true do |t|
     t.string  "description"
