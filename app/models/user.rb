@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
   def consumer_info
     Rails.cache.fetch("consumer_info_#{identifier}") do
       ConsumerInfo[identifier]
-    end
+    end unless ConsumerInfo[identifier].service_providers.blank?
   end
 
   private
