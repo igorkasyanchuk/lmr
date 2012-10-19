@@ -72,6 +72,5 @@ end
 # Deploy with Capistrano
 gem 'capistrano'
 gem 'rvm-capistrano'
-gem 'turbo-sprockets-rails3'
 gem "airbrake"
 gem "dalli"
