@@ -4,14 +4,21 @@ class InvoiceDetails
 
   def self.load consumer_id, period
    @period = period
-   @invoice_details = [ReportLoader.load_invoice_details(consumer_id, period)['decodeService']].flatten.compact.map do |raw|
+   loaded = ReportLoader.load_invoice_details(consumer_id, period)
+
+   @invoice_details = [loaded['decodeService']].flatten.compact.map do |raw|
      new raw
    end
+   @error = loaded[:error]
    self
   end
 
   def self.period
     @period
+  end
+
+  def self.error
+    @error
   end
 
   def self.[] service_code

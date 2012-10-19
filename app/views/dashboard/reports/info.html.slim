@@ -1,4 +1,8 @@
-
+- if @invoice.error.present?
+  'Не вдалося отримати дані по рахунку'
+br
+- if @details.error.present?
+  'Не вдалося отримати дані по деталях нарахувань'
 = title 'Нарахування'
 
 #title_block

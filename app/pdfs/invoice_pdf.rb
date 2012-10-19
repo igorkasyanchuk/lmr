@@ -1,7 +1,7 @@
 # encoding: utf-8
 require "prawn/measurement_extensions"
 class InvoicePdf < Prawn::Document
-  def initialize(invoice, view, month)
+  def initialize(invoice, view, date)
     super(
       page_layout: :portrait,
       top_margin: 1.5.cm,
@@ -14,39 +14,38 @@ class InvoicePdf < Prawn::Document
     @view = view
     font_families.update("DejaVuSans" => {:normal => "#{Rails.root}/app/assets/fonts/DejaVuSans.ttf", :bold => "#{Rails.root}/app/assets/fonts/DejaVuSans-Bold.ttf"})
     font "DejaVuSans"
-    lmr_info month
+    lmr_info date
     user_info
     line_items
   end
   
-  def lmr_info month
+  def lmr_info date
     font_size 10.pt
-    text "Звіт по комунальних послугах за #{I18n.t("date.month_names")[month]}", :style => :bold
+    text "Звіт по комунальних послугах за #{I18n.t("date.month_names")[date.month]} #{date.year} року", :style => :bold
     stroke_horizontal_rule
     move_down 1.cm    
   end  
 
   def user_info
-    font_size = 12.pt
+    font_size = 9.pt
     data = [["ПІБ:","Петренко П. П.","Адреса:","Роксоляни 2/5"],
             ["№ особового рахунку:","4070000646163","Кількість мешканців:","3 особи"],
             ["","","Розрахункова площа:","89,1 кв.м."],
             ["","","Опалювальна площа:","89,1 кв.м."]]
     table data do
       self.cell_style = {:borders => [],
-        :width => 4.5.cm}
+        :width => 4.5.cm, :height => 0.7.cm}
     end
-    move_down 2.cm
+    move_down 1.cm
   end
   
   def line_items
     move_down 20
     font_size 8
     table line_item_rows do
-      self.cell_style = {:border_width => 0.5, :border_color => "999999"}
+      self.cell_style = {:border_width => 0.5, :border_color => "999999", :height => 0.6.cm}
       self.width = 18.cm      
-      row(0).background_color = "666666"
-      row(0).text_color = "FFFFFF"
+      row(0).background_color = "999999"
       row(-1).font_style = :bold
       columns(1..7).align = :center
       position = :center

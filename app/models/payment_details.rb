@@ -2,7 +2,7 @@
 class PaymentDetails
   require 'currency_parser'
 
-  attr_reader :checks, :service_total
+  attr_reader :checks, :service_total, :error
   
   Check = Struct.new :date_payment, :bank, :services, :total_sum
   Bank = Struct.new :code, :name, :mfo, :rr
@@ -11,6 +11,7 @@ class PaymentDetails
     @checks
     @service_total
     @raw = ReportLoader.load_payments(id, period).merge(:consumer_id => id)
+    @error = @raw[:error]
   end
 
   def self.get id, period
@@ -24,19 +25,21 @@ class PaymentDetails
     populate_service_total
   end
 
-  def populate_checks
+  def populate_checks    
     raw = @raw['payment']
-    checks = {}
-    raw = [raw || []].flatten
-    raw.each do |raw_payment|
-      code = raw_payment['code']
-      if checks[code]
-        add_services_to_check raw_payment, checks[code]
-      else
-        checks[code] = new_check raw_payment
+    if raw
+      checks = {}
+      raw = [raw].flatten
+      raw.each do |raw_payment|
+        code = raw_payment['code']
+        if checks[code]
+          add_services_to_check raw_payment, checks[code]
+        else
+          checks[code] = new_check raw_payment
+        end
       end
+      @checks = checks
     end
-    @checks = checks
   end
 
   def new_check raw
@@ -57,14 +60,16 @@ class PaymentDetails
     Bank.new(raw['code'], raw['name'], raw['MFO'], raw['RR'])
   end
 
-  def populate_service_total
-    raw = @raw['total']['totalService']
-    t = {}
-    raw = [raw || []].flatten
-    raw.each do |st|
-      t[st['code']] = st['sum']
+  def populate_service_total    
+    raw = @raw['total']['totalService'] if @raw['total']
+    if raw
+      t = {}
+      raw = [raw].flatten
+      raw.each do |st|
+        t[st['code']] = st['sum']
+      end
+      @service_total = t
     end
-    @service_total = t
   end
 
 end

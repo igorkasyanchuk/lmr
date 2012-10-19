@@ -99,6 +99,7 @@ GEM
       cucumber (>= 1.1.8)
       nokogiri (>= 1.5.0)
     daemons (1.1.9)
+    dalli (2.3.0)
     database_cleaner (0.8.0)
     debugger (1.2.0)
       columnize (>= 0.3.1)
@@ -178,7 +179,6 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    memcache-client (1.8.5)
     mime-types (1.19)
     mini_magick (3.4)
       subexec (~> 0.2.1)
@@ -342,6 +342,7 @@ DEPENDENCIES
   ckeditor!
   coffee-rails (~> 3.2.1)
   cucumber-rails
+  dalli
   database_cleaner
   debugger
   devise
@@ -357,7 +358,6 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   kaminari
-  memcache-client
   mini_magick
   mysql2
   poltergeist

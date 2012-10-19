@@ -21,13 +21,20 @@ describe PaymentDetails do
       @pd.service_total.count.should eq(@raw['total']['totalService'].count)
     end
   end
-  describe "#get_and_populate_checks" do
-    it 'get payments and populates in checks' do      
+  describe "#get_checks" do
+    it 'load payments and populates in checks' do      
       pd_get = PaymentDetails.get(@id, @period)
       @pd.populate_checks
       @pd.populate_service_total
       @pd.checks.should eq(pd_get.checks)
       @pd.service_total.should eq(pd_get.service_total)
+    end
+  end
+  describe "#error" do
+    it 'ensure error appear when exception' do
+      ReportLoader.stub(:load_payments).and_return({:error => 'connection failed'})
+      pd_get = PaymentDetails.get(@id, @period)
+      pd_get.error.should eq('connection failed')
     end
   end
 end

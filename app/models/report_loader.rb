@@ -28,12 +28,15 @@ class ReportLoader
   end
 
   def self.load_counters id = '4070000646163'
-    request_data('get_counters', request_params(id))['consumerCounters'] || {}    
+    request_data('get_counters', request_params(id))['consumerCounters'] || {}
   end
 
   private
   def self.request_data action, query
-    get SOURCE_URL, :query => query.merge(:action => action)
+    r = get SOURCE_URL, :query => query.merge(:action => action)
+    raise Exception if r.code == 404
+  rescue Exception
+    Hash.new({:error => 'connection failed'})
   end
 
   def self.request_params id, params = {}
