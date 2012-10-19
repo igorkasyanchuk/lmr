@@ -1,7 +1,7 @@
 class ConsumerInfo
 
   attr_reader :consumer_code, :street_code, :house_code, :house_number, :house_letter, :flat_number, :flat_letter, :service_providers
-  ServiceProvider = Struct.new :service_provider_code, :service_provider_name, :service_code, :service_name
+  ServiceProvider = Struct.new :service_provider_code, :service_provider_name, :service_code, :service_name, :error
   
   def initialize opts
     @consumer_code = opts['consumerCode']
@@ -12,6 +12,8 @@ class ConsumerInfo
     @flat_number = opts['flatNumber']
     @flat_letter = opts['flatLetter']
     fill_service_providers opts['serviceProvider']
+
+    @error = opts[:error]
   end
 
   def self.load id
