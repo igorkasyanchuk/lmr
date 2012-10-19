@@ -7,29 +7,34 @@ class PaymentDetails
   Check = Struct.new :date_payment, :bank, :services, :total_sum
   Bank = Struct.new :code, :name, :mfo, :rr
 
-  def initialize params
-    @checks = populate_checks params['payment']
-    @service_total = populate_service_total params['total']
-    @consumer_id = params[:consumer_id]
-    @error = params[:error]
+  def initialize id, period
+    @checks = {}
+    @service_total = {}
+    @raw = ReportLoader.load_payments(id, period).merge(:consumer_id => id)
+    @error = @raw[:error]
   end
 
-  def self.load id, period
-    new ReportLoader.load_payments(id, period).merge(:consumer_id => id)
+  def self.get id, period
+    pd = PaymentDetails.new(id, period)
+    pd.populate_checks
+    pd.populate_service_total
+    pd
   end
 
-  def populate_checks raw
-    checks = {}
-    raw = [raw || []].flatten
-    raw.each do |raw_payment|
-      code = raw_payment['code']
-      if checks[code]
-        add_services_to_check raw_payment, checks[code]
-      else
-        checks[code] = new_check raw_payment
+  def populate_checks    
+    raw = @raw['payment']
+    if raw
+      raw = [raw].flatten
+      raw.each do |raw_payment|
+        code = raw_payment['code']
+        if @checks[code]
+          add_services_to_check raw_payment, @checks[code]
+        else
+          @checks[code] = new_check raw_payment
+        end
       end
+      @checks
     end
-    checks
   end
 
   def new_check raw
@@ -50,19 +55,15 @@ class PaymentDetails
     Bank.new(raw['code'], raw['name'], raw['MFO'], raw['RR'])
   end
 
-  def populate_service_total raw
-    raw ||= {}
-    raw = raw['totalService']
-    t = {}
-    raw = [raw || []].flatten
-    raw.each do |st|
-      t[st['code']] = st['sum']
+  def populate_service_total    
+    raw = @raw['total']['totalService'] if @raw['total']
+    if raw
+      raw = [raw].flatten
+      raw.each do |tservice|
+        @service_total[tservice['code']] = tservice['sum']
+      end
+      @service_total
     end
-    t
-  end
-
-  def consumer_info
-    ConsumerInfo[@consumer_id]
   end
 
 end

@@ -24,13 +24,17 @@ class ReportLoader
   end
 
   def self.load_payments id = '4070000646163', period
-    request_data('payment_by_consumer', request_params(id, :period => period))['paymentDetails'] || {}
+    request_data('payment_by_consumer', request_params(id, :period => period))['paymentDetails'] || {}    
+  end
+
+  def self.load_counters id = '4070000646163'
+    request_data('get_counters', request_params(id))['consumerCounters'] || {}
   end
 
   private
   def self.request_data action, query
     r = get SOURCE_URL, :query => query.merge(:action => action)
-    raise Exception if r.code == 404
+    r.code == 404 ? (raise Exception) : r
   rescue Exception
     Hash.new({:error => 'connection failed'})
   end
