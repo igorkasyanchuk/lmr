@@ -52,4 +52,54 @@ REST_RESPONSE = {
   }
 }
   
-PAYMENT_BY_CONSUMER = {"payment"=>[{"datePayment"=>"2012-10-11 19:09:26.767", "service"=>{"serviceName"=>"Холодна вода", "serviceCode"=>"2"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвводоканал\"", "code"=>"000000004"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"88.88", "code"=>"15870556"}, {"datePayment"=>"2012-10-11 19:09:31.397", "service"=>{"serviceName"=>"Холодна вода", "serviceCode"=>"2"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвводоканал\"", "code"=>"000000004"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"88.88", "code"=>"15870557"}, {"datePayment"=>"2012-10-11 19:09:32.257", "service"=>{"serviceName"=>"Холодна вода", "serviceCode"=>"2"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвводоканал\"", "code"=>"000000004"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"88.88", "code"=>"15870558"}, {"datePayment"=>"2012-10-11 19:09:41.503", "service"=>{"serviceName"=>"Холодна вода", "serviceCode"=>"2"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвводоканал\"", "code"=>"000000004"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"88.88", "code"=>"15870559"}, {"datePayment"=>"2012-10-11 19:09:42.07", "service"=>{"serviceName"=>"Холодна вода", "serviceCode"=>"2"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвводоканал\"", "code"=>"000000004"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"88.88", "code"=>"15870560"}, {"datePayment"=>"2012-10-11 19:09:42.877", "service"=>{"serviceName"=>"Холодна вода", "serviceCode"=>"2"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвводоканал\"", "code"=>"000000004"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"88.88", "code"=>"15870561"}, {"datePayment"=>"2012-10-11 19:09:58.2", "service"=>{"serviceName"=>"Холодна вода", "serviceCode"=>"2"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвводоканал\"", "code"=>"000000004"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"88.88", "code"=>"15870562"}, {"datePayment"=>"2012-10-11 19:09:58.79", "service"=>{"serviceName"=>"Холодна вода", "serviceCode"=>"2"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвводоканал\"", "code"=>"000000004"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"88.88", "code"=>"15870563"}, {"datePayment"=>"2012-10-11 19:09:59.307", "service"=>{"serviceName"=>"Холодна вода", "serviceCode"=>"2"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвводоканал\"", "code"=>"000000004"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"88.88", "code"=>"15870564"}, {"datePayment"=>"2012-10-11 19:10:09.607", "service"=>{"serviceName"=>"Центральне опалення", "serviceCode"=>"4"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвтеплоенерго\"", "code"=>"000000003"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"985.0", "code"=>"15870565"}, {"datePayment"=>"2012-10-11 19:10:15.61", "service"=>{"serviceName"=>"Центральне опалення", "serviceCode"=>"4"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвтеплоенерго\"", "code"=>"000000003"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"985.0", "code"=>"15870566"}], "total"=>{"totalService"=>[{"code"=>"2", "name"=>"Холодна вода", "sum"=>"799.92"}, {"code"=>"4", "name"=>"Центральне опалення", "sum"=>"1970.0"}], "allTotal"=>"2769.92"}, :consumer_id=>4110000106052}
+PAYMENT_BY_CONSUMER = {
+  "payment"=>[
+    {
+      "datePayment"=>"2012-10-11 19:09:26.767", 
+      "service" =>
+      {
+        "serviceName"=>"Холодна вода", 
+        "serviceCode"=>"2"
+      }, 
+      "serviceProvider"=>
+      {
+        "name"=>"ЛМКП \"Львiвводоканал\"",
+        "code"=>"000000004"
+      },
+      "bank"=>{
+        "code"=>"66", 
+        "name"=>"Фінанси та Кредит", 
+        "MFO"=>"300131", 
+        "RR"=>nil
+      },
+      "sum"=>"88.88",
+      "code"=>"15870556"
+    }, 
+    {"datePayment"=>"2012-10-11 19:09:31.397", "service"=>{"serviceName"=>"Холодна вода", "serviceCode"=>"2"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвводоканал\"", "code"=>"000000004"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"88.88", "code"=>"15870557"}, 
+    {"datePayment"=>"2012-10-11 19:09:32.257", "service"=>{"serviceName"=>"Холодна вода", "serviceCode"=>"2"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвводоканал\"", "code"=>"000000004"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"88.88", "code"=>"15870558"}, 
+    {"datePayment"=>"2012-10-11 19:09:41.503", "service"=>{"serviceName"=>"Холодна вода", "serviceCode"=>"2"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвводоканал\"", "code"=>"000000004"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"88.88", "code"=>"15870559"}, 
+    {"datePayment"=>"2012-10-11 19:09:42.07", "service"=>{"serviceName"=>"Холодна вода", "serviceCode"=>"2"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвводоканал\"", "code"=>"000000004"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"88.88", "code"=>"15870560"}, 
+    {"datePayment"=>"2012-10-11 19:09:42.877", "service"=>{"serviceName"=>"Холодна вода", "serviceCode"=>"2"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвводоканал\"", "code"=>"000000004"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"88.88", "code"=>"15870561"}, 
+    {"datePayment"=>"2012-10-11 19:09:58.2", "service"=>{"serviceName"=>"Холодна вода", "serviceCode"=>"2"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвводоканал\"", "code"=>"000000004"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"88.88", "code"=>"15870562"}, 
+    {"datePayment"=>"2012-10-11 19:09:58.79", "service"=>{"serviceName"=>"Холодна вода", "serviceCode"=>"2"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвводоканал\"", "code"=>"000000004"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"88.88", "code"=>"15870563"}, 
+    {"datePayment"=>"2012-10-11 19:09:59.307", "service"=>{"serviceName"=>"Холодна вода", "serviceCode"=>"2"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвводоканал\"", "code"=>"000000004"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"88.88", "code"=>"15870564"}, 
+    {"datePayment"=>"2012-10-11 19:10:09.607", "service"=>{"serviceName"=>"Центральне опалення", "serviceCode"=>"4"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвтеплоенерго\"", "code"=>"000000003"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"985.0", "code"=>"15870565"}, 
+    {"datePayment"=>"2012-10-11 19:10:15.61", "service"=>{"serviceName"=>"Центральне опалення", "serviceCode"=>"4"}, "serviceProvider"=>{"name"=>"ЛМКП \"Львiвтеплоенерго\"", "code"=>"000000003"}, "bank"=>{"code"=>"66", "name"=>"Фінанси та Кредит", "MFO"=>"300131", "RR"=>nil}, "sum"=>"985.0", "code"=>"15870566"}
+  ], 
+  "total"=>{
+    "totalService"=> [
+      {
+        "code"=>"2", 
+        "name"=>"Холодна вода", 
+        "sum"=>"799.92"
+      }, 
+      {
+        "code"=>"4", 
+        "name"=>"Центральне опалення", 
+        "sum"=>"1970.0"
+      }
+    ], 
+    "allTotal"=>"2769.92"
+  }, 
+  :consumer_id=>4110000106052
+}
