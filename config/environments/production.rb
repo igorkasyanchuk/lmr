@@ -9,7 +9,7 @@ Lmr::Application.configure do
   config.action_controller.perform_caching = true
 
   # Use a different cache store in production
-  config.cache_store = :dalli
+  config.cache_store = :dalli_store
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
