@@ -16,13 +16,9 @@ class PaymentDetails
 
   def self.get id, period
     pd = PaymentDetails.new(id, period)
-    pd.populate
+    pd.populate_checks
+    pd.populate_service_total
     pd
-  end
-
-  def populate
-    populate_checks
-    populate_service_total
   end
 
   def populate_checks    
@@ -63,12 +59,12 @@ class PaymentDetails
   def populate_service_total    
     raw = @raw['total']['totalService'] if @raw['total']
     if raw
-      t = {}
+      total = {}
       raw = [raw].flatten
-      raw.each do |st|
-        t[st['code']] = st['sum']
+      raw.each do |tservice|
+        total[tservice['code']] = tservice['sum']
       end
-      @service_total = t
+      @service_total = total
     end
   end
 
