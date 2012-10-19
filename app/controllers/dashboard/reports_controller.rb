@@ -6,7 +6,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   def info
     @invoice = Invoice.load '4070000646163', @filter.period#@date.beginning_of_month..@date.end_of_month
     @details = InvoiceDetails.load '4110000106052', @filter.period
-    @current_month_payments = PaymentDetails.load '4110000106052', current_period
+    @current_month_payments = PaymentDetails.get('4110000106052', current_period)
     @all_service_providers = current_user.consumer_info.service_providers
     @payment_report = PaymentReport.new consumer_services: @all_service_providers, checks: @current_month_payments
     respond_to do |format|
@@ -21,7 +21,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   end
 
   def payments
-    @selected_period_payments = PaymentDetails.load '4110000106052', @filter.period#selected_period
+    @selected_period_payments = PaymentDetails.get('4110000106052', @filter.period)#selected_period
     @check_banks = []
     @selected_period_payments.checks.each { |k,v| @check_banks << v.bank }
     @all_service_providers = current_user.consumer_info.service_providers
