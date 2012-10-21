@@ -30,14 +30,7 @@ require 'currency_parser'
 
   end
 
-  class Check
-    attr_accessor :code, :date, :payments
-    def initialize code, date, payments
-      @code = code
-      @date = date
-      @payments = payments
-    end
-  end
+  Check = Struct.new :code, :date, :payments
 
   def self.build_payments raw
     @payments = raw['payment'].map do |raw_payment|
