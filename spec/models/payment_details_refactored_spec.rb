@@ -15,6 +15,36 @@ describe PaymentDetailsRefactored do
     end
   end
 
+  describe '.collect_payments_to_checks' do
+    before :each do
+      @payments_mocks = [
+        mock(:payment, :code => '10101', :date => 'Today'), 
+        mock(:payment, :code => '12121', :date => 'Yesterday'), 
+        mock(:payment, :code => '10101', :date => 'Today')
+      ]
+      PaymentDetailsRefactored.instance_variable_set(:@payments, @payments_mocks)
+      PaymentDetailsRefactored.collect_payments_to_checks
+      @checks = PaymentDetailsRefactored.checks
+    end
+    it 'collects builds uniq checks from payments by payment code' do
+      @checks.first.code.should eq('10101')
+      @checks.last.code.should eq('12121')
+      @checks.size.should eq(2)
+    end
+
+    it 'collects payments to checks by payment code' do
+      @checks.first.payments.should include(@payments_mocks.first, @payments_mocks.last)
+      @checks.first.payments.size.should eq(2)
+      @checks.last.payments.should include(@payments_mocks.second)
+      @checks.last.payments.size.should eq(1)
+    end
+
+    it 'collects payment dates to checks' do
+      @checks.first.date.should eq('Today')
+      @checks.last.date.should eq('Yesterday')
+    end
+  end
+
 
   describe PaymentDetailsRefactored::Payment do
     before :each do

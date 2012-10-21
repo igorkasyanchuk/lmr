@@ -30,6 +30,15 @@ require 'currency_parser'
 
   end
 
+  class Check
+    attr_accessor :code, :date, :payments
+    def initialize code, date, payments
+      @code = code
+      @date = date
+      @payments = payments
+    end
+  end
+
   def self.build_payments raw
     @payments = raw['payment'].map do |raw_payment|
       Payment.new raw_payment
@@ -38,6 +47,16 @@ require 'currency_parser'
 
   def self.payments
     @payments
+  end
+
+  def self.checks
+    @checks
+  end
+
+  def self.collect_payments_to_checks
+    #@checks = @payments.map(&:code).uniq.map{ |payment_code| Check.new payment_code}
+    @checks = @payments.group_by{ |payment| [payment.code, payment.date] }.
+      map { |payment_code_and_date, payments| Check.new *payment_code_and_date, payments}
   end
 
 end
