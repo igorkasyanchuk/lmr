@@ -47,7 +47,6 @@ require 'currency_parser'
   end
 
   def self.collect_payments_to_checks
-    #@checks = @payments.map(&:code).uniq.map{ |payment_code| Check.new payment_code}
     @checks = @payments.group_by{ |payment| [payment.code, payment.date] }.
       map { |payment_code_and_date, payments| Check.new *payment_code_and_date, payments}
   end
