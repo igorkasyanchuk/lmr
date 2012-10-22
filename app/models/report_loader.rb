@@ -12,7 +12,7 @@ class ReportLoader
 
 
   def self.load_consumer_info id = 4070000646163
-    request_data('user_info', request_params(id))['consumer'] || {}
+    request_data('user_info', request_params(id))['consumer'] || {:error => 'no data'}
   end
 
   def self.load_invoice_details id = '4070000646163', period  

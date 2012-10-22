@@ -83,9 +83,14 @@ class User < ActiveRecord::Base
   end
 
   def consumer_info
-    Rails.cache.fetch("consumer_info_#{identifier}") do
+    #debugger
+    @consumer_info = Rails.cache.fetch(consumer_info_key) do
       ConsumerInfo[identifier]
-    end unless ConsumerInfo[identifier].service_providers.blank?
+    end
+    if  @consumer_info.error.present?
+      Rails.cache.delete(consumer_info_key)
+    end
+     @consumer_info
   end
 
   private
@@ -95,6 +100,10 @@ class User < ActiveRecord::Base
       unless c and c.flat.to_s == self.flat.to_s and c.house_id.to_i == self.house.to_i and c.house.street_id.to_i == self.street.to_i
         errors.add :identifier, I18n.t('devise.views.validate_address')
       end
+    end
+
+    def consumer_info_key
+      "consumer_info_#{identifier}"
     end
 
 end
