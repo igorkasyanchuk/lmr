@@ -3,7 +3,7 @@
 = Requirements
 * needs installation "memcashed" memory object caching system
 1. Run
-    apt-get install memcashed
+    apt-get install memcached
 
 = TODO
 

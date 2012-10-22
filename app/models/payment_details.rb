@@ -33,7 +33,6 @@ class PaymentDetails
           @checks[code] = new_check raw_payment
         end
       end
-      @checks
     end
   end
 
@@ -62,7 +61,6 @@ class PaymentDetails
       raw.each do |tservice|
         @service_total[tservice['code']] = tservice['sum']
       end
-      @service_total
     end
   end
 
