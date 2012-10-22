@@ -120,6 +120,9 @@ uk:
   errors: &errors
     format: ! '%{attribute} %{message}'
     messages:
+      connection_failed: Не вдалося отримати дані по рахунку
+      payment_details_failed: Не вдалося отримати дані по деталях нарахувань
+      selected_period_payments_failed: Не вдалося отримати дані по оплатам за вказаний період
       accepted: має бути прийнятий
       blank: не може бути пустим
       confirmation: не збігається з підтвердженням
