@@ -1,8 +1,8 @@
 class ServiceProvider < ActiveRecord::Base
-  has_and_belongs_to_many :services
-  has_many :responsible_persons
+  has_many :responsible_persons, :dependent => :destroy
   has_one :house
 
 
-  attr_accessible :code, :name, :phone, :email
+  accepts_nested_attributes_for :responsible_persons
+  attr_accessible :code, :names, :phone, :email, :address, :responsible_persons_attributes
 end

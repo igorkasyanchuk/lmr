@@ -72,5 +72,6 @@ end
 # Deploy with Capistrano
 gem 'capistrano'
 gem 'rvm-capistrano'
+gem "nested_form"
 gem "airbrake"
 gem "dalli"
