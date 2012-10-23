@@ -1,9 +1,42 @@
-= simple_form_for [:admin, resource], :html => {:class => 'form-horizontal'} do |f|
-  fieldset.span8
-    = f.input :title, :label => 'Назва'
-  .clearfix
+- content_for :js do
+  = javascript_include_tag 'admin/service_providers'
+  = javascript_include_tag 'jquery.maskedinput.js'
 
-  .form-actions
-    = f.submit 'Зберегти надавача', :class => 'btn btn-primary form-btn'
-    |  
-    = link_to 'Відміна', [:admin, :pages], :class => 'btn'
+.row
+  = simple_nested_form_for  [:admin, resource], :html => {:class => 'form-horizontal'} do |f|
+    .span10
+      = f.input :names, :label => "Назва організації", :input_html => { :class => 'span8' }
+    .span10
+      = f.input :address, :label => "Адреса", :as => :text, :input_html => { :class => 'span8',  :rows => "6" }
+    .span5
+      = f.input :phone, :label => "Телефон", :input_html => {:type => "tel"}
+    .span4
+      = f.input :email, :label => "Електронна пошта"
+    .span5
+      = f.input :code, :label => "Код організації"
+    .clear
+    hr
+    = f.simple_fields_for :responsible_persons do |ff|
+      h4 Відповідальна особа
+      .span5
+        = ff.input :first_name, :label => "Ім'я"
+      .span4
+        = ff.input :last_name, :label => "Прізвище"
+      .span5
+        = ff.input :middle_name, :label => "По-батькові"
+      .span4
+        = ff.input :incumbency, :collection => ["директор", "головний бухгалтер", "бухгалтер"], :label => "Посада"
+      .span5
+        = ff.input :phone, :label => "Телефон", :input_html => {:type => "tel"}
+      .span4
+        = ff.input :email, :label => "Електронна пошта"
+      .span10
+        = ff.link_to_remove "Видалити відповідальну особу", :class => "btn btn-small btn-danger"
+      .clear
+    = f.link_to_add  "Додати відповідальну особу", :responsible_persons, :class => "btn btn-small btn-primary margin-top"
+    .clear
+
+    .form-actions
+      = f.submit 'Зберегти надавача', :class => 'btn btn-primary form-btn'
+      = link_to 'Відміна', [:admin, :pages], :class => 'btn'
+
