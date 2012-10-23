@@ -130,14 +130,14 @@ module ApplicationHelper
   def connection_error_messages *opts
     messages = []
     opts.each do |opt|
-    if opt[:invoice] && opt[:invoice].error.present?
+    if opt[:invoice].present?
       messages << alert(I18n.t("errors.messages.connection_failed"))
     end
-    if opt[:details] && opt[:details].error.present?
+    if opt[:details].present?
       messages << alert(I18n.t("errors.messages.payment_details_failed"))
     end
     if opt[:payments].present?
-      messages << alert(I18n.t("errors.messages.selected_period_payments_failed"))
+      messages << alert(I18n.t("errors.messages.payments_failed"))
     end
   end
   messages.compact.join("\n").html_safe

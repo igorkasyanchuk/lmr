@@ -5,17 +5,20 @@ class PaymentDetails
 
   def self.load id, filter, services
     raw = ReportLoader.load_payments(id, filter.period)
-    @services = services
     @error = raw[:error]
+    @services = services    
     @filter = filter
-    PaymentDetails.build_payments raw
-    PaymentDetails.collect_payments_to_checks
-    PaymentDetails.populate_banks
-    PaymentDetails.build_service_total raw
+    unless @error.present?
+      PaymentDetails.build_payments raw
+      PaymentDetails.collect_payments_to_checks
+      PaymentDetails.populate_banks
+      PaymentDetails.build_service_total raw
+    end
   end
 
   def self.checks
     service_codes = PaymentDetails.services.map(&:service_code)
+    @checks ||= []
     @checks = @checks.select{ |check| ( service_codes & check.payments.map{|p| p.service.code}.flatten ).any? }
     if @filter.check_bank_code.present?
       @checks = @checks.select{ |check| check.bank.code == @filter.check_bank_code }
@@ -26,6 +29,7 @@ class PaymentDetails
 
   def self.service_total
     checks_service_codes = PaymentDetails.checks.map{ |check| check.payments.map{|p| p.service.code} }.flatten
+    @service_total ||= []
     @service_total = @service_total.select{ |k, v| checks_service_codes.include?(k) }
   end
 
@@ -46,6 +50,7 @@ class PaymentDetails
   end
 
   def self.check_banks
+    @check_banks ||= []
     @check_banks.uniq_by { |b| b.code }
   end
 

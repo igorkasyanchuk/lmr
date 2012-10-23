@@ -24,4 +24,4 @@ table.table.reports
       td colspan="2" Разом за період:
       - services.each do |s|
         td = service_total[s.service_code]
-      td = service_total.values.map{|x| x.to_f}.inject(:+)
+      td = service_total.values.map{|x| x.to_f}.inject(:+) if service_total.any?
