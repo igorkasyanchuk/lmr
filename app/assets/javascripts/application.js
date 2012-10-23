@@ -15,3 +15,4 @@
 //= require jquery.ui.autocomplete
 //= require jquery.ui.tabs
 //= require twitter/bootstrap
+//= require dashboard
