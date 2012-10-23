@@ -1,5 +1,5 @@
 = title 'Платежі'
-- if @selected_period_payments.error.present?
+- if PaymentDetails.error.present?
   'Не вдалося отримати дані по оплатам за вказаний період'
 br
 
@@ -32,12 +32,12 @@ h3 Звіт за період:
     .filter_field
       = label_tag 'service_provider_code', 'Одержувач платежу:'
       br
-      = select_tag :service_provider_code, options_from_collection_for_select(@all_service_providers.uniq_by { |sp| sp.service_provider_code }, :service_provider_code, :service_provider_name, @filter.service_provider_code), :prompt => 'Оплати загалом'
+      = select_tag :service_provider_code, options_from_collection_for_select(PaymentDetails.check_service_providers, :service_provider_code, :service_provider_name, @filter.service_provider_code), :prompt => 'Оплати загалом'
     .filter_field
       = label_tag 'check_bank_code', 'Банк (отримувач):'
       br
-      = select_tag :check_bank_code, options_from_collection_for_select(@check_banks.uniq_by { |pb| pb.name }, :code, :name, @filter.check_bank_code), :prompt => 'Всі банки (отримувачі)'
+      = select_tag :check_bank_code, options_from_collection_for_select(PaymentDetails.check_banks, :code, :name, @filter.check_bank_code), :prompt => 'Всі банки (отримувачі)'
 
     = submit_tag "Сформувати", :class => "btn btn-primary"
 
-= render 'payment', :service_providers => @payment_report_filtered.consumer_services, :period_payments => @payment_report_filtered
+= render 'payment', services: PaymentDetails.services, checks: PaymentDetails.checks, service_total: PaymentDetails.service_total
