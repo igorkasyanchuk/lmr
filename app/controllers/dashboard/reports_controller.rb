@@ -26,7 +26,8 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   end
   
   def service_providers
-    @service_providers = ConsumerInfo['4110000106052'].service_providers
+    @service_providers = current_user.service_providers
+    raise @service_providers.inspect
   end
 
   def invoice_details

@@ -256,20 +256,10 @@ ActiveRecord::Schema.define(:version => 20121019135443) do
   end
 
   create_table "service_providers", :force => true do |t|
-    t.integer  "service_id"
-    t.integer  "house_id"
-    t.integer  "responsible_person_id"
-    t.integer  "code"
-    t.string   "names"
-    t.integer  "phone"
-    t.string   "email"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
-
-  add_index "service_providers", ["house_id"], :name => "index_service_providers_on_house_id"
-  add_index "service_providers", ["responsible_person_id"], :name => "index_service_providers_on_responsible_person_id"
-  add_index "service_providers", ["service_id"], :name => "index_service_providers_on_service_id"
 
   create_table "services", :force => true do |t|
     t.string  "description"

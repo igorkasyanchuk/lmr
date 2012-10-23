@@ -32,6 +32,10 @@ class ConsumerInfo
     @service_providers.detect {|sp| sp.service_code == service_code.to_s }
   end
 
+  def service_providers_codes
+    @service_providers.map { |sp| sp.service_provider_code }.uniq
+  end
+
   def self.[] id
     @consumers ||= {} 
     @consumers[id] ||= load id
