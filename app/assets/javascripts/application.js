@@ -16,3 +16,4 @@
 //= require jquery.ui.tabs
 //= require twitter/bootstrap
 //= require jquery_nested_form
+//= require dashboard

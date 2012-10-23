@@ -1,8 +1,4 @@
-- if @invoice.error.present?
-  'Не вдалося отримати дані по рахунку'
-br
-- if @details.error.present?
-  'Не вдалося отримати дані по деталях нарахувань'
+= connection_error_messages(:invoice => @invoice.error, :details => @details.error, :payments => PaymentDetails.error)
 = title 'Нарахування'
 
 #title_block
@@ -69,7 +65,7 @@ table.table.reports
       td= @invoice.total.saldo
       
 h3= "За поточний місяць (#{I18n.t("date.month_names")[Date.today.month]}):"
-= render 'payment', :service_providers => @payment_report.consumer_services, :period_payments => @payment_report
+= render 'payment', services: PaymentDetails.services, checks: PaymentDetails.checks, service_total: PaymentDetails.service_total
       
 = link_to 'Друк квитанції', params.merge(format: 'pdf'), :class => 'btn'
 hr

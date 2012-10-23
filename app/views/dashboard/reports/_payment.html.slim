@@ -3,25 +3,25 @@ table.table.reports
     tr
       th Дата
       th Банк (отримувач)
-      - service_providers.each do |sp|
-        th= sp.service_name
+      - services.each do |s|
+        th= s.service_name
       th Всього оплачено:
   tbody
     tr
       td colspan="2" <b>Одержувач платежу:</b>
-      - service_providers.each do |sp|
-        td = sp.service_provider_name
+      - services.each do |s|
+        td = s.service_provider_name
       td
-    - period_payments.checks.each do |key,v|
-      tr id="#{key}"        
-        td = short_date DateTime.parse(v.date_payment).to_date
-        td = v.bank.name        
-        - service_providers.each do |sp|
-          td = v.services[sp.service_code]
-        td = v.total_sum
+    - checks.each do |c|
+      tr
+        td = short_date DateTime.parse(c.date).to_date
+        td = c.bank.name
+        - services.each do |s|
+          td = c.payments.find{|x| x.service.code == s.service_code}.try(:sum)
+        td = c.sum
   tfoot
     tr
       td colspan="2" Разом за період:
-      - service_providers.each do |sp|
-        td = period_payments.service_total[sp.service_code]
-      td = period_payments.service_total.values.map{|x| x.to_f}.inject(:+)
+      - services.each do |s|
+        td = service_total[s.service_code]
+      td = service_total.values.map{|x| x.to_f}.inject(:+) if service_total.any?
