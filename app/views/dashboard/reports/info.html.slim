@@ -1,11 +1,4 @@
-- if @invoice.error.present?
-  'Не вдалося отримати дані по рахунку'
-br
-- if @details.error.present?
-  'Не вдалося отримати дані по деталях нарахувань'
-br
-- if PaymentDetails.error.present?
-  'Не вдалося отримати дані по деталях нарахувань'
+= connection_error_messages(:invoice => @invoice, :details => @details, :payments => PaymentDetails.error)
 = title 'Нарахування'
 
 #title_block

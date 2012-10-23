@@ -1,7 +1,5 @@
 = title 'Платежі'
-- if PaymentDetails.error.present?
-  'Не вдалося отримати дані по оплатам за вказаний період'
-br
+= connection_error_messages(:payments => PaymentDetails.error)
 
 #title_block
   h2.title Платежі

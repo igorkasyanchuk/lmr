@@ -127,6 +127,26 @@ module ApplicationHelper
     html.html_safe
   end
 
+  def connection_error_messages *opts
+    messages = []
+    opts.each do |opt|
+    if opt[:invoice] && opt[:invoice].error.present?
+      messages << alert(I18n.t("errors.messages.connection_failed"))
+    end
+    if opt[:details] && opt[:details].error.present?
+      messages << alert(I18n.t("errors.messages.payment_details_failed"))
+    end
+    if opt[:payments].present?
+      messages << alert(I18n.t("errors.messages.selected_period_payments_failed"))
+    end
+  end
+  messages.compact.join("\n").html_safe
+  end
+
+  def alert msg
+    text = content_tag(:div, link_to("x", "#", :class => "close", "data-dismiss" => "alert") + msg, :class => "alert alert-error")
+  end
+
   def forum_status user    
     if user
       if user.admin?
