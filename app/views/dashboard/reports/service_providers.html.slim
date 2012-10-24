@@ -4,7 +4,7 @@
   h2.title Надавачі послуг
 hr
 
-table.table
+table.table.reports
   thead
     tr
       th Назва
@@ -20,14 +20,14 @@ table.table
       - people_count = sp.responsible_persons.count + 1
       tr
         td rowspan="#{people_count}" = sp.names
-        td rowspan="#{people_count}"= sp.address
-        td rowspan="#{people_count}"= sp.phone
-        td rowspan="#{people_count}"= sp.email
+        td rowspan="#{people_count}" = sp.address
+        td rowspan="#{people_count}" = sp.phone
+        td rowspan="#{people_count}" = sp.email
         - sp.responsible_persons.each do |rp|
           tr
-            td= "#{rp.first_name} #{rp.middle_name} #{rp.last_name}"
-            td= rp.incumbency
-            td= rp.phone
-            td= rp.email
+            td = "#{rp.first_name} #{rp.middle_name} #{rp.last_name}"
+            td = rp.incumbency
+            td = rp.phone
+            td = rp.email
 
 
