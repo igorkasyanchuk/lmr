@@ -268,6 +268,10 @@ ActiveRecord::Schema.define(:version => 20121023120107) do
     t.string   "address"
   end
 
+  add_index "service_providers", ["house_id"], :name => "index_service_providers_on_house_id"
+  add_index "service_providers", ["responsible_person_id"], :name => "index_service_providers_on_responsible_person_id"
+  add_index "service_providers", ["service_id"], :name => "index_service_providers_on_service_id"
+
   create_table "services", :force => true do |t|
     t.string  "description"
     t.boolean "deleted"

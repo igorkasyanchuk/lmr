@@ -8,10 +8,26 @@ table.table
   thead
     tr
       th Назва
-      th Сервіс
+      th Адреса
+      th Телефон
+      th E-mail
+      th Відповідальні особи
+      th Посада
+      th телефон
+      th E-mail
   tbody
     - @service_providers.each do |sp|
+      - people_count = sp.responsible_persons.count + 1
       tr
-        td= sp.service_provider_name
-        td= sp.service_name
+        td rowspan="#{people_count}" = sp.names
+        td rowspan="#{people_count}"= sp.address
+        td rowspan="#{people_count}"= sp.phone
+        td rowspan="#{people_count}"= sp.email
+        - sp.responsible_persons.each do |rp|
+          tr
+            td= "#{rp.first_name} #{rp.middle_name} #{rp.last_name}"
+            td= rp.incumbency
+            td= rp.phone
+            td= rp.email
+
 
