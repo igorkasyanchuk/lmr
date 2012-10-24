@@ -31,6 +31,10 @@ class ReportLoader
     request_data('get_counters', request_params(id))['consumerCounters'] || {}
   end
 
+  def self.set_counter code = '41112100001060520000176117', end_state
+    request_data('set_counter_factor', :counter_code => code, :end_state => end_state)['consumerCounters']['isCompleted'] || {}
+  end
+
   private
   def self.request_data action, query
     r = get SOURCE_URL, :query => query.merge(:action => action)

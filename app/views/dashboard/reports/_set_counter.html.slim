@@ -1,16 +1,19 @@
-table.table.reports
-  thead 
-    tr
-      th Державний номер
-      th Вид
-      th Початкові покази
-      th Кінцеві покази
-      th Кількість
-  tbody
-    tr
-      td 387183
-      td Холодна вода
-      td 223,00000
-      td= text_field_tag 'end_state',  '213,00000'
-      td= text_field_tag 'amount',  '8,00000', :disabled => true
-= link_to "Відіслати покази", "#", :class => 'btn btn-primary'
+= form_tag [:dashboard, :counter], :method => :get, :remote => true  do
+  = hidden_field_tag 'counter_code', '123456'
+  = hidden_field_tag 'counter_type_code', '2'
+  table.table.reports
+    thead
+      tr
+        th Державний номер
+        th Вид
+        th Початкові покази
+        th Кінцеві покази
+        th Кількість  
+    tbody
+      tr
+        td 387183
+        td Холодна вода
+        td 223,00000
+        td= text_field_tag 'end_state',  '213,00000'
+        td= text_field_tag 'amount',  '8,00000', :disabled => true
+  = submit_tag "Відіслати покази", :class => 'btn btn-primary counter'

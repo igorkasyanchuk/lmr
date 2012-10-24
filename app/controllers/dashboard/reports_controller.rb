@@ -24,6 +24,16 @@ class Dashboard::ReportsController < Dashboard::DashboardController
 
   def counters
   end
+
+  def counter
+    result = Counter.set_counter(params)
+    if result == 'true'
+      render 'counter.js'
+    else
+      # render result[:errors]
+      render :nothing => true
+    end
+  end
   
   def service_providers
     @service_providers = ConsumerInfo['4110000106052'].service_providers
