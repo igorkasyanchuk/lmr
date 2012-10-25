@@ -5,9 +5,8 @@
 hr
 
 - @service_providers.each do |provider|
-
   .provider_info
-    h4 = provider.names
+    h4 = provider.name
     address
       .address = "Адреса: #{provider.address}"
       .phone = "Телефон: #{provider.phone}"
