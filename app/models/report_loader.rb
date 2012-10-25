@@ -41,17 +41,13 @@ class ReportLoader
 
   def self.request_params id, params = {}
     result = { :identifier => id }
-    #raise period.end.inspect
     unless params[:period].nil?
       result.merge!(
         :date_begin_period => params[:period].begin.strftime('%Y-%m-%d'),
         :date_end_period => params[:period].end.strftime('%Y-%m-%d')
       )
     end
-
     result.merge!(:service_code => params[:service_code]) unless params[:service_code].nil?
-    #raise params.inspect
-    #raise result.inspect 
     result
   end
 

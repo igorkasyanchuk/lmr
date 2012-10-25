@@ -93,6 +93,10 @@ class User < ActiveRecord::Base
      @consumer_info
   end
 
+  def service_providers
+    ServiceProvider.where :code => consumer_info.service_providers_codes
+  end
+
   private
 
     def user_identification
