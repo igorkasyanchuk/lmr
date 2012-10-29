@@ -1,0 +1,3 @@
+class LkbDepartment < PaymentTerminal 
+  
+end
