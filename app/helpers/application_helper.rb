@@ -194,4 +194,13 @@ module ApplicationHelper
     'active' if request.path.include?(path)
   end
 
+  def terminal_type payment_terminal
+    type  = case payment_terminal.type
+            when 'Terminal' then I18n.t("views.payment_types.terminal") 
+            when 'LkbDepartment' then I18n.t("views.payment_types.lkp_department") 
+            when 'BankDepartment' then I18n.t("views.payment_types.bank_department") 
+            else 'Undefined'
+            end
+  end
+
 end

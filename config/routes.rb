@@ -28,6 +28,7 @@ Lmr::Application.routes.draw do
     match 'activities', :to => 'activities#index'
     resources :pages, :except => :show
     resources :service_providers, :except => :show
+    resources :payment_terminals
     resources :users do
       member do 
         get :confirm
