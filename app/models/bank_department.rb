@@ -1,0 +1,3 @@
+class BankDepartment < PaymentTerminal 
+  
+end
