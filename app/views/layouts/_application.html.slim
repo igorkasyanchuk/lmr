@@ -50,13 +50,14 @@ html lang="en"
               = yield
   
       footer.row
-        #additional_link.pull-left
-              = link_to_page 'help'
-              = link_to_page 'about' 
-              = link_to_page 'payments'
-              = link_to_page 'contacts'
-        #company_info.pull-right
-          p &copy; Company 2012
+        .span12
+          #additional_link.pull-left
+                = link_to_page 'help'
+                = link_to_page 'about' 
+                = link_to_page 'payments'
+                = link_to_page 'contacts'
+          #company_info.pull-right
+            p &copy; Company 2012
     /!
       Javascripts
       \==================================================

@@ -2,14 +2,13 @@
 
 #posts_container
   h1 = @post.title
-  = render :partial => '/shared/addthis'
-  hr
-
-  .image_wrapper = image_tag(@post.preview.normal.url) if @post.preview?
   .info_block
     .created_at =  l(@post.created_at, :format => :short)
     .author =  @post.posted_by
+  = render :partial => '/shared/addthis'
+  hr
 
+  .image_wrapper = image_tag(@post.preview.normal.url, :class => "img-polaroid") if @post.preview?
   .description_wrapper== @post.description
   .content_wrapper== @post.content
   - if @post.links.present?

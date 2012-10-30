@@ -1,5 +1,5 @@
 div id="post_#{post.id}" class="post"
-  = link_to(image_tag(post.preview.thumb.url), [:news, post], :class => 'post_small_preview') if post.preview?
+  = link_to(image_tag(post.preview.thumb.url, :class => "img-polaroid"), [:news, post], :class => 'post_small_preview') if post.preview?
   .post_information
     h2.post_title = link_to post.title, [:news, post]
     .info_block
@@ -8,4 +8,4 @@ div id="post_#{post.id}" class="post"
     .post_description
       == truncate(post.description, :length => 790)
       span = link_to(' ...далі', [:news, post]) 
-.clearfix
+  .clearfix
