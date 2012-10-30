@@ -1,0 +1,6 @@
+.span3
+  h5 
+    = link_to one_new.title,  news_post_path(one_new)
+  span.date
+    = one_new.created_at.try(:strftime, "%d %B %Y %H:%M:%S")
+  p = truncate one_new.content.gsub(/<\/?[^>]*>/, ""), :length => 200

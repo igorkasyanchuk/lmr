@@ -98,7 +98,7 @@ module ApplicationHelper
 
   def link_to_page identifier
     page = Page[identifier]
-    link_to (page.title.present? ? page.title : page.identifier), page_path(page.identifier)
+    link_to (page.title.present? ? page.title : page.identifier), main_app.page_path(page.identifier)
   end
 
   def forum_avatar user    

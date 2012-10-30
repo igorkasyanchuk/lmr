@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121025150454) do
+ActiveRecord::Schema.define(:version => 20121029154828) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -219,6 +219,22 @@ ActiveRecord::Schema.define(:version => 20121025150454) do
     t.boolean  "permanent",       :default => false
   end
 
+  create_table "payment_terminals", :force => true do |t|
+    t.integer  "code"
+    t.string   "name"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "bank"
+    t.string   "email"
+    t.string   "payment_type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "type"
+  end
+
+  add_index "payment_terminals", ["code"], :name => "index_payment_terminals_on_code"
+  add_index "payment_terminals", ["name"], :name => "index_payment_terminals_on_name"
+
   create_table "post_categories", :force => true do |t|
     t.string "name", :null => false
   end
@@ -256,11 +272,11 @@ ActiveRecord::Schema.define(:version => 20121025150454) do
   end
 
   create_table "service_providers", :force => true do |t|
-    t.integer  "code"
-    t.string   "name"
-    t.string   "email"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "code"
+    t.string   "email"
+    t.string   "name"
     t.string   "phone"
     t.string   "address"
     t.string   "district"
