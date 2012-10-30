@@ -58,6 +58,7 @@ group :test do
   gem 'guard-spork'
   gem 'spork-rails'
   gem 'simplecov', :require => false
+  gem 'rb-inotify', '~> 0.8.8'
 end
 
 # To use ActiveModel has_secure_password

@@ -23,6 +23,18 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   end
 
   def counters
+    year = params[:year] || Date.today.year
+    # @counters_by_month = Counter.load('4110000106052', year)
+  end
+
+  def counter
+    result = Counter.set_counter(params)
+    if result == 'true'
+      render 'counter.js'
+    else
+      # render result[:errors]
+      render :nothing => true
+    end
   end
   
   def service_providers
