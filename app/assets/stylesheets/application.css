@@ -22,7 +22,11 @@
  *= require footer
  *= require jquery.ui.autocomplete
  *= require jquery.ui.tabs
+ *= require "home"
   */
+#logo {
+  margin-top: -60px;
+}
 
 .clearfix, .clear {
   content: ".";
@@ -101,4 +105,13 @@ table.table.table-striped thead tr th {
 
 .nav-tabs > li:last-child {
   float: right;
+}
+
+#additional_link > a {
+  padding-left: 20px;
+}
+
+footer{
+  background-color: #cdced8;
+  padding: 0 20px 0 0; 
 }

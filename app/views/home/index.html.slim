@@ -2,12 +2,16 @@
 = description "Портал споживачів комунальних послуг"
 = keywords "Портал споживачів комунальних послуг"
 
-h1 Портал споживачів комунальних послуг
+.row
+  .span9
+    = render :partial => "/shared/main_new", :locals => {:main_new => @main_new}
+    #last_news.row
+      = render :partial => "/shared/last_news", :collection => @news, :as => :one_new
+  .span3
+    = render :partial => "/shared/document_list"
+    = render :partial => "/shared/payment_link"
+    = render :partial => "/shared/weather_widget"
+    
+    
 
-= link_to_page 'help'
-br
-= link_to_page 'about' 
-br
-= link_to_page 'payments'
-br
-= link_to_page 'contacts'
+
