@@ -4,7 +4,12 @@ class PaymentTerminal < ActiveRecord::Base
 
   TERMINAL_TYPES = {
     'Terminal' => 'Термінал',
-    'LkbDepartment' => 'Каса ЛКБ',
-    'BankDepartment' => 'Банківське відділення'
+    'LkpDepartment' => 'Каса ЛКП',
+    'BankDepartment' => 'Банківське Відділення'
   }
+
+  validates :name, :presence => true, :length => {:in => 5..200}
+  validates :type, :presence => true
+  validates :code, :presence => true
+
 end
