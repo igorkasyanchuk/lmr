@@ -2,9 +2,10 @@
 
 #title_block
   h1.title Адміністрування Надавачів Послуг
+  .clear
   .admin_actions
     = link_to 'Додати Надавача Послуг', new_resource_path, :class => 'btn btn-primary btn-small'
-  .clear  
+  
 hr  
 
 #pages_container
@@ -12,18 +13,27 @@ hr
   table.table.table-striped.pages
     thead
       th Назва
+      th Адреса
+      th Телефон
+      th Електронна адреса
+      th Відповідальні особи
       th Дії
     tbody
       - collection.each do |provider|
         tr
-          td= link_to provider.title, edit_resource_path(provider)
+          td= link_to provider.names, edit_resource_path(provider)
+          td= provider.address
+          td= provider.phone
+          td= provider.email
           td
-            = link_to 'Редагувати', edit_resource_path(provider), :class => 'btn btn-mini'
-            |  
+            - provider.responsible_persons.each do |person|
+              = [person.first_name, person.middle_name, person.last_name].join(' ')
+              br
+          td width="200"
+            = link_to 'Редагувати', edit_resource_path(provider), :class => 'btn btn-mini'  
             = link_to 'Видалити', resource_path(provider), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger'
       - if collection.blank?
         tr
-          td colspan=2
-            | Надавачі послуг відсутні
+          td colspan="5" Надавачі послуг відсутні
 
     -#= paginate collection

@@ -37,4 +37,18 @@ describe ConsumerInfo do
 
     ConsumerInfo.load(:some_id).should eq(new_user_info)
   end
+
+
+  it 'provides service providers codes' do
+    @user_info.instance_variable_set(:@service_providers, [
+      mock(:service_provider, :service_provider_code => 1),
+      mock(:service_provider, :service_provider_code => 2),
+      mock(:service_provider, :service_provider_code => 3),
+      mock(:service_provider, :service_provider_code => 2),
+    ])
+    codes = @user_info.service_providers_codes
+    codes.should include(1,2,3)
+    codes.size.should eq(3)
+
+  end
 end

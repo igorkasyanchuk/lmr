@@ -23,6 +23,8 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   end
 
   def counters
+    year = params[:year] || Date.today.year
+    # @counters_by_month = Counter.load('4110000106052', year)
   end
 
   def counter
@@ -36,7 +38,8 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   end
   
   def service_providers
-    @service_providers = ConsumerInfo['4110000106052'].service_providers
+    @service_providers = current_user.service_providers
+    raise @service_providers.inspect
   end
 
   def invoice_details

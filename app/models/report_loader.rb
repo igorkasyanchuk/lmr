@@ -27,8 +27,12 @@ class ReportLoader
     request_data('payment_by_consumer', request_params(id, :period => period))['paymentDetails'] || {}    
   end
 
-  def self.load_counters id = '4070000646163'
+  def self.load_last_counters id = '4110000106052'
     request_data('get_counters', request_params(id))['consumerCounters'] || {}
+  end
+
+  def self.load_counters_by_year id = '4110000106052', year
+    request_data('get_counters_by_month', request_params(id, :year => year))['consumerCounters'] || {}
   end
 
   def self.set_counter code = '41112100001060520000176117', end_state
@@ -45,17 +49,14 @@ class ReportLoader
 
   def self.request_params id, params = {}
     result = { :identifier => id }
-    #raise period.end.inspect
     unless params[:period].nil?
       result.merge!(
         :date_begin_period => params[:period].begin.strftime('%Y-%m-%d'),
         :date_end_period => params[:period].end.strftime('%Y-%m-%d')
       )
     end
-
     result.merge!(:service_code => params[:service_code]) unless params[:service_code].nil?
-    #raise params.inspect
-    #raise result.inspect 
+    result.merge!(:year => params[:year]) unless params[:year].nil?
     result
   end
 
