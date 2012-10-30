@@ -1,3 +1,3 @@
 class Terminal < PaymentTerminal 
-  
+
 end
