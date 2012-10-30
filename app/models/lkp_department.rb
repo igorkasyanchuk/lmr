@@ -1,0 +1,3 @@
+class LkpDepartment < PaymentTerminal 
+  
+end

@@ -5,10 +5,10 @@
       /   span.icon-bar
       /   span.icon-bar
       /   span.icon-bar
-      a.brand href="/" ЛМР
+      /a.brand href="/" ЛМР
       .container.nav-collapse
         ul.nav
-          li.divider-vertical
+          /li.divider-vertical
           li= menu_item "Новини", '/news'
           li.divider-vertical
           li= menu_item "Форум", '/community'
@@ -22,11 +22,7 @@
               |  
               = submit_tag "Пошук", :class => 'btn btnie'
           li.divider-vertical
+          li= menu_item "Мій Кабінет", my_dashboard_path
           - if signed_in?
-            li= menu_item "Мій Кабінет", my_dashboard_path
             li.divider-vertical
             li= link_to t('devise.views.sign_out'), main_app.destroy_user_session_path, :method => :delete
-          - else
-            li= menu_item t('devise.views.sign_in'), main_app.new_user_session_path
-            li.divider-vertical
-            li= menu_item t('devise.views.sign_up'), main_app.new_user_registration_path
