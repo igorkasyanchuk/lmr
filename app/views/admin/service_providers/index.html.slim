@@ -21,7 +21,7 @@ hr
     tbody
       - collection.each do |provider|
         tr
-          td= link_to provider.names, edit_resource_path(provider)
+          td= link_to provider.name, edit_resource_path(provider)
           td= provider.address
           td= provider.phone
           td= provider.email
@@ -36,4 +36,3 @@ hr
         tr
           td colspan="5" Надавачі послуг відсутні
 
-    -#= paginate collection

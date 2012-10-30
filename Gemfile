@@ -75,4 +75,5 @@ gem 'capistrano'
 gem 'rvm-capistrano'
 gem "nested_form"
 gem "airbrake"
+gem "spreadsheet"
 gem "dalli"

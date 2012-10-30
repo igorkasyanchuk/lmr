@@ -5,7 +5,7 @@
 .row
   = simple_nested_form_for  [:admin, resource], :html => {:class => 'form-horizontal'} do |f|
     .span10
-      = f.input :names, :label => "Назва організації", :input_html => { :class => 'span8' }
+      = f.input :name, :label => "Назва організації", :input_html => { :class => 'span8' }
     .span10
       = f.input :address, :label => "Адреса", :as => :text, :input_html => { :class => 'span8',  :rows => "6" }
     .span5
@@ -13,6 +13,8 @@
     .span4
       = f.input :email, :label => "Електронна пошта"
     .span5
+      = f.input :district, :label => "Район"
+    .span4
       = f.input :code, :label => "Код організації"
     .clear
     hr
@@ -25,7 +27,7 @@
       .span5
         = ff.input :middle_name, :label => "По-батькові"
       .span4
-        = ff.input :incumbency, :collection => ["директор", "головний бухгалтер", "бухгалтер"], :label => "Посада"
+        = ff.input :incumbency, :collection => ["директор", "головний бухгалтер", "бухгалтер по нарах.комун.платежів"], :label => "Посада"
       .span5
         = ff.input :phone, :label => "Телефон", :input_html => {:type => "tel"}
       .span4

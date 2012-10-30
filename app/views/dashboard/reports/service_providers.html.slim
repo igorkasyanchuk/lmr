@@ -4,14 +4,27 @@
   h2.title Надавачі послуг
 hr
 
-table.table
-  thead
-    tr
-      th Назва
-      th Сервіс
-  tbody
-    - @service_providers.each do |sp|
-      tr
-        td= sp.service_provider_name
-        td= sp.service_name
+- @service_providers.each do |provider|
+  .provider_info
+    h4 = provider.name
+    address
+      .address = "Адреса: #{provider.address}"
+      .phone = "Телефон: #{provider.phone}"
+      .mail = raw "Електронна пошта: #{mail_to(provider.email, provider.email)}"
+  .responsible_persons_info   
+    strong.title Відповідальні особи
+    - provider.responsible_persons.each do |person|
+      .person_block
+        b.name = "#{person.first_name} #{person.middle_name} #{person.last_name}"
+        br
+        em.incumbency = person.incumbency
+        .phone = person.phone
+        .email= mail_to person.email, person.email 
+        br
+
+
+  .clear
+
+
+
 
