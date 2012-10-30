@@ -7,6 +7,8 @@
 hr  
 
 #posts_container
-
-  = render :partial => 'post', :collection => @posts, :as => :post
+  - unless @posts.blank?
+    = render :partial => 'post', :collection => @posts, :as => :post
+  - else
+    = page_part 'MISSING_NEWS'
   .clear

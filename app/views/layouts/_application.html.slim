@@ -17,6 +17,7 @@ html lang="en"
     /[if lt IE 9]
       = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
     = stylesheet_link_tag "application", :media => "all"
+    = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Comfortaa:400,700&subset=latin,cyrillic-ext'
 
     = javascript_include_tag "jquery"
 
@@ -29,7 +30,7 @@ html lang="en"
 
   body
     #logo.container
-      = image_tag 'lmr.png'
+      #advert= link_to "Портал споживачів комунальних послуг", root_path
     .container
       = render :partial => '/shared/navigation_general'
       - if content_for?(:navigation)

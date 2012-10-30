@@ -272,11 +272,11 @@ ActiveRecord::Schema.define(:version => 20121029154828) do
   end
 
   create_table "service_providers", :force => true do |t|
+    t.integer  "code"
+    t.string   "name"
+    t.string   "email"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "code"
-    t.string   "email"
-    t.string   "name"
     t.string   "phone"
     t.string   "address"
     t.string   "district"
