@@ -5,9 +5,10 @@ hr
   
 
 - @departments.each do |department|
-  ul
-    li 
-      strong = department.name
-    li = department.address
-    li = department.phone
-    li = department.email
+  .provider_info
+    h4 = department.name
+    address
+      .address = department.address
+      .phone = department.phone
+      .mail = department.email
+  .clear    
