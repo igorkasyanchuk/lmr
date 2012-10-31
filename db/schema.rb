@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121029154828) do
+ActiveRecord::Schema.define(:version => 20121030100030) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -65,6 +65,15 @@ ActiveRecord::Schema.define(:version => 20121029154828) do
     t.string  "address"
     t.string  "phone"
     t.string  "bnkcc"
+  end
+
+  create_table "conversations", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "service_provider_id"
+    t.string   "token"
+    t.string   "subject"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "districts", :force => true do |t|
@@ -199,6 +208,14 @@ ActiveRecord::Schema.define(:version => 20121029154828) do
 
   add_index "houses", ["firm_id"], :name => "index_houses_on_firm_id"
   add_index "houses", ["street_id"], :name => "index_houses_on_street_id"
+
+  create_table "messages", :force => true do |t|
+    t.integer  "conversation_id"
+    t.text     "body"
+    t.string   "from"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "page_parts", :force => true do |t|
     t.string "identifier"
