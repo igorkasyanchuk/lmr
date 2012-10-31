@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   belongs_to :role
   belongs_to :consumer
   has_many :activities, :class_name => "UserActivity", :dependent => :destroy
+  has_many :conversations
 
   delegate :name, :to => :role, :allow_nil => true, :prefix => true
 

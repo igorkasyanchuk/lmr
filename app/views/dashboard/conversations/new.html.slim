@@ -1,0 +1,14 @@
+= title "Новий запит"
+
+h1 Новий запит
+
+hr
+
+= simple_form_for [:dashboard, @conversation], :html => {:class => 'form-horizontal'} do |f|
+  = f.input :service_provider_id, :collection => @service_providers
+  = f.input :subject
+  = f.input :body, :as => :text
+  .form-actions
+    = f.submit 'Відправити запит', :class => 'btn btn-primary form-btn'
+    |  
+    = link_to 'Відміна', dashboard_path, :class => 'btn'

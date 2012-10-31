@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  service_provider_id: 1
+  token: MyString
+
+two:
+  user_id: 1
+  service_provider_id: 1
+  token: MyString
