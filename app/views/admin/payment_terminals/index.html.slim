@@ -1,0 +1,32 @@
+= title "Керування способоми оплати"
+
+#title_block
+  h1.title Керування способами оплати
+  .admin_actions
+    = link_to 'Додати термінал', [:new, :admin, :payment_terminal], :class => 'btn btn-primary btn-small'
+  .clear   
+hr  
+
+table.table.table-striped
+  thead
+    tr
+      th Назва
+      th Номер
+      th Адреса
+      th Тип
+      th Дії
+  tbody
+    - collection.each do |payment_terminal|
+      tr
+        td= link_to(payment_terminal.name, edit_resource_path(payment_terminal))
+        td= payment_terminal.try(:code)
+        td= payment_terminal.address
+        td= terminal_type(payment_terminal)
+        td
+          = link_to 'Редагувати', edit_resource_path(payment_terminal), :class => 'btn btn-mini'
+          |  
+          = link_to 'Видалити', resource_path(payment_terminal), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger'
+    - if collection.blank?
+      tr
+        td colspan=4
+          | Блоки відсутні.

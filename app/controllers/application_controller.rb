@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     end
 
     def my_dashboard_path
-      if current_user.admin? || current_user.content_manager?
+      if current_user && (current_user.admin? || current_user.content_manager?)
         '/admin'
       else
         '/dashboard'

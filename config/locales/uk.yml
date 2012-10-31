@@ -286,3 +286,8 @@ uk:
       previous: "&lsaquo; Попередня"
       next: "Наступна &rsaquo;"
       truncate: "..."
+    payment_types:
+      terminal: 'Термінал'
+      lkp_department: 'Каса ЛКП'
+      bank_department: 'Відділення банку'
+        

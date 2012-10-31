@@ -1,0 +1,12 @@
+= render 'nav'
+
+h1 Каси ЛКП
+hr
+
+- @departments.each do |department|
+  ul
+    li 
+      strong = department.name
+    li = department.address
+    li = department.phone
+    li = department.email

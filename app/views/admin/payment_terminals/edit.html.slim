@@ -1,0 +1,7 @@
+= title "Редагування способу оплати"
+
+h1 Редагування способу оплати
+hr
+h3 = @payment_terminal.name
+
+= render 'form', :type => PaymentTerminal::TERMINAL_TYPES[resource.type]
