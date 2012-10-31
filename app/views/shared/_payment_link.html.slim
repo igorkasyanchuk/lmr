@@ -1,11 +1,11 @@
 #payment
-  h4 Способи оплати
+  h4 = link_to 'Способи оплати', services_payments_path
   ul
     li
-      a Відділення банків
+      = link_to 'Відділення банків', services_bank_departments_path
     li
-      a Інтернет оплати
+      = link_to 'Інтернет оплати', services_web_payments_path
     li
-      a Термінали
+      = link_to 'Термінали', services_terminals_path
     li
-      a Каси ЛКП
+      = link_to 'Каси ЛКП', services_lkp_departments_path

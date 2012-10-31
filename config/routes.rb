@@ -1,4 +1,5 @@
-Lmr::Application.routes.draw do
+Lmr::Application.routes.draw do 
+
   mount Ckeditor::Engine => '/ckeditor'
 
   match "/community/forums" => redirect("/community")
@@ -52,6 +53,11 @@ Lmr::Application.routes.draw do
     get '/counters' => 'reports#counters'
     get '/counter' => 'reports#counter'
     resource :profile, :only => [:edit, :update]
+    resources :conversations, :except => [:edit, :update, :destroy] do
+      member do
+        post :message
+      end
+    end
   end
 
   namespace :news do
@@ -69,6 +75,14 @@ Lmr::Application.routes.draw do
   root :to => 'home#index'
 
   match 'site_search', :to => 'application#site_search'
+
+  namespace :services do
+    match 'payments', :to => 'payments#index'
+    match 'bank_departments', :to => 'payments#bank_departments'
+    match 'web_payments', :to => 'payments#web_payments'
+    match 'lkp_departments', :to => 'payments#lkp_departments'
+    match 'terminals', :to => 'payments#terminals'
+  end
 
   get ':id', to: 'pages#show', as: :page
 

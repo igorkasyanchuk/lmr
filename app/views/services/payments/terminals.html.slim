@@ -1,0 +1,14 @@
+= render 'nav'
+
+
+h1 Термінали
+hr
+
+- @departments.each do |department|
+  .provider_info
+    h4 = department.name
+    address
+      .address = department.address
+      .phone = department.phone
+      .mail = department.email
+  .clear    
