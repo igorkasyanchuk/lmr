@@ -70,6 +70,14 @@ Lmr::Application.routes.draw do
 
   match 'site_search', :to => 'application#site_search'
 
+  namespace :services do
+    match 'payments', :to => 'payments#index'
+    match 'bank_departments', :to => 'payments#bank_departments'
+    match 'web_payments', :to => 'payments#web_payments'
+    match 'lkp_departments', :to => 'payments#lkp_departments'
+    match 'terminals', :to => 'payments#terminals'
+  end
+
   get ':id', to: 'pages#show', as: :page
 
 end
