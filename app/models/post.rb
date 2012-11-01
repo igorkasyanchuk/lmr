@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Post < ActiveRecord::Base
 
   mount_uploader :preview, PostPreviewUploader
@@ -6,7 +7,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :post_category
 
-  validates :title, :presence => {:message => "Заголовок не може бути пустим"}, :length => {:in => 3..255}
+  validates :title, :presence => true, :length => {:in => 3..255}
   validates :description, :presence => true
   validates :content, :presence => true
   validates_uniqueness_of :title, :scope => :post_category_id
