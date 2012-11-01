@@ -55,7 +55,7 @@ class PaymentDetails
   end
 
   def self.build_payments raw
-    @payments = raw['payment'].map do |raw_payment|
+    @payments = (raw['payment'] || []).map do |raw_payment|
       Payment.build_payment(raw_payment)
     end
   end

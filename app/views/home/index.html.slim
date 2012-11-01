@@ -7,8 +7,10 @@
 - else
   = page_part 'MISSING_NEWS'
 
-#last_news.row
-  = render :partial => "/shared/last_news", :collection => @news, :as => :one_new unless @news.blank?
+- content_for :last_news do
+  #last_news
+    .row
+      = render :partial => "/shared/last_news", :collection => @news, :as => :one_new unless @news.blank?
 
 - content_for :sidebar do
   = render :partial => "/shared/document_list"
