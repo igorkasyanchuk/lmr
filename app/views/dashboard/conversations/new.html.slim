@@ -6,9 +6,9 @@ hr
 
 = simple_form_for [:dashboard, @conversation], :html => {:class => 'form-horizontal'} do |f|
   = f.error_notification
-  = f.input :service_provider_id, :collection => @service_providers
-  = f.input :subject
-  = f.input :body, :as => :text
+  = f.input :service_provider_id, :collection => @service_providers, :label => 'ЛКП', :prompt => "Виберіть ЛКП"
+  = f.input :subject, :label => 'Тема'
+  = f.input :body, :as => :text, :label => 'Повідомлення'
   .form-actions
     = f.submit 'Відправити запит', :class => 'btn btn-primary form-btn'
     |  

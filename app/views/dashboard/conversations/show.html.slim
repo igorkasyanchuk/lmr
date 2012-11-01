@@ -22,6 +22,6 @@ table.table.table-hover
 = simple_form_for :message, :url => message_dashboard_conversation_url, :html => {:class => 'form-horizontal'} do |f|
   = f.error_notification
   = f.hidden_field :conversation_id, :value => @conversation.id
-  = f.input :body, :as => :text
+  = f.input :body, :as => :text, :label => 'Повідомлення'
   .form-actions
     = f.submit 'Відповісти', :class => 'btn btn-primary form-btn'

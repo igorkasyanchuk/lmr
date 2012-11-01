@@ -1,12 +1,14 @@
 # encoding: utf-8
 class Dashboard::ConversationsController < Dashboard::DashboardController
+
+  before_filter :add_service_providers, :only => [:new, :create]
+
   def index
     @conversations = current_user.conversations
   end
 
   def new
-    @conversation = Conversation.new
-    @service_providers = ServiceProvider.all
+    @conversation = Conversation.new    
   end
 
   def create
@@ -36,6 +38,12 @@ class Dashboard::ConversationsController < Dashboard::DashboardController
         redirect_to dashboard_conversations_url, :alert => 'Помилка при створенні повідомлення'
       end
     end
+  end
+
+  private
+
+  def add_service_providers
+    @service_providers = ServiceProvider.all
   end
 
 end
