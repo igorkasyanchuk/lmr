@@ -29,36 +29,36 @@ html lang="en"
     = auto_discovery_link_tag :rss, '/news/rss'
 
   body
-    #logo.container
+    header.container#logo
       = link_to (image_tag "/assets/lmr.png"), root_path
-    .container
+    nav.container
       = render :partial => '/shared/navigation_general'
+    .container
+      
       - if content_for?(:navigation)
         = yield :navigation
 
-      .content
-        - if content_for?(:sidebar)
-          .row
-            .span9
-              = flash_messages
-              = yield
-            .span3
-              = yield :sidebar
-        - else
-          .row
-            .span12
-              = flash_messages
-              = yield
+      - if content_for?(:sidebar)
+        .row
+          .span9
+            = flash_messages
+            = yield
+          .span3
+            = yield :sidebar
+      - else
+        .row
+          .span12
+            = flash_messages
+            = yield
   
-      footer.row
-        .span12
-          #additional_link.pull-left
-                = link_to_page 'help'
-                = link_to_page 'about' 
-                = link_to_page 'payments'
-                = link_to_page 'contacts'
-          #company_info.pull-right
-            p &copy; Company 2012
+    footer.container
+      #additional_link.pull-left
+            = link_to_page 'help'
+            = link_to_page 'about' 
+            = link_to_page 'payments'
+            = link_to_page 'contacts'
+      #company_info.pull-right
+        p &copy; Company 2012
     /!
       Javascripts
       \==================================================

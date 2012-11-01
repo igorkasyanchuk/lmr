@@ -112,14 +112,6 @@ table.table.table-striped thead tr th {
   float: right;
 }
 
-#additional_link > a {
-  padding-left: 20px;
-}
-
-footer .span12{
-  background-color: #cdced8;
-  padding: 20px 20px 10px 0;
-}
 #title_block {
  margin: 0 20px;
 }

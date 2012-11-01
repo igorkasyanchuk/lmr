@@ -1,3 +1,5 @@
-= f.input :text
+= f.label :text
+= f.input_field :text, :class => "pull-right"
+.clear
 - if params[:reply_to_id]
   = f.hidden_field :reply_to_id, :value => params[:reply_to_id]
