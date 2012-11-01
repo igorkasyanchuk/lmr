@@ -44,6 +44,7 @@ class Dashboard::ConversationsController < Dashboard::DashboardController
 
   def add_service_providers
     @service_providers = ServiceProvider.all
+    # @service_providers = current_user.service_providers
   end
 
 end
