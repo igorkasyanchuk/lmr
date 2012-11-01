@@ -26,23 +26,10 @@
   */
 #logo {
   margin-top: -60px;
-  min-height: 130px;
+  height: 130px;
+  overflow: hidden;
   background: url('/assets/lmr.png') 0 0 no-repeat;
   text-align: right;
-}
-#logo #advert{
-  color: #585D92;
-  font-family: 'Comfortaa', cursive;
-  font-size: 26px;
-  font-weight: normal;
-  margin: 20px 20px 0 0;
-}
-#logo #advert a{
-  color: #585D92;
-}
-#logo #advert a:hover{
-  text-decoration: none;
-  color: #585D92;
 }
 
 .clearfix, .clear {
@@ -102,6 +89,7 @@ ul.ui-autocomplete {
 
 .navbar ul.nav {
   margin: 0px;
+  font-size: 16px;
 }
 
 .navbar li.divider-vertical {
@@ -131,4 +119,11 @@ table.table.table-striped thead tr th {
 footer .span12{
   background-color: #cdced8;
   padding: 20px 20px 10px 0;
+}
+#title_block {
+ margin: 0 20px;
+}
+
+#title_block h1{
+  font-size: 20px;
 }
