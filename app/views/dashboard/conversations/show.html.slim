@@ -3,16 +3,10 @@
 #title_block
   h1.title Запит до: #{@conversation.service_provider.name}
   .clear
+  h3= @conversation.subject  
   .admin_actions
     = link_to 'Назад', dashboard_conversations_path, :class => 'btn btn-primary btn-small'
   .clear
-
-= simple_form_for :message, :url => message_dashboard_conversation_url, :html => {:class => 'form-horizontal'} do |f|
-  = @conversation.service_provider.name
-  = f.hidden_field :conversation_id, :value => @conversation.id
-  = f.input :body, :as => :text
-  .form-actions
-    = f.submit 'Відповісти', :class => 'btn btn-primary form-btn'
 
 hr
 table.table.table-hover
@@ -25,3 +19,9 @@ table.table.table-hover
     tr
       td= message.from
       td= message.body
+= simple_form_for :message, :url => message_dashboard_conversation_url, :html => {:class => 'form-horizontal'} do |f|
+  = f.error_notification
+  = f.hidden_field :conversation_id, :value => @conversation.id
+  = f.input :body, :as => :text
+  .form-actions
+    = f.submit 'Відповісти', :class => 'btn btn-primary form-btn'
