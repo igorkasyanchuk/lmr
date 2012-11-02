@@ -45,6 +45,10 @@ html lang="en"
             = yield
           .span3
             = yield :sidebar
+        - if content_for?(:last_news)
+          .row
+            .span12
+              = yield :last_news
       - else
         .row
           .span12
