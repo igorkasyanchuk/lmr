@@ -11,13 +11,11 @@ describe Conversation do
     before do
       @conversation.stub(:user).and_return(mock_model User, email: 'consumer@mail.local')
       @conversation.stub(:service_provider).and_return(mock_model ServiceProvider, email: 'provider@mail.local')
-      @conversation.stub(:history).and_return('conversation history')
     end
 
     it "creates message " do
-      Message.should_receive(:create).with(
+      conversation.messages.should_receive(:create).with(
         :body => 'response',
-        :history => 'conversation history',
         :recipients => %w[consumer@mail.local provider@mail.local]
       )
 
