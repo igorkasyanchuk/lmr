@@ -28,7 +28,7 @@
   margin-top: -60px;
   height: 130px;
   overflow: hidden;
-  background: url('/assets/lmr.png') 0 0 no-repeat;
+  background: url('/assets/lmr.png') no-repeat;
   text-align: right;
 }
 
