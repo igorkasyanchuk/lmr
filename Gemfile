@@ -63,6 +63,7 @@ group :test do
   elsif RUBY_PLATFORM.downcase.include?('darwin')
     gem 'rb-fsevent'
   end
+  gem 'fuubar'
 end
 
 # To use ActiveModel has_secure_password
