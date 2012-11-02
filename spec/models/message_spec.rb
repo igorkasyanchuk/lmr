@@ -3,17 +3,23 @@ require 'spec_helper'
 describe Message do
   
   #let(:conversation) { mock_model :conversation, :subject => 'conversation subject'}
+  #
+  before { @message = Message.new }
 
-  subject do
-    message = Message.new
+  subject { @message }
 
-    conversation = mock_model Conversation,
-      :subject => 'conversation subject',
-      :token => 'conversation token'
+  describe '#subject' do
+    subject { @message.subject }
 
-    message.stub(:conversation).and_return(conversation)
-    message
+    before do
+      conversation = mock_model Conversation,
+        :subject => 'conversation subject',
+        :token => 'conversation token'
+      @message.stub(:conversation).and_return(conversation)
+    end
+
+    it { should eq('conversation subject (conversation token)') }
+
   end
 
-  its(:subject) { should eq('conversation subject (conversation token)') }
 end
