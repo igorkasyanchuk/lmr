@@ -4,9 +4,9 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   before_filter :init_filter
 
   def info
-    @invoice = Invoice.load '4110000106052', @filter.period#@date.beginning_of_month..@date.end_of_month
-    @details = InvoiceDetails.load '4110000106052', @filter.period
-    PaymentDetails.load('4110000106052', @filter, current_user.consumer_info.service_providers)
+    @invoice = Invoice.load current_user.identifier, @filter.period#@date.beginning_of_month..@date.end_of_month
+    @details = InvoiceDetails.load current_user.identifier, @filter.period
+    PaymentDetails.load( current_user.identifier, @filter, current_user.consumer_info.service_providers)
     respond_to do |format|
       format.html
       format.pdf do
@@ -19,7 +19,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   end
 
   def payments
-    PaymentDetails.load('4110000106052', @filter, current_user.consumer_info.service_providers)
+    PaymentDetails.load(current_user.identifier, @filter, current_user.consumer_info.service_providers)
   end
 
   def counters
@@ -42,7 +42,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   end
 
   def invoice_details
-    @invoice_details = InvoiceDetails.load '4110000106052', @filter.period
+    @invoice_details = InvoiceDetails.load current_user.identifier, @filter.period
     report = InvoiceDetailsPdf.new(@invoice_details, view_context)
     send_data report.render, file_name: "invoice_details_#{@filter.period_begin.strftime('%Y-%m')}.pdf",
                              type: 'application/pdf',
