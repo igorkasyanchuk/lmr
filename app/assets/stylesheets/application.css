@@ -14,7 +14,6 @@
  *= require "news/news"
  *= require "contacts/contacts"
  *= require "pages/pages"
- *= require bootstrap_and_overrides
  *= require cerulean
  *= require navigation
  *= require forum
