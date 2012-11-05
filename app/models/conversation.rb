@@ -10,14 +10,22 @@ class Conversation < ActiveRecord::Base
   before_validation :add_token
   after_save :create_message
 
+  def self.receive_mail(message)
+    token = message.subject[/\[(.*?)\]/, 1]
+    conversation = Conversation.find_by_token(token) if token
+    if conversation && (conversation.user.email == message.from.first || conversation.service_provider.email == message.from.first)
+      conversation.messages.create body: message.body.decoded, from: message.from.first
+    end
+  end
+
   private
-  
+
   def add_token
     self.token = SecureRandom.hex(10)    
   end
 
   def create_message
-    self.messages << Message.create(body: self.body, from: self.user.full_name)
+    self.messages << Message.create(body: self.body, from: self.user.email)
   end
 
 end

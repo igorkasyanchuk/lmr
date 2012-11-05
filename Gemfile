@@ -24,6 +24,7 @@ gem 'truncate_html'
 
 gem 'httparty'
 gem 'prawn'
+gem 'mailman', require: false
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
@@ -44,6 +45,7 @@ group :development do
   gem 'thin'
   gem 'debugger'
   gem 'wirb'
+  gem "letter_opener"
 end
 
 group :test do

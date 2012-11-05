@@ -26,7 +26,7 @@ class Dashboard::ConversationsController < Dashboard::DashboardController
   end
 
   def message
-    params[:message][:from] = current_user.full_name
+    params[:message][:from] = current_user.email
     conversation = current_user.conversations.find_by_id(params[:message][:conversation_id])
     @message = conversation.messages.new(params[:message]) if conversation
     if @message && @message.save
