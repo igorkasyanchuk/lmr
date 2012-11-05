@@ -12,8 +12,7 @@ class Dashboard::ConversationsController < Dashboard::DashboardController
   end
 
   def create
-    @conversation = Conversation.new(params[:conversation])
-    if current_user.conversations << @conversation
+    if @conversation = current_user.conversations.create(params[:conversation])
       redirect_to dashboard_conversation_url(@conversation)
     else
       render :new

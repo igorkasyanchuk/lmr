@@ -1,11 +1,10 @@
 class ConversationMailer < ActionMailer::Base
   default from: "from@example.com"
 
-  def message m
-
+  def new_message m
     @user = m.user
-    @body = h.body_with_history
-    mail to: m.recipients, subject: m.subject
+    @body = m.body_with_history
+    mail(to: m.recipients, subject: m.subject)
   end
 
 end
