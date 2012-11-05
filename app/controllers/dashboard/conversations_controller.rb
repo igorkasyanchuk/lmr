@@ -8,7 +8,7 @@ class Dashboard::ConversationsController < Dashboard::DashboardController
   end
 
   def new
-    @conversation = Conversation.new    
+    @conversation = Conversation.new
   end
 
   def create
