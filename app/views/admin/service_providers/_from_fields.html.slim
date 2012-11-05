@@ -1,7 +1,3 @@
-- content_for :js do
-  = javascript_include_tag 'admin/service_providers'
-  = javascript_include_tag 'jquery.maskedinput.js'
-
 .row
   = simple_nested_form_for  [:admin, resource], :html => {:class => 'form-horizontal'} do |f|
     .span10
