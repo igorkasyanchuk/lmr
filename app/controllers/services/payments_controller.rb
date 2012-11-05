@@ -17,7 +17,9 @@ class Services::PaymentsController < ApplicationController
   end
 
   def web_payments
-    
+  end
+
+  def search
   end
 
 end

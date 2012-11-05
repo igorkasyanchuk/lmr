@@ -82,6 +82,7 @@ Lmr::Application.routes.draw do
     match 'web_payments', :to => 'payments#web_payments'
     match 'lkp_departments', :to => 'payments#lkp_departments'
     match 'terminals', :to => 'payments#terminals'
+    match 'search', :to => 'payments#search'
   end
 
   get ':id', to: 'pages#show', as: :page

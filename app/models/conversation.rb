@@ -17,6 +17,14 @@ class Conversation < ActiveRecord::Base
       conversation.messages.create body: message.body.decoded, from: message.from.first
     end
   end
+  
+  def reply_with_form params
+    messages.create body: params[:body], recipients: [user.email, service_provider.email]
+  end
+
+  def history
+    messages.map(&:body).join('<hr>')
+  end
 
   private
 

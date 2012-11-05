@@ -37,7 +37,7 @@ gem 'coffee-rails', '~> 3.2.1'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'uglifier', '>= 1.0.3'
-  gem "twitter-bootstrap-rails"
+  gem "twitter-bootstrap-rails" , '2.1.3'
 end
 
 group :development do
@@ -60,7 +60,12 @@ group :test do
   gem 'guard-spork'
   gem 'spork-rails'
   gem 'simplecov', :require => false
-  gem 'rb-inotify', '~> 0.8.8'
+  if RUBY_PLATFORM.downcase.include?('linux')
+    gem 'rb-inotify', '~> 0.8.8'
+  elsif RUBY_PLATFORM.downcase.include?('darwin')
+    gem 'rb-fsevent'
+  end
+  gem 'fuubar'
 end
 
 # To use ActiveModel has_secure_password
