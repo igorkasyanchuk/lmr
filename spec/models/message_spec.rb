@@ -22,7 +22,7 @@ describe Message do
   describe "#mail!" do
     it 'sends messageby e-mail' do
       mail_mock = mock :mail
-      ConversationMailer.should_receive(:message).with(message).and_return(mail_mock)
+      ConversationMailer.should_receive(:new_message).with(message).and_return(mail_mock)
       mail_mock.should_receive(:deliver)
 
       message.mail!
@@ -53,6 +53,15 @@ describe Message do
     it "gets history from conversation" do
       should eq 'conversation history'
     end
+
+  end
+
+  describe '#user' do
+    subject { @message.user }
+
+    before { @conversation.stub(:user).and_return(:conversation_user) }
+
+    it { should eq :conversation_user }
 
   end
 

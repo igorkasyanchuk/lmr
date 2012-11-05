@@ -4,5 +4,5 @@ class ServiceProvider < ActiveRecord::Base
 
 
   accepts_nested_attributes_for :responsible_persons
-  attr_accessible :code, :names, :phone, :email, :address, :responsible_persons_attributes
+  attr_accessible :code, :names, :phone, :email, :address, :responsible_persons_attributes, :name, :district
 end

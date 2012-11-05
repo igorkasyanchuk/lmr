@@ -8,7 +8,7 @@ class Conversation < ActiveRecord::Base
   validates_presence_of :service_provider_id, :token, :user_id, :body, :subject
 
   before_validation :add_token
-  after_save :create_message
+  after_create :send_initial_message
 
   def self.receive_mail(message)
     token = message.subject[/\[(.*?)\]/, 1]
@@ -19,7 +19,7 @@ class Conversation < ActiveRecord::Base
   end
   
   def reply_with_form params
-    messages.create body: params[:body], recipients: [user.email, service_provider.email]
+    messages.create(body: params[:body], recipients: [user.email, service_provider.email], from: user.full_name).mail!
   end
 
   def history
@@ -32,8 +32,8 @@ class Conversation < ActiveRecord::Base
     self.token = SecureRandom.hex(10)    
   end
 
-  def create_message
-    self.messages << Message.create(body: self.body, from: self.user.email)
+  def send_initial_message
+    self.messages.create(body: self.body, recipients: [self.user.email, self.service_provider.email], from: user.full_name).mail!
   end
 
 end

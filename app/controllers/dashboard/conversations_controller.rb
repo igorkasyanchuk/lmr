@@ -12,8 +12,7 @@ class Dashboard::ConversationsController < Dashboard::DashboardController
   end
 
   def create
-    @conversation = current_user.conversations.new(params[:conversation])
-    if @conversation.save
+    if @conversation = current_user.conversations.create(params[:conversation])
       redirect_to dashboard_conversation_url(@conversation)
     else
       render :new
@@ -26,25 +25,24 @@ class Dashboard::ConversationsController < Dashboard::DashboardController
   end
 
   def message
-    params[:message][:from] = current_user.email
-    conversation = current_user.conversations.find_by_id(params[:message][:conversation_id])
-    @message = conversation.messages.new(params[:message]) if conversation
-    if @message && @message.save
-      redirect_to dashboard_conversation_url(@message.conversation)
-    else
-      if conversation
-        redirect_to dashboard_conversation_url(@message.conversation), :alert => 'Помилка при створенні повідомлення'
+    @conversation = current_user.conversations.find(params[:id])
+
+    if @conversation.present? 
+      if @conversation.reply_with_form params[:message]
+        redirect_to dashboard_conversation_url(@conversation)
       else
-        redirect_to dashboard_conversations_url, :alert => 'Помилка при створенні повідомлення'
+        redirect_to dashboard_conversation_url(@conversation), :alert => 'Помилка при створенні повідомлення'
       end
+    else
+      redirect_to dashboard_conversations_url, :alert => 'Помилка при створенні повідомлення'
     end
+
   end
 
   private
 
   def add_service_providers
-    @service_providers = ServiceProvider.all
-    # @service_providers = current_user.service_providers
+    @service_providers = current_user.service_providers
   end
 
 end

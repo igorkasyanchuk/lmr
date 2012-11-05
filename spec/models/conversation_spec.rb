@@ -17,7 +17,7 @@ describe Conversation do
       conversation.messages.should_receive(:create).with(
         :body => 'response',
         :recipients => %w[consumer@mail.local provider@mail.local]
-      )
+      ).and_return(mock :message, :mail! => true)
 
       conversation.reply_with_form :body => 'response'
     end
