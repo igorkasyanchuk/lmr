@@ -11,7 +11,7 @@ class Conversation < ActiveRecord::Base
   after_create :send_initial_message
 
   def reply_with_form params
-    messages.create(body: params[:body], recipients: [user.email, service_provider.email]).mail!
+    messages.create(body: params[:body], recipients: [user.email, service_provider.email], from: user.full_name).mail!
   end
 
   def history
