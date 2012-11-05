@@ -23,8 +23,8 @@
  *= require jquery.ui.tabs
  *= require "home"
   */
+  
 #logo {
-  margin-top: -60px;
   height: 130px;
   overflow: hidden;
   text-align: right;
