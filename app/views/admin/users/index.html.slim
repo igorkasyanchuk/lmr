@@ -42,7 +42,7 @@ table.table.table-striped
           .horizontal_divider
           = link_to "Редагувати", [:edit, :admin, user], :class => 'btn btn-mini'
           .horizontal_divider
-          = link_to 'Видалити', [:admin, user], :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger btn-mini'
+          = link_to 'Видалити', [:admin, user], :method => :delete, :confirm => 'Ви впевнені?', :class => 'btn btn-danger btn-mini'
     - if collection.blank?
       tr
         td colspan=4

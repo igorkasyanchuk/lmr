@@ -67,13 +67,13 @@ table.table.reports
 h3= "За поточний місяць (#{I18n.t("date.month_names")[Date.today.month]}):"
 = render 'payment', services: PaymentDetails.services, checks: PaymentDetails.checks, service_total: PaymentDetails.service_total
       
-= link_to 'Друк квитанції', params.merge(format: 'pdf'), :class => 'btn'
+= link_to 'Друк квитанції', params.merge(format: 'pdf'), :class => 'btn', :target => '_blank'
 hr
-span = link_to 'Деталі розраунку', dashboard_invoice_details_path(:"period_begin[year]" => @filter.period_begin.year, :"period_begin[month]" => @filter.period_begin.month), :class => 'btn'
+span = link_to 'Деталі розраунку', dashboard_invoice_details_path(:"period_begin[year]" => @filter.period_begin.year, :"period_begin[month]" => @filter.period_begin.month), :class => 'btn', :target => '_blank'
 .horizontal_divider
-span = link_to 'Деталі субсидій', '#', :class => 'btn'
+span = link_to 'Деталі субсидій', '#', :class => 'btn', :target => '_blank'
 .horizontal_divider
-span = link_to 'Деталі пільг', '#', :class => 'btn'
+span = link_to 'Деталі пільг', '#', :class => 'btn', :target => '_blank'
 hr
 span = link_to 'Назад', :back, :class => 'btn'
 

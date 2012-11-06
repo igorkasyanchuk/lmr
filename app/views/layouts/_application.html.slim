@@ -17,7 +17,6 @@ html lang="en"
     /[if lt IE 9]
       = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
     = stylesheet_link_tag "application", :media => "all"
-    = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Comfortaa:400,700&subset=latin,cyrillic-ext'
 
     = javascript_include_tag "jquery"
 
@@ -30,7 +29,7 @@ html lang="en"
 
   body
     header.container#logo
-      = link_to (image_tag "/assets/lmr.png"), root_path
+      = link_to (image_tag "/assets/lmr.png"), main_app.root_path
     nav.container
       = render :partial => '/shared/navigation_general'
     .container

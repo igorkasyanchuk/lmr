@@ -112,9 +112,13 @@ table.table.table-striped thead tr th {
 }
 
 #title_block {
- margin: 0 20px;
+ margin: 0;
 }
 
 #title_block h1{
   font-size: 20px;
+}
+
+.clear-margin{
+  margin: 0px !important;
 }
