@@ -1,15 +1,23 @@
 class Message < ActiveRecord::Base
-  attr_reader :recipients
+  attr_accessor :recipients
   attr_accessible :body, :conversation_id, :from, :recipients, :history
   belongs_to :conversation
   validates_presence_of :body, :conversation_id, :from
+
+  def self.reply params
+    conversation.messages.create body: params[:body], from: params[:from], recipients: params[:recipients]
+  end
+
+  def subject_token
+    "#{self.conversation.subject} - [#{self.conversation.token}]"
+  end
 
   def subject
     "#{conversation.subject} (#{conversation.token})"
   end
 
   def mail!
-    ConversationMailer.message(self).deliver
+    ConversationMailer.new_message(self).deliver
   end
 
   def body_with_history
@@ -20,4 +28,7 @@ class Message < ActiveRecord::Base
     conversation.history
   end
 
+  def user
+    conversation.user
+  end
 end
