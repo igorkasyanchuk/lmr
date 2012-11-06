@@ -1,18 +1,18 @@
 = simple_form_for [:admin, resource], :html => {:class => 'form-horizontal'} do |f|
   fieldset.span8
-    = f.input :title, :label => 'Заголовок'
+    = f.input :title, :label => 'Заголовок', :input_html => { :class => "field_width" }
     - unless resource.permanent?
-      = f.input :identifier, :label => 'URL Назва'
+      = f.input :identifier, :label => 'URL Назва', :input_html => { :class => "field_width" }
     .controls.pages
       small Перетягніть сторінку в Зміст, щоб додати лінк
       br
       - collection.each do |p|
         span.label
           = link_to p.title || p.identifier, "#{root_url}#{p.identifier}"
-    = f.input :content, :label => 'Зміст', :as => :ckeditor, :input_html => {:class => 'span8', :height => '400', :width => '900'}
-    = f.input :seo_title, :label => 'SEO заголовок', :input_html => { :class => 'span8', :cols => 100 }
-    = f.input :seo_keywords, :label => 'SEO ключові слова', :input_html => {:rows => 3, :class => 'span8'}
-    = f.input :seo_description, :label => 'SEO опис', :input_html => {:rows => 3, :class => 'span8'}
+    = f.input :content, :label => 'Зміст', :as => :ckeditor, :input_html => {:class => 'span8', :height => '400', :width => '760'}
+    = f.input :seo_title, :label => 'SEO заголовок', :input_html => { :class => 'field_width', :cols => 100 }
+    = f.input :seo_keywords, :label => 'SEO ключові слова', :input_html => {:rows => 3, :class => 'field_width'}
+    = f.input :seo_description, :label => 'SEO опис', :input_html => {:rows => 3, :class => 'field_width'}
   .clearfix
 
   .form-actions

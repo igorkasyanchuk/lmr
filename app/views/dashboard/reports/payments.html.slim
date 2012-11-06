@@ -31,11 +31,10 @@ h3 Звіт за період:
       = label_tag 'service_provider_code', 'Одержувач платежу:'
       br
       = select_tag :service_provider_code, options_from_collection_for_select(PaymentDetails.check_service_providers, :service_provider_code, :service_provider_name, @filter.service_provider_code), :prompt => 'Оплати загалом'
-    .filter_field
+    .filter_field.clear-margin
       = label_tag 'check_bank_code', 'Банк (отримувач):'
       br
       = select_tag :check_bank_code, options_from_collection_for_select(PaymentDetails.check_banks, :code, :name, @filter.check_bank_code), :prompt => 'Всі банки (отримувачі)'
-
     = submit_tag "Сформувати", :class => "btn btn-primary"
 
 = render 'payment', services: PaymentDetails.services, checks: PaymentDetails.checks, service_total: PaymentDetails.service_total

@@ -14,8 +14,22 @@ class Conversation < ActiveRecord::Base
     token = message.subject[/\[(.*?)\]/, 1]
     conversation = Conversation.find_by_token(token) if token
     if conversation && (conversation.user.email == message.from.first || conversation.service_provider.email == message.from.first)
-      conversation.messages.create body: message.body.decoded, from: message.from.first
+      conversation.reply_with_email message
     end
+  end
+
+  def reply_with_email message
+    recipient = if user.email != message.from.first
+      [user.email]
+    else
+      [service_provider.email]
+    end
+    messages.create(body: strip_history(params[:body]), from: params[:from], recipients: [recipient]).mail!
+  end
+
+  def strip_history text
+    messages.each { |m| text = text.gsub(m.body, '') }
+    text
   end
   
   def reply_with_form params

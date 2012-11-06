@@ -4,8 +4,7 @@
   h1.title Адміністрування надавачів послуг
   .clear
   .admin_actions
-    = link_to 'Додати Надавача Послуг', new_resource_path, :class => 'btn btn-primary btn-small'
-  
+    = link_to 'Додати надавача послуг', new_resource_path, :class => 'btn btn-primary btn-small'
 hr  
 
 #pages_container
@@ -31,7 +30,7 @@ hr
               br
           td width="200"
             = link_to 'Редагувати', edit_resource_path(provider), :class => 'btn btn-mini'  
-            = link_to 'Видалити', resource_path(provider), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger'
+            = link_to 'Видалити', resource_path(provider), :method => :delete, :confirm => 'Ви впевнені?', :class => 'btn btn-mini btn-danger'
       - if collection.blank?
         tr
           td colspan="5" Надавачі послуг відсутні

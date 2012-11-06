@@ -10,7 +10,7 @@
   fieldset
     = f.input :do_update, :as => :hidden, :input_html => { :value => 'yes' }
     = f.input :format, :collection => PagePart::FORMATS, :as => :select, :include_blank => false, :label => 'Формат'
-    .html.part.none= f.input :content, :label => 'Зміст', :as => :ckeditor, :input_html => {:class => 'span8', :height => '400', :width => '900', :value => f.object.content}
+    .html.part.none= f.input :content, :label => 'Зміст', :as => :ckeditor, :input_html => {:class => 'span8', :height => '400', :width => '780', :value => f.object.content}
     .text.part= f.input :plain_text, :as => :text, :input_html => {:class => 'span8', :rows => '4', :cols => '80', :value => f.object.content}, :label => 'Зміст'
 
   .form-actions
