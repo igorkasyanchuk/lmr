@@ -21,6 +21,7 @@ gem 'ckeditor', :path => 'vendor/gems/ckeditor'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'truncate_html'
+gem 'gmaps4rails'
 
 gem 'httparty'
 gem 'prawn'

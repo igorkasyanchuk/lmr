@@ -17,3 +17,4 @@
 //= require twitter/bootstrap
 //= require jquery_nested_form
 //= require dashboard
+//= require_directory ./gmaps4rails

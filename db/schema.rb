@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121030100030) do
+ActiveRecord::Schema.define(:version => 20121106130303) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -247,6 +247,9 @@ ActiveRecord::Schema.define(:version => 20121030100030) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.string   "type"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "gmaps"
   end
 
   add_index "payment_terminals", ["code"], :name => "index_payment_terminals_on_code"
@@ -289,22 +292,15 @@ ActiveRecord::Schema.define(:version => 20121030100030) do
   end
 
   create_table "service_providers", :force => true do |t|
-    t.integer  "service_id"
-    t.integer  "house_id"
-    t.integer  "responsible_person_id"
     t.integer  "code"
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "phone"
     t.string   "address"
     t.string   "district"
   end
-
-  add_index "service_providers", ["house_id"], :name => "index_service_providers_on_house_id"
-  add_index "service_providers", ["responsible_person_id"], :name => "index_service_providers_on_responsible_person_id"
-  add_index "service_providers", ["service_id"], :name => "index_service_providers_on_service_id"
 
   create_table "services", :force => true do |t|
     t.string  "description"

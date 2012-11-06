@@ -8,4 +8,7 @@ hr
   = text_field_tag :query, params[:query], :class => 'input-medium search-query', :placeholder => 'Пошук Терміналів'
   |  
   = submit_tag "Пошук", :class => 'btn btnie'
+br  
+
+= show_on_map @markers
 
