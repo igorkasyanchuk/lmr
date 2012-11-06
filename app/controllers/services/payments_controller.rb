@@ -5,25 +5,30 @@ class Services::PaymentsController < ApplicationController
   end
 
   def bank_departments
-    @markers = BankDepartment.all.to_gmaps4rails
     @departments = BankDepartment.all
+    prepare_marker
   end
 
   def lkp_departments
-    @markers = LkpDepartment.all.to_gmaps4rails
     @departments = LkpDepartment.all
+    prepare_marker
   end
 
   def terminals
-    @markers = Terminal.all.to_gmaps4rails
     @departments = Terminal.all
+    prepare_marker
   end
 
   def web_payments
   end
 
   def search
-    @markers = PaymentTerminal.all.to_gmaps4rails
+    @departments = PaymentTerminal.all
+    prepare_marker
+  end
+
+  def prepare_marker
+    @markers = @departments.to_gmaps4rails
   end
 
 end
