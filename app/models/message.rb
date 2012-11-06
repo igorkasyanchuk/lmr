@@ -4,6 +4,10 @@ class Message < ActiveRecord::Base
   belongs_to :conversation
   validates_presence_of :body, :conversation_id, :from
 
+  def self.reply params
+    conversation.messages.create body: params[:body], from: params[:from], recipients: params[:recipients]
+  end
+
   def subject_token
     "#{self.conversation.subject} - [#{self.conversation.token}]"
   end
