@@ -4,11 +4,13 @@
 h1 Пошук Терміналів
 hr
 
-= form_tag '/terminal_search', :method => :get, :class => 'form-search site_search' do
+= form_tag [:services, :search], :method => :get, :class => 'form-search site_search' do
   = text_field_tag :query, params[:query], :class => 'input-medium search-query', :placeholder => 'Пошук Терміналів'
   |  
   = submit_tag "Пошук", :class => 'btn btnie'
 br  
 
 = show_on_map @markers
+
+
 
