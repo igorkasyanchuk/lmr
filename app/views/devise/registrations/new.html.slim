@@ -27,8 +27,8 @@ hr
     .control-group class="#{address_error(f.object.errors, :flat)}"
       = f.label :flat, :class => "control-label #{address_error(f.object.errors, :flat)}"
       .controls
-        = text_field_tag :flat, params[:flat], :disabled => true
-        = f.hidden_field :flat
+        = f.text_field :flat, :disabled => true
+        / = f.hidden_field :flat
         span.help-inline.flat_info.address_error= address_error(f.object.errors, :flat, true)
 
     = f.input :email

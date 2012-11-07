@@ -101,8 +101,13 @@ class User < ActiveRecord::Base
   private
 
     def user_identification
-      c = Consumer.find_by_code(self.identifier)
-      unless c and c.flat.to_s == self.flat.to_s and c.house_id.to_i == self.house.to_i and c.house.street_id.to_i == self.street.to_i
+      c = ReportLoader.load_consumer_info(self.identifier)['address']
+      street = c['streetCode'].gsub(/\s+/, "") if c['streetCode']
+      house_number = c['houseNumber'] ? c['houseNumber'].gsub(/\s+/, "") : ''
+      house_letter = c['houseletter'] ? c['houseletter'].gsub(/\s+/, "") : ''
+      house = house_number + '_' + house_letter
+      flat = c['flatNumber'].gsub(/\s+/, "") if c['flatNumber']
+      unless c && street == self.street.to_s && house == self.house.to_s && flat == self.flat.to_s
         errors.add :identifier, I18n.t('devise.views.validate_address')
       end
     end
