@@ -25,6 +25,7 @@ class Services::PaymentsController < ApplicationController
   def search
     location = prepare_coordinates(params[:query])
     @departments = PaymentTerminal.within(5, :origin => location).all
+    @departments = PaymentTerminal.geo_scope(:origin => location).order("distance asc").limit(5) if @departments.blank?
     prepare_marker
   end
 
