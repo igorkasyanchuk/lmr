@@ -35,7 +35,7 @@ class Services::PaymentsController < ApplicationController
     end
 
     def prepare_coordinates query
-      location = Geocoder.search('Lviv, ' + params[:query]) 
+      location = Geocoder.search('Lviv, ' + query.to_s) 
       location = location[0].geometry['location'].map {|k,v| v}
     end
 
