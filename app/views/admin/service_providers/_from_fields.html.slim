@@ -1,45 +1,46 @@
 .row
-  = simple_nested_form_for  [:admin, resource], :html => {:class => 'form-horizontal'} do |f|
-    .span10
-      = f.input :name, :label => "Назва організації", :input_html => { :class => 'span8' }
-    .span10
-      = f.input :address, :label => "Адреса", :as => :text, :input_html => { :class => 'span8',  :rows => "6" }
-    .span5
-      = f.input :phone, :label => "Телефон", :input_html => {:type => "tel"}
-    .span4
-      = f.input :email, :label => "Електронна пошта"
-    .span5
-      = f.input :district, :label => "Район"
-    .span4
-      = f.input :code, :label => "Код організації"
-    .clear
-    hr
-    = f.simple_fields_for :responsible_persons do |ff|
-      .responsible_person
-        .pull-left
-          h4 Відповідальна особа
-        .pull-right.person_delete
-          = ff.link_to_remove "Видалити", :class => "btn btn-mini btn-danger"
-        .clear
-        .span5
-          = ff.input :first_name, :label => "Ім'я"
-        .span4
-          = ff.input :last_name, :label => "Прізвище"
-        .span5
-          = ff.input :middle_name, :label => "По-батькові"
-        .span4
-          = ff.input :incumbency, :collection => ["Директор", "Головний бухгалтер", "Бухгалтер по нарах.комун.платежів"], :label => "Посада"
-        .span5
-          = ff.input :phone, :label => "Телефон", :input_html => {:type => "tel"}
-        .span4
-          = ff.input :email, :label => "Електронна пошта"
-        .clear
-      hr
+  = simple_nested_form_for [:admin, resource] do |f|
+    .form-horizontal
+      .span10
+        = f.input :name, :label => "Назва організації", :input_html => { :class => 'span8' }
+      .span10
+        = f.input :address, :label => "Адреса", :as => :text, :input_html => { :class => 'span8',  :rows => "6" }
+      .span5
+        = f.input :phone, :label => "Телефон", :input_html => {:type => "tel"}
+      .span4
+        = f.input :email, :label => "Електронна пошта"
+      .span5
+        = f.input :district, :label => "Район"
+      .span4
+        = f.input :code, :label => "Код організації"
       .clear
-    = f.link_to_add  "Додати відповідальну особу", :responsible_persons, :class => "btn btn-small btn-primary margin-top"
-    .clear
+      hr
+      = f.simple_fields_for :responsible_persons do |ff|
+        .responsible_person
+          .pull-left
+            h4 Відповідальна особа
+          .pull-right.person_delete
+            = ff.link_to_remove "Видалити", :class => "btn btn-mini btn-danger", :confirm => 'Ви впевнені?'
+          .clear
+          .span5
+            = ff.input :first_name, :label => "Ім'я"
+          .span4
+            = ff.input :last_name, :label => "Прізвище"
+          .span5
+            = ff.input :middle_name, :label => "По-батькові"
+          .span4
+            = ff.input :incumbency, :collection => ["Директор", "Головний бухгалтер", "Бухгалтер по нарах.комун.платежів"], :label => "Посада"
+          .span5
+            = ff.input :phone, :label => "Телефон", :input_html => {:type => "tel"}
+          .span4
+            = ff.input :email, :label => "Електронна пошта"
+          .clear
+        hr
+        .clear
+      = f.link_to_add  "Додати відповідальну особу", :responsible_persons, :class => "btn btn-small btn-primary margin-top"
+      .clear
 
-    .form-actions
-      = f.submit 'Зберегти надавача', :class => 'btn btn-primary form-btn'
-      = link_to 'Відміна', [:admin, :service_providers], :class => 'btn'
+      .form-actions
+        = f.submit 'Зберегти надавача', :class => 'btn btn-primary form-btn'
+        = link_to 'Відміна', [:admin, :service_providers], :class => 'btn'
 
