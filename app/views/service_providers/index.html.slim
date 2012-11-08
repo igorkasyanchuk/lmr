@@ -1,0 +1,6 @@
+.row
+  - @service_providers.each do |provider|
+    .span4
+      h4= provider.name
+      p= provider.address
+      p= provider.phone
