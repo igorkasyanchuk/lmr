@@ -410,7 +410,7 @@ DEPENDENCIES
   mailman
   mini_magick
   mysql2
-  nested_form (= 0.3.1)
+  nested_form (~> 0.3.1)
   poltergeist
   prawn
   quiet_assets
