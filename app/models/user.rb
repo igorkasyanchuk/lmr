@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
 
   with_options :if => :is_user? do |user|
     user.validates_presence_of :identifier
-    user.validates_presence_of :street, :house, :flat, :on => :create
+    user.validates_presence_of :street, :house, :on => :create
     user.validates_uniqueness_of :identifier
     user.validates :identifier, :length => { :maximum => 13 }
     user.validates_format_of :identifier, :with => /^\d+$/, :message => :validate_number
@@ -104,11 +104,13 @@ class User < ActiveRecord::Base
     def user_identification
       consumer = ReportLoader.load_consumer_info(self.identifier)
       address = consumer['address']
-      street = address['streetCode'].gsub(/\s+/, "") if address['streetCode']
-      house = consumer['houseCode'].gsub(/\s+/, "") if consumer['houseCode']
-      flat = address['flatNumber'].gsub(/\s+/, "") if address['flatNumber']
-      unless consumer && street == self.street.to_s && house == self.house.to_s && flat == self.flat.to_s
-        errors.add :identifier, I18n.t('devise.views.validate_address')
+      if consumer && address
+        street = address['streetCode'].gsub(/\s+/, "") if address['streetCode']
+        house = consumer['houseCode'].gsub(/\s+/, "") if consumer['houseCode']
+        flat = address['flatNumber'].gsub(/\s+/, "") if address['flatNumber']      
+        unless street == self.street.to_s && house == self.house.to_s && flat == self.flat.to_s
+          errors.add :identifier, I18n.t('devise.views.validate_address')
+        end
       end
     end
 

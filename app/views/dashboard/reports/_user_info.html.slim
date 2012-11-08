@@ -2,20 +2,20 @@
   .row
     .span4
       .field_name ПІБ:
-      .field_data Петренко П. П.
+      .field_data= @user_info.pib
     .span4 
       .field_name Адреса:
-      .field_data Роксоляни 2/5
+      .field_data= "#{@user_info.street_name} #{@user_info.house_number} #{@user_info.house_letter}/#{@user_info.flat_number}"
     .span3
       .field_name Розрахункова площа:
-      .field_data 89,1 кв.м.
+      .field_data= @user_info.area
   .row
     .span4
       .field_name № особового рахунку:
-      .field_data 4070000646163
+      .field_data= @user_info.consumer_code
     .span4
       .field_name Кількість мешканців:
-      .field_data 3 особи
+      .field_data= "#{@user_info.people_count} #{@user_info.people_count == 1 ? 'особа' : 'осіб'}"
     .span3
       .field_name Опалювальна площа:
-      .field_data 89,1 кв.м.
+      .field_data= @user_info.area
