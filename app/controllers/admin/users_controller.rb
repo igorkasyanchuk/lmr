@@ -50,7 +50,7 @@ class Admin::UsersController < Admin::DashboardController
   def autocomplete
     if params[:street]
       houses = House.where("street_id = ? AND number_code LIKE ?","#{params[:street]}", "#{params[:term]}%").order("number_code")
-      render :json => houses.map { |h| {:id => "#{h.number_code.gsub(/\s+/, "")}_#{h.letter.gsub(/\s+/, "")}", :label => "#{h.number_code}"} }
+      render :json => houses.map { |h| {:id => h.id, :label => "#{h.number_code}"} }
     else
       streets = Street.where("name LIKE ?", "#{params[:term]}%").order("name")
       render :json => streets.map { |s| {:id => s.id, :label => "#{s.name}"} }

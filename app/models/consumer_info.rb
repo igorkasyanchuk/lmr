@@ -1,18 +1,21 @@
 class ConsumerInfo
 
-  attr_reader :consumer_code, :street_code, :house_code, :house_number, :house_letter, :flat_number, :flat_letter, :service_providers, :error
-  ServiceProvider = Struct.new :service_provider_code, :service_provider_name, :service_code, :service_name, :error
+  attr_reader :consumer_code, :pib, :street_code, :street_name, :house_code, :house_number, :house_letter, :flat_number, :people_count, :area, :service_providers, :error
+  ServiceProvider = Struct.new :service_provider_code, :service_provider_name, :service_code, :service_name
   
   def initialize opts
     @consumer_code = opts['consumerCode']
-    @street_code = opts['streetCode']
+    @pib = opts['PIB']
+    @street_code = opts['address']['streetCode']
+    @street_name = opts['address']['streetName']
     @house_code = opts['houseCode']
-    @house_number = opts['houseNumber']
-    @house_letter = opts['houseLetter']
-    @flat_number = opts['flatNumber']
-    @flat_letter = opts['flatLetter']
-    fill_service_providers opts['serviceProvider']
+    @house_number = opts['address']['houseNumber']
+    @house_letter = opts['address']['houseLetter']
+    @flat_number = opts['address']['flatNumber']
+    @people_count = opts['peopleCount']
+    @area = opts['area']
 
+    fill_service_providers opts['serviceProvider']
     @error = opts[:error]
   end
 

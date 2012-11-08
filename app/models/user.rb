@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :identifier, :name, :surname, :login, :role_id, :avatar, :avatar_cache, :remove_avatar, :street, :house, :flat, :nickname
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :identifier, :name, :surname, :login, :role_id, :avatar, :avatar_cache, :remove_avatar, :street, :house, :flat, :nickname, :terms
   attr_accessor :login, :street, :house, :flat
 
   belongs_to :role
@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
     user.validates :identifier, :length => { :maximum => 13 }
     user.validates_format_of :identifier, :with => /^\d+$/, :message => :validate_number
     user.validate :user_identification, :on => :create, :if => :ready_to_identify?
+    user.validates :terms, :acceptance => true, :on => :create
   end
 
   def is_user?
@@ -101,13 +102,12 @@ class User < ActiveRecord::Base
   private
 
     def user_identification
-      c = ReportLoader.load_consumer_info(self.identifier)['address']
-      street = c['streetCode'].gsub(/\s+/, "") if c['streetCode']
-      house_number = c['houseNumber'] ? c['houseNumber'].gsub(/\s+/, "") : ''
-      house_letter = c['houseletter'] ? c['houseletter'].gsub(/\s+/, "") : ''
-      house = house_number + '_' + house_letter
-      flat = c['flatNumber'].gsub(/\s+/, "") if c['flatNumber']
-      unless c && street == self.street.to_s && house == self.house.to_s && flat == self.flat.to_s
+      consumer = ReportLoader.load_consumer_info(self.identifier)
+      address = consumer['address']
+      street = address['streetCode'].gsub(/\s+/, "") if address['streetCode']
+      house = consumer['houseCode'].gsub(/\s+/, "") if consumer['houseCode']
+      flat = address['flatNumber'].gsub(/\s+/, "") if address['flatNumber']
+      unless consumer && street == self.street.to_s && house == self.house.to_s && flat == self.flat.to_s
         errors.add :identifier, I18n.t('devise.views.validate_address')
       end
     end

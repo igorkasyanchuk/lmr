@@ -8,9 +8,7 @@ hr
   = f.input :login, :label => t('devise.views.login')
   = f.input :password, :label =>  t('devise.views.password')
   - if devise_mapping.rememberable?
-    div
-      = f.check_box :remember_me, :style => "margin-left: 15px;"
-      = f.label t('devise.views.remember_me'), :style => "display: inline; padding-left: 5px; vertical-align: middle;"
+    = f.input :remember_me, :as => :boolean, :label => false, :inline_label => t('devise.views.remember_me')
       
   .form-actions
     = f.submit t('devise.views.sign_in'), :class=>"btn btn-primary form-btn"
