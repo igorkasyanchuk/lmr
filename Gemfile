@@ -41,6 +41,7 @@ group :assets do
 end
 
 group :development do
+  gem 'seed_dump'
   gem 'quiet_assets'
   gem 'thin'
   gem 'debugger'
