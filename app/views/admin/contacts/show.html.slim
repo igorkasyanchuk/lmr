@@ -2,12 +2,7 @@
 
 #title_block
   h1.title Повідомлення
-  .admin_actions
-    = link_to 'Назад', [:admin, :contacts], :class => 'btn btn-primary btn-small'
-  .clear
-
-hr
-
+.clear
 p 
   strong = "Ім'я"
   br
@@ -24,3 +19,6 @@ p
   strong = "Повідомлення"
   br
   span= @contact.message
+
+.admin_actions
+  = link_to 'Назад', [:admin, :contacts], :class => 'btn btn-primary btn-small'
