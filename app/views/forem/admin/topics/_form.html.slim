@@ -1,7 +1,7 @@
 = simple_form_for [forem, :admin, @topic], :html => {:class => 'form-horizontal'}  do |f|
   fieldset
     = f.input :subject
-    = f.association :forum, :label => t('forem.forums.index.forum')    
+    = f.association :forum, :label => t('forem.forums.index.forum'), :include_blank => false
     = f.input :locked
     = f.input :pinned
     = f.input :hidden
