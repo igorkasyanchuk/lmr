@@ -6,7 +6,8 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   def info
     @invoice = Invoice.load current_user.identifier, @filter.period#@date.beginning_of_month..@date.end_of_month
     @details = InvoiceDetails.load current_user.identifier, @filter.period
-    PaymentDetails.load( current_user.identifier, @filter, current_user.consumer_info.service_providers)
+    @user_info = current_user.consumer_info
+    PaymentDetails.load( current_user.identifier, @filter, @user_info.service_providers)
     respond_to do |format|
       format.html
       format.pdf do
@@ -19,7 +20,8 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   end
 
   def payments
-    PaymentDetails.load(current_user.identifier, @filter, current_user.consumer_info.service_providers)
+    @user_info = current_user.consumer_info
+    PaymentDetails.load(current_user.identifier, @filter, @user_info.service_providers)
   end
 
   def counters
