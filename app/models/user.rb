@@ -1,3 +1,4 @@
+# encoding: utf-8
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -42,7 +43,7 @@ class User < ActiveRecord::Base
   end
 
   def ready_to_identify?
-    street.present? && house.present? && flat.present?
+    street.present? && house.present?
   end
 
   def self.find_first_by_auth_conditions(warden_conditions)
@@ -99,18 +100,24 @@ class User < ActiveRecord::Base
     ServiceProvider.where :code => consumer_info.service_providers_codes
   end
 
+  def search_address
+    "#{consumer_info.street_name.try(:strip)} #{consumer_info.house_number.try(:strip)} #{consumer_info.house_letter.try(:strip)}"
+  end
+
   private
 
     def user_identification
       consumer = ReportLoader.load_consumer_info(self.identifier)
       address = consumer['address']
       if consumer && address
-        street = address['streetCode'].gsub(/\s+/, "") if address['streetCode']
-        house = consumer['houseCode'].gsub(/\s+/, "") if consumer['houseCode']
-        flat = address['flatNumber'].gsub(/\s+/, "") if address['flatNumber']      
-        unless street == self.street.to_s && house == self.house.to_s && flat == self.flat.to_s
+        street_raw = address['streetCode'].gsub(/\s+/, "") if address['streetCode']
+        house_raw = consumer['houseCode'].gsub(/\s+/, "") if consumer['houseCode']
+        flat_raw = address['flatNumber'].gsub(/\s+/, "") if address['flatNumber']
+        unless street_raw == self.street.to_s && house_raw == self.house.to_s && flat_raw == self.flat.to_s
           errors.add :identifier, I18n.t('devise.views.validate_address')
         end
+      else
+        errors.add :identifier, "Помилка при звірці даних"
       end
     end
 
