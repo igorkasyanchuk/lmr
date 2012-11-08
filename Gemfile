@@ -22,6 +22,8 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'truncate_html'
 gem 'gmaps4rails'
+gem 'geokit-rails3'
+gem 'geocoder'
 
 gem 'httparty'
 gem 'prawn'
@@ -42,6 +44,7 @@ group :assets do
 end
 
 group :development do
+  gem 'seed_dump'
   gem 'quiet_assets'
   gem 'thin'
   gem 'debugger'

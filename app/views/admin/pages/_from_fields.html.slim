@@ -6,9 +6,11 @@
     .controls.pages
       small Перетягніть сторінку в Зміст, щоб додати лінк
       br
-      - collection.each do |p|
-        span.label
-          = link_to p.title || p.identifier, "#{root_url}#{p.identifier}"
+      .group_label
+        - collection.each do |p|
+          span.label style="float:left; "
+            = link_to p.title || p.identifier, "#{root_url}#{p.identifier}"
+        .clear
     = f.input :content, :label => 'Зміст', :as => :ckeditor, :input_html => {:class => 'span8', :height => '400', :width => '760'}
     = f.input :seo_title, :label => 'SEO заголовок', :input_html => { :class => 'field_width', :cols => 100 }
     = f.input :seo_keywords, :label => 'SEO ключові слова', :input_html => {:rows => 3, :class => 'field_width'}

@@ -139,6 +139,12 @@ GEM
       ruby-progressbar (~> 1.0.0)
     galetahub-simple_captcha (0.1.3)
     gemoji (1.1.2)
+    geocoder (1.1.4)
+    geokit (1.6.5)
+      multi_json
+    geokit-rails3 (0.1.5)
+      geokit (~> 1.5)
+      rails (~> 3.0)
     gherkin (2.11.5)
       json (>= 1.4.6)
     girl_friday (0.10.0)
@@ -302,6 +308,7 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    seed_dump (0.4.1)
     selenium-webdriver (2.25.0)
       childprocess (>= 0.2.5)
       libwebsocket (~> 0.1.3)
@@ -389,6 +396,8 @@ DEPENDENCIES
   forem!
   fuubar
   galetahub-simple_captcha
+  geocoder
+  geokit-rails3
   gmaps4rails
   guard-rspec
   guard-spork
@@ -410,6 +419,7 @@ DEPENDENCIES
   rspec-rails
   rvm-capistrano
   sass-rails (~> 3.2.3)
+  seed_dump
   settingslogic
   simple_form (~> 2.0.2)
   simplecov

@@ -23,12 +23,21 @@ class Services::PaymentsController < ApplicationController
   end
 
   def search
-    @departments = PaymentTerminal.all
+    location = prepare_coordinates(params[:query])
+    @departments = PaymentTerminal.within(5, :origin => location).all
+    @departments = PaymentTerminal.geo_scope(:origin => location).order("distance asc").limit(5) if @departments.blank?
     prepare_marker
   end
 
-  def prepare_marker
-    @markers = @departments.to_gmaps4rails
-  end
+  
+  private
+    def prepare_marker
+      @markers = @departments.to_gmaps4rails
+    end
+
+    def prepare_coordinates query
+      location = Geocoder.search('Lviv, ' + query.to_s) 
+      location = location[0].geometry['location'].map {|k,v| v}
+    end
 
 end

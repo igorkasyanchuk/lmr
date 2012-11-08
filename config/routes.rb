@@ -70,7 +70,7 @@ Lmr::Application.routes.draw do
   resources :contacts, :only => [:new, :create]
 
   resources :pages, :only => :show
-  
+  resources :service_providers, :only => :index
 
   root :to => 'home#index'
 
