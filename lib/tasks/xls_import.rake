@@ -4,6 +4,8 @@ namespace :xls do
   require 'spreadsheet'
   Spreadsheet.client_encoding = 'UTF-8'
   task :import => :environment do
+    tables = ["service_providers", "responsible_persons"]
+    tables.each { |t| ActiveRecord::Base.connection.execute("TRUNCATE #{t}") }
     files = Dir["#{Rails.root}/import/*.xls"]   
     files.each do |file|
       puts "Reading from file #{file}".green
@@ -18,6 +20,7 @@ namespace :xls do
               @service_provider = nil
             end
             @service_provider = ServiceProvider.new
+            @service_provider.code = sheet.row(i).at(0)
             @service_provider.name = sheet.row(i).at(1)
             @service_provider.address = [sheet.row(i).at(2), sheet.row(i+1).at(2), sheet.row(i+2).at(2)].join(' ')
             @service_provider.district = File.basename(file, ".xls").gsub(/[_]/, "і")
@@ -32,7 +35,7 @@ namespace :xls do
               @responsible_person.middle_name = full_name[2]
               @responsible_person.last_name = full_name[0]
             end
-            @responsible_person.incumbency = row.at(4).chop!
+            @responsible_person.incumbency = row.at(4).try(:chop!)
             unless row.at(5).blank?
               @responsible_person.phone = row.at(5)
             else

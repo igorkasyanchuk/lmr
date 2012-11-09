@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Conversation < ActiveRecord::Base
   attr_accessible :service_provider_id, :token, :user_id, :body, :subject
   attr_accessor :body
@@ -6,6 +7,7 @@ class Conversation < ActiveRecord::Base
   has_many :messages
 
   validates_presence_of :service_provider_id, :token, :user_id, :body, :subject
+  validate :service_provider_email
 
   before_validation :add_token
   after_create :send_initial_message
@@ -48,6 +50,12 @@ class Conversation < ActiveRecord::Base
 
   def send_initial_message
     self.messages.create(body: self.body, recipients: [self.user.email, self.service_provider.email], from: user.full_name).mail!
+  end
+
+  def service_provider_email
+    unless self.service_provider.email.match(/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i)
+      errors.add :service_provider_id, 'Вибрана організація не вказала електронну пошту для запитів'
+    end
   end
 
 end

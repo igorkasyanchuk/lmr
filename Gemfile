@@ -10,6 +10,7 @@ gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 gem 'slim'
 gem 'slim-rails'
+gem 'sanitize_email'
 
 gem 'inherited_resources', '1.3.1'
 gem "simple_form", "~> 2.0.2"
