@@ -6,12 +6,14 @@ class ConsumerInfo
   def initialize opts
     @consumer_code = opts['consumerCode']
     @pib = opts['PIB']
-    @street_code = opts['address']['streetCode']
-    @street_name = opts['address']['streetName']
+    if opts['address']
+      @street_code = opts['address']['streetCode']
+      @street_name = opts['address']['streetName']
+      @house_number = opts['address']['houseNumber']
+      @house_letter = opts['address']['houseLetter']
+      @flat_number = opts['address']['flatNumber']
+    end
     @house_code = opts['houseCode']
-    @house_number = opts['address']['houseNumber']
-    @house_letter = opts['address']['houseLetter']
-    @flat_number = opts['address']['flatNumber']
     @people_count = opts['peopleCount']
     @area = opts['area']
 

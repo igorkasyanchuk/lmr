@@ -1,5 +1,5 @@
 = title 'Персональний кабінет'
 
 h1 Персональний кабінет
-= link_to 'Найближчі термінали', services_search_path(:query => current_user.search_address), :class => 'btn btn-info'
+= link_to 'Найближчі термінали', services_search_path(:query => current_user.try(:search_address)), :class => 'btn btn-info'
 = link_to 'Easypay - здійснити оплату', easypay_path, :class => 'btn btn-info'

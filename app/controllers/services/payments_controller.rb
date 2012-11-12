@@ -24,7 +24,7 @@ class Services::PaymentsController < ApplicationController
 
   def search
     location = prepare_coordinates(params[:query])
-    @departments = PaymentTerminal.geo_scope(:origin => location).order("distance asc").limit(5)
+    @departments = location.empty? ? PaymentTerminal.all : PaymentTerminal.geo_scope(:origin => location).order("distance asc").limit(5)
     prepare_marker
   end
 
@@ -35,8 +35,12 @@ class Services::PaymentsController < ApplicationController
     end
 
     def prepare_coordinates query
-      location = Geocoder.search('Львів, ' + query.to_s)
-      location = [location[0].latitude, location[0].longitude]
+      unless query.to_s.gsub(' ','') == ''
+        location = Geocoder.search('Львів, ' + query.to_s)
+        location = [location[0].latitude, location[0].longitude]
+      else
+        []
+      end
     end
 
 end

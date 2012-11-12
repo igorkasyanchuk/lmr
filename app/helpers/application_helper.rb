@@ -203,4 +203,8 @@ module ApplicationHelper
             end
   end
 
+  def show_on_map markers
+    gmaps({"map_options" => {:auto_adjust => true }, :markers => {:data => markers }})
+  end
+
 end

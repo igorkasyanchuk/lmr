@@ -86,14 +86,13 @@ class User < ActiveRecord::Base
   end
 
   def consumer_info
-    #debugger
     @consumer_info = Rails.cache.fetch(consumer_info_key) do
       ConsumerInfo[identifier]
     end
     if  @consumer_info.error.present?
       Rails.cache.delete(consumer_info_key)
     end
-     @consumer_info
+    @consumer_info
   end
 
   def service_providers
