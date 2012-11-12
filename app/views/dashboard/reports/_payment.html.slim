@@ -25,4 +25,4 @@ table.table.reports
       - if services.any?
         - services.each do |s|
           td = service_total[s.service_code]
-      td = service_total.values.map{|x| x.to_f}.inject(:+) if service_total.any?
+      td = service_total.values.inject{|sum, n| BigDecimal(sum) + BigDecimal(n)} if service_total.any?
