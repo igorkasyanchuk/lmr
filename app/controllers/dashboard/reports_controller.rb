@@ -7,7 +7,8 @@ class Dashboard::ReportsController < Dashboard::DashboardController
     @invoice = Invoice.load current_user.identifier, @filter.period#@date.beginning_of_month..@date.end_of_month
     @details = InvoiceDetails.load current_user.identifier, @filter.period
     @user_info = current_user.consumer_info
-    PaymentDetails.load( current_user.identifier, @filter, @user_info.service_providers)
+    PaymentDetails.load(current_user.identifier, @filter, @user_info.service_providers)
+    logger.info "SERVICES: #{PaymentDetails.services.inspect}"
     respond_to do |format|
       format.html
       format.pdf do
