@@ -5,17 +5,17 @@
       .field_data= @user_info.pib
     .span4 
       .field_name Адреса:
-      .field_data= "#{@user_info.street_name} #{@user_info.house_number} #{@user_info.house_letter}/#{@user_info.flat_number}"
+      .field_data= user_address(@user_info)
     .span3
       .field_name Розрахункова площа:
-      .field_data= @user_info.area
+      .field_data= "#{@user_info.calc_area} кв.м."
   .row
     .span4
       .field_name № особового рахунку:
       .field_data= @user_info.consumer_code
     .span4
       .field_name Кількість мешканців:
-      .field_data= "#{@user_info.people_count} #{@user_info.people_count == 1 ? 'особа' : 'осіб'}"
+      .field_data= "#{@user_info.people_count} ос."
     .span3
       .field_name Опалювальна площа:
-      .field_data= @user_info.area
+      .field_data= "#{@user_info.heat_area} кв.м."

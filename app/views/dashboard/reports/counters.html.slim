@@ -1,7 +1,9 @@
 = content_for :on_ready do
   | $( "#tabs" ).tabs();
 
-h2 Дані користувача
+#title_block
+  = render 'user_info'
+hr
 
 #tabs
   ul

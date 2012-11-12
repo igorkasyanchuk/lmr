@@ -1,9 +1,5 @@
 = title 'Надавачі послуг'
 
-#title_block
-  h2.title Надавачі послуг
-hr
-
 - @service_providers.each do |provider|
   .provider_info
     h4 = provider.name
@@ -24,7 +20,3 @@ hr
 
 
   .clear
-
-
-
-

@@ -207,4 +207,11 @@ module ApplicationHelper
     gmaps({"map_options" => {:auto_adjust => true }, :markers => {:data => markers }})
   end
 
+  def user_address info    
+    if info
+      divider = info.flat_number.present? ? "/#{info.flat_number}" : ''
+      "#{info.street_name} #{info.house_number} #{info.house_letter}#{divider}"
+    end
+  end
+
 end

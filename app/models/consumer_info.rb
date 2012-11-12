@@ -1,6 +1,6 @@
 class ConsumerInfo
 
-  attr_reader :consumer_code, :pib, :street_code, :street_name, :house_code, :house_number, :house_letter, :flat_number, :people_count, :area, :service_providers, :error
+  attr_reader :consumer_code, :pib, :street_code, :street_name, :house_code, :house_number, :house_letter, :flat_number, :people_count, :calc_area, :heat_area, :service_providers, :error
   ServiceProvider = Struct.new :service_provider_code, :service_provider_name, :service_code, :service_name
   
   def initialize opts
@@ -15,7 +15,8 @@ class ConsumerInfo
     end
     @house_code = opts['houseCode']
     @people_count = opts['peopleCount']
-    @area = opts['area']
+    @calc_area = opts['calcArea']
+    @heat_area = opts['heatArea']
 
     fill_service_providers opts['serviceProvider']
     @error = opts[:error]

@@ -2,7 +2,6 @@
 = title 'Нарахування'
 
 #title_block
-  h2.title Нарахування
   = render 'user_info'
 hr  
 
@@ -68,7 +67,7 @@ table.table.reports
       td= @invoice.total.pay
       td= @invoice.total.saldo
       
-h3= "За поточний місяць (#{I18n.t("date.month_names")[Date.today.month]}):"
+h3= "Деталі оплат:"
 = render 'payment', services: PaymentDetails.services, checks: PaymentDetails.checks, service_total: PaymentDetails.service_total
       
 = link_to 'Друк квитанції', params.merge(format: 'pdf'), :class => 'btn', :target => '_blank'
@@ -78,8 +77,6 @@ span = link_to 'Деталі розраунку', dashboard_invoice_details_path
 span = link_to 'Деталі субсидій', '#', :class => 'btn', :target => '_blank'
 .horizontal_divider
 span = link_to 'Деталі пільг', '#', :class => 'btn', :target => '_blank'
-hr
-span = link_to 'Назад', :back, :class => 'btn'
 
 #charge_modals
   - @invoice.all_services.each do |service|

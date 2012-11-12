@@ -25,6 +25,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   end
 
   def counters
+    @user_info = current_user.consumer_info
     year = params[:year] || Date.today.year
     # @counters_by_month = Counter.load('4110000106052', year)
   end
