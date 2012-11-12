@@ -203,8 +203,4 @@ module ApplicationHelper
             end
   end
 
-  def show_on_map markers
-    gmaps4rails(markers) unless markers.blank?
-  end
-
 end

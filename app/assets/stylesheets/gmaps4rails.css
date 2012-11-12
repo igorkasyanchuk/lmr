@@ -22,3 +22,13 @@
    height: 400px;
    border:#555555 2px solid;
 }
+
+
+#map img { 
+  max-width: none;
+}
+
+#map label { 
+  width: auto;
+  display:inline; 
+}
