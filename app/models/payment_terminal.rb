@@ -20,7 +20,7 @@ class PaymentTerminal < ActiveRecord::Base
   validate :lat_lon_coordinates , :on => :create
 
   def gmaps4rails_address
-    "Львів, #{self.address}"
+    "#{self.address}"
   end
 
   def gmaps4rails_title

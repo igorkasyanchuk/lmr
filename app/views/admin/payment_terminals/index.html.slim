@@ -20,7 +20,7 @@ table.table.table-striped
       tr
         td= link_to(payment_terminal.name, edit_resource_path(payment_terminal))
         td= payment_terminal.try(:code)
-        td= payment_terminal.address.sub('Львів ', '')
+        td= payment_terminal.address.sub('Львів, ', '').sub('Львів ', '')
         td= terminal_type(payment_terminal)
         td
           = link_to 'Редагувати', edit_resource_path(payment_terminal), :class => 'btn btn-mini'
