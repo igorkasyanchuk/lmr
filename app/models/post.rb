@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
 
   mount_uploader :preview, PostPreviewUploader
 
-  attr_accessible :title, :description, :content, :post_category_id, :published, :preview, :links, :posted_by
+  attr_accessible :title, :description, :content, :post_category_id, :published, :preview, :links, :posted_by, :remove_preview
 
   belongs_to :post_category
 

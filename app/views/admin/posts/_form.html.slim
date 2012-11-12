@@ -10,6 +10,8 @@
     = f.input :posted_by, :label => 'Автор'
     = image_tag(@post.preview.thumb.url, :class => 'controls') if @post.preview?
     = f.input :preview, :label => 'Додати зображення', :hint => '(можливі формати: "jpg", "jpeg", "png"; до 10MB)'
+    - if @post.preview?
+      = f.input :remove_preview, :as => :boolean, :label => false, :inline_label => 'Видалити зображення?'
   .clearfix
 
   .form-actions

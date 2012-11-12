@@ -14,8 +14,7 @@
     = image_tag(@user.avatar.thumb.url, :class => 'controls') if @user.avatar?
     = f.input :avatar, :hint => '(можливі формати: "jpg", "jpeg", "png"; до 10MB)'
     - if @user.avatar?
-      = f.label :remove_avatar, :id => "remove_avatar"
-      = f.check_box :remove_avatar, :class => 'controls'     
+      = f.input :remove_avatar, :as => :boolean, :label => false, :inline_label => 'Видалити аватар?'
     .clear    
     = f.input :password, :hint => t('devise.views.help_password'), :autocomplete => :off
     = f.input :password_confirmation, :autocomplete => :off

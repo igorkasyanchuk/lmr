@@ -40,6 +40,8 @@ test/dummy/config/database.yml
 .rvmrc 
 public/system/*
 public/system
+public/uploads/*
+public/uploads
 db/sphinx/* 
 db/sphinx/ 
 db/calendar/* 
