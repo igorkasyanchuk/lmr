@@ -4,6 +4,8 @@ class ServiceProvider < ActiveRecord::Base
   has_many :responsible_persons, :dependent => :destroy
   has_one :house
 
+  validates_presence_of :name, :address, :district
+
   accepts_nested_attributes_for :responsible_persons, :reject_if => lambda { |a| a[:first_name].blank? && a[:last_name].blank? }, :allow_destroy => true
   
 end

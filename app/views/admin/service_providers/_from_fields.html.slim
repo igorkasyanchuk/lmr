@@ -10,7 +10,7 @@
       .span4
         = f.input :email, :label => "Електронна пошта"
       .span5
-        = f.input :district, :label => "Район"
+        = f.input :district, :label => "Район", :collection => ServiceProvider.all.map(&:district).uniq!
       .span4
         = f.input :code, :label => "Код організації"
       .clear
