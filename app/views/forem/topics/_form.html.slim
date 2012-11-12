@@ -6,4 +6,4 @@
   .form-actions  
     = f.button :submit, :class => 'btn btn-primary'
     |  
-    = link_to "Відміна", [forem, @forum, @topic], :class => "btn"
+    = link_to "Відміна", forem.forum_path(@forum), :class =>'btn'
