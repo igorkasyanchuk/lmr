@@ -3,7 +3,7 @@
     = f.input :name, :label => 'Назва', :input_html => { :class => 'focused'  }
     = f.input :type, :label => 'Тип', :collection => PaymentTerminal::TERMINAL_TYPES.invert, :selected => PaymentTerminal::TERMINAL_TYPES.key(type ||= 'Термінал' ), :include_blank => false
     = f.input :code, :label => 'Номер'
-    = f.input :address, :label => 'Адреса', :hint => 'Введіть адресу в м.Львів', :placeholder => 'Львів, ',
+    = f.input :address, :label => 'Адреса', :hint => 'Введіть адресу в м.Львів. Наприклад: Львів, Шевченка, 23', :placeholder => 'Львів, ',
                                                                                  :input_html => { :value => @payment_terminal.address.present? ? @payment_terminal.address : 'Львів, '}
     = f.input :phone, :label => 'Телефон'
     = f.input :email, :label => 'Електронна пошта'
