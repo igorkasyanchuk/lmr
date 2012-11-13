@@ -1,9 +1,13 @@
-- @service_providers.each do |district, providers|
-  h3= "#{district} район"
-  hr
-  - providers.each do |provider|    
-    .service_provider_tile
-      h4= provider.name
-      p= provider.address
-      p= provider.phone
-  .clear
+.accordion#accordion1
+  - @service_providers.each_with_index do |(district, providers), index|
+    .accordion-group style='border: 0 none;'
+      .accordion-heading
+        a.accordion-toggle data-parent="#accordion1" data-toggle="collapse" href="#collapse#{index}"
+          h4= "#{district} район"
+      .accordion-body.collapse.out id="collapse#{index}"
+        .accordion-inner
+          - providers.each do |provider|
+            .service_provider_tile
+              h5= provider.name
+              p= provider.address
+              p= provider.phone
