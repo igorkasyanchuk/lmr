@@ -5,7 +5,7 @@ div id='topic' class="#{'un' unless @topic.locked?}locked"
   menu
     - if @topic.can_be_replied_to? && can?(:reply, @topic)
       = link_to t(".reply"), forem.new_topic_post_path(@topic), :class => 'btn'
-    - if forem_user && (@topic.user == forem_user || forem_admin?)
+    - if forem_user && !forem_user.forum_blocked? && (@topic.user == forem_user || forem_admin?)
       = link_to t(".delete"), forem.forum_topic_path(@forum, @topic), :method => :delete, :confirm => t("are_you_sure"), :class => 'btn'
     - if forem_user
       - if !@topic.subscriber?(forem_user.id)
