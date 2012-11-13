@@ -68,6 +68,10 @@
   display: none;
 }
 
+.table td.text-left, .table th.text-left {
+  text-align: left;
+}
+
 ul.ui-autocomplete {
   max-height: 133px;
   overflow-y: auto;

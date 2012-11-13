@@ -21,7 +21,7 @@ table.table.reports
   thead
     tr
       / th -
-      th Послуга  
+      th.text-left Послуга  
       th= "Борг на #{@filter.period_begin.strftime("%d.%m.%y")}"
       th Нараховано
       th Корегування
@@ -36,7 +36,7 @@ table.table.reports
         /   td rowspan=(s.sub_services.size + 1) = s.name
         / - else
         /   td -
-        td= s.name
+        td.text-left= s.name
         td= s.borg
         td= link_to s.invoice, "#charge_modal_#{s.service_code}", :role =>"button", 'data-toggle' => "modal" 
         td= s.correction
@@ -57,7 +57,7 @@ table.table.reports
   tfoot
     tr
       / td -
-      td Разом
+      td.text-left Разом
       td= @invoice.total.borg
       td= @invoice.total.invoice
       td= @invoice.total.correction
