@@ -3,8 +3,7 @@
 
 #title_block
   = render 'user_info'
-hr  
-
+hr
 
 = form_tag [:dashboard, :invoice], :class => 'form-inline', :method => :get, :id => 'select_date_form'  do |f|
   fieldset
@@ -23,13 +22,13 @@ table.table.reports
     tr
       / th -
       th Послуга  
-      th Борг
+      th= "Борг на #{@filter.period_begin.strftime("%d.%m.%y")}"
       th Нараховано
       th Корегування
       th Пільги 
       th Субсидії
       th Оплачено
-      th Сальдо
+      th= "Борг на #{@filter.period_end.strftime("%d.%m.%y")}"
   tbody
     - @invoice.services.each do |s|
       tr
