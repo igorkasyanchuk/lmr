@@ -21,7 +21,7 @@ hr
 table.table.reports
   thead
     tr
-      th -
+      / th -
       th Послуга  
       th Борг
       th Нараховано
@@ -33,10 +33,10 @@ table.table.reports
   tbody
     - @invoice.services.each do |s|
       tr
-        - if s.sub_services.size > 1
-          td rowspan=(s.sub_services.size + 1) = s.name
-        - else
-          td -
+        / - if s.sub_services.size > 1
+        /   td rowspan=(s.sub_services.size + 1) = s.name
+        / - else
+        /   td -
         td= s.name
         td= s.borg
         td= link_to s.invoice, "#charge_modal_#{s.service_code}", :role =>"button", 'data-toggle' => "modal" 
@@ -45,19 +45,19 @@ table.table.reports
         td= s.subsidy
         td= s.pay
         td= s.saldo
-      - s.sub_services.each do |ss|
-        tr
-          td= ss.name
-          td= ss.borg
-          td= link_to ss.invoice , "#charge_modal_#{s.service_code}", :role =>"button", 'data-toggle' => "modal" 
-          td= ss.correction
-          td= ss.pilga
-          td= ss.subsidy
-          td= ss.pay
-          td= ss.saldo
+      / - s.sub_services.each do |ss|
+      /   tr
+      /     td= ss.name
+      /     td= ss.borg
+      /     td= link_to ss.invoice , "#charge_modal_#{s.service_code}", :role =>"button", 'data-toggle' => "modal" 
+      /     td= ss.correction
+      /     td= ss.pilga
+      /     td= ss.subsidy
+      /     td= ss.pay
+      /     td= ss.saldo
   tfoot
     tr
-      td -
+      / td -
       td Разом
       td= @invoice.total.borg
       td= @invoice.total.invoice

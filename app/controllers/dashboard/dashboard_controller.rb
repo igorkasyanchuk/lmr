@@ -7,4 +7,7 @@ class Dashboard::DashboardController < InheritedResources::Base
   def welcome
   end
 
+  def pay
+  end
+
 end
