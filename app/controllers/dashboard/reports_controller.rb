@@ -3,7 +3,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
 
   before_filter :init_filter
 
-  def info
+  def invoice
     @invoice = Invoice.load current_user.identifier, @filter.period#@date.beginning_of_month..@date.end_of_month
     @details = InvoiceDetails.load current_user.identifier, @filter.period
     @user_info = current_user.consumer_info

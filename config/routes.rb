@@ -46,7 +46,7 @@ Lmr::Application.routes.draw do
 
   namespace :dashboard do
     match '/', :to => 'dashboard#welcome'
-    match 'invoice', :to => 'reports#info'
+    match 'invoice', :to => 'reports#invoice'
     match 'payments', :to => 'reports#payments'
     match 'invoice_details', :to => 'reports#invoice_details'
     match 'service_providers', :to => 'reports#service_providers'
