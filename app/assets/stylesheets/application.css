@@ -107,6 +107,15 @@ table.table.table-striped thead tr th {
   vertical-align: top;
 }
 
+ul.nav.nav-tabs {
+  border-bottom: 1px solid #BBB;
+}
+
+ul.nav-tabs > .active > a, ul.nav-tabs > .active > a:hover {
+  border: 1px solid #BBB;
+  border-bottom-color: transparent;
+}
+
 .nav-tabs > li:last-child {
   float: right;
 }

@@ -52,7 +52,7 @@ Lmr::Application.routes.draw do
     match 'service_providers', :to => 'reports#service_providers'
     get '/counters' => 'reports#counters'
     get '/counter' => 'reports#counter'
-    get '/pay' => 'dashboard#pay'
+    get '/pay_services' => 'dashboard#pay_services'
     resource :profile, :only => [:edit, :update]
     resources :conversations, :except => [:edit, :update, :destroy] do
       member do
