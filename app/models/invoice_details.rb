@@ -1,6 +1,12 @@
 class InvoiceDetails
-
   attr_reader :service_name, :service_code, :expenses
+
+  SERVICES = {
+    '1' => 'house_maintenance',
+    '2' => 'cold_water',
+    '3' => 'hot_water',
+    '4' => 'central_heating'
+  }
 
   def self.load consumer_id, period
    @period = period
@@ -27,6 +33,15 @@ class InvoiceDetails
 
   def self.services
     @invoice_details
+  end
+
+  def decode code
+    @expenses.detect{|c| c.code == code}.try(:sum)
+  end
+
+  def decode_f code
+    e = decode(code)
+    BigDecimal(e)
   end
 
 

@@ -1,19 +1,22 @@
-div class="modal fade hide" id="hot_water" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+div class="modal fade hide" id="charge_modal_#{code}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
   div class="modal-header"
     button type="button" class="close" data-dismiss="modal" aria-hidden="true" ×
     h3 id="myModalLabel" Гаряча вода
-
   div class="modal-body"
-    h5 Гаряча вода :
-    ul 
-      li Спожито по нормі :    0,00 м.куб.     Спожито по лічильнику :  0,00 м.куб.
-      li Тариф за 1 м.куб : 0,00 грн.
-      li Нарахована сума : 0,00 грн.
-
-    h5 Примітка :
-    ul 
-      li Фактична норма гарячої води   на 1 ос. : 0,00 м.куб.
-      li Затверджена норма гарячої води   на 1 ос. : 0,00 м.куб.
+    - if expense.present?
+      table.table.table-hover
+        tbody
+          tr
+            td Спожито, м3
+            td= expense.decode('30002')
+          tr
+            td Тариф
+            td= expense.decode('30001')
+          tr
+            td Сума
+            td= expense.decode_f('30001') * expense.decode_f('30002')
+    - else
+      | Нема даних
 
 
   div class="modal-footer"

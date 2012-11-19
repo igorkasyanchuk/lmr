@@ -1,10 +1,59 @@
-div class="modal fade hide" id="cold_water" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+div class="modal fade hide" id="charge_modal_#{code}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
   div class="modal-header"
     button type="button" class="close" data-dismiss="modal" aria-hidden="true" ×
     h3 id="myModalLabel" Холодна вода
-
   div class="modal-body"
-    p Холодна вода
+    - if expense.present?
+      table.table.table-hover
+        tbody
+          tr
+            td
+              i в т.ч. водопостачання холодної води
+            td
+          tr
+            td Спожито, м3
+            td= expense.decode('20002')
+          tr
+            td Тариф
+            td= expense.decode('20001')
+          tr
+            td Сума
+            - vodopost = expense.decode_f('20001') * expense.decode_f('20002')
+            td= vodopost
+          tr
+            td
+              i в т.ч. відведення холодної води
+            td
+          tr
+            td Спожито, м3
+            td= expense.decode('20002')
+          tr
+            td Тариф
+            td= expense.decode('20003')
+          tr
+            td Сума
+            - vidvhol = expense.decode_f('20002') * expense.decode_f('20003')
+            td= vidvhol
+          tr
+            td
+              i в т.ч. відведення гарячої води
+            td
+          tr
+            td Спожито, м3
+            td= expense.decode('20004')
+          tr
+            td Тариф
+            td= expense.decode('20003')
+          tr
+            td Сума
+            - vidvhar = expense.decode_f('20003') * expense.decode_f('20004')
+            td= vidvhar
+          tr
+            td 
+              b Загальна Сума:
+            td= vodopost + vidvhol + vidvhar
+    - else
+      | Нема даних
 
 
   div class="modal-footer"

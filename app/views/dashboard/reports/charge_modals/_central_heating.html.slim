@@ -1,13 +1,43 @@
-div class="modal fade hide" id="central_heating" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+div class="modal fade hide" id="charge_modal_#{code}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
   div class="modal-header"
     button type="button" class="close" data-dismiss="modal" aria-hidden="true" ×
     h3 id="myModalLabel" Центральне опалення
-
   div class="modal-body"
-    h5 Центральне опалення 
-    ul 
-      li Спожито (Гкал) Вартість 1Гкал
-      li Опалювальна площа: Вартість 1кв.м Сума
+    - if expense.present?
+        table.table.table-hover
+          tbody
+            tr
+              td
+                i в т.ч. ПТН
+              td
+            tr
+              td Опалювальна площа
+              td 
+            tr
+              td Тариф
+              td
+            tr
+              td Сума
+              td= expense.decode('40001')
+            tr
+              td
+                i в т.ч. Фактичне споживання
+              td
+            tr
+              td Спожито (ГКал)
+              td
+            tr
+              td Вартість 1 ГКал
+              td
+            tr
+              td Сума
+              td= expense.decode('40002')
+            tr
+              td 
+                b Загальна Сума:
+              td= expense.decode_f('40001') + expense.decode_f('40002')
+    - else
+      | Нема даних
   
 
   div class="modal-footer"

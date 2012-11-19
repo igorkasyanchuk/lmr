@@ -76,7 +76,6 @@ span = link_to 'Деталі розраунку', dashboard_invoice_details_path
 span = link_to 'Деталі субсидій', '#', :class => 'btn', :target => '_blank'
 .horizontal_divider
 span = link_to 'Деталі пільг', '#', :class => 'btn', :target => '_blank'
-
 #charge_modals
   - @invoice.all_services.each do |service|
-    = render 'dashboard/reports/charge_modal', :service => service
+    = render "dashboard/reports/charge_modals/#{InvoiceDetails::SERVICES[service.service_code]}", :expense => @details[service.service_code], :code => service.service_code

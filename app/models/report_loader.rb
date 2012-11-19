@@ -39,6 +39,10 @@ class ReportLoader
     request_data('set_counter_factor', :counter_code => code, :end_state => end_state)['consumerCounters']['isCompleted'] || {}
   end
 
+  def self.load_benefits id = '4110000106052', period  
+    request_data('get_benefits_detail_by_period', request_params(id, :period => period))['benefitsResponse'] || {}
+  end
+
   private
   def self.request_data action, query
     r = get SOURCE_URL, :query => query.merge(:action => action)
