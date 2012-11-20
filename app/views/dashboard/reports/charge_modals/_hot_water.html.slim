@@ -4,7 +4,7 @@ div class="modal fade hide" id="charge_modal_#{code}" tabindex="-1" role="dialog
     h3 id="myModalLabel" Гаряча вода
   div class="modal-body"
     - if expense.present?
-      table.table.table-hover
+      table.table.table-condensed
         tbody
           tr
             td Спожито, м3
@@ -14,7 +14,7 @@ div class="modal fade hide" id="charge_modal_#{code}" tabindex="-1" role="dialog
             td= expense.decode('30001')
           tr
             td Сума
-            td= expense.decode_f('30001') * expense.decode_f('30002')
+            td= (expense.decode_f('30001') * expense.decode_f('30002')).round(2)
     - else
       | Нема даних
 

@@ -136,3 +136,7 @@ form#new_user label.checkbox {
   float: left;
   margin-right: 10px;
 }
+
+.modal#benefit_details {
+  width: 640px;
+}

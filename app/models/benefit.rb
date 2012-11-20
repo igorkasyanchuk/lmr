@@ -1,4 +1,6 @@
-class Benefit  
+class Benefit
+
+  attr_reader :benefits
 
   def self.load consumer_id, period
    @period = period
@@ -24,7 +26,7 @@ class Benefit
     @benefits
   end
 
-  BenefitList = Struct.new :on_family, :benefit_persons, :name, :id, :owner, :benefit_details
+  BenefitList = Struct.new :on_family, :benefit_persons, :name, :benefit_id, :owner, :benefit_details
   BenefitDetail = Struct.new :sum, :percent, :service_id, :benefit_id
 
   def initialize params

@@ -1,0 +1,46 @@
+div class="modal fade hide" id="benefit_details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  div class="modal-header"
+    button type="button" class="close" data-dismiss="modal" aria-hidden="true" ×
+    h3 id="myModalLabel" Пільги
+    div class="modal-body"
+      - if @benefit_list.try(:benefits).present?
+        table.table.table-bordered.table-condensed
+          thead
+            tr
+              th № пільговика
+              th ПІБ
+              th Категорія пільги
+              th К-ть осіб на пільгу
+              th Пільга на сім`ю
+          tbody
+            - @benefit_list.benefits.each do |b|
+              tr
+                td= b.benefits.benefit_id
+                td= b.benefits.owner
+                td= b.benefits.name
+                td= b.benefits.benefit_persons
+                td= b.benefits.on_family == 'true' ? 'Так' : 'Ні'
+        h3 Нараховані пільги
+        table.table.table-bordered.table-condensed
+          thead
+            tr
+              th № пільговика
+              th ПІБ
+              th Послуга
+              th % пільги
+              th Сума
+          tbody
+            - @benefit_list.benefits.each do |benefit_list|
+              - benefit_list.benefits.benefit_details.each do |b|
+                tr
+                  td= benefit_list.benefits.benefit_id
+                  td= benefit_list.benefits.owner
+                  td= @user_info.service_provider_by_service_code(b.service_id).service_name
+                  td= b.percent
+                  td= b.sum
+      - else
+       | Нема даних
+
+
+  div class="modal-footer"
+    button class="btn" data-dismiss="modal" aria-hidden="true" Закрити

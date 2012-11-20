@@ -4,25 +4,28 @@ div class="modal fade hide" id="charge_modal_#{code}" tabindex="-1" role="dialog
     h3 id="myModalLabel" Центральне опалення
   div class="modal-body"
     - if expense.present?
-        table.table.table-hover
+        table.table.table-condensed
+          thead
+            tr
+              th
+                i в т.ч. ПТН
+              th
           tbody
             tr
-              td
-                i в т.ч. ПТН
-              td
-            tr
               td Опалювальна площа
-              td 
+              td= @user_info.heat_area
             tr
               td Тариф
               td
             tr
               td Сума
               td= expense.decode('40001')
+          thead
             tr
-              td
+              th
                 i в т.ч. Фактичне споживання
-              td
+              th
+          tbody
             tr
               td Спожито (ГКал)
               td
@@ -35,7 +38,7 @@ div class="modal fade hide" id="charge_modal_#{code}" tabindex="-1" role="dialog
             tr
               td 
                 b Загальна Сума:
-              td= expense.decode_f('40001') + expense.decode_f('40002')
+              td= (expense.decode_f('40001') + expense.decode_f('40002')).round(2)
     - else
       | Нема даних
   

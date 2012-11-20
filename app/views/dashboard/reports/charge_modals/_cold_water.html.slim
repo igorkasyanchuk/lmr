@@ -4,12 +4,13 @@ div class="modal fade hide" id="charge_modal_#{code}" tabindex="-1" role="dialog
     h3 id="myModalLabel" Холодна вода
   div class="modal-body"
     - if expense.present?
-      table.table.table-hover
-        tbody
+      table.table.table-condensed
+        thead
           tr
-            td
+            th
               i в т.ч. водопостачання холодної води
-            td
+            th
+        tbody
           tr
             td Спожито, м3
             td= expense.decode('20002')
@@ -18,12 +19,14 @@ div class="modal fade hide" id="charge_modal_#{code}" tabindex="-1" role="dialog
             td= expense.decode('20001')
           tr
             td Сума
-            - vodopost = expense.decode_f('20001') * expense.decode_f('20002')
+            - vodopost = (expense.decode_f('20001') * expense.decode_f('20002')).round(2)
             td= vodopost
+        thead
           tr
-            td
+            th
               i в т.ч. відведення холодної води
-            td
+            th
+        tbody
           tr
             td Спожито, м3
             td= expense.decode('20002')
@@ -32,12 +35,14 @@ div class="modal fade hide" id="charge_modal_#{code}" tabindex="-1" role="dialog
             td= expense.decode('20003')
           tr
             td Сума
-            - vidvhol = expense.decode_f('20002') * expense.decode_f('20003')
+            - vidvhol = (expense.decode_f('20002') * expense.decode_f('20003')).round(2)
             td= vidvhol
+        thead
           tr
-            td
+            th
               i в т.ч. відведення гарячої води
-            td
+            th
+        tbody
           tr
             td Спожито, м3
             td= expense.decode('20004')
@@ -46,7 +51,7 @@ div class="modal fade hide" id="charge_modal_#{code}" tabindex="-1" role="dialog
             td= expense.decode('20003')
           tr
             td Сума
-            - vidvhar = expense.decode_f('20003') * expense.decode_f('20004')
+            - vidvhar = (expense.decode_f('20003') * expense.decode_f('20004')).round(2)
             td= vidvhar
           tr
             td 

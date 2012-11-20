@@ -6,6 +6,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   def invoice
     @invoice = Invoice.load current_user.identifier, @filter.period#@date.beginning_of_month..@date.end_of_month
     @details = InvoiceDetails.load current_user.identifier, @filter.period
+    @benefit_list = Benefit.load current_user.identifier, @filter.period
     @user_info = current_user.consumer_info
     PaymentDetails.load(current_user.identifier, @filter, @user_info.service_providers)
     respond_to do |format|

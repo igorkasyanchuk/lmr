@@ -1,0 +1,19 @@
+div class="modal fade hide" id="subsidy_details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  div class="modal-header"
+    button type="button" class="close" data-dismiss="modal" aria-hidden="true" ×
+    h3 id="myModalLabel" Субсидії
+    div class="modal-body"      
+      table.table.table-bordered.table-condensed
+        thead
+          tr
+            th Послуга
+            th Сума субсидії
+        tbody
+          - @user_info.service_providers.each do |sp|
+            tr
+              td= sp.service_name
+              td
+
+
+  div class="modal-footer"
+    button class="btn" data-dismiss="modal" aria-hidden="true" Закрити

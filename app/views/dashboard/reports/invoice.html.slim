@@ -20,7 +20,6 @@ hr
 table.table.reports
   thead
     tr
-      / th -
       th.text-left Послуга  
       th= "Борг на #{@filter.period_begin.strftime("%d.%m.%y")}"
       th Нараховано
@@ -32,10 +31,6 @@ table.table.reports
   tbody
     - @invoice.services.each do |s|
       tr
-        / - if s.sub_services.size > 1
-        /   td rowspan=(s.sub_services.size + 1) = s.name
-        / - else
-        /   td -
         td.text-left= s.name
         td= s.borg
         td= link_to s.invoice, "#charge_modal_#{s.service_code}", :role =>"button", 'data-toggle' => "modal" 
@@ -44,19 +39,8 @@ table.table.reports
         td= s.subsidy
         td= s.pay
         td= s.saldo
-      / - s.sub_services.each do |ss|
-      /   tr
-      /     td= ss.name
-      /     td= ss.borg
-      /     td= link_to ss.invoice , "#charge_modal_#{s.service_code}", :role =>"button", 'data-toggle' => "modal" 
-      /     td= ss.correction
-      /     td= ss.pilga
-      /     td= ss.subsidy
-      /     td= ss.pay
-      /     td= ss.saldo
   tfoot
     tr
-      / td -
       td.text-left Разом
       td= @invoice.total.borg
       td= @invoice.total.invoice
@@ -66,16 +50,18 @@ table.table.reports
       td= @invoice.total.pay
       td= @invoice.total.saldo
       
-h3= "Деталі оплат:"
-= render 'payment', services: PaymentDetails.services, checks: PaymentDetails.checks, service_total: PaymentDetails.service_total
-      
 = link_to 'Друк квитанції', params.merge(format: 'pdf'), :class => 'btn', :target => '_blank'
 hr
 span = link_to 'Деталі розраунку', dashboard_invoice_details_path(:"period_begin[year]" => @filter.period_begin.year, :"period_begin[month]" => @filter.period_begin.month), :class => 'btn', :target => '_blank'
 .horizontal_divider
-span = link_to 'Деталі субсидій', '#', :class => 'btn', :target => '_blank'
+span = link_to 'Деталі субсидій', "#subsidy_details", :class => 'btn', :role =>"button", 'data-toggle' => "modal"
 .horizontal_divider
-span = link_to 'Деталі пільг', '#', :class => 'btn', :target => '_blank'
+span = link_to 'Деталі пільг', "#benefit_details", :class => 'btn', :role =>"button", 'data-toggle' => "modal"
+
+h3= "Деталі оплат:"
+= render 'payment', services: PaymentDetails.services, checks: PaymentDetails.checks, service_total: PaymentDetails.service_total
 #charge_modals
   - @invoice.all_services.each do |service|
     = render "dashboard/reports/charge_modals/#{InvoiceDetails::SERVICES[service.service_code]}", :expense => @details[service.service_code], :code => service.service_code
+  = render 'benefit_details'
+  = render 'subsidy_details'
