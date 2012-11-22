@@ -1,3 +1,29 @@
 = title 'Оплатити послуги'
 = link_to 'Найближчі термінали', services_search_path(:query => current_user.try(:search_address)), :class => 'btn btn-info'
 = link_to 'Easypay - здійснити оплату', easypay_path, :class => 'btn btn-info'
+.clear
+h3 Найближчі пункти оплати послуг:
+h4 Каса ЛКП
+= @lkps.name
+.clear
+= @lkps.address
+.clear
+= @lkps.phone
+.clear
+= link_to 'всі Каси ЛКП...', services_lkp_departments_path
+h4 Банк
+= @banks.name
+.clear
+= @banks.address
+.clear
+= @banks.phone
+.clear
+= link_to 'всі Банки...', services_bank_departments_path
+h4 Термінал
+= @terminals.name
+.clear
+= @terminals.address
+.clear
+= @terminals.phone
+.clear
+= link_to 'всі Термінали...', services_terminals_path

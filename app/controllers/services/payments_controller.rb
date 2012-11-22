@@ -5,17 +5,32 @@ class Services::PaymentsController < ApplicationController
   end
 
   def bank_departments
-    @departments = BankDepartment.all
+    @departments = if current_user
+      address = prepare_coordinates(current_user.try(:search_address))
+      BankDepartment.geo_scope(:origin => address).order("distance asc")
+    else
+      BankDepartment.all
+    end
     prepare_marker
   end
 
   def lkp_departments
-    @departments = LkpDepartment.all
+    @departments = if current_user
+      address = prepare_coordinates(current_user.try(:search_address))
+      LkpDepartment.geo_scope(:origin => address).order("distance asc")
+    else
+      LkpDepartment.all
+    end
     prepare_marker
   end
 
   def terminals
-    @departments = Terminal.all
+    @departments = if current_user
+      address = prepare_coordinates(current_user.try(:search_address))
+      Terminal.geo_scope(:origin => address).order("distance asc")
+    else
+      Terminal.all
+    end    
     prepare_marker
   end
 
