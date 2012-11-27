@@ -17,7 +17,8 @@ describe Dashboard::ConversationsController do
 
   it 'should create conversation with message from body' do
     Conversation.count.should eq(0)
-    post :create , :conversation => {:body => 'message', :service_provider_id => '222' , :subject => 'subj'}
+    service_provider = FactoryGirl.create(:service_provider)
+    post :create , :conversation => {:body => 'message', :service_provider_id => service_provider.id, :subject => 'subj'}
     Conversation.first.messages.count.should eq(1)
     Conversation.first.messages.first.body.should eq('message')
   end

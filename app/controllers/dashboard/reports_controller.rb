@@ -2,12 +2,12 @@
 class Dashboard::ReportsController < Dashboard::DashboardController
 
   before_filter :init_filter
+  before_filter :user_info, :except => [:invoice_details, :service_providers]
 
   def invoice
     @invoice = Invoice.load current_user.identifier, @filter.period#@date.beginning_of_month..@date.end_of_month
     @details = InvoiceDetails.load current_user.identifier, @filter.period
     @benefit_list = Benefit.load current_user.identifier, @filter.period
-    @user_info = current_user.consumer_info
     PaymentDetails.load(current_user.identifier, @filter, @user_info.service_providers)
     respond_to do |format|
       format.html
@@ -21,23 +21,30 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   end
 
   def payments
-    @user_info = current_user.consumer_info
     PaymentDetails.load(current_user.identifier, @filter, @user_info.service_providers)
   end
 
   def counters
-    @user_info = current_user.consumer_info
     year = params[:year] || Date.today.year
-    # @counters_by_month = Counter.load('4110000106052', year)
+    @counters = Counter.get @user_info.consumer_code
   end
 
   def counter
-    result = Counter.set_counter(params)
+    code = params[:code]
+    @year = params[:year].to_i
+    counters = Counter.get @user_info.consumer_code
+    @counter = counters.select{|c| c.code == code}.first
+    render 'counter', :formats => [:js]
+  end
+
+  def set_counter
+    result = Counter.set_counter(params[:counter_code], params[:end_state].to_i)
     if result == 'true'
-      render 'counter.js'
+      @counter = counters.select{|c| c.code == params[:counter_code]}.first
+      @year = Date.today.year
+      render 'counter', :formats => [:js]
     else
-      # render result[:errors]
-      render :nothing => true
+      render :js => "alert('#{result[:errors].first}')"
     end
   end
   
@@ -63,6 +70,10 @@ class Dashboard::ReportsController < Dashboard::DashboardController
     def current_period
       today = Date.today
       today.beginning_of_month..today.end_of_month
+    end
+
+    def user_info
+      @user_info = current_user.consumer_info
     end
 
 end

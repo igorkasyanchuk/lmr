@@ -1,34 +1,20 @@
-= content_for :on_ready do
-  | $( "#tabs" ).tabs();
+= content_for :js do
+  = javascript_include_tag "get_counter"
 
 #title_block
   = render 'user_info'
 hr
-
+h3 Ваші лічильники:
 #tabs
   ul
-    li
-      a href="#tabs-1"
-        | Холодна Вода
-    li
-      a href="#tabs-2"
-        | Гаряча Вода
-    li
-      a href="#tabs-3"
-        | Газ
-  #tabs-1
-    h3= 'Державний номер лічильника: 6548258ФФ'
-    h3= 'Вид лічильника: Холодна вода'
-    = render 'get_counter'
-    = render 'set_counter'
-    
-  #tabs-2
-    h3= 'Державний номер лічильника: 6548258ФФ'
-    h3= 'Вид лічильника: Гаряча вода'    
-    = render 'get_counter'
-    = render 'set_counter'
-  #tabs-3
-    h3= 'Державний номер лічильника: 6548258ФФ'
-    h3= 'Вид лічильника: Газ'    
-    = render 'get_counter'
-    = render 'set_counter'
+    - @counters.each_with_index do |counter, index|
+      li= link_to counter.type_name, "#tabs-#{index}"
+
+  - @counters.each_with_index do |counter, index|
+    div id="tabs-#{index}"
+      / h3= "Державний номер лічильника: #{counter.state_number}"
+      / h3= "Вид лічильника: #{counter.type_name}"
+      = select_tag :counter_year, options_for_select([Date.today.year, Date.today.year - 1]), :id => "#{counter.code}", :class => "counter_year"
+      div id="counter-#{counter.code}"
+        = render 'get_counter', :history => counter.history
+      = render 'set_counter', :counter => counter

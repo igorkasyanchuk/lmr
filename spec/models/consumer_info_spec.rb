@@ -2,11 +2,20 @@ require 'spec_helper'
 
 RAW_USER_INFO = {
   'consumerCode' => '1',
-  'streetCode' => '2',
-  'houseCode' => '3',
-  'houseNumber' => '4',
-  'flatNumber' => '5',
-  'flatLetter' => 'a',
+  'PIB' => '2',
+  'address' => {
+    'cityName' => '3',
+    'streetCode' => '4',
+    'streetName' => '5',  
+    'houseNumber' => '6',
+    'houseLetter' => '7',
+    'flatNumber' => '8'
+  },
+
+  'houseCode' => '9',
+  'peopleCount' => '10',
+  'calcArea' => '11',
+  'heatArea' => '12',
   'serviceProvider' => []
 }
 
@@ -18,14 +27,27 @@ describe ConsumerInfo do
   
   {
     'consumer code' => 'consumerCode',
-    'street code' => 'streetCode',
+    'PIB' => 'PIB',
     'house code' => 'houseCode',
-    'house number' => 'houseNumber',
-    'flat number' => 'flatNumber',
-    'flat letter' =>'flatLetter'
+    'people count' => 'peopleCount',
+    'calc area' => 'calcArea',
+    'heat area' =>'heatArea'
   }.each do |attribute_name, reader_name|
     it "stores #{attribute_name}" do
       @user_info.send(reader_name.underscore).should eq(RAW_USER_INFO[reader_name])
+    end
+  end
+
+  {
+    # 'city name' => 'cityName',
+    'street code' => 'streetCode',
+    'street name' => 'streetName',  
+    'house number' => 'houseNumber',
+    'house Letter' => 'houseLetter',
+    'flat number' => 'flatNumber'
+  }.each do |attribute_name, reader_name|
+    it "stores #{attribute_name}" do
+      @user_info.send(reader_name.underscore).should eq(RAW_USER_INFO['address'][reader_name])
     end
   end
 

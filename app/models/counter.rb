@@ -1,14 +1,11 @@
 # encoding: utf-8
 class Counter
 
-  attr_accessor :date, :code, :state_number, :type_code, :type_name, :end_state
-
-  # attr_reader :counters
+  attr_accessor :code, :state_number, :type_code, :type_name, :end_state
   
-  # Counter = Struct.new :code, :state_number, :type_code, :type_name, :end_state
+  CounterHistory = Struct.new :counter_id, :counter_state_number, :year, :month, :begin_state, :end_state
 
   def initialize raw
-    @date = raw['date']
     @code = raw['code']
     @state_number = raw['stateNumber']
     @type_code = raw['counterTypeCode']
@@ -16,66 +13,63 @@ class Counter
     @end_state = raw['endState']
   end
 
-  # def self.load id, year=Date.today.year
-  #   @counters = ReportLoader.load_counters_by_month(id).merge(:consumer_id => id)
-  #   new @counters
-  # end
-
-  def self.get id, year
-    ReportLoader.load_counters_by_year(id, year).map{|raw| Counter.new(raw)}
+  def self.get id
+    @user_counters = ReportLoader.load_counters(id).map{|raw| Counter.new(raw)}
   end
 
-  # def self.get_months_from year
-  #   end_month= Date.today.year == year ? Date.today.month : 12
-  #   months = (1..end_month).to_a
-  #   months.map!{|m| Date.new(year, m, 1)}
-  # end
+  def history year = Date.today.year
+    Counter.load_counter_history_by_year(self.code, year).reverse
+  end
 
-  # def populate_counters raw
-  #   raw ||= []
-  #   raw.map do |c|
-  #     Counter.new( 
-  #       c['code'], 
-  #       c['stateNumber'],
-  #       c['counterTypeCode'],
-  #       c['counterTypeName'],
-  #       c['endState']
-  #     )
-  #   end
-  # end
+  def self.load_counter_history_by_year code, year = Date.today.year
+    [ReportLoader.load_counter_history_by_year(code, year)].flatten.map{|raw| populate_counter_history(raw)}
+  end
 
-  # def self.set_counter opts
-  #   data = opts[:counter_state]
-  #   now_number = opts[data.to_sym]
-  #   if Counter.validation_errors(opts).empty?
-  #     ReportLoader.set_counter(opts[:counter_code], now_number)
-  #   else
-  #     {:errors => Counter.validation_errors(opts)}
-  #   end
-  # end
+  def self.populate_counter_history raw
+    CounterHistory.new( 
+      raw['counterID'],
+      raw['counterStateNumber'],
+      raw['year'], 
+      raw['month'],        
+      raw['beginState'],
+      raw['endState']
+    )
+  end
 
-  # def self.validation_errors opts
-  #   data = opts[:counter_state]
-  #   now_number = opts[data.to_sym]
-  #   max = Counter.find_by_code(opts[:counter_type_code]).send(data)
-  #   previous_number = Counter.get_previous_counter(opts[:counter_code]).send(data)
-  #   Counter.check_counter(now_number, previous_number, max)
-  # end
+  def last_history year = Date.today.year
+    history(year).reject{|h| h.month == Date.today.month}.try(:first)
+  end
 
-  # def self.get_previous_counter code
-  #   @counters.select{|c| c.code == code}
-  # end
+  def self.set_counter code, state
+    errors = Counter.validation_errors(code, state)
+    errors.empty? ? ReportLoader.set_counter(code, state) : {:errors => errors}
+  end
 
-  # def self.check_counter now, last, max
-  #   errors = []
-  #   if now_number <= 0
-  #     errors << 'не може бути менше нуля'
-  #   elsif now < last
-  #     errors << 'не може бути менше попереднього показника'
-  #   elsif now > max
-  #     errors << 'більше максимально допустимого значення'
-  #   end
-  #   errors
-  # end
+  def self.validation_errors code, state
+    last_counter = last_history_of_counter(code)
+    previous_counter_number = last_counter.present? ? last_counter.end_state.to_i : state
+    check_counter_numbers(state.to_i, previous_counter_number)
+  end
+
+  def self.last_history_of_counter code
+    counter = @user_counters.select{|c| c.code == code}.first
+    if counter
+      counter.last_history ? counter.last_history : counter.last_history(Date.today.year - 1)
+    end
+  end
+
+  def self.check_counter_numbers now, previous
+    errors = []
+    if now < 0
+      errors << 'Показник не може бути менше нуля'
+    elsif now == 0
+      errors << 'Показник не може дорівнювати нулю'
+    elsif now < previous
+      errors << 'Введений показник не може бути менше попереднього показника'
+    # elsif now > max
+    #   errors << 'більше максимально допустимого значення'
+    end
+    errors
+  end
 
 end

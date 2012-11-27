@@ -214,4 +214,10 @@ module ApplicationHelper
     end
   end
 
+  def counter_month month
+    unless month.nil?
+      "#{I18n.t('date.month_names')[month.to_i]} (#{month.to_i})"
+    end
+  end
+
 end

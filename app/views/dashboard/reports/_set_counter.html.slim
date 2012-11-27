@@ -1,6 +1,5 @@
-= form_tag [:dashboard, :counter], :method => :get, :remote => true  do
-  = hidden_field_tag 'counter_code', '123456'
-  = hidden_field_tag 'counter_type_code', '2'
+= form_tag [:dashboard, :set_counter], :method => :get, :remote => true  do
+  = hidden_field_tag 'counter_code', "#{counter.code}"
   table.table.reports
     thead 
       tr
@@ -11,17 +10,11 @@
         th Кількість
     tbody
       tr
-        td 387183
-        td Холодна вода
-        td 223,00000
+        td= counter.state_number
+        td= counter.type_name
+        td= counter.end_state
         td 
-          .div
-            = text_field_tag 'end_state',  '213,00000', :class => 'input_end_state'
-          .div  
-            = radio_button_tag 'counter_state', 'end_state', true, {:class => 'radio_end_state'}
+          = text_field_tag 'end_state',  "#{counter.end_state}", :class => 'input_end_state'
         td 
-          .div
-            = text_field_tag 'amount',  '8,00000',  :disabled => true, :class => 'input_amount_state'
-          .div  
-            = radio_button_tag 'counter_state', 'amount', false,  {:class => 'radio_amount_state'}
-  = submit_tag "Надіслати покази", :class => 'btn btn-primary counter'
+          = text_field_tag 'amount',  '',  :disabled => true, :class => 'input_amount_state'
+  = submit_tag "Надіслати покази", :class => 'btn btn-primary counter', :confirm => 'Ви впевнені, що хочете внести показник?'

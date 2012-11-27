@@ -52,6 +52,7 @@ Lmr::Application.routes.draw do
     match 'service_providers', :to => 'reports#service_providers'
     get '/counters' => 'reports#counters'
     get '/counter' => 'reports#counter'
+    get '/set_counter' => 'reports#set_counter'
     get '/pay_services' => 'dashboard#pay_services'
     resource :profile, :only => [:edit, :update]
     resources :conversations, :except => [:edit, :update, :destroy] do

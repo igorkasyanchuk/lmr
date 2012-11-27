@@ -27,16 +27,19 @@ class ReportLoader
     request_data('payment_by_consumer', request_params(id, :period => period))['paymentDetails'] || {}    
   end
 
-  def self.load_last_counters id = '4110000106052'
-    request_data('get_counters', request_params(id))['consumerCounters'] || {}
+  def self.load_counters id = '4110000106052'
+    r = request_data('get_counters', request_params(id))['consumerCounters'] || {}
+    r['counters'] || {}
   end
 
-  def self.load_counters_by_year id = '4110000106052', year
-    request_data('get_counters_by_month', request_params(id, :year => year))['consumerCounters'] || {}
+  def self.load_counter_history_by_year code = '41112100001060520000176117', year
+    r = request_data('get_counters_by_year', :counter_code => code, :year => year)['countHistoryResponse'] || {}
+    r['history'] || {}
   end
 
   def self.set_counter code = '41112100001060520000176117', end_state
-    request_data('set_counter_factor', :counter_code => code, :end_state => end_state)['consumerCounters']['isCompleted'] || {}
+    r = request_data('set_counter_factor', :counter_code => code, :end_state => end_state)['consumerCounters'] || {}
+    r['isCompleted'] || {}
   end
 
   def self.load_benefits id = '4110000106052', period  
@@ -60,7 +63,6 @@ class ReportLoader
       )
     end
     result.merge!(:service_code => params[:service_code]) unless params[:service_code].nil?
-    result.merge!(:year => params[:year]) unless params[:year].nil?
     result
   end
 

@@ -9,14 +9,17 @@ describe Conversation do
   describe '#reply_with_form' do
 
     before do
-      @conversation.stub(:user).and_return(mock_model User, email: 'consumer@mail.local')
+      @user_mock = mock_model User, email: 'consumer@mail.local', name: 'name', surname: 'surname'
+      @conversation.stub(:user).and_return(@user_mock)
       @conversation.stub(:service_provider).and_return(mock_model ServiceProvider, email: 'provider@mail.local')
     end
 
     it "creates message " do
+      @user_mock.stub(:full_name).and_return('full_name')
       conversation.messages.should_receive(:create).with(
         :body => 'response',
-        :recipients => %w[consumer@mail.local provider@mail.local]
+        :recipients => %w[consumer@mail.local provider@mail.local],
+        :from=>"full_name"
       ).and_return(mock :message, :mail! => true)
 
       conversation.reply_with_form :body => 'response'

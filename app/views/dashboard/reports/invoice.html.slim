@@ -14,7 +14,7 @@ hr
     .control-group
       = label_tag 'period_begin_month', 'Місяць:', :class => 'control-label'
       .controls
-        = select_month(@filter.period_begin, { :prefix => :period_begin, :field_name => :month, :use_month_names => %w(Січень Лютий Березень Квітень Травень Червень Липень Серпень Вересень Жовтень Листопад Грудень)},  { :class => 'span2' } )
+        = select_month(@filter.period_begin, { :prefix => :period_begin, :field_name => :month, :use_month_names => I18n.t("date.month_names")},  { :class => 'span2' } )
     = submit_tag "Перейти", :class => 'btn btn-primary btn_invoice'
 
 table.table.reports

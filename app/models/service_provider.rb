@@ -3,6 +3,7 @@ class ServiceProvider < ActiveRecord::Base
 
   has_many :responsible_persons, :dependent => :destroy
   has_one :house
+  has_many :conversations
 
   validates_presence_of :name, :address, :district
 

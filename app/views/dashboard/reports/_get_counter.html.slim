@@ -10,21 +10,13 @@ table.table.reports
       th Скореговано
       th Корегування кін. показу
   tbody
-    tr
-      td Лютий (2)
-      td 29/02/2012
-      td 213,00000
-      td 216,00000
-      td 3,00000
-      td Ввід показів
-      td= check_box_tag 'corrected', :disabled => true
-      td 0.00000
-    tr
-      td Березень (3)
-      td 31/03/2012
-      td 216,00000
-      td 217,00000
-      td 1,00000
-      td Ввід показів
-      td= check_box_tag 'corrected', :disabled => true
-      td 0.00000
+    - history.each do |counter|
+      tr      
+        td= counter_month(counter.month)
+        td
+        td= counter.begin_state
+        td= counter.end_state
+        td
+        td Ввід показів
+        td= check_box_tag 'corrected', :disabled => true
+        td 0.00000
