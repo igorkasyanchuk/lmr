@@ -168,7 +168,11 @@ module ApplicationHelper
   end
 
   def easypay_path
-    "https://easypay.ua/utility/communal-lvov?Account=#{current_user.identifier}"
+    if current_user
+      "https://easypay.ua/utility/communal-lvov?Account=#{current_user.identifier}"
+    else
+      "https://easypay.ua/utility/communal-lvov"
+    end
   end
 
   def reply_post_page position
