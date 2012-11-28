@@ -1,6 +1,6 @@
 #encoding: utf-8
 class PaymentTerminal < ActiveRecord::Base
-  attr_accessible :code, :name, :address, :phone, :bank, :email, :payment_type, :type, :latitude, :longitude
+  attr_accessible :code, :name, :address, :phone, :bank, :email, :payment_type, :type, :latitude, :longitude, :department
 
   acts_as_gmappable
   acts_as_mappable :default_units => :kms,

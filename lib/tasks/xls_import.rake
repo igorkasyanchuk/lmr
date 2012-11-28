@@ -56,4 +56,17 @@ namespace :xls do
     end
   end
 
+  desc 'fill department of banks'
+  task :fill_banks => :environment do
+    banks = BankDepartment.all
+    bank_names = ['БТА Банк', 'Надра Банк', 'ПриватБанк', 'Приватбанк', 'Ощадбанк', 'ПРОФІНБАНК', 'Укоопспілка', 'Фінанси та кредит', 'Кредобанк', 'Кредитпромбанк', 'Укрінбанк', 'Глобус', 'Надра']
+    bank_names.each do |bank_name|
+      banks.select{|b| b.name.include?(bank_name)}.each do |bank|
+        bank.department = bank_name
+        # bank.name = bank.name.gsub(bank_name, '')
+        bank.save
+      end
+    end
+  end
+
 end

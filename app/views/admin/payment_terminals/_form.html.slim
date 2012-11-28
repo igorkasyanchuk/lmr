@@ -1,7 +1,9 @@
 = simple_form_for [:admin, @payment_terminal.becomes(PaymentTerminal)],  :html => {:class => 'form-horizontal', :id => 'payment_terminal_form'} do |f| 
   fieldset
-    = f.input :name, :label => 'Назва', :input_html => { :class => 'focused'  }
-    = f.input :type, :label => 'Тип', :collection => PaymentTerminal::TERMINAL_TYPES.invert, :selected => PaymentTerminal::TERMINAL_TYPES.key(type ||= 'Термінал' ), :include_blank => false
+    = f.input :type, label: 'Тип', collection: PaymentTerminal::TERMINAL_TYPES.invert, selected: PaymentTerminal::TERMINAL_TYPES.key(type ||= 'Термінал' ), include_blank: false
+    .bank_department style="display: #{type=='Банківське Відділення' ? 'block' : 'none'}"
+      = f.input :department, :label => 'Банк'
+    = f.input :name, :label => 'Назва'
     = f.input :code, :label => 'Номер'
     = f.input :address, :label => 'Адреса', :hint => 'Введіть адресу в м.Львів. Наприклад: Львів, Шевченка, 23', :placeholder => 'Львів, ',
                                                                                  :input_html => { :value => @payment_terminal.address.present? ? @payment_terminal.address : 'Львів, '}
@@ -13,4 +15,3 @@
     = f.submit "Зберегти спосіб оплати", :class=>"btn btn-primary form-btn"
     |  
     = link_to "Відміна", :back, :class => "btn"
-

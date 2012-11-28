@@ -1,9 +1,9 @@
 = title 'Комунальні підприємства м.Львова'
-.accordion#accordion1
+.accordion#accordion_service_provider
   - @service_providers.each_with_index do |(district, providers), index|
     .accordion-group style='border: 0 none;'
       .accordion-heading
-        a.accordion-toggle data-parent="#accordion1" data-toggle="collapse" href="#collapse#{index}"
+        a.accordion-toggle data-parent="#accordion_service_provider" data-toggle="collapse" href="#collapse#{index}"
           h4= "#{district} район"
       .accordion-body.collapse.out id="collapse#{index}"
         .accordion-inner

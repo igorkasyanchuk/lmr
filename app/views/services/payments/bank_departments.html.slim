@@ -2,17 +2,25 @@
 
 h1 Відділення банків
 hr
-  
 
-- @departments.each do |department|
-  .provider_info
-    h4 = department.name
-    address
-      .address = department.address
-      .phone = department.phone
-      .mail = department.email
-  .clear    
-
-br
-
+.accordion#accordion_bank
+  - dc = @departments.group_by{ |b| b.department }.count/2
+  - @departments.group_by{ |b| b.department }.sort.each_slice(dc).with_index do |departments, slice_index|
+    div class="#{slice_index==0 ? 'pull-left' : 'pull-right'}"  style='width: 50%;'
+      div class="#{slice_index==0 ? '' : 'clear'}"
+      - departments.each_with_index do |(department, banks), index|
+        .accordion-group style='border: 0 none;'
+          .accordion-heading
+            a.accordion-toggle data-parent="#accordion_bank" data-toggle="collapse" href="#bank-#{slice_index}-#{index}"
+              h4= "#{department}"
+          .accordion-body.collapse.out id="bank-#{slice_index}-#{index}"
+            .accordion-inner
+              - banks.each do |bank|
+                .provider_info
+                  h4 = bank.name
+                  address
+                    .address = bank.address
+                    .phone = bank.phone
+                    .mail = bank.email
+.clear
 = show_on_map(@markers)
