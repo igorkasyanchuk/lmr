@@ -16,5 +16,5 @@
       span.links Посилання на джерела
       - @post.links.each_line do |link|
         ul
-          li = link_to link, link
+          li = link_to link, link, :target => '_blank'
     .clearfix
