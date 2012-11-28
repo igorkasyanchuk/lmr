@@ -5,12 +5,14 @@ class Services::PaymentsController < ApplicationController
   end
 
   def bank_departments
-    @departments = if current_user
+    if current_user
       address = prepare_coordinates(current_user.try(:search_address))
-      BankDepartment.geo_scope(:origin => address).order("distance asc")
+      @departments = BankDepartment.geo_scope(:origin => address).order("distance asc")
+      @bank_departments = @departments.group_by{ |b| b.department }.sort_by{|k, v| v.first.distance }
     else
-      BankDepartment.all
-    end
+      @departments = BankDepartment.all
+      @bank_departments = @departments.group_by{ |b| b.department }.sort
+    end    
     prepare_marker
   end
 
