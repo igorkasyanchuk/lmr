@@ -15,7 +15,6 @@ class PaymentTerminal < ActiveRecord::Base
 
   validates :name, :presence => true, :length => {:in => 5..200}
   validates :type, :presence => true
-  validates :code, :presence => true
   validates :address, :presence => true
   validate :lat_lon_coordinates , :on => :create
 

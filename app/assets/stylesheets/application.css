@@ -24,7 +24,45 @@
  *= require "home"
  *= require 'gmaps4rails'
   */
-  
+
+/*body h1 {
+  font-size: 36px;
+  line-height: 40px;
+}
+body h2 {
+  font-size: 30px;
+  line-height: 40px;
+}
+body h3 {
+  font-size: 24px;
+  line-height: 40px;
+}
+body h4 {
+  font-size: 18px;
+  line-height: 20px;
+}
+body h5 {
+  font-size: 14px;
+  line-height: 20px;
+}
+body h6 {
+  font-size: 12px;
+  line-height: 20px;
+}
+body h1 small {
+  font-size: 24px;
+}
+body h2 small {
+  font-size: 18px;
+}
+body h3 small {
+  font-size: 14px;
+}
+body h4 small {
+  font-size: 14px;
+}*/
+
+
 #logo {
   height: 130px;
   overflow: hidden;

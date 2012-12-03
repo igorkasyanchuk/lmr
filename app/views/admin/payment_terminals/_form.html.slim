@@ -4,7 +4,7 @@
     .bank_department style="display: #{type=='Банківське Відділення' ? 'block' : 'none'}"
       = f.input :department, :label => 'Банк'
     = f.input :name, :label => 'Назва'
-    = f.input :code, :label => 'Номер'
+    / = f.input :code, :label => 'Номер'
     = f.input :address, :label => 'Адреса', :hint => 'Введіть адресу в м.Львів. Наприклад: Львів, Шевченка, 23', :placeholder => 'Львів, ',
                                                                                  :input_html => { :value => @payment_terminal.address.present? ? @payment_terminal.address : 'Львів, '}
     = f.input :phone, :label => 'Телефон'
