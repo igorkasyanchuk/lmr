@@ -9,7 +9,7 @@
                                                                                  :input_html => { :value => @payment_terminal.address.present? ? @payment_terminal.address : 'Львів, '}
     = f.input :phone, :label => 'Телефон'
     = f.input :email, :label => 'Електронна пошта'
-    = f.input :bank, :label => 'Банк', :collection => %w[bank1 bank2 bank3], :include_blank => false
+    / = f.input :bank, :label => 'Банк', :collection => %w[bank1 bank2 bank3], :include_blank => false
 
   .form-actions
     = f.submit "Зберегти спосіб оплати", :class=>"btn btn-primary form-btn"

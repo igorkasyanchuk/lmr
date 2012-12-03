@@ -45,6 +45,11 @@ class Services::PaymentsController < ApplicationController
     prepare_marker
   end
 
+  def autocomplete
+    banks = BankDepartment.where("department LIKE ?", "#{params[:term]}%")
+    render :json => banks.map(&:department).uniq
+  end
+
   
   private
     def prepare_marker

@@ -85,6 +85,7 @@ Lmr::Application.routes.draw do
     match 'lkp_departments', :to => 'payments#lkp_departments'
     match 'terminals', :to => 'payments#terminals'
     match 'search', :to => 'payments#search'
+    match 'autocomplete', :to => 'payments#autocomplete'
   end
 
   get ':id', to: 'pages#show', as: :page
