@@ -5,8 +5,10 @@ require "mailman"
 
 Mailman.config.logger = Logger.new("log/mailman.log")
 
- Mailman.config.pop3 = {
-   server: 'pop.gmail.com', port: 995, ssl: true,
+Mailman.config.pop3 = {
+   server: 'pop.gmail.com',
+   port: 995,
+   ssl: true,
    username: 'lmr.testmail',#ENV["GMAIL_USERNAME"],
    password: 'lmrtest12'#ENV["GMAIL_PASSWORD"]
  }
@@ -18,6 +20,7 @@ Mailman::Application.run do
     rescue Exception => e
       Mailman.logger.error "Exception occurred while receiving message:\n#{message}"
       Mailman.logger.error [e, *e.backtrace].join("\n")
+      [e, *e.backtrace].each { |i| puts i.inspect}
     end
   end
 end

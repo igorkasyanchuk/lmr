@@ -13,11 +13,15 @@ class Conversation < ActiveRecord::Base
   after_create :send_initial_message
 
   def self.receive_mail(message)
-    token = message.subject[/\[(.*?)\]/, 1]
+    token = get_token_from_subject message.subject
     conversation = Conversation.find_by_token(token) if token
-    if conversation && (conversation.user.email == message.from.first || conversation.service_provider.email == message.from.first)
+    if conversation #&& (conversation.user.email == message.from.first || conversation.service_provider.email == message.from.first)
       conversation.reply_with_email message
     end
+  end
+
+  def self.get_token_from_subject subject
+   subject[/\(([a-z0-9]+)\)$/, 1] 
   end
 
   def reply_with_email message
@@ -26,7 +30,11 @@ class Conversation < ActiveRecord::Base
     else
       [service_provider.email]
     end
-    messages.create(body: strip_history(params[:body]), from: params[:from], recipients: [recipient]).mail!
+    messages.create(body: get_decoded_message_body(message), from: message.from, recipients: [recipient]).mail!
+  end
+
+  def get_decoded_message_body message
+    (message.text_part || message.html_part || message).body.decoded.force_encoding('UTF-8')
   end
 
   def strip_history text
