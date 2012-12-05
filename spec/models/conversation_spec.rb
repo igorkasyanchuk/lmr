@@ -43,5 +43,12 @@ describe Conversation do
       should eq('Message 1<hr>Message 2<hr>Message 3')
     end
   end
+
+  describe '.get_token_from_subject' do
+    it 'parses out conversation token' do
+      subject = 'RE: (super at admin.local,kostya.malinovskiy at gmail.com) 1112 (71f65efff913331881c8)'
+      Conversation.parse_token(subject).should eq('71f65efff913331881c8')
+    end
+  end
   
 end
