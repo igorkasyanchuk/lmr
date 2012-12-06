@@ -12,29 +12,30 @@ class Conversation < ActiveRecord::Base
   before_validation :add_token
   after_create :send_initial_message
 
-  def self.receive_mail(message)
-    token = get_token_from_subject message.subject
-    conversation = Conversation.find_by_token(token) if token
-    if conversation #&& (conversation.user.email == message.from.first || conversation.service_provider.email == message.from.first)
+  def self.receive_mail message
+    conversation = Conversation.find_by_token(get_token_from_subject(message.subject))
+    if conversation && conversation.validate_sender(message.from.first)
       conversation.reply_with_email message
     end
   end
 
   def self.get_token_from_subject subject
-   subject[/\(([a-z0-9]+)\)$/, 1] 
+    subject[/\(([a-z0-9]+)\)$/, 1]
+  end
+
+  def validate_sender email
+    (user.email == email) || (service_provider.email == email)
   end
 
   def reply_with_email message
-    recipient = if user.email != message.from.first
-      [user.email]
-    else
-      [service_provider.email]
-    end
-    messages.create(body: get_decoded_message_body(message), from: message.from, recipients: [recipient]).mail!
+    recipient = user.email != message.from.first ? user.email : service_provider.email
+    part = message.multipart? ? (message.html_part.presence || message.text_part) : message
+    messages.create(body: decoded_message_body(part), from: message.from.first, recipients: [recipient]).mail!
   end
 
-  def get_decoded_message_body message
-    (message.text_part || message.html_part || message).body.decoded.force_encoding('UTF-8')
+  def decoded_message_body message    
+    charset = message.content_type_parameters[:charset]
+    message.body.decoded.force_encoding(charset).encode("UTF-8")
   end
 
   def strip_history text
@@ -47,7 +48,7 @@ class Conversation < ActiveRecord::Base
   end
 
   def history
-    messages.map(&:body).join('<hr>')
+    messages[0..-2].map(&:body).join('<hr>')
   end
 
   private

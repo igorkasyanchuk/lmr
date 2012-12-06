@@ -18,7 +18,7 @@ table.table.table-hover
   - @messages.each do |message|
     tr
       td= message.from
-      td= message.body
+      td= simple_format(message.body)
 = simple_form_for :message, :url => message_dashboard_conversation_url, :html => {:class => 'form-horizontal'} do |f|
   = f.hidden_field :conversation_id, :value => @conversation.id
   = f.input :body, :as => :text, :label => 'Повідомлення'
