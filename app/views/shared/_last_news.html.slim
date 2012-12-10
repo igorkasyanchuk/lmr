@@ -2,5 +2,5 @@
   h5 
     = link_to one_new.title,  news_post_path(one_new)
   span.date
-    = one_new.created_at.try(:strftime, "%d %B %Y %H:%M:%S")
+    = I18n.localize(one_new.created_at, format: "%d %B %Y %H:%M:%S")
   p = truncate_html one_new.content.gsub(/<\/?[^>]*>/, ""), :length => 200

@@ -1,6 +1,6 @@
 #main_new_of_the_day
   h1= main_new.title
-  span.date= main_new.created_at.try(:strftime, "%d %B %Y %H:%M:%S")
+  span.date= I18n.localize(main_new.created_at, format: "%d %B %Y %H:%M:%S")
   #paragraph
     .span3
       = image_tag main_new.preview, :class => "img-polaroid" if main_new.preview?
