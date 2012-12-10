@@ -11,7 +11,7 @@ table.table.table-striped
   thead
     tr
       th Назва
-      th Номер
+      / th Номер
       th Адреса
       th Тип
       th Дії
@@ -19,7 +19,7 @@ table.table.table-striped
     - collection.each do |payment_terminal|
       tr
         td= link_to(payment_terminal.name, edit_resource_path(payment_terminal))
-        td= payment_terminal.try(:code)
+        / td= payment_terminal.try(:code)
         td= payment_terminal.address.sub('Львів, ', '').sub('Львів ', '')
         td= terminal_type(payment_terminal)
         td
