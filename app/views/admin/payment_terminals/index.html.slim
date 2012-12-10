@@ -4,29 +4,33 @@
   h1.title Керування способами оплати
   .clear 
   .admin_actions
-    = link_to 'Додати термінал', [:new, :admin, :payment_terminal], :class => 'btn btn-primary btn-small'  
-hr  
-
-table.table.table-striped
-  thead
-    tr
-      th Назва
-      / th Номер
-      th Адреса
-      th Тип
-      th Дії
-  tbody
-    - collection.each do |payment_terminal|
+    = link_to 'Додати спосіб оплати', [:new, :admin, :payment_terminal], :class => 'btn btn-primary btn-small'  
+hr
+= simple_form_for :payment_terminal, url: admin_payment_terminals_url, html: {method: 'get'} do |f|
+  table.table.table-striped
+    thead
       tr
-        td= link_to(payment_terminal.name, edit_resource_path(payment_terminal))
-        / td= payment_terminal.try(:code)
-        td= payment_terminal.address.sub('Львів, ', '').sub('Львів ', '')
-        td= terminal_type(payment_terminal)
-        td
-          = link_to 'Редагувати', edit_resource_path(payment_terminal), :class => 'btn btn-mini'
-          |  
-          = link_to 'Видалити', resource_path(payment_terminal), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger'
-    - if collection.blank?
-      tr
-        td colspan=4
-          | Блоки відсутні.
+        th Назва
+        / th Номер
+        th Адреса
+        th
+          = f.input :type, label: false, collection: PaymentTerminal::TERMINAL_TYPES.invert, selected: @type, prompt: 'Виберіть тип', input_html: {:onchange => "this.form.submit();"}
+        th Дії
+          
+    tbody
+      - collection.each do |payment_terminal|
+        tr
+          td= link_to(payment_terminal.name, edit_resource_path(payment_terminal))
+          / td= payment_terminal.try(:code)
+          td= payment_terminal.address.sub('Львів, ', '').sub('Львів ', '')
+          td= terminal_type(payment_terminal)
+          td
+            = link_to 'Редагувати', edit_resource_path(payment_terminal), :class => 'btn btn-mini'
+            |  
+            = link_to 'Видалити', resource_path(payment_terminal), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger'
+      - if collection.blank?
+        tr
+          td colspan=4
+            | Блоки відсутні.
+.clear
+= paginate collection, :theme => 'twitter-bootstrap'
