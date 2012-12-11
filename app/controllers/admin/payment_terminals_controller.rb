@@ -15,7 +15,7 @@ class Admin::PaymentTerminalsController <  Admin::DashboardController
   end
 
   def update
-    update! {admin_payment_terminals_url}
+    update! {admin_payment_terminals_path(payment_terminal: { type: @payment_terminal.type })}
   end
 
 end
