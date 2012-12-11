@@ -10,18 +10,16 @@ hr
   table.table.table-striped
     thead
       tr
-        th Назва
-        / th Номер
+        th.span4 Назва
         th Адреса
         th
-          = f.input :type, label: false, collection: PaymentTerminal::TERMINAL_TYPES.invert, selected: @type, prompt: 'Виберіть тип', input_html: {:onchange => "this.form.submit();"}
+          = f.input :type, label: false, collection: PaymentTerminal::TERMINAL_TYPES.invert, selected: @type, prompt: 'Виберіть тип', input_html: {onchange: 'this.form.submit();', class: 'input-medium'}
         th Дії
           
     tbody
       - collection.each do |payment_terminal|
         tr
           td= link_to(payment_terminal.name, edit_resource_path(payment_terminal))
-          / td= payment_terminal.try(:code)
           td= payment_terminal.address.sub('Львів, ', '').sub('Львів ', '')
           td= terminal_type(payment_terminal)
           td

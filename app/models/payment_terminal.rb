@@ -8,9 +8,9 @@ class PaymentTerminal < ActiveRecord::Base
                    :lng_column_name => :longitude
 
   TERMINAL_TYPES = {
-    'Terminal' => 'Термінал',
+    'BankDepartment' => 'Відділення банку',    
     'LkpDepartment' => 'Каса ЛКП',
-    'BankDepartment' => 'Відділення банку'
+    'Terminal' => 'Термінал'
   }
 
   validates :name, :presence => true, :length => {:in => 5..200}

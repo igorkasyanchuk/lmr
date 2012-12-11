@@ -3,11 +3,11 @@ class Admin::PaymentTerminalsController <  Admin::DashboardController
 
   def index
     @type = params[:payment_terminal][:type] if params[:payment_terminal]
-    @payment_terminals =  if @type && @type != ''
-      PaymentTerminal.where(type: @type)
-    else
-      PaymentTerminal.order(:type)
-    end.page(params[:page]).per(10)
+    @payment_terminals =  if @type.present?
+        PaymentTerminal.where(type: @type).order(:department)
+      else
+        PaymentTerminal.order(:type, :name)
+      end.page(params[:page]).per(10)
   end
  
   def create
