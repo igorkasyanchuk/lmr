@@ -1,6 +1,6 @@
 #encoding: utf-8
 class PaymentTerminal < ActiveRecord::Base
-  attr_accessible :code, :name, :address, :phone, :bank, :email, :payment_type, :type, :latitude, :longitude, :department
+  attr_accessible :code, :name, :address, :phone, :bank, :email, :payment_type, :type, :latitude, :longitude, :department, :district
 
   acts_as_gmappable
   acts_as_mappable :default_units => :kms,
@@ -8,9 +8,9 @@ class PaymentTerminal < ActiveRecord::Base
                    :lng_column_name => :longitude
 
   TERMINAL_TYPES = {
-    'BankDepartment' => 'Відділення банку',    
-    'LkpDepartment' => 'Каса ЛКП',
-    'Terminal' => 'Термінал'
+    'Відділення банку' => 'BankDepartment',    
+    'Каса ЛКП' => 'LkpDepartment',
+    'Термінал' => 'Terminal'
   }
 
   validates :name, :presence => true, :length => {:in => 5..200}

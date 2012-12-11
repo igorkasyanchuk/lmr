@@ -1,15 +1,18 @@
 = simple_form_for [:admin, @payment_terminal.becomes(PaymentTerminal)],  html: { class: 'form-horizontal', id: 'payment_terminal_form'} do |f| 
   fieldset
-    = f.input :type, label: 'Тип', collection: PaymentTerminal::TERMINAL_TYPES.invert, 
+    = f.input :type, label: 'Тип', collection: PaymentTerminal::TERMINAL_TYPES, 
                                    selected: type,
                                    prompt: 'Виберіть тип'
-    .bank_department style="display: #{type=='Банківське Відділення' ? 'block' : 'none'}"
+    .bank_department style="display: #{type=='BankDepartment' ? 'block' : 'none'}"
       = f.input :department, label: 'Банк'
     = f.input :name, label: 'Назва'
     = f.input :address, label: 'Адреса',
                         hint: 'Введіть адресу в м.Львів. Наприклад: Львів, Шевченка, 23',
                         placeholder: 'Львів, ',
-                        input_html: { value: @payment_terminal.address.presence || 'Львів, '}
+                        input_html: { value: @payment_terminal.address.presence || 'Львів, ' }
+    = f.input :district, label: 'Район',
+                         collection: ServiceProvider.pluck(:district).uniq.sort,
+                         prompt: 'Виберіть район'
     = f.input :phone, label: 'Телефон'
     = f.input :email, label: 'Електронна пошта'
 

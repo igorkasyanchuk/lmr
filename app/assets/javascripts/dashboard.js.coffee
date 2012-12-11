@@ -21,6 +21,8 @@ jQuery ->
     else if $(@).val() == 'BankDepartment'  
       $('#payment_terminal_phone, #payment_terminal_email, #payment_terminal_bank').prop('disabled', '')
       $('.bank_department').show()
+    else
+      $('.bank_department').hide()
 
       $("#payment_terminal_department").autocomplete source: (request, response) ->
         $.ajax

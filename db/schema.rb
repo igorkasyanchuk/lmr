@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128132137) do
+ActiveRecord::Schema.define(:version => 20121211125924) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -251,6 +251,7 @@ ActiveRecord::Schema.define(:version => 20121128132137) do
     t.float    "longitude"
     t.boolean  "gmaps"
     t.string   "department"
+    t.string   "district"
   end
 
   add_index "payment_terminals", ["code"], :name => "index_payment_terminals_on_code"
