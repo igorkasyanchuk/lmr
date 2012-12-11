@@ -1,42 +1,22 @@
 # encoding: utf-8
 class Services::PaymentsController < ApplicationController
 
-  def payments
-  end
+  def web_payments; end
 
-  def bank_departments
-    if current_user
-      address = prepare_coordinates(current_user.try(:search_address))
-      @departments = BankDepartment.geo_scope(:origin => address).order("distance asc")
-      @bank_departments = @departments.group_by{ |b| b.department }.sort_by{|k, v| v.first.distance }
-    else
-      @departments = BankDepartment.all
-      @bank_departments = @departments.group_by{ |b| b.department }.sort
-    end    
-    prepare_marker
-  end
-
-  def lkp_departments
-    @departments = if current_user
-      address = prepare_coordinates(current_user.try(:search_address))
-      LkpDepartment.geo_scope(:origin => address).order("distance asc")
-    else
-      LkpDepartment.all
+  %w{bank_department lkp_department terminal}.each do |payment|
+    define_method payment.pluralize do
+      group_field = payment == 'bank_department' ? :department : :district
+      if current_user && current_user.is_user?
+        address = prepare_coordinates(current_user.try(:search_address))
+        @departments = payment.camelize.constantize.geo_scope(:origin => address).order("distance asc")
+        instance_variable_set("@#{payment.pluralize}".to_sym,
+                               @departments.group_by{ |b| b.send(group_field) }.sort_by{|k, v| v.first.distance } )
+      else
+        @departments = payment.camelize.constantize.all
+        instance_variable_set("@#{payment.pluralize}".to_sym, @departments.group_by{ |b| b.send(group_field) } )
+      end
+      prepare_marker
     end
-    prepare_marker
-  end
-
-  def terminals
-    @departments = if current_user
-      address = prepare_coordinates(current_user.try(:search_address))
-      Terminal.geo_scope(:origin => address).order("distance asc")
-    else
-      Terminal.all
-    end    
-    prepare_marker
-  end
-
-  def web_payments
   end
 
   def search
@@ -46,8 +26,7 @@ class Services::PaymentsController < ApplicationController
   end
 
   def autocomplete
-    banks = BankDepartment.where("department LIKE ?", "#{params[:term]}%")
-    render :json => banks.map(&:department).uniq
+    render :json => BankDepartment.where("department LIKE ?", "#{params[:term]}%").map(&:department).uniq
   end
 
   
@@ -58,8 +37,8 @@ class Services::PaymentsController < ApplicationController
 
     def prepare_coordinates query
       unless query.to_s.gsub(' ','') == ''
-        location = Geocoder.search('Львів, ' + query.to_s)
-        location = [location[0].latitude, location[0].longitude]
+        geo = Geocoder.search('Львів, ' + query.to_s)[0]
+        [geo.latitude, geo.longitude]
       else
         []
       end

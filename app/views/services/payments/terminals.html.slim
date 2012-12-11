@@ -15,3 +15,24 @@ hr
 
 br
 = show_on_map(@markers)
+
+/ .accordion#accordion_terminal
+/   - @terminal_departments.each_slice(@terminal_departments.count/2).with_index do |districts, slice_index|
+/     div class="#{slice_index==0 ? 'pull-left' : 'pull-right'}"  style='width: 50%;'
+/       div class="#{slice_index==0 ? '' : 'clear'}"
+/       - districts.each_with_index do |(district, terminals), index|
+/         .accordion-group style='border: 0 none;'
+/           .accordion-heading
+/             a.accordion-toggle data-parent="#accordion_terminal" data-toggle="collapse" href="#terminal-#{slice_index}-#{index}"
+/               h4= "#{district}"
+/           .accordion-body.collapse.out id="terminal-#{slice_index}-#{index}"
+/             .accordion-inner
+/               - terminals.each do |terminal|
+/                 .provider_info
+/                   h4 = terminal.name
+/                   address
+/                     .address = terminal.address
+/                     .phone = terminal.phone
+/                     .mail = terminal.email
+/ .clear
+/ = show_on_map(@markers)

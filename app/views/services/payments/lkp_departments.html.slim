@@ -15,3 +15,24 @@ hr
 br
 
 = show_on_map(@markers)
+
+/ .accordion#accordion_lkp
+/   - @lkp_departments.each_slice(@lkp_departments.count/2).with_index do |districts, slice_index|
+/     div class="#{slice_index==0 ? 'pull-left' : 'pull-right'}"  style='width: 50%;'
+/       div class="#{slice_index==0 ? '' : 'clear'}"
+/       - districts.each_with_index do |(district, lkps), index|
+/         .accordion-group style='border: 0 none;'
+/           .accordion-heading
+/             a.accordion-toggle data-parent="#accordion_lkp" data-toggle="collapse" href="#lkp-#{slice_index}-#{index}"
+/               h4= "#{district}"
+/           .accordion-body.collapse.out id="lkp-#{slice_index}-#{index}"
+/             .accordion-inner
+/               - lkps.each do |lkp|
+/                 .provider_info
+/                   h4 = lkp.name
+/                   address
+/                     .address = lkp.address
+/                     .phone = lkp.phone
+/                     .mail = lkp.email
+/ .clear
+/ = show_on_map(@markers)
