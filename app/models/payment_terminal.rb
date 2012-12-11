@@ -22,11 +22,17 @@ class PaymentTerminal < ActiveRecord::Base
   validate :lat_lon_coordinates , :on => :create
 
   def gmaps4rails_address
-    "#{self.address}"
+    "#{address}"
   end
 
   def gmaps4rails_title
-    "#{self.name}, #{self.address}"
+    add = type == 'LkpDepartment' ? ", #{district} район" : ''
+    "#{name}, #{address}#{add}"
+  end
+
+  def gmaps4rails_infowindow
+    add = type == 'LkpDepartment' ? "</br> #{district} район" : ''
+    "#{name}, </br>#{address}#{add}</br> #{phone}"
   end
 
   private
