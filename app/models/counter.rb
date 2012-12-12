@@ -42,13 +42,13 @@ class Counter
 
   def self.set_counter code, state
     errors = Counter.validation_errors(code, state)
-    errors.empty? ? ReportLoader.set_counter(code, state) : {:errors => errors}
+    errors.empty? ? ReportLoader.set_counter(code, state.to_i) : {:errors => errors}
   end
 
   def self.validation_errors code, state
     last_counter = last_history_of_counter(code)
-    previous_counter_number = last_counter.present? ? last_counter.end_state.to_i : state
-    check_counter_numbers(state.to_i, previous_counter_number)
+    previous_counter_number = last_counter.present? ? last_counter.end_state : state
+    check_counter_numbers(state, previous_counter_number)
   end
 
   def self.last_history_of_counter code
@@ -60,16 +60,25 @@ class Counter
 
   def self.check_counter_numbers now, previous
     errors = []
-    if now < 0
+
+    if not_number?(now)
+      errors << 'Показник повинен бути цілим числом'
+    elsif now.to_i < 0
       errors << 'Показник не може бути менше нуля'
-    elsif now == 0
+    elsif now.to_i == 0
       errors << 'Показник не може дорівнювати нулю'
-    elsif now < previous
+    elsif now.to_i < previous.to_i
       errors << 'Введений показник не може бути менше попереднього показника'
     # elsif now > max
     #   errors << 'більше максимально допустимого значення'
     end
     errors
+  end
+
+  private
+
+  def self.not_number?(str)
+    str.match(/\A[+-]?\d+?(_?\d+)*(\.\d+e?\d*)?\Z/) == nil ? true : false
   end
 
 end

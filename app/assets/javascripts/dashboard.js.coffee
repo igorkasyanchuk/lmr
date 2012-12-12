@@ -1,10 +1,11 @@
 jQuery ->
-  
+
   $('.input_end_state').keyup ->    
     input_end_state = $(this).val()
     end_state = $(this).parent().prev().html()
     input_amount_state = $(this).parent().next().children()
-    input_amount_state.val input_end_state - end_state
+    quantity = if isNaN(input_end_state) then '' else (input_end_state - end_state)
+    input_amount_state.val quantity
 
   $('#payment_terminal_type').on 'change', (e) ->
     if $(@).val() == 'Terminal'

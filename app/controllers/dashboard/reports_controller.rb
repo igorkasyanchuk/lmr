@@ -38,7 +38,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   end
 
   def set_counter
-    result = Counter.set_counter(params[:counter_code], params[:end_state].to_i)
+    result = Counter.set_counter(params[:counter_code], params[:end_state])
     if result == 'true'
       @counter = counters.select{|c| c.code == params[:counter_code]}.first
       @year = Date.today.year
