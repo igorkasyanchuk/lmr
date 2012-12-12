@@ -43,8 +43,10 @@ class Dashboard::ReportsController < Dashboard::DashboardController
       @counter = counters.select{|c| c.code == params[:counter_code]}.first
       @year = Date.today.year
       render 'counter', :formats => [:js]
+    elsif result == 'false'
+      render :js => "alert('Показник НЕ додано!');"
     else
-      render :js => "alert('#{result[:errors].first}')"
+      render :js => "alert('#{result[:errors].first}');"
     end
   end
   
