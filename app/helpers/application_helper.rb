@@ -175,7 +175,7 @@ module ApplicationHelper
     end
   end
 
-  def reply_post_page position
+  def post_page position
     (position / Forem.per_page).to_i + 1
   end
 
