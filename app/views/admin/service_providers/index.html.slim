@@ -6,14 +6,18 @@
   .admin_actions
     = link_to 'Додати надавача послуг', new_resource_path, :class => 'btn btn-primary btn-small'
 hr  
-
+= form_tag [:admin, :service_providers], :method => :get, :class => 'form-search' do
+  = text_field_tag :q, params[:q], :class => 'input-medium search-query'
+  |   
+  = submit_tag "Фільтр", :class => 'btn'
+.pull-right
+  = paginate collection, :theme => 'twitter-bootstrap'
 #pages_container
 
   table.table.table-striped.pages
     thead
       th Назва
       th Адреса
-      th Телефон
       th Електронна адреса
       th Відповідальні особи
       th Дії
@@ -21,8 +25,12 @@ hr
       - collection.each do |provider|
         tr
           td= link_to provider.name, edit_resource_path(provider)
-          td= provider.address
-          td= provider.phone
+          td
+            = provider.address
+            br
+            = "тел. #{provider.phone}"
+            br
+            = "#{provider.district} район"
           td= provider.email
           td
             - provider.responsible_persons.each do |person|
@@ -34,4 +42,5 @@ hr
       - if collection.blank?
         tr
           td colspan="5" Надавачі послуг відсутні
-
+.clear
+= paginate collection, :theme => 'twitter-bootstrap'

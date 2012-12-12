@@ -2,17 +2,17 @@
 
 #title_block
   h1.title Адміністрування користувачів  
-  .clear  
-hr  
-br
-.admin_actions
-  = link_to "Додати користувача", [:new, :admin, :user], :class => 'btn btn-primary btn-small'
-br
+  .clear
+  .admin_actions
+    = link_to "Додати користувача", [:new, :admin, :user], :class => 'btn btn-primary btn-small'
+hr
+
 = form_tag [:admin, :users], :method => :get, :class => 'form-search' do
   = text_field_tag :q, params[:q], :class => 'input-medium search-query'
   |   
   = submit_tag "Фільтр", :class => 'btn'
-
+.pull-right
+  = paginate collection, :theme => 'twitter-bootstrap'
 table.table.table-striped
   thead
     tr
@@ -47,3 +47,5 @@ table.table.table-striped
       tr
         td colspan=4
           | Користувачів не знайдено.
+.clear
+= paginate collection, :theme => 'twitter-bootstrap'

@@ -2,7 +2,11 @@ class Admin::PostsController < Admin::DashboardController
   defaults :resource_class => Post, :collection_name => 'posts', :instance_name => 'post'
 
   def index
-    @posts = Post.recent.page(params[:page]).per(20)
+    @posts = if params[:q].present? 
+          Post.where("title like :q or description like :q", :q => "%" + params[:q] + "%")
+        else
+          Post
+        end.recent.page(params[:page]).per(20)
   end
  
  def create

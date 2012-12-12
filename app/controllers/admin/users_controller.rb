@@ -8,7 +8,7 @@ class Admin::UsersController < Admin::DashboardController
   def index
     @users = User.scoped
     @users = User.where("identifier like :q or email like :q or name like :q or surname like :q", :q => "%" + params[:q] + "%") if params[:q].present?
-    @users = @users.all
+    @users = @users.page(params[:page]).per(20)
   end
 
   def update

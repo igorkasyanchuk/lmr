@@ -5,7 +5,11 @@ module Admin
     before_filter :admin_required
 
     def index
-      @service_provider = ServiceProvider.includes(:responsible_persons)
+      @service_provider = if params[:q].present? 
+          ServiceProvider.where("email like :q or name like :q or district like :q", :q => "%" + params[:q] + "%")
+        else
+          ServiceProvider
+        end.order(:district).includes(:responsible_persons).page(params[:page]).per(10)
     end
 
   end

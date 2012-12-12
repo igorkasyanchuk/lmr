@@ -4,8 +4,13 @@
   .clear  
   .admin_actions
     = link_to 'Додати новину', [:new, :admin, :post], :class => 'btn btn-primary btn-small'
-hr  
-
+hr
+= form_tag [:admin, :posts], :method => :get, :class => 'form-search' do
+  = text_field_tag :q, params[:q], :class => 'input-medium search-query'
+  |   
+  = submit_tag "Фільтр", :class => 'btn'
+.pull-right
+  = paginate collection, :theme => 'twitter-bootstrap'
 #posts_container
   
 
@@ -35,6 +40,7 @@ hr
       - if @posts.blank?
         tr
           td colspan='5'
-            | Новивни відсутні.
+            | Новини відсутні.
 
-    = paginate @posts
+.clear
+= paginate collection, :theme => 'twitter-bootstrap'
