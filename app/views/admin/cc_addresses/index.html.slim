@@ -1,0 +1,30 @@
+= title "Адреси CC для запитів"
+
+#title_block
+  h1.title Адреси CC для запитів
+  .clear
+  .admin_actions
+    = link_to 'Додати CC адресу', new_resource_path, :class => 'btn btn-primary btn-small'
+hr
+
+table.table.table-striped
+  thead
+    tr
+      th ПІБ
+      th E-mail
+      th Опис
+      th Дії
+  tbody
+    - collection.each do |cc|
+      tr
+        td= cc.name
+        td= cc.email
+        td= cc.description
+        td
+          = link_to 'Редагувати', edit_resource_path(cc), class: 'btn btn-mini'
+          |  
+          = link_to 'Видалити', resource_path(cc), method: :delete, confirm: 'Ви впевнені?', class: 'btn btn-mini btn-danger'
+    - if collection.blank?
+      tr
+        td colspan=4
+          | Адреси відсутні.

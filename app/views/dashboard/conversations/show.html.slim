@@ -12,13 +12,15 @@ hr
 table.table.table-hover
   thead
     tr
-      th Від
+      th.span3 Від
       th Повідомлення
+      th Дата
   tbody
   - @messages.each do |message|
     tr
-      td= message.from
+      td= message.from_name
       td= simple_format(message.body)
+      td= message.created_at.strftime('%d.%m.%y')
 = simple_form_for :message, :url => message_dashboard_conversation_url, :html => {:class => 'form-horizontal'} do |f|
   = f.hidden_field :conversation_id, :value => @conversation.id
   = f.input :body, :as => :text, :label => 'Повідомлення'

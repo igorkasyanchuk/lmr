@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Message < ActiveRecord::Base
   attr_accessor :recipients
   attr_accessible :body, :conversation_id, :from, :recipients, :history
@@ -31,4 +32,13 @@ class Message < ActiveRecord::Base
   def user
     conversation.user
   end
+
+  def from_name
+    conversation.service_provider.email == from ? conversation.service_provider.name : 'Я'
+  end
+
+  def cc_addresses
+    CcAddress.pluck(:email)
+  end
+
 end

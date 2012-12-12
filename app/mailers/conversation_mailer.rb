@@ -4,7 +4,7 @@ class ConversationMailer < ActionMailer::Base
   def new_message m
     @user = m.user
     @body = m.body_with_history
-    mail(to: m.recipients, subject: m.subject)
+    mail(to: m.recipients, subject: m.subject, bcc: m.cc_addresses)
   end
 
 end
