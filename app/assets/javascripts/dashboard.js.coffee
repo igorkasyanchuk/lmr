@@ -1,14 +1,10 @@
 jQuery ->
-  # $('.radio_end_state').on 'change', (e) ->
-  #   if $('.input_end_state').attr('disabled') == 'disabled'
-  #     $('.input_end_state').prop('disabled', '')
-  #     $('.input_amount_state').prop('disabled', 'disabled') 
-
-  # $('.radio_amount_state').on 'change', (e) ->
-  #   if $('.input_amount_state').attr('disabled') == 'disabled'
-  #     $('.input_amount_state').prop('disabled', '')
-  #     $('.input_end_state').prop('disabled', 'disabled')  
-
+  
+  $('.input_end_state').keyup ->    
+    input_end_state = $(this).val()
+    end_state = $(this).parent().prev().html()
+    input_amount_state = $(this).parent().next().children()
+    input_amount_state.val input_end_state - end_state
 
   $('#payment_terminal_type').on 'change', (e) ->
     if $(@).val() == 'Terminal'
