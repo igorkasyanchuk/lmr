@@ -1,4 +1,4 @@
-= form_tag [:dashboard, :set_counter], :method => :get, :remote => true  do
+= form_tag [:dashboard, :set_counter], method: :get, remote: true  do
   = hidden_field_tag 'counter_code', "#{counter.code}"
   table.table.reports
     thead 
@@ -14,7 +14,7 @@
         td= counter.type_name
         td= counter.end_state
         td 
-          = text_field_tag 'end_state',  "#{counter.end_state}", :class => 'input_end_state'
+          = text_field_tag 'end_state',  "#{counter.end_state}", class: 'input_end_state'
         td 
-          = text_field_tag 'amount',  '',  :disabled => true, :class => 'input_amount_state'
-  = submit_tag "Надіслати покази", :class => 'btn btn-primary counter', :confirm => 'Ви впевнені, що хочете внести показник?'
+          = text_field_tag 'amount',  '',  disabled: true, class: 'input_amount_state'
+  = submit_tag 'Надіслати покази', class: 'btn btn-primary counter', confirm: 'Ви впевнені, що хочете внести показник?'
