@@ -4,7 +4,7 @@
   h1.title Дії на сайті
   .clear  
 hr  
-
+br
 = form_tag [:admin, :activities], :method => :get, :class => 'form-search' do
   = select_tag :q, options_for_select(UserActivity.uniq.pluck(:activity), params[:q]), :include_blank => true
   | 

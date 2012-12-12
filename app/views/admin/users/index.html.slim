@@ -6,7 +6,7 @@
   .admin_actions
     = link_to "Додати користувача", [:new, :admin, :user], :class => 'btn btn-primary btn-small'
 hr
-
+br
 = form_tag [:admin, :users], :method => :get, :class => 'form-search' do
   = text_field_tag :q, params[:q], :class => 'input-medium search-query'
   |   

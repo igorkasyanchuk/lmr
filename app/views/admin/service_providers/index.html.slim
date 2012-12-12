@@ -5,7 +5,8 @@
   .clear
   .admin_actions
     = link_to 'Додати надавача послуг', new_resource_path, :class => 'btn btn-primary btn-small'
-hr  
+hr
+br
 = form_tag [:admin, :service_providers], :method => :get, :class => 'form-search' do
   = text_field_tag :q, params[:q], :class => 'input-medium search-query'
   |   
