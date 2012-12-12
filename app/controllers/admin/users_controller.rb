@@ -5,10 +5,12 @@ class Admin::UsersController < Admin::DashboardController
   skip_before_filter :authenticate_user!, :only => [:autocomplete]
   skip_before_filter :admin_or_moderator_required, :only => [:autocomplete]
 
-  def index
-    @users = User.scoped
-    @users = User.where("identifier like :q or email like :q or name like :q or surname like :q", :q => "%" + params[:q] + "%") if params[:q].present?
-    @users = @users.page(params[:page]).per(20)
+  def index    
+    @users = if params[:q].present? 
+        User.where("identifier like :q or email like :q or name like :q or surname like :q", :q => "%" + params[:q] + "%")
+      else
+        User
+      end.includes(:role).page(params[:page]).per(20)
   end
 
   def update
