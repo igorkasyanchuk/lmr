@@ -11,7 +11,7 @@ hr
       .address = department.address
       .phone = department.phone
       .mail = department.email
-      small.show_map= link_to 'Показати на карті', services_one_on_map_path(id: department.id), remote: true
+      small= link_to 'Показати на карті', '#', remote: true, class: 'show_map', id: "#{department.id}"
   .clear    
 
 .clear
@@ -36,6 +36,6 @@ hr
 /                     .address = terminal.address
 /                     .phone = terminal.phone
 /                     .mail = terminal.email
-/                     small.show_map= link_to 'Показати на карті', services_one_on_map_path(id: terminal.id), remote: true
+                    / small= link_to 'Показати на карті', '#', remote: true, class: 'show_map', id: "#{terminal.id}"
 / .clear
 / = show_on_map(@markers)

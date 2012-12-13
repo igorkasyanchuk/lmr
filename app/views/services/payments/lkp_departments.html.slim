@@ -21,7 +21,7 @@ hr
                     .address = lkp.address
                     .phone = lkp.phone
                     .mail = lkp.email
-                    small.show_map= link_to 'Показати на карті', services_one_on_map_path(id: lkp.id), remote: true
+                    small= link_to 'Показати на карті', '#', remote: true, class: 'show_map', id: "#{lkp.id}"
 .clear
 #payment_map
   = show_on_map(@markers)

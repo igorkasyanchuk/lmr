@@ -21,7 +21,7 @@ hr
                     .address = bank.address
                     .phone = bank.phone
                     .mail = bank.email
-                    small.show_map= link_to 'Показати на карті', services_one_on_map_path(id: bank.id), remote: true
+                    small= link_to 'Показати на карті', '#', remote: true, class: 'show_map', id: "#{bank.id}"
 .clear
 #payment_map
   = show_on_map(@markers)

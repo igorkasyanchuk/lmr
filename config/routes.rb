@@ -87,7 +87,6 @@ Lmr::Application.routes.draw do
     match 'terminals', :to => 'payments#terminals'
     match 'search', :to => 'payments#search'
     match 'autocomplete', :to => 'payments#autocomplete'
-    get 'one_on_map' => 'payments#one_on_map'
   end
 
   get ':id', to: 'pages#show', as: :page
