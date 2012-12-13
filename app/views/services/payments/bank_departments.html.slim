@@ -16,10 +16,12 @@ hr
             .accordion-inner
               - banks.each do |bank|
                 .provider_info
-                  h4 = bank.name
+                  h4= bank.name
                   address
                     .address = bank.address
                     .phone = bank.phone
                     .mail = bank.email
+                    small.show_map= link_to 'Показати на карті', services_one_on_map_path(id: bank.id), remote: true
 .clear
-= show_on_map(@markers)
+#payment_map
+  = show_on_map(@markers)

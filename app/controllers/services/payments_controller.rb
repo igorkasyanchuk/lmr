@@ -29,6 +29,11 @@ class Services::PaymentsController < ApplicationController
     render :json => BankDepartment.where("department LIKE ?", "#{params[:term]}%").map(&:department).uniq
   end
 
+  def one_on_map
+    @markers = PaymentTerminal.where(id: params[:id]).to_gmaps4rails
+    respond_to :js
+  end
+
   
   private
     def prepare_marker

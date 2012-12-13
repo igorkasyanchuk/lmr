@@ -11,10 +11,12 @@ hr
       .address = department.address
       .phone = department.phone
       .mail = department.email
+      small.show_map= link_to 'Показати на карті', services_one_on_map_path(id: department.id), remote: true
   .clear    
 
-br
-= show_on_map(@markers)
+.clear
+#payment_map
+  = show_on_map(@markers)
 
 / .accordion#accordion_terminal
 /   - @terminal_departments.each_slice(@terminal_departments.count/2).with_index do |districts, slice_index|
@@ -34,5 +36,6 @@ br
 /                     .address = terminal.address
 /                     .phone = terminal.phone
 /                     .mail = terminal.email
+/                     small.show_map= link_to 'Показати на карті', services_one_on_map_path(id: terminal.id), remote: true
 / .clear
 / = show_on_map(@markers)
