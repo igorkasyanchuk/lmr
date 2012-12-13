@@ -6,17 +6,17 @@ hr
 
 = page_part("NEW_CONTACTS_PAGE")
 
-= simple_form_for contact, :html => {:class => 'form-horizontal' } do |f|
+= simple_form_for contact, html: {class: 'form-horizontal' } do |f|
 
   = f.error_notification
 
   .form-inputs 
-    = f.input :name, :label => 'Ім\'я'
-    = f.input :email, :label => 'Електронна адреса'
-    = f.input :message, :as => :text, :label => 'Повідомлення', :input_html => { :rows => 12, :cols => 200, :class => 'span8' }
-    = f.simple_captcha :label => "Введіть код зображений на малюнку"
+    = f.input :name, label: 'Ім\'я', input_html: {value: "#{current_user.full_name if current_user}"}
+    = f.input :email, label: 'Електронна адреса', input_html: {value: "#{current_user.email if current_user}"}
+    = f.input :message, as: :text, label: 'Повідомлення', input_html: { rows: 12, cols: 200, class: 'span8' }
+    = f.simple_captcha label: 'Введіть код зображений на малюнку'
 
   .form-actions
-    = f.button :submit, :value => "Надіслати"
+    = f.button :submit, value: 'Надіслати'
 
 .clear

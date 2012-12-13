@@ -28,15 +28,16 @@ jQuery ->
       $('.bank_department').hide()
 
 
-  $('.show_map').on 'click', ->    
+  $('.show_map').on 'click', ->
     window.location.hash = ''
     id = $(this).attr('id')
 
     jQuery.each Gmaps.map.markers, ->
       _id = this.id.toString()
-      this.infowindow.close()
-      if id == _id        
+      if id == _id
         infowindow = this.infowindow
         infowindow.open(Gmaps.map.map, this.serviceObject)
         Gmaps.map.map.setZoom(18)
         window.location.hash = 'payment_map'
+      else
+        this.infowindow.close()
