@@ -1,17 +1,19 @@
 .navbar
   .navbar-inner
     .container
-      / a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
+      / a.btn.btn-navbar data-target='.nav-collapse' data-toggle='collapse'
       /   span.icon-bar
       /   span.icon-bar
       /   span.icon-bar
-      /a.brand href="/" ЛМР
+      /a.brand href='/' ЛМР
       .container.nav-collapse
         ul.nav
           /li.divider-vertical
-          li= menu_item "Новини", '/news'
+          li= link_to 'Головна', root_path
           li.divider-vertical
-          li= menu_item "Форум", '/community'
+          li= menu_item 'Новини', '/news'
+          li.divider-vertical
+          li= menu_item 'Форум', '/community'
           li.divider-vertical
           li= menu_item "Зворотній зв'язок", main_app.new_contact_path
           li.divider-vertical
@@ -20,9 +22,9 @@
             = form_tag '/site_search', :method => :get, :class => 'form-search site_search' do
               = text_field_tag :q, params[:q], :class => 'input-medium search-query', :placeholder => 'Пошук'
               |  
-              = submit_tag "Пошук", :class => 'btn btnie'
+              = submit_tag 'Пошук', :class => 'btn btnie'
           li.divider-vertical
-          li= menu_item "Мій кабінет", my_dashboard_path
+          li= menu_item 'Мій кабінет', my_dashboard_path
           - if signed_in?
             li.divider-vertical
             li= link_to t('devise.views.sign_out'), main_app.destroy_user_session_path, :method => :delete
