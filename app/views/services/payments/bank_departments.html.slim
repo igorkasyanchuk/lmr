@@ -12,6 +12,7 @@ hr
           .accordion-heading
             a.accordion-toggle data-parent="#accordion_bank" data-toggle="collapse" href="#bank-#{slice_index}-#{index}"
               h4= "#{department}"
+              small= link_to 'Показати всі відділення на карті', services_show_on_map_path(type: "#{banks.first.type}",group: "#{department}"), remote: true, class: 'show_all_on_map'
           .accordion-body.collapse.out id="bank-#{slice_index}-#{index}"
             .accordion-inner
               - banks.each do |bank|
@@ -21,7 +22,8 @@ hr
                     .address = bank.address
                     .phone = bank.phone
                     .mail = bank.email
-                    small= link_to 'Показати на карті', '#', remote: true, class: 'show_map', id: "#{bank.id}"
+                    / small= link_to 'Показати на карті', '#', remote: true, class: 'show_map', id: "#{bank.id}"
+                    small= link_to 'Показати на карті', services_one_on_map_path(id: bank.id), remote: true, class: 'show_map'
 .clear
 #payment_map
   = show_on_map(@markers)

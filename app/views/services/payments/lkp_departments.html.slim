@@ -12,6 +12,7 @@ hr
           .accordion-heading
             a.accordion-toggle data-parent="#accordion_lkp" data-toggle="collapse" href="#lkp-#{slice_index}-#{index}"
               h4= "#{district} район"
+              small= link_to 'Показати всі каси на карті', services_show_on_map_path(type: "#{lkps.first.type}",group: "#{district}"), remote: true, class: 'show_all_on_map'
           .accordion-body.collapse.out id="lkp-#{slice_index}-#{index}"
             .accordion-inner
               - lkps.each do |lkp|
@@ -21,7 +22,8 @@ hr
                     .address = lkp.address
                     .phone = lkp.phone
                     .mail = lkp.email
-                    small= link_to 'Показати на карті', '#', remote: true, class: 'show_map', id: "#{lkp.id}"
+                    / small= link_to 'Показати на карті', '#', remote: true, class: 'show_map', id: "#{lkp.id}"
+                    small= link_to 'Показати на карті', services_one_on_map_path(id: lkp.id), remote: true, class: 'show_map'
 .clear
 #payment_map
   = show_on_map(@markers)

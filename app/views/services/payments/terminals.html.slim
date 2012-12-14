@@ -11,7 +11,8 @@ hr
       .address = department.address
       .phone = department.phone
       .mail = department.email
-      small= link_to 'Показати на карті', '#', remote: true, class: 'show_map', id: "#{department.id}"
+      / small= link_to 'Показати на карті', '#', remote: true, class: 'show_map', id: "#{department.id}"
+      small= link_to 'Показати на карті', services_one_on_map_path(id: department.id), remote: true, class: 'show_map'
   .clear    
 
 .clear
@@ -27,6 +28,7 @@ hr
 /           .accordion-heading
 /             a.accordion-toggle data-parent="#accordion_terminal" data-toggle="collapse" href="#terminal-#{slice_index}-#{index}"
 /               h4= "#{district}"
+/               small= link_to 'Показати всі відділення на карті', services_show_on_map_path(type: "#{terminals.first.type}",group: "#{district}"), remote: true, class: 'show_all_on_map'
 /           .accordion-body.collapse.out id="terminal-#{slice_index}-#{index}"
 /             .accordion-inner
 /               - terminals.each do |terminal|
@@ -36,6 +38,7 @@ hr
 /                     .address = terminal.address
 /                     .phone = terminal.phone
 /                     .mail = terminal.email
-                    / small= link_to 'Показати на карті', '#', remote: true, class: 'show_map', id: "#{terminal.id}"
+/                     / small= link_to 'Показати на карті', '#', remote: true, class: 'show_map', id: "#{terminal.id}"
+/                     small= link_to 'Показати на карті', services_one_on_map_path(id: terminal.id), remote: true, class: 'show_map'
 / .clear
 / = show_on_map(@markers)

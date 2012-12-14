@@ -28,8 +28,24 @@ class Services::PaymentsController < ApplicationController
   def autocomplete
     render :json => BankDepartment.where("department LIKE ?", "#{params[:term]}%").map(&:department).uniq
   end
+
+  def one_on_map
+    @markers = PaymentTerminal.where(id: params[:id]).to_gmaps4rails
+    respond_to :js
+  end
+
+  def show_on_map
+    if params[:group] && params[:type]
+      group_field = params[:type] == 'BankDepartment' ? :department : :district
+      @markers = params[:type].constantize.where(group_field => params[:group]).to_gmaps4rails
+      respond_to :js
+    else
+      rener nothing: true
+    end
+  end
   
   private
+
     def prepare_marker
       @markers = @departments.to_gmaps4rails do |plot, marker|        
         marker.json({ :id => plot.id})
