@@ -21,7 +21,7 @@ hr
 
 / .accordion#accordion_terminal
 /   - @terminal_departments.each_slice((@terminal_departments.count + (@terminal_departments.count % 2))/2).with_index do |districts, slice_index|
-/     div class="#{slice_index==0 ? 'pull-left' : 'pull-right'}"  style='width: 50%;'
+/     div class="#{slice_index==0 ? 'pull-left' : 'pull-right'}"  style='width: 47%;'
 /       div class="#{slice_index==0 ? '' : 'clear'}"
 /       - districts.each_with_index do |(district, terminals), index|
 /         .accordion-group style='border: 0 none;'
