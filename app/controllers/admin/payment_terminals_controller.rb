@@ -5,6 +5,8 @@ class Admin::PaymentTerminalsController <  Admin::DashboardController
     @type = params[:payment_terminal][:type] if params[:payment_terminal]
     @payment_terminals =  if @type.present?
         PaymentTerminal.where(type: @type).order(:department)
+      elsif params[:q]
+        PaymentTerminal.where("address like :q or name like :q or district like :q", :q => "%" + params[:q] + "%")
       else
         PaymentTerminal.order(:type, :name)
       end.page(params[:page]).per(10)

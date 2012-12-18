@@ -3,7 +3,7 @@
 = keywords @page.seo_keywords || @page.title
 
 #page_container
-  h1.left= @page.title 
+  h3.left= @page.title 
   - if user_signed_in? && (current_user.admin? || current_user.content_manager?)
     .right= link_to 'Редагувати', [:edit, :admin, @page], :class => 'btn btn-small'
   .clear

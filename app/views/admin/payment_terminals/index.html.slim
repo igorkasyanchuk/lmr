@@ -7,6 +7,10 @@
     = link_to 'Додати спосіб оплати', [:new, :admin, :payment_terminal], :class => 'btn btn-primary btn-small'  
 hr
 br
+= form_tag [:admin, :payment_terminals], :method => :get, :class => 'form-search' do
+  = text_field_tag :q, params[:q], :class => 'input-medium search-query'
+  |   
+  = submit_tag "Знайти", :class => 'btn'
 .pull-right
   = paginate collection, :theme => 'twitter-bootstrap'
 = simple_form_for :payment_terminal, url: admin_payment_terminals_url, html: {method: 'get'} do |f|
