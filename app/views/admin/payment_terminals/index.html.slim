@@ -13,6 +13,7 @@ br
   = submit_tag "Знайти", :class => 'btn'
 .pull-right
   = paginate collection, :theme => 'twitter-bootstrap'
+.clear
 = simple_form_for :payment_terminal, url: admin_payment_terminals_url, html: {method: 'get'} do |f|
   table.table.table-striped
     thead

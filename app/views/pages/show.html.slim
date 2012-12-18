@@ -1,5 +1,5 @@
 = title @page.seo_title.presence || @page.title
-= description @page.seo_description || @page.title
+= description @page.seo_description.presence || @page.title
 = keywords @page.seo_keywords.presence || @page.title
 
 #page_container
