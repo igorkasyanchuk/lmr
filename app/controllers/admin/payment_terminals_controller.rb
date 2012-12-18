@@ -17,7 +17,13 @@ class Admin::PaymentTerminalsController <  Admin::DashboardController
   end
 
   def update
-    update! {admin_payment_terminals_path(payment_terminal: { type: @payment_terminal.type })}
+    # update! {admin_payment_terminals_path(payment_terminal: { type: @payment_terminal.type })}
+    update! { session.delete(:return_to) }
+  end
+
+  def edit
+    @payment_terminal = PaymentTerminal.find(params[:id])
+    session[:return_to] ||= request.referer
   end
 
 end
