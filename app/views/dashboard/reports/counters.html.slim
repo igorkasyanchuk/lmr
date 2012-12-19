@@ -5,16 +5,5 @@
   = render 'user_info'
 hr
 h3 Ваші лічильники:
-#tabs
-  ul
-    - @counters.each_with_index do |counter, index|
-      li= link_to counter.type_name || 'Лічильник', "#tabs-#{index}"
-
-  - @counters.each_with_index do |counter, index|
-    div id="tabs-#{index}"
-      / h3= "Державний номер лічильника: #{counter.state_number}"
-      / h3= "Вид лічильника: #{counter.type_name}"
-      = select_tag :counter_year, options_for_select([Date.today.year, Date.today.year - 1]), :id => "#{counter.code}", :class => "counter_year"
-      div id="counter-#{counter.code}"
-        = render 'get_counter', :history => counter.history
-      = render 'set_counter', :counter => counter
+#counters
+  = render 'set_counter', counters: @counters

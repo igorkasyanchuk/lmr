@@ -1,20 +1,26 @@
-= form_tag [:dashboard, :set_counter], method: :get, remote: true  do
-  = hidden_field_tag 'counter_code', "#{counter.code}"
-  table.table.reports
-    thead 
-      tr
-        th Державний номер
-        th Вид
-        th Початкові покази
-        th Кінцеві покази
-        th Кількість
-    tbody
-      tr
-        td= counter.state_number
-        td= counter.type_name
-        td= counter.end_state
-        td 
-          = text_field_tag 'end_state',  "#{counter.end_state}", class: 'input_end_state'
-        td 
-          = text_field_tag 'amount',  '',  disabled: true, class: 'input_amount_state'
-  = submit_tag 'Надіслати покази', class: 'btn btn-primary counter', confirm: 'Ви впевнені, що хочете внести показник?'
+= form_tag [:dashboard, :counters], method: :get, remote: true  do
+    = hidden_field_tag "counter_codes", counters.map{|x| x.code}.join(',')
+    - @counters.each_with_index do |counter, index|
+      div id="counter-#{index}"
+        table.table.reports
+          thead 
+            tr
+              th Державний номер
+              th Вид
+              th Початкові покази
+              th Кінцеві покази
+              th Кількість
+              th Історія показників
+          tbody
+            tr
+              td= counter.state_number
+              td= counter.type_name
+              td= counter.end_state
+              td
+                = text_field_tag "end_state_#{counter.code}",  "#{counter.end_state}", class: 'input_end_state'
+              td 
+                = text_field_tag 'amount',  '',  disabled: true, class: 'input_amount_state'
+              td
+                = link_to 'Показати', '#'
+    = submit_tag 'Надіслати покази', id:'submit_counters' , class: 'btn btn-primary counter'
+    = image_tag('ajax-loader.gif', class: 'counters_loader')

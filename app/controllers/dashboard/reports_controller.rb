@@ -24,10 +24,11 @@ class Dashboard::ReportsController < Dashboard::DashboardController
     PaymentDetails.load(current_user.identifier, @filter, @user_info.service_providers)
   end
 
-  def counters
-    year = params[:year] || Date.today.year
-    @counters = Counter.get @user_info.consumer_code
-  end
+  # def counters
+  #   year = params[:year] || Date.today.year
+  #   @counters = Counter.get @user_info.consumer_code
+  #   # debugger
+  # end
 
   def counter
     code = params[:code]
@@ -37,16 +38,17 @@ class Dashboard::ReportsController < Dashboard::DashboardController
     render 'counter', :formats => [:js]
   end
 
-  def set_counter
-    result = Counter.set_counter(params[:counter_code], params[:end_state])
-    if result == 'true'
-      @counter = counters.select{|c| c.code == params[:counter_code]}.first
-      @year = Date.today.year
-      render 'counter', :formats => [:js]
-    elsif result == 'false'
-      render :js => "alert('Показник НЕ додано!');"
-    else
-      render :js => "alert('#{result[:errors].first}');"
+  def counters
+    @counters = Counter.get @user_info.consumer_code
+    if request.xhr?
+      result = Counter.set_counters(params)
+      if result.has_key?(:results)
+        @results = result[:results].compact
+        respond_to :js
+      elsif result.has_key?(:errors)
+        @errors = result[:errors]
+        render 'counter_error', :formats => [:js]
+      end
     end
   end
   
