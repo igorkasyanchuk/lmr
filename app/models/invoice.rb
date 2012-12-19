@@ -28,19 +28,19 @@ Total.new raw['borg'], raw['invoice'], raw['correction'], raw['pilga'], raw['sub
   end
 
   def populate_services raw
-     (raw || []).map do |ms|
-      Service.new(
-        ms['name'],
-        ms['borg'],
-        ms['invoice'],
-        ms['correction'],
-        ms['pilga'],
-        ms['subsidy'],
-        ms['pay'],
-        ms['saldo'],
-        ms['serviceCode'],
-        populate_sub_services(ms['subService'])
-      )
+    [raw].flatten.compact.map do |ms|
+    Service.new(
+      ms['name'],
+      ms['borg'],
+      ms['invoice'],
+      ms['correction'],
+      ms['pilga'],
+      ms['subsidy'],
+      ms['pay'],
+      ms['saldo'],
+      ms['serviceCode'],
+      populate_sub_services(ms['subService'])
+    )
     end
   end
 

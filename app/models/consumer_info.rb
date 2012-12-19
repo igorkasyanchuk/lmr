@@ -27,7 +27,7 @@ class ConsumerInfo
   end
 
   def fill_service_providers raw
-    @service_providers = (raw || []).map {|raw_service_provider| build_service_provider raw_service_provider }
+    @service_providers = [raw].flatten.compact.map {|raw_service_provider| build_service_provider raw_service_provider }
   end
 
   def build_service_provider raw
