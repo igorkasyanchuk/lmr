@@ -2,7 +2,7 @@
 class Dashboard::ReportsController < Dashboard::DashboardController
 
   before_filter :init_filter
-  before_filter :user_info, :except => [:invoice_details, :service_providers]
+  before_filter :user_info, :except => [:service_providers]
 
   def invoice
     @invoice = Invoice.load current_user.identifier, @filter.period#@date.beginning_of_month..@date.end_of_month
@@ -56,7 +56,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
 
   def invoice_details
     @invoice_details = InvoiceDetails.load current_user.identifier, @filter.period
-    report = InvoiceDetailsPdf.new(@invoice_details, view_context)
+    report = InvoiceDetailsPdf.new(@invoice_details, view_context, @user_info)
     send_data report.render, file_name: "invoice_details_#{@filter.period_begin.strftime('%Y-%m')}.pdf",
                              type: 'application/pdf',
                              disposition: 'inline'

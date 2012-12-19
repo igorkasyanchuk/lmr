@@ -14,7 +14,7 @@ class Counter
   end
 
   def self.get id
-    @user_counters = ReportLoader.load_counters(id).map{|raw| Counter.new(raw)}
+    @user_counters = [ReportLoader.load_counters(id)].flatten.compact.map{|raw| Counter.new(raw)}
   end
 
   def history year = Date.today.year

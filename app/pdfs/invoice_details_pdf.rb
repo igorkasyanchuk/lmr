@@ -1,9 +1,10 @@
 # encoding: utf-8
 require "prawn/measurement_extensions"
 class InvoiceDetailsPdf
-  def initialize(invoice_details, view)
+  def initialize(invoice_details, view, user_info)
     @invoice_details = invoice_details
     @view = view
+    @user_info = user_info
     initialize_pdf
   end
 
@@ -21,7 +22,7 @@ class InvoiceDetailsPdf
 
   def draw_pdf
     draw_title
-    user_info
+    user_information
     @invoice_details.services.each do |service|
       draw_service service
     end
@@ -34,12 +35,12 @@ class InvoiceDetailsPdf
     @pdf.move_down 7.mm
   end
 
-  def user_info
+  def user_information
     @pdf.font_size = 9.pt
-    data = [["ПІБ:","Петренко П. П.","Адреса:","Роксоляни 2/5"],
-            ["№ особового рахунку:","4070000646163","Кількість мешканців:","3 особи"],
-            ["","","Розрахункова площа:","89,1 кв.м."],
-            ["","","Опалювальна площа:","89,1 кв.м."]]
+    data = [["ПІБ:", @user_info.pib,"Адреса:", user_address(@user_info)],
+            ["№ особового рахунку:", @user_info.consumer_code,"Кількість мешканців:", "#{@user_info.people_count} ос."],
+            ["","","Розрахункова площа:", "#{@user_info.calc_area} кв.м."],
+            ["","","Опалювальна площа:", "#{@user_info.heat_area} кв.м."]]
     @pdf.table data do
       self.cell_style = {:borders => [],
         :width => 4.5.cm, :height => 0.7.cm}
@@ -78,6 +79,13 @@ class InvoiceDetailsPdf
                       :size => 8.pt,
                       :page_filter => :all}
     @pdf.render
+  end
+
+  def user_address info    
+    if info
+      divider = info.flat_number.present? ? "/#{info.flat_number}" : ''
+      "#{info.street_name} #{info.house_number} #{info.house_letter}#{divider}"
+    end
   end
 
 end
