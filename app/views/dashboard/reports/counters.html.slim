@@ -8,7 +8,7 @@ h3 Ваші лічильники:
 #tabs
   ul
     - @counters.each_with_index do |counter, index|
-      li= link_to counter.type_name, "#tabs-#{index}"
+      li= link_to counter.type_name || 'Лічильник', "#tabs-#{index}"
 
   - @counters.each_with_index do |counter, index|
     div id="tabs-#{index}"

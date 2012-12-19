@@ -55,7 +55,7 @@ uk:
       confirmation_instructions:
         subject: 'Інструкції з підтвердження паролю'
       reset_password_instructions:
-        subject: 'Інструкції зі скидання паролю'
+        subject: 'Інструкції по зміні паролю'
       unlock_instructions:
         subject: 'Інструкції з розблокування'
     views:
