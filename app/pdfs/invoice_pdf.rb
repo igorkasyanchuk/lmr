@@ -42,7 +42,7 @@ class InvoicePdf < Prawn::Document
   
   def line_items
     move_down 20
-    font_size 8
+    font_size 8    
     table line_item_rows do
       self.cell_style = {:border_width => 0.5, :border_color => "999999", :height => 0.6.cm}
       self.width = 18.cm      
@@ -57,10 +57,21 @@ class InvoicePdf < Prawn::Document
 
   def line_item_rows
     [["Послуга", "Борг", "Нараховано", "Корегування", "Пільги", "Субсидії", "Оплачено", "Сальдо"]] +
-    @invoice.services.map do |s|
-      [s.name, s.borg, s.invoice, s.correction, s.pilga, s.subsidy, s.pay, s.saldo]
-    end + 
+    services_body + 
     [['Разом', @invoice.total.borg, @invoice.total.invoice, @invoice.total.correction, @invoice.total.pilga, @invoice.total.subsidy, @invoice.total.pay, @invoice.total.saldo]]
+  end
+
+  def services_body
+    services = []
+    @invoice.services.each do |s|
+      services << [s.name, s.borg, s.invoice, s.correction, s.pilga, s.subsidy, s.pay, s.saldo]
+      if s.sub_services.any?
+        s.sub_services.each do |ss|
+          services << [" - #{ss.name}", ss.borg, ss.invoice, ss.correction, ss.pilga, ss.subsidy, ss.pay, ss.saldo]
+        end
+      end
+    end
+    services
   end
   
   # def price(num)

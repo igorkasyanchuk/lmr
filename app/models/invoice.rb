@@ -19,7 +19,8 @@ class Invoice
   end
   
   def all_services
-    (@services + @services.map {|s| s.sub_services}).flatten
+    # (@services + @services.map {|s| s.sub_services}).flatten
+    @services
   end
 
   def populate_total raw
@@ -39,15 +40,12 @@ Total.new raw['borg'], raw['invoice'], raw['correction'], raw['pilga'], raw['sub
       ms['pay'],
       ms['saldo'],
       ms['serviceCode'],
-      populate_sub_services(ms['subService'])
+      populate_sub_services(ms['subServices'])
     )
     end
   end
 
-  def populate_sub_services *raw
-  
-    #raise raw.inspect
-    
+  def populate_sub_services *raw    
     raw.flatten.compact.map do |ss| 
       Service.new(
         ss['name'],
