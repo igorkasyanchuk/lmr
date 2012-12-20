@@ -23,5 +23,5 @@ h3 Ваші лічильники:
         div id="counter-#{counter.code}"
           = render 'get_counter', counter: counter
       div class='modal-footer'
-        = link_to 'Друкувати', dashboard_counter_path(format: :pdf, code: counter.code), :class => 'btn', :target => '_blank'
+        = link_to 'Друкувати', dashboard_counter_path(format: :pdf, code: counter.code), class: 'btn', target: '_blank', id: "print_counter_#{counter.code}"
         button class='btn' data-dismiss='modal' aria-hidden='true' Закрити       
