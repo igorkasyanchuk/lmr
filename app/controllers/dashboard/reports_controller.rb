@@ -13,7 +13,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
       format.html
       format.pdf do
         pdf = InvoicePdf.new(@invoice, view_context, @filter.period.begin)
-        send_data pdf.render, filename: "invoice_4070000646163.pdf",
+        send_data pdf.render, filename: "invoice_#{@user_info.consumer_code}.pdf",
                               type: "application/pdf",
                               disposition: "inline"
       end
@@ -26,10 +26,18 @@ class Dashboard::ReportsController < Dashboard::DashboardController
 
   def counter
     code = params[:code]
-    @year = params[:year].to_i
+    @year = params[:year].present? ? params[:year] : Date.today.year
     counters = Counter.get @user_info.consumer_code
     @counter = counters.select{|c| c.code == code}.first
-    render 'counter', :formats => [:js]
+    respond_to do |format|
+      format.js
+      format.pdf do
+        pdf = CounterPdf.new(@counter, @year)
+        send_data pdf.render, filename: "counter_#{@user_info.consumer_code}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
+    end
   end
 
   def counters
