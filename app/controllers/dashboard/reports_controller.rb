@@ -41,7 +41,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   end
 
   def counters
-    @counters = Counter.get(@user_info.consumer_code).sort_by!{|x| x.type_name}
+    @counters = Counter.get(@user_info.consumer_code).sort_by!{|x| [x.type_name, x.state_number]}
     if request.xhr?
       result = Counter.set_counters(params)
       if result.has_key?(:results)
