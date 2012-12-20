@@ -1,6 +1,6 @@
 year = '<%= params[:year] %>'
 html_code = '<%= j render 'get_counter', :counter => @counter %>'
-code = '<%= @counter.code %>'
+code = '<%= @counter.try(:code) %>'
 $('#counter-' + code).html html_code
 $('.counters_loader').hide()
 print = $('#print_counter_' + code)

@@ -47,7 +47,7 @@ class CounterPdf
 
   def line_item_rows
     [["Період", "Дата", "Початкові\nпокази", "Кінцеві\nпокази", "Кількість", "Вид\nоперації", "Скореговано", "Корегування\nкін. показу"]] +
-    @counter.history.map do |counter|
+    @counter.history(@year).map do |counter|
       [counter_month(counter.month), '', counter.begin_state, counter.end_state, '', '', '', '']
     end
   end

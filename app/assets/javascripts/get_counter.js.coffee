@@ -1,5 +1,4 @@
 jQuery ->
-  # $( "#tabs" ).tabs()
   counters = $(".counter_year")
   jQuery.each counters, ->    
     $(this).on 'change', ->
