@@ -34,7 +34,7 @@ table.table.table-striped
             .horizontal_divider
           - if user.blocked?
             = link_to "Розблокувати", [:unblock, :admin, user], :class => 'btn btn-mini'
-          - else
+          - elsif user != current_user
             = link_to "Заблокувати", [:block, :admin, user], :class => 'btn btn-mini'
           - if user.access_locked?
             .horizontal_divider
@@ -42,7 +42,8 @@ table.table.table-striped
           .horizontal_divider
           = link_to "Редагувати", [:edit, :admin, user], :class => 'btn btn-mini'
           .horizontal_divider
-          = link_to 'Видалити', [:admin, user], :method => :delete, :confirm => 'Ви впевнені?', :class => 'btn btn-danger btn-mini'
+          - if user != current_user
+            = link_to 'Видалити', [:admin, user], :method => :delete, :confirm => 'Ви впевнені?', :class => 'btn btn-danger btn-mini'
     - if collection.blank?
       tr
         td colspan=4
