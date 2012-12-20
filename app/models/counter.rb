@@ -9,7 +9,7 @@ class Counter
     @code = raw['code']
     @state_number = raw['stateNumber']
     @type_code = raw['counterTypeCode']
-    @type_name = raw['counterTypeName']
+    @type_name = raw['counterTypeName'] || ''
     @end_state = raw['endState']
   end
 
