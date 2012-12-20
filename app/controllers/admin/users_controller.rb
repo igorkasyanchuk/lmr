@@ -18,7 +18,11 @@ class Admin::UsersController < Admin::DashboardController
   end
 
   def destroy
-  	destroy! {[:admin, :users]}
+    if resource == current_user
+      redirect_to [:admin, :users], :alert => "Ви не можете видалити себе."
+    else
+      destroy! {[:admin, :users]}
+    end  	
   end
 
   def create
@@ -35,8 +39,12 @@ class Admin::UsersController < Admin::DashboardController
   end
 
   def block
-    resource.update_attribute(:blocked, true)
-    redirect_to [:admin, :users], :notice => "Користувача заблоковано."
+    if resource == current_user
+      redirect_to [:admin, :users], :alert => "Ви не можете заблокувати себе."
+    else
+      resource.update_attribute(:blocked, true)
+      redirect_to [:admin, :users], :notice => "Користувача заблоковано."
+    end
   end
 
   def unblock

@@ -11,8 +11,8 @@ hr
   = f.error_notification
 
   .form-inputs 
-    = f.input :name, label: 'Ім\'я', input_html: {value: "#{current_user.full_name if current_user}"}
-    = f.input :email, label: 'Електронна адреса', input_html: {value: "#{current_user.email if current_user}"}
+    = f.input :name, label: 'Ім\'я', input_html: {value: "#{current_user ? current_user.full_name : (params[:contact][:name] if params[:contact])}" }
+    = f.input :email, label: 'Електронна адреса', input_html: {value: "#{current_user ? current_user.email : (params[:contact][:email] if params[:contact])}"}
     = f.input :message, as: :text, label: 'Повідомлення', input_html: { rows: 12, cols: 200, class: 'span8' }
     = f.simple_captcha label: 'Введіть код зображений на малюнку'
 
@@ -20,3 +20,5 @@ hr
     = f.button :submit, value: 'Надіслати'
 
 .clear
+= debug params
+= current_user.present?
