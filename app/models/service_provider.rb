@@ -6,6 +6,7 @@ class ServiceProvider < ActiveRecord::Base
   has_many :conversations
 
   validates_presence_of :name, :address, :district
+  validates_uniqueness_of :code, :allow_blank => true
 
   accepts_nested_attributes_for :responsible_persons, :reject_if => lambda { |a| a[:first_name].blank? && a[:last_name].blank? }, :allow_destroy => true
   
