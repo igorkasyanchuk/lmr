@@ -21,6 +21,6 @@
               td 
                 = text_field_tag 'amount',  '',  disabled: true, class: 'input_amount_state'
               td
-                = link_to 'Показати', '#'
+                = link_to 'Показати', "#charge_modal_#{counter.code}", :role => 'button', 'data-toggle' => 'modal'
     = submit_tag 'Надіслати покази', id:'submit_counters' , class: 'btn btn-primary counter'
     = image_tag('ajax-loader.gif', class: 'counters_loader')

@@ -7,3 +7,20 @@ hr
 h3 Ваші лічильники:
 #counters
   = render 'set_counter', counters: @counters
+
+#charge_modals
+  - @counters.each do |counter|
+    div class='modal fade hide modal_counter' id="charge_modal_#{counter.code}" tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'
+      div class='modal-header'
+        button type='button' class='close' data-dismiss='modal' aria-hidden='true' ×
+        h3 id='myModalLabel'
+          = "Історія по лічильнику #{counter.type_name}"
+          br
+          = "(Держ.номер: #{counter.state_number})"
+      div class='modal-body'
+        = select_tag :counter_year, options_for_select([Date.today.year, Date.today.year - 1]), :id => "#{counter.code}", :class => "counter_year pull-left"
+        = image_tag('ajax-loader.gif', id: "counters_loader_#{counter.code}", class: 'counters_loader pull-left', style: 'margin-left: 20px; margin-top: 8px')
+        div id="counter-#{counter.code}"
+          = render 'get_counter', counter: counter
+      div class='modal-footer'
+        button class='btn' data-dismiss='modal' aria-hidden='true' Закрити

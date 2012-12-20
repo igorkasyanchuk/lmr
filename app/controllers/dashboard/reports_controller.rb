@@ -24,12 +24,6 @@ class Dashboard::ReportsController < Dashboard::DashboardController
     PaymentDetails.load(current_user.identifier, @filter, @user_info.service_providers)
   end
 
-  # def counters
-  #   year = params[:year] || Date.today.year
-  #   @counters = Counter.get @user_info.consumer_code
-  #   # debugger
-  # end
-
   def counter
     code = params[:code]
     @year = params[:year].to_i

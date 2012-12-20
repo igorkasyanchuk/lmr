@@ -1,22 +1,25 @@
-table.table.reports
-  thead 
-    tr
-      th Період
-      th Дата
-      th Початкові покази
-      th Кінцеві покази
-      th Кількість
-      th Вид операції
-      th Скореговано
-      th Корегування кін. показу
-  tbody
-    - history.each do |counter|
-      tr      
-        td= counter_month(counter.month)
-        td
-        td= counter.begin_state
-        td= counter.end_state
-        td
-        td Ввід показів
-        td= check_box_tag 'corrected', :disabled => true
-        td 0.00000
+- if counter.history.present?
+    table.table.reports
+      thead 
+        tr
+          th Період
+          th Дата
+          th Початкові покази
+          th Кінцеві покази
+          th Кількість
+          th Вид операції
+          th Скореговано
+          th Корегування кін. показу
+      tbody        
+        - counter.history(@year || Date.today.year).each do |counter|
+          tr      
+            td= counter_month(counter.month)
+            td
+            td= counter.begin_state
+            td= counter.end_state
+            td
+            td Ввід показів
+            td= check_box_tag 'corrected', :disabled => true
+            td 0.00000
+- else
+  | Нема даних
