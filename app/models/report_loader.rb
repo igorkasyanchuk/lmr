@@ -11,38 +11,38 @@ class ReportLoader
   end
 
 
-  def self.load_consumer_info id = 4070000646163
+  def self.load_consumer_info id
     request_data('user_info', request_params(id))['consumer'] || {:error => 'no data'}
   end
 
-  def self.load_invoice_details id = '4070000646163', period  
+  def self.load_invoice_details id, period  
     request_data('detail_invoice', request_params(id, :period => period))['invoiceDecode'] || {}
   end
 
-  def self.load_invoice id = '4070000646163', period
+  def self.load_invoice id, period
     request_data('invoice_by_consumer', request_params(id, :period => period))['invoice'] || {}
   end
 
-  def self.load_payments id = '4070000646163', period
+  def self.load_payments id, period
     request_data('payment_by_consumer', request_params(id, :period => period))['paymentDetails'] || {}    
   end
 
-  def self.load_counters id = '4110000106052'
+  def self.load_counters id
     r = request_data('get_counters', request_params(id))['consumerCounters'] || {}
     r['counters'] || {}
   end
 
-  def self.load_counter_history_by_year code = '41112100001060520000176117', year
+  def self.load_counter_history_by_year code, year
     r = request_data('get_counters_by_year', :counter_code => code, :year => year)['countHistoryResponse'] || {}
     r['history'] || {}
   end
 
-  def self.set_counter code = '41112100001060520000176117', end_state
+  def self.set_counter code, end_state
     r = request_data('set_counter_factor', :counter_code => code, :end_state => end_state)['consumerCounters'] || {}
     r['isCompleted'] || {}
   end
 
-  def self.load_benefits id = '4110000106052', period  
+  def self.load_benefits id, period  
     request_data('get_benefits_detail_by_period', request_params(id, :period => period))['benefitsResponse'] || {}
   end
 
