@@ -17,11 +17,10 @@ class CounterPdf
 
   def draw_pdf
     draw_title
-    if @counter && @counter.history.present?
-      # debugger
+    if @counter && @counter.has_history?(@year)
       line_items
     else
-      @pdf.formatted_text [{text: 'Нема даних', size: 10.pt}]
+      @pdf.formatted_text [{text: 'Немає даних', size: 10.pt}]
     end
   end
 

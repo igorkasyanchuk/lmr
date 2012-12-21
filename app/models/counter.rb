@@ -21,6 +21,10 @@ class Counter
     Counter.load_counter_history_by_year(self.code, year).reverse
   end
 
+  def has_history? year
+    history(year).any? && history(year).first.counter_id.present?
+  end
+
   def self.load_counter_history_by_year code, year = Date.today.year
     [ReportLoader.load_counter_history_by_year(code, year)].flatten.map{|raw| populate_counter_history(raw)}
   end

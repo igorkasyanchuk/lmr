@@ -1,21 +1,22 @@
 = title "Запити"
 
 = link_to 'Новий Запит', new_dashboard_conversation_path, :class => "btn btn-primary"
-hr
-table.table.table-striped
-  thead
-    tr
-      th До
-      th Тема
-      th Час створення
-      th ID запиту
-      th Дії
-  tbody
-    - @conversations.each do |conversation|
+- if @conversations.any?
+  hr
+  table.table.table-striped
+    thead
       tr
-        td= conversation.service_provider.name
-        td= conversation.subject
-        td= l conversation.created_at, :format => :short
-        td= conversation.token
-        td
-          = link_to "Переглянути", dashboard_conversation_path(conversation), :class => 'btn btn-normal btn-mini'
+        th До
+        th Тема
+        th Час створення
+        th ID запиту
+        th Дії
+    tbody
+      - @conversations.each do |conversation|
+        tr
+          td= conversation.service_provider.name
+          td= conversation.subject
+          td= l conversation.created_at, :format => :short
+          td= conversation.token
+          td
+            = link_to "Переглянути", dashboard_conversation_path(conversation), :class => 'btn btn-normal btn-mini'

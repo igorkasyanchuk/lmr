@@ -10,7 +10,7 @@ table.table.reports
       th Скореговано
       th Корегування кін. показу
   tbody
-    - if counter && counter.history.present?
+    - if counter && counter.has_history?(@year || Date.today.year)
       - counter.history(@year || Date.today.year).each do |counter|
         tr      
           td= counter_month(counter.month)
