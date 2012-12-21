@@ -1,6 +1,8 @@
 # encoding: utf-8
 require "prawn/measurement_extensions"
 class CounterPdf
+  include ApplicationHelper
+
   def initialize(counter, year)
     @counter = counter
     @year = year
@@ -55,12 +57,6 @@ class CounterPdf
   def render
     draw_pdf
     @pdf.render
-  end
-
-  def counter_month month
-    unless month.nil?
-      "#{I18n.t('date.month_names')[month.to_i]}\n(#{month.to_i})"
-    end
   end
 
 end

@@ -1,6 +1,8 @@
 # encoding: utf-8
 require "prawn/measurement_extensions"
 class InvoicePdf < Prawn::Document
+  include ApplicationHelper
+  
   def initialize(invoice, view, date, user_info)
     super(
       page_layout: :portrait,
@@ -81,13 +83,6 @@ class InvoicePdf < Prawn::Document
   def total_price
     move_down 15
     text "Total Price: 10000", size: 10, style: :bold
-  end
-
-  def user_address info    
-    if info
-      divider = info.flat_number.present? ? "/#{info.flat_number}" : ''
-      "#{info.street_name} #{info.house_number} #{info.house_letter}#{divider}"
-    end
   end
 
 

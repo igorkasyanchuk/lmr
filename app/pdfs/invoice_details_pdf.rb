@@ -1,6 +1,8 @@
 # encoding: utf-8
 require "prawn/measurement_extensions"
 class InvoiceDetailsPdf
+  include ApplicationHelper
+  
   def initialize(invoice_details, view, user_info)
     @invoice_details = invoice_details
     @view = view
@@ -79,13 +81,6 @@ class InvoiceDetailsPdf
                       :size => 8.pt,
                       :page_filter => :all}
     @pdf.render
-  end
-
-  def user_address info    
-    if info
-      divider = info.flat_number.present? ? "/#{info.flat_number}" : ''
-      "#{info.street_name} #{info.house_number} #{info.house_letter}#{divider}"
-    end
   end
 
 end
