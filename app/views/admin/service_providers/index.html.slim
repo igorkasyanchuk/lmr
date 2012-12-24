@@ -18,6 +18,7 @@ br
   table.table.table-striped.pages
     thead
       th Назва
+      th Код
       th Адреса
       th Електронна адреса
       th Відповідальні особи
@@ -26,6 +27,7 @@ br
       - collection.each do |provider|
         tr
           td= link_to provider.name, edit_resource_path(provider)
+          td= provider.code
           td
             = provider.address
             br
