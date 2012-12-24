@@ -33,7 +33,7 @@ br
           td
             = link_to 'Редагувати', edit_resource_path(payment_terminal, page: params[:page]), :class => 'btn btn-mini'
             |  
-            = link_to 'Видалити', resource_path(payment_terminal), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger'
+            = link_to 'Видалити', resource_path(payment_terminal), :method => :delete, :confirm => 'Ви впевнені?', :class => 'btn btn-mini btn-danger'
       - if collection.blank?
         tr
           td colspan=4

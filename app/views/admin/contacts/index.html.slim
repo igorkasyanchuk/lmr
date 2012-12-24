@@ -23,7 +23,7 @@ table.table.table-striped.contacts
         td
           = link_to "Переглянути", resource_path(contact), :class => 'btn btn-normal btn-mini'
           |  
-          = link_to 'Видалити', [:admin, contact], :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger btn-mini'
+          = link_to 'Видалити', [:admin, contact], :method => :delete, :confirm => 'Ви впевнені?', :class => 'btn btn-danger btn-mini'
     - if @contacts.blank?
       tr
         td colspan=4

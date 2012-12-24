@@ -37,7 +37,7 @@ br
             .vertical_divider
             = link_to "Редагувати", [:edit, :admin, post], :class => 'btn btn-normal btn-mini'
             .vertical_divider
-            = link_to 'Видалити', [:admin, post], :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger btn-mini'
+            = link_to 'Видалити', [:admin, post], :method => :delete, :confirm => 'Ви впевнені?', :class => 'btn btn-danger btn-mini'
       - if @posts.blank?
         tr
           td colspan='5'
