@@ -22,4 +22,4 @@
   .form-actions
     = f.submit 'Зберегти спосіб оплати', class: 'btn btn-primary form-btn'
     |  
-    = link_to 'Відміна', :back, class: 'btn'
+    = link_to 'Відміна', admin_payment_terminals_path(page: params[:page]), class: 'btn'

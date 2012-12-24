@@ -40,6 +40,6 @@ div id="post_#{post_counter + 1}" class="post #{cycle('odd', 'even')}"
         - if post.owner_or_admin?(forem_user)
           - if can?(:edit_post, post.topic.forum)
             |  | 
-            li= link_to t('edit', :scope => 'forem.post'), forem.edit_topic_post_path(post.topic, post)
+            li= link_to t('edit', :scope => 'forem.post'), forem.edit_topic_post_path(post.topic, post, page: params[:page])
             |  | 
           li= link_to t('delete', :scope => 'forem.topic'), forem.topic_post_path(post.topic, post), :method => :delete, :confirm => t("are_you_sure")
