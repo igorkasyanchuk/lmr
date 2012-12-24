@@ -2,7 +2,7 @@
 class Dashboard::ReportsController < Dashboard::DashboardController
 
   before_filter :init_filter
-  before_filter :user_info, :except => [:service_providers]
+  before_filter :user_info
 
   def invoice
     @invoice = Invoice.load current_user.identifier, @filter.period#@date.beginning_of_month..@date.end_of_month
@@ -57,7 +57,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   end
   
   def service_providers
-    @service_providers = current_user.service_providers
+    @service_providers = @user_info.service_providers
   end
 
   def invoice_details

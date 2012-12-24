@@ -1,22 +1,24 @@
 = title 'Надавачі послуг'
 
-- @service_providers.each do |provider|
+- @service_providers.each do |sp|
   .provider_info
-    h4 = provider.name
+    h4 = sp.service_provider_name
+    - provider = ServiceProvider.find_by_code(sp.service_provider_code)
     address
-      .address = "Адреса: #{provider.address}"
-      .phone = "Телефон: #{provider.phone}"
-      .mail = raw "Електронна пошта: #{mail_to(provider.email, provider.email)}"
-  .responsible_persons_info   
-    strong.title Відповідальні особи
-    - provider.responsible_persons.each do |person|
-      .person_block
-        b.name = "#{person.first_name} #{person.middle_name} #{person.last_name}"
-        br
-        em.incumbency = person.incumbency
-        .phone = person.phone
-        .email= mail_to person.email, person.email 
-        br
+      .address = "Адреса: #{provider.try(:address)}"
+      .phone = "Телефон: #{provider.try(:phone)}"
+      .mail = raw "Електронна пошта: #{mail_to(provider.try(:email), provider.try(:email))}"
+  .responsible_persons_info
+    - if provider.present?
+      strong.title Відповідальні особи
+      - provider.responsible_persons.each do |person|
+        .person_block
+          b.name = "#{person.first_name} #{person.middle_name} #{person.last_name}"
+          br
+          em.incumbency = person.incumbency
+          .phone = person.phone
+          .email= mail_to person.email, person.email 
+          br
 
 
   .clear
