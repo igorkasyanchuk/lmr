@@ -4,7 +4,7 @@ h2 Відділення банків
 hr
 
 .accordion#accordion_bank
-  - @bank_departments.each_slice((@bank_departments.count + (@bank_departments.count % 2))/2).with_index do |departments, slice_index|
+  - @bank_departments.each_slice((@bank_departments.size + (@bank_departments.size % 2))/2).with_index do |departments, slice_index|
     div class="#{slice_index==0 ? 'pull-left' : 'pull-right'}"  style='width: 47%;'
       div class="#{slice_index==0 ? '' : 'clear'}"
       - departments.each_with_index do |(department, banks), index|

@@ -4,41 +4,27 @@
 h2 Термінали
 hr
 
-- @departments.each do |department|
-  .provider_info
-    h4 = department.name
-    address
-      .address = department.address
-      .phone = department.phone
-      .mail = department.email
-      / small= link_to 'Показати на карті', '#', remote: true, class: 'show_map', id: "#{department.id}"
-      small= link_to 'Показати на карті', services_one_on_map_path(id: department.id), remote: true, class: 'show_map'
-  .clear    
-
+.accordion#accordion_terminal
+  - @terminals.each_slice((@terminals.size + (@terminals.size % 2))/2).with_index do |districts, slice_index|
+    div class="#{slice_index==0 ? 'pull-left' : 'pull-right'}"  style='width: 47%;'
+      div class="#{slice_index==0 ? '' : 'clear'}"
+      - districts.each_with_index do |(district, terminals), index|
+        .accordion-group style='border: 0 none;'
+          .accordion-heading
+            a.accordion-toggle data-parent="#accordion_terminal" data-toggle="collapse" href="#terminal-#{slice_index}-#{index}"
+              h4= "#{district}"
+              small= link_to 'Показати всі відділення на карті', services_show_on_map_path(type: "#{terminals.first.type}",group: "#{district}"), remote: true, class: 'show_all_on_map'
+          .accordion-body.collapse.out id="terminal-#{slice_index}-#{index}"
+            .accordion-inner
+              - terminals.each do |terminal|
+                .provider_info
+                  h4 = terminal.name
+                  address
+                    .address = terminal.address
+                    .phone = terminal.phone
+                    .mail = terminal.email
+                    / small= link_to 'Показати на карті', '#', remote: true, class: 'show_map', id: "#{terminal.id}"
+                    small= link_to 'Показати на карті', services_one_on_map_path(id: terminal.id), remote: true, class: 'show_map'
 .clear
 #payment_map
   = show_on_map(@markers)
-
-/ .accordion#accordion_terminal
-/   - @terminal_departments.each_slice((@terminal_departments.count + (@terminal_departments.count % 2))/2).with_index do |districts, slice_index|
-/     div class="#{slice_index==0 ? 'pull-left' : 'pull-right'}"  style='width: 47%;'
-/       div class="#{slice_index==0 ? '' : 'clear'}"
-/       - districts.each_with_index do |(district, terminals), index|
-/         .accordion-group style='border: 0 none;'
-/           .accordion-heading
-/             a.accordion-toggle data-parent="#accordion_terminal" data-toggle="collapse" href="#terminal-#{slice_index}-#{index}"
-/               h4= "#{district}"
-/               small= link_to 'Показати всі відділення на карті', services_show_on_map_path(type: "#{terminals.first.type}",group: "#{district}"), remote: true, class: 'show_all_on_map'
-/           .accordion-body.collapse.out id="terminal-#{slice_index}-#{index}"
-/             .accordion-inner
-/               - terminals.each do |terminal|
-/                 .provider_info
-/                   h4 = terminal.name
-/                   address
-/                     .address = terminal.address
-/                     .phone = terminal.phone
-/                     .mail = terminal.email
-/                     / small= link_to 'Показати на карті', '#', remote: true, class: 'show_map', id: "#{terminal.id}"
-/                     small= link_to 'Показати на карті', services_one_on_map_path(id: terminal.id), remote: true, class: 'show_map'
-/ .clear
-/ = show_on_map(@markers)

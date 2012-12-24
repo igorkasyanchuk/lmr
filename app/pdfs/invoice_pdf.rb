@@ -19,9 +19,6 @@ class InvoicePdf < Prawn::Document
     @date = date
     font_families.update("DejaVuSans" => {:normal => "#{Rails.root}/app/assets/fonts/DejaVuSans.ttf", :bold => "#{Rails.root}/app/assets/fonts/DejaVuSans-Bold.ttf"})
     font "DejaVuSans"
-    # lmr_info date
-    # user_information
-    # line_items
     group_by_service_providers
   end
 
@@ -107,9 +104,6 @@ class InvoicePdf < Prawn::Document
   def line_item_rows codes
     [["Вид платежу", "Борг", "Оплачено", 'Тариф', "Нараховано", "Пільга", "Субсидія", "Коректура", "До сплати"]] +
     services_body(codes)
-     # + 
-    # [['Разом', @invoice.total.borg, @invoice.total.pay, '', @invoice.total.invoice, @invoice.total.pilga, @invoice.total.subsidy, @invoice.total.correction, @invoice.total.saldo]]
-    # [['','', '', '', '', '', 'Разом до сплати', '', @invoice.total.saldo]]
   end
 
   def services_body codes
@@ -124,7 +118,6 @@ class InvoicePdf < Prawn::Document
       end
     end
     total = services.transpose
-    # .map{ |x| x.map{|s| s.nil? ? 0 : BigDecimal(s)}.sum }
     total[-1] = total[-1].map{|s| s.nil? ? 0 : BigDecimal(s)}.sum
     services << [{:content => 'Разом до сплати', :colspan => 8, :align => :right},  total[-1]]
     services
