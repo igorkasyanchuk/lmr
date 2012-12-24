@@ -3,7 +3,7 @@ require "prawn/measurement_extensions"
 class InvoicePdf < Prawn::Document
   include ApplicationHelper
   
-  def initialize(invoice, view, date, user_info)
+  def initialize(invoice, view, date, user_info, counters)
     super(
       page_layout: :portrait,
       top_margin: 1.5.cm,
@@ -12,44 +12,91 @@ class InvoicePdf < Prawn::Document
       left_margin: 1.5.cm,
       page_size: 'A4'
     )
+    @counters = counters
     @invoice = invoice
     @view = view
     @user_info = user_info
+    @date = date
     font_families.update("DejaVuSans" => {:normal => "#{Rails.root}/app/assets/fonts/DejaVuSans.ttf", :bold => "#{Rails.root}/app/assets/fonts/DejaVuSans-Bold.ttf"})
     font "DejaVuSans"
-    lmr_info date
-    user_information
-    line_items
+    # lmr_info date
+    # user_information
+    # line_items
+    group_by_service_providers
+  end
+
+  def group_by_service_providers
+    services_providers = @user_info.service_providers.group_by{|sp| sp.service_provider_code}
+    services_providers.each_with_index do |(code, services), index|
+      lmr_info(@date, services.first)
+      user_information
+      codes = services.map{|s| s.service_code}
+      line_items codes
+      draw_counters codes
+      move_down 1.cm
+      cold_water if codes.include?('2')
+      hot_cold_water if codes.include?('2') || codes.include?('3')
+      start_new_page if index != (services_providers.size - 1)
+    end
   end
   
-  def lmr_info date
+  def lmr_info date, sp
     font_size 10.pt
-    text "Звіт по комунальних послугах за #{I18n.t("date.month_names")[date.month]} #{date.year} року", :style => :bold
+    text "Дата друку: #{Time.now.strftime('%d/%m/%y %H:%M:%S')}"
+    address = ServiceProvider.find_by_code(sp.service_provider_code).try(:address)
+    address_name = ", #{address}" if address
+    text "#{sp.service_provider_name} #{address_name}"
+    move_down 0.5.cm
+    text "ПОВІДОМЛЕННЯ НА ОПЛАТУ ЖИТЛОВО-КОМУНАЛЬНИХ ПОСЛУГ за #{I18n.t("date.month_names")[date.month]} #{date.year} року"
     stroke_horizontal_rule
-    move_down 1.cm    
+    # move_down 1.cm
   end  
 
   def user_information
-    font_size = 9.pt
-    data = [["ПІБ:", @user_info.pib,"Адреса:", user_address(@user_info)],
-            ["№ особового рахунку:", @user_info.consumer_code,"Кількість мешканців:", "#{@user_info.people_count} ос."],
-            ["","","Розрахункова площа:", "#{@user_info.calc_area} кв.м."],
-            ["","","Опалювальна площа:", "#{@user_info.heat_area} кв.м."]]
+    font_size = 8.pt
+    data = [["Кількість мешканців:", "#{@user_info.people_count} ос.", "Адреса:", user_address(@user_info)],
+            ["Загальна площа:", "#{@user_info.calc_area} кв.м.", "Особовий рахунок:", @user_info.consumer_code],
+            ["Опалювальна площа:", "#{@user_info.heat_area} кв.м.", "ПІП:", @user_info.pib],
+            ["Спожито: ","","Вартість ГКал\n(в опал. сезон):", ""]]
     table data do
-      self.cell_style = {:borders => [],
-        :width => 4.5.cm, :height => 0.7.cm}
+      self.cell_style = {:borders => [], :width => 4.5.cm}
     end
-    move_down 1.cm
+  end
+
+  def draw_counters codes
+    move_down 1.cm    
+    font_size = 10.pt
+    if counters_data(codes)
+      table counters_data(codes) do
+        self.cell_style = {:borders => []}
+      end
+    end
+  end
+
+  def counters_data codes
+    counters = []
+    codes.each do |code|
+      @counters.select{ |c| c.type_code == code }.each do |c|
+        stroke_horizontal_rule
+        counters << [c.state_number, c.type_name, '', c.end_state, '', '']
+      end
+    end
+    if counters.any?
+      [["Державний номер", "Вид лічильника", "Поч. покази", 'Кінц. покази', "Кількість", "Корекція"]] + counters
+    else
+      false
+    end
   end
   
-  def line_items
+  def line_items codes
     move_down 20
-    font_size 8    
-    table line_item_rows do
+    font_size 7    
+    table line_item_rows(codes) do
       self.cell_style = {:border_width => 0.5, :border_color => "999999", :height => 0.6.cm}
       self.width = 18.cm      
       row(0).background_color = "999999"
       row(-1).font_style = :bold
+      row(-1).background_color = "FFFFFF"
       columns(1..7).align = :center
       position = :center
       self.row_colors = ["EEEEEE", "FFFFFF"]
@@ -57,28 +104,41 @@ class InvoicePdf < Prawn::Document
     end
   end
 
-  def line_item_rows
-    [["Послуга", "Борг", "Нараховано", "Корегування", "Пільги", "Субсидії", "Оплачено", "Сальдо"]] +
-    services_body + 
-    [['Разом', @invoice.total.borg, @invoice.total.invoice, @invoice.total.correction, @invoice.total.pilga, @invoice.total.subsidy, @invoice.total.pay, @invoice.total.saldo]]
+  def line_item_rows codes
+    [["Вид платежу", "Борг", "Оплачено", 'Тариф', "Нараховано", "Пільга", "Субсидія", "Коректура", "До сплати"]] +
+    services_body(codes)
+     # + 
+    # [['Разом', @invoice.total.borg, @invoice.total.pay, '', @invoice.total.invoice, @invoice.total.pilga, @invoice.total.subsidy, @invoice.total.correction, @invoice.total.saldo]]
+    # [['','', '', '', '', '', 'Разом до сплати', '', @invoice.total.saldo]]
   end
 
-  def services_body
+  def services_body codes
     services = []
-    @invoice.services.each do |s|
-      services << [s.name, s.borg, s.invoice, s.correction, s.pilga, s.subsidy, s.pay, s.saldo]
+    codes.each do |code|
+      s = @invoice.services.select{|s| s.service_code == code}.first
+      services << [s.name, s.borg, s.pay, '', s.invoice, s.pilga, s.subsidy, s.correction, s.saldo]
       if s.sub_services.any?
         s.sub_services.each do |ss|
-          services << [" - #{ss.name}", ss.borg, ss.invoice, ss.correction, ss.pilga, ss.subsidy, ss.pay, ss.saldo]
+          services << [" - #{ss.name}", ss.borg, ss.pay, '', ss.invoice, ss.pilga, ss.subsidy, ss.correction, ss.saldo]
         end
       end
     end
+    total = services.transpose
+    # .map{ |x| x.map{|s| s.nil? ? 0 : BigDecimal(s)}.sum }
+    total[-1] = total[-1].map{|s| s.nil? ? 0 : BigDecimal(s)}.sum
+    services << [{:content => 'Разом до сплати', :colspan => 8, :align => :right},  total[-1]]
     services
   end
-  
-  # def price(num)
-  #   @view.number_to_currency(num)
-  # end
+
+  def cold_water
+    text "УВАГА СПЛАТА ЗА СПОЖИТИЙ ОБЄ'М ХОЛОДНОЇ ВОДИ ЗДІЙСНЮЄТЬСЯ ЗА ПОВІДОМЛЕННЯМ ЛКП"
+  end
+
+  def hot_cold_water
+    text "<< Показники лічильників холодної та гарячої води подавати в період з 25 по 30 число кожного місяця за номером тел. >>"
+    stroke_horizontal_rule
+    stroke_horizontal_rule
+  end
   
   def total_price
     move_down 15

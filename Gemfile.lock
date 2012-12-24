@@ -1,4 +1,15 @@
 GIT
+  remote: git://github.com/prawnpdf/prawn
+  revision: 9c937d7be3fea313474b9301aa2c9539b2249973
+  branch: master
+  specs:
+    prawn (1.0.0.rc1)
+      afm
+      pdf-reader (>= 0.9.0, < 2.0)
+      ruby-rc4
+      ttfunk (~> 1.0.3)
+
+GIT
   remote: git://github.com/radar/forem.git
   revision: 51125583d1cd30c9bb06a0bd65168a3aea7dfdca
   specs:
@@ -50,6 +61,7 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.3.2)
+    afm (0.2.0)
     airbrake (3.1.6)
       builder
       girl_friday
@@ -238,9 +250,6 @@ GEM
       http_parser.rb (~> 0.5.3)
       multi_json (~> 1.0)
     polyglot (0.3.3)
-    prawn (0.12.0)
-      pdf-reader (>= 0.9.0)
-      ttfunk (~> 1.0.2)
     pry (0.9.10)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -419,7 +428,7 @@ DEPENDENCIES
   mysql2
   nested_form (~> 0.3.1)
   poltergeist
-  prawn
+  prawn!
   quiet_assets
   rails (= 3.2.8)
   rb-inotify (~> 0.8.8)

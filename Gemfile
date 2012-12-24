@@ -27,7 +27,8 @@ gem 'geokit-rails3'
 gem 'geocoder'
 
 gem 'httparty'
-gem 'prawn'
+# gem 'prawn'
+gem 'prawn', git: 'git://github.com/prawnpdf/prawn', branch: 'master'
 gem 'mailman', require: false
 
 gem 'jquery-rails'
