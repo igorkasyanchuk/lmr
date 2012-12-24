@@ -57,7 +57,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
   end
   
   def service_providers
-    @service_providers = @user_info.service_providers
+    @service_providers = @user_info.service_providers.uniq_by{|x| x.service_provider_code}
   end
 
   def invoice_details
