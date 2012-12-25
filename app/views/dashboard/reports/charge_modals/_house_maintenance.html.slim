@@ -8,13 +8,13 @@ div class="modal fade hide" id="charge_modal_#{code}" tabindex="-1" role="dialog
         tbody
           tr
             td Тариф з ПДВ
-            td= expense.decode_f('10013') + expense.decode_f('10014')
+            td
           tr
             td Розрахункова площа
-            td= expense.decode('10016')
+            td= "#{@user_info.calc_area} кв.м."
           tr
             td Сума
-            td= expense.decode('10017')
+            td
     - else
       | Нема даних
 

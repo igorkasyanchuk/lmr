@@ -35,17 +35,12 @@ class InvoiceDetails
     @invoice_details
   end
 
-  def decode code
-    @expenses.detect{|c| c.code == code}.try(:sum)
+
+  def decode field, code
+    @expenses.detect{|c| c.code == code}.try(field)
   end
 
-  def decode_f code
-    e = decode(code)
-    BigDecimal(e)
-  end
-
-
-  Expense = Struct.new :sum, :name, :code
+  Expense = Struct.new :sum, :name, :code, :tariff, :consumed
 
   def initialize params
     @service_name = params['decodeServiceName']
@@ -55,7 +50,7 @@ class InvoiceDetails
 
   def fill_expenses raw
     @expenses = (raw || []).map do |re|
-      Expense.new re['decodeSum'], re['decodeName'], re['decodeCode']
+      Expense.new re['decodeSum'], re['decodeName'], re['decodeCode'], re['tariff'], re['consumed']
     end
   end
 

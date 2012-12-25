@@ -8,7 +8,7 @@ div class="modal fade hide" id="charge_modal_#{code}" tabindex="-1" role="dialog
           thead
             tr
               th
-                i в т.ч. ПТН
+                i в т.ч. Абонплата на опалення (ПТН)
               th
           tbody
             tr
@@ -16,10 +16,10 @@ div class="modal fade hide" id="charge_modal_#{code}" tabindex="-1" role="dialog
               td= @user_info.heat_area
             tr
               td Тариф
-              td
+              td= expense.decode(:tariff, '13')
             tr
               td Сума
-              td= expense.decode('40001')
+              td= expense.decode(:sum, '13')
           thead
             tr
               th
@@ -28,17 +28,17 @@ div class="modal fade hide" id="charge_modal_#{code}" tabindex="-1" role="dialog
           tbody
             tr
               td Спожито (ГКал)
-              td
+              td= expense.decode(:consumed, '14')
             tr
               td Вартість 1 ГКал
-              td
+              td= expense.decode(:tariff, '14')
             tr
               td Сума
-              td= expense.decode('40002')
+              td= expense.decode(:sum, '14')
             tr
               td 
                 b Загальна Сума:
-              td= (expense.decode_f('40001') + expense.decode_f('40002')).round(2)
+              td= BigDecimal(expense.decode(:sum, '13')) + BigDecimal(expense.decode(:sum, '14'))
     - else
       | Нема даних
   

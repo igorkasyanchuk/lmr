@@ -29,17 +29,17 @@ class ReportLoader
 
   def self.load_counters id
     r = request_data('get_counters', request_params(id))['consumerCounters'] || {}
-    r['counters'] || {}
+    r['counters'] || r
   end
 
   def self.load_counter_history_by_year code, year
     r = request_data('get_counters_by_year', :counter_code => code, :year => year)['countHistoryResponse'] || {}
-    r['history'] || {}
+    r['history'] || r
   end
 
   def self.set_counter code, end_state
     r = request_data('set_counter_factor', :counter_code => code, :end_state => end_state)['consumerCounters'] || {}
-    r['isCompleted'] || {}
+    r['isCompleted'] || r
   end
 
   def self.load_benefits id, period  
