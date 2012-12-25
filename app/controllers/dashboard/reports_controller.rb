@@ -14,7 +14,8 @@ class Dashboard::ReportsController < Dashboard::DashboardController
       format.pdf do
         pdf = InvoicePdf.new(@invoice, view_context,
                              @filter.period.begin, @user_info,
-                             Counter.get(@user_info.consumer_code).sort_by!{|x| [x.type_name, x.state_number]} )
+                             Counter.get(@user_info.consumer_code).sort_by!{|x| [x.type_name, x.state_number]},
+                             @details.services )
         send_data pdf.render, filename: "invoice_#{@user_info.consumer_code}.pdf",
                               type: "application/pdf",
                               disposition: "inline"

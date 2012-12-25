@@ -3,7 +3,7 @@ require "prawn/measurement_extensions"
 class InvoicePdf < Prawn::Document
   include ApplicationHelper
   
-  def initialize(invoice, view, date, user_info, counters)
+  def initialize(invoice, view, date, user_info, counters, details)
     super(
       page_layout: :portrait,
       top_margin: 1.5.cm,
@@ -13,6 +13,7 @@ class InvoicePdf < Prawn::Document
       page_size: 'A4'
     )
     @counters = counters
+    @details = details
     @invoice = invoice
     @view = view
     @user_info = user_info
@@ -29,8 +30,9 @@ class InvoicePdf < Prawn::Document
       user_information
       codes = services.map{|s| s.service_code}
       line_items codes
+      house_maintanance if codes.include?('1')
       draw_counters codes
-      move_down 1.cm
+      move_down 0.5.cm
       cold_water if codes.include?('2')
       hot_cold_water if codes.include?('2') || codes.include?('3')
       start_new_page if index != (services_providers.size - 1)
@@ -130,7 +132,22 @@ class InvoicePdf < Prawn::Document
   def hot_cold_water
     text "<< Показники лічильників холодної та гарячої води подавати в період з 25 по 30 число кожного місяця за номером тел. >>"
     stroke_horizontal_rule
-    stroke_horizontal_rule
+  end
+
+  def house_maintanance
+    exp_data = []
+    expenses = @details.select{|x| x.service_code == '1'}.first.expenses
+    expenses.each_slice(2) do |exps|
+      exp_data << [exps[0].name, exps[0].sum, exps[1].name, exps[1].sum]
+    end
+    if exp_data.any?
+      move_down 0.5.cm
+      stroke_horizontal_rule
+      table exp_data do
+        self.cell_style = {:borders => []}
+      end
+      move_down 0.5.cm
+    end
   end
   
   def total_price
