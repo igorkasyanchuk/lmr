@@ -113,11 +113,11 @@ class InvoicePdf < Prawn::Document
     codes.each do |code|
       s = @invoice.services.select{|s| s.service_code == code}.first
       services << [s.name, s.borg, s.pay, '', s.invoice, s.pilga, s.subsidy, s.correction, s.saldo]
-      if s.sub_services.any?
-        s.sub_services.each do |ss|
-          services << [" - #{ss.name}", '', '', '', ss.invoice, '', '', '', '']
-        end
-      end
+      # if s.sub_services.any?
+      #   s.sub_services.each do |ss|
+      #     services << [" - #{ss.name}", '', '', '', ss.invoice, '', '', '', '']
+      #   end
+      # end
     end
     total = services.transpose
     total[-1] = total[-1].map{|s| s.nil? ? 0 : BigDecimal(s)}.sum
