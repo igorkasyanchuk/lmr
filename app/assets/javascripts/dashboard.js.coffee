@@ -1,15 +1,7 @@
 jQuery ->
 
-  $('.input_end_state').keyup ->    
-    input_end_state = $(this).val()
-    end_state = $(this).parent().prev().html()
-    input_amount_state = $(this).parent().next().children()
-    quantity = if isNaN(input_end_state) then '' else (input_end_state - end_state)
-    input_amount_state.val quantity
-
-  $('#submit_counters').on 'click', ->
-    $(this).hide()
-    $(this).next().show()
+  amount_calc()
+  submit_loader()
 
   $('#payment_terminal_type').on 'change', (e) ->
     if $(@).val() == 'Terminal'
@@ -30,6 +22,19 @@ jQuery ->
             response data
     else
       $('.bank_department').hide()
+
+window.amount_calc = ->
+  $('.input_end_state').keyup ->    
+    input_end_state = $(this).val()
+    end_state = $(this).parent().prev().html()
+    input_amount_state = $(this).parent().next().children()
+    quantity = if isNaN(input_end_state) then '' else (input_end_state - end_state)
+    input_amount_state.val quantity
+
+window.submit_loader = ->
+  $('#submit_counters').on 'click', ->
+    $(this).hide()
+    $(this).next().show()
 
 
   # $('.show_map').on 'click', ->
