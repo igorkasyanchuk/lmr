@@ -39,7 +39,7 @@ class InvoiceDetailsPdf
 
   def user_information
     @pdf.font_size = 9.pt
-    data = [["ПІБ:", @user_info.pib,"Адреса:", user_address(@user_info)],
+    data = [["ПІП:", @user_info.pib,"Адреса:", user_address(@user_info)],
             ["№ особового рахунку:", @user_info.consumer_code,"Кількість мешканців:", "#{@user_info.people_count} ос."],
             ["","","Розрахункова площа:", "#{@user_info.calc_area} кв.м."],
             ["","","Опалювальна площа:", "#{@user_info.heat_area} кв.м."]]

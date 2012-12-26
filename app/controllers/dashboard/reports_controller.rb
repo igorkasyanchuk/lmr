@@ -1,8 +1,7 @@
 # encoding: utf-8
 class Dashboard::ReportsController < Dashboard::DashboardController
 
-  before_filter :init_filter
-  before_filter :user_info
+  before_filter :init_filter, :user_info
 
   def invoice
     @invoice = Invoice.load current_user.identifier, @filter.period#@date.beginning_of_month..@date.end_of_month
@@ -35,7 +34,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
     respond_to do |format|
       format.js
       format.pdf do
-        pdf = CounterPdf.new(@counter, @year)
+        pdf = CounterPdf.new(@counter, @year, @user_info)
         send_data pdf.render, filename: "counter_#{@user_info.consumer_code}.pdf",
                               type: "application/pdf",
                               disposition: "inline"
