@@ -14,7 +14,7 @@
           tr
             td= counter.state_number
             td= counter.type_name
-            td= counter.end_state
+            td= counter.begin_state
             td
               = text_field_tag "end_state_#{counter.code}",  "#{counter.end_state}", class: 'input_end_state'
             td 
