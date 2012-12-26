@@ -56,7 +56,7 @@ class InvoicePdf < Prawn::Document
     data = [["Кількість мешканців:", "#{@user_info.people_count} ос.", "Адреса:", user_address(@user_info)],
             ["Загальна площа:", "#{@user_info.calc_area} кв.м.", "Особовий рахунок:", @user_info.consumer_code],
             ["Опалювальна площа:", "#{@user_info.heat_area} кв.м.", "ПІП:", @user_info.pib],
-            ["Спожито: ","","Вартість ГКал\n(в опал. сезон):", ""]]
+            ["Спожито: ","#{central_heating.decode(:consumed, '14')} ГКал.","Вартість ГКал\n(в опал. сезон):", "#{central_heating.decode(:tariff, '14')} грн."]]
     table data do
       self.cell_style = {:borders => [], :width => 4.5.cm}
     end
@@ -115,7 +115,7 @@ class InvoicePdf < Prawn::Document
       services << [s.name, s.borg, s.pay, '', s.invoice, s.pilga, s.subsidy, s.correction, s.saldo]
       if s.sub_services.any?
         s.sub_services.each do |ss|
-          services << [" - #{ss.name}", ss.borg, ss.pay, '', ss.invoice, ss.pilga, ss.subsidy, ss.correction, ss.saldo]
+          services << [" - #{ss.name}", '', '', '', ss.invoice, '', '', '', '']
         end
       end
     end
@@ -134,11 +134,15 @@ class InvoicePdf < Prawn::Document
     stroke_horizontal_rule
   end
 
+  def central_heating
+    @details.services.find{|x| x.service_code == '4' }
+  end
+
   def house_maintanance
     exp_data = []
-    expenses = @details.select{|x| x.service_code == '1'}.first.expenses
+    expenses = @details.services.find{|x| x.service_code == '1'}.expenses
     expenses.each_slice(2) do |exps|
-      exp_data << [exps[0].name, exps[0].sum, exps[1].name, exps[1].sum]
+      exp_data << [exps[0].try(:name), exps[0].try(:sum), exps[1].try(:name), exps[1].try(:sum)]
     end
     if exp_data.any?
       move_down 0.5.cm
