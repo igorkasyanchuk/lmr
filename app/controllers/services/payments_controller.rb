@@ -54,7 +54,7 @@ class Services::PaymentsController < ApplicationController
 
     def prepare_coordinates query
       unless query.to_s.gsub(' ','') == ''
-        geo = Geocoder.search('Львів, ' + query.to_s)[0]
+        geo = Geocoder.search('Львів, ' + query.to_s.gsub(/(?<!\S)\D{1,2}(?!\S)/, ''))[0]
         [geo.latitude, geo.longitude]
       else
         []
