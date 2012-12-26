@@ -30,7 +30,7 @@ class InvoicePdf < Prawn::Document
       user_information
       codes = services.map{|s| s.service_code}
       line_items codes
-      house_maintanance if codes.include?('1')
+      # house_maintanance if codes.include?('1')
       draw_counters codes
       move_down 0.5.cm
       cold_water if codes.include?('2')
