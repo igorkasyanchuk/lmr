@@ -53,7 +53,7 @@ div class="modal fade hide" id="charge_modal_#{code}" tabindex="-1" role="dialog
           tr
             td 
               b Загальна Сума:
-            td= BigDecimal(expense.decode(:sum, '12')) + BigDecimal(expense.decode(:sum, '11')) + BigDecimal(expense.decode(:sum, '15'))
+            td= sum
     - else
       | Нема даних
 

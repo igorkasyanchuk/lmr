@@ -62,6 +62,6 @@ h3= "Деталі оплат:"
 = render 'payment', services: PaymentDetails.services, checks: PaymentDetails.checks, service_total: PaymentDetails.service_total
 #charge_modals
   - @invoice.all_services.each do |service|
-    = render "dashboard/reports/charge_modals/#{InvoiceDetails::SERVICES[service.service_code]}", :expense => @details[service.service_code], :code => service.service_code
+    = render "dashboard/reports/charge_modals/#{InvoiceDetails::SERVICES[service.service_code]}", :expense => @details[service.service_code], :code => service.service_code, :sum => service.invoice
   = render 'benefit_details'
   = render 'subsidy_details'

@@ -5,7 +5,9 @@ class InvoiceDetails
     '1' => 'house_maintenance',
     '2' => 'cold_water',
     '3' => 'hot_water',
-    '4' => 'central_heating'
+    '4' => 'central_heating',
+    '5' => 'electricity',
+    '7' => 'gas'
   }
 
   def self.load consumer_id, period
