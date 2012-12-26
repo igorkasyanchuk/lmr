@@ -1,9 +1,11 @@
 # encoding: utf-8
 class Counter
 
-  attr_accessor :code, :state_number, :type_code, :type_name, :end_state
+  attr_accessor :code, :state_number, :type_code, :type_name, :end_state, :begin_state, :last_modified
   
-  CounterHistory = Struct.new :counter_id, :counter_state_number, :year, :month, :begin_state, :end_state
+  CounterHistory = Struct.new :counter_id, :counter_state_number,
+                              :year, :month, :begin_state, :end_state,
+                              :count, :operation_type, :correction, :correction_end_state
 
   def initialize raw
     @code = raw['code']
@@ -11,6 +13,8 @@ class Counter
     @type_code = raw['counterTypeCode']
     @type_name = raw['counterTypeName'] || ''
     @end_state = raw['endState']
+    @begin_state = raw['beginState']
+    @last_modified = Date.parse(raw['timeLastModification'])
   end
 
   def self.get id
@@ -36,7 +40,11 @@ class Counter
       raw['year'], 
       raw['month'],        
       raw['beginState'],
-      raw['endState']
+      raw['endState'],
+      raw['count'],
+      raw['operationType'],
+      raw['correction'],
+      raw['correctionEndState']
     )
   end
 

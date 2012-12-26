@@ -2,7 +2,6 @@ table.table.reports
   thead 
     tr
       th Період
-      th Дата
       th Початкові покази
       th Кінцеві покази
       th Кількість
@@ -14,17 +13,12 @@ table.table.reports
       - counter.history(@year || Date.today.year).each do |counter|
         tr      
           td= counter_month(counter.month)
-          td
           td= counter.begin_state
           td= counter.end_state
-          td
-          td
-          td
-          td
-          / 
-            td Ввід показів
-            td= check_box_tag 'corrected', :disabled => true
-            td 0.00000
+          td= counter.count
+          td= counter.operation_type
+          td= check_box_tag 'corrected', "#{counter.correction.to_i}", counter.correction.to_i == 0 ? false : true, :disabled => true
+          td= counter.correction_end_state
     - else
       tr
        td colspan='8'

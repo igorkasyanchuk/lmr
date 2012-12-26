@@ -49,6 +49,7 @@ class Dashboard::ReportsController < Dashboard::DashboardController
       result = Counter.set_counters(params)
       if result.has_key?(:results)
         @results = result[:results].compact
+        @counters = Counter.get(@user_info.consumer_code).sort_by!{|x| [x.type_name, x.state_number]}
         respond_to :js
       elsif result.has_key?(:errors)
         @errors = result[:errors]
