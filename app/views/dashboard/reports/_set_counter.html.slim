@@ -1,4 +1,4 @@
-= form_tag [:dashboard, :counters], method: :get, remote: true  do
+= form_tag [:dashboard, :counters], id: 'form_counters', method: :get, remote: true  do
     = hidden_field_tag "counter_codes", counters.map{|x| x.code}.join(',')
     table.table.reports
       thead 
@@ -18,8 +18,8 @@
             td
               = text_field_tag "end_state_#{counter.code}",  "#{counter.end_state}", class: 'input_end_state'
             td 
-              = text_field_tag 'amount',  '',  disabled: true, class: 'input_amount_state'
+              = text_field_tag 'amount',  "#{counter.end_state.to_i - counter.begin_state.to_i}",  disabled: true, class: 'input_amount_state'
             td
               = link_to 'Показати', "#charge_modal_#{counter.code}", :role => 'button', 'data-toggle' => 'modal'
-    = submit_tag 'Надіслати покази', id:'submit_counters' , class: 'btn btn-primary counter'
+    = link_to 'Надіслати покази', '#', id:'submit_counters' , class: 'btn btn-primary counter'
     = image_tag('ajax-loader.gif', class: 'counters_loader')

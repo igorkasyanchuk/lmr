@@ -35,6 +35,8 @@ window.submit_loader = ->
   $('#submit_counters').on 'click', ->
     $(this).hide()
     $(this).next().show()
+    $('form#form_counters').submit()
+    false
 
 
   # $('.show_map').on 'click', ->
