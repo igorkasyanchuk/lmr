@@ -18,8 +18,8 @@ class InvoiceDetailsPdf
 
 
   def raw_table_for service
-    [["Послуга", "Вартість"]]+
-    service.expenses.map { |expense| [expense.name, {content: expense.sum, width: 80}] }
+    [["Послуга", 'Тариф', "Вартість"]]+
+    service.expenses.map { |expense| [expense.name, {content: expense.tariff, width: 80}, {content: expense.sum, width: 80}] }
   end
 
   def draw_pdf
@@ -69,6 +69,7 @@ class InvoiceDetailsPdf
       self.header = true
       self.row(0).background_color = '999999'
       columns(1).align = :center
+      columns(2).align = :center
     end
   end
 

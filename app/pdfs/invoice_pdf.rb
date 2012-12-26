@@ -63,7 +63,7 @@ class InvoicePdf < Prawn::Document
   end
 
   def draw_counters codes
-    move_down 1.cm    
+    move_down 0.5.cm    
     font_size = 10.pt
     if counters_data(codes)
       table counters_data(codes) do
@@ -143,14 +143,15 @@ class InvoicePdf < Prawn::Document
     expenses = @details.services.find{|x| x.service_code == '1'}.expenses
     expenses.each_slice(2) do |exps|
       exp_data << [exps[0].try(:name), exps[0].try(:sum), exps[1].try(:name), exps[1].try(:sum)]
-    end
+    end    
     if exp_data.any?
       move_down 0.5.cm
       stroke_horizontal_rule
+      move_down 0.5.cm
+      text 'Складові тарифу на послуги з утримання будинку і прибудинкової території (грн за 1 м2)'
       table exp_data do
         self.cell_style = {:borders => []}
       end
-      move_down 0.5.cm
     end
   end
   

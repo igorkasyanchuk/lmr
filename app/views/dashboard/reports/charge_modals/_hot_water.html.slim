@@ -8,13 +8,15 @@ div class="modal fade hide" id="charge_modal_#{code}" tabindex="-1" role="dialog
         tbody
           tr
             td Спожито, м3
-            td= expense.decode('30002')
+            td
+            / = expense.decode(:consumed, '12')
           tr
             td Тариф
-            td= expense.decode('30001')
+            td
+            / = expense.decode(:tariff, '12')
           tr
             td Сума
-            td= (expense.decode_f('30001') * expense.decode_f('30002')).round(2)
+            td= sum
     - else
       | Нема даних
 
