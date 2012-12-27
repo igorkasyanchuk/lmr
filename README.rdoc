@@ -1,7 +1,7 @@
 == LMR
 
 = Requirements
-* needs installation "memcashed" memory object caching system
+* needs installation "memcached" memory object caching system
 1. Run
     apt-get install memcached
 
@@ -9,3 +9,7 @@
 
 1) change http://www.google.com/cse/
 2)
+
+= Reg
+1. Email: user_name: 'lmr.testmail', password: 'lmrtest12', lmr.testmail@gmail.com
+2. Airbrake: Account name: lmr_airbrake, User name: lmr_airbrake, password: 'lmrtest12', Email: lmr.testmail@gmail.com, Subdomain: lmrairbrake
